@@ -1,0 +1,18 @@
+{
+  "background_color": "#ffffff",
+  "description": "that is a calculating program what to be pro.",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "ruleofhour",
+  "orientation": "portrait",
+  "scope": "/",
+  "short_name": "10000hour",
+  "start_url": "https://akakss225.github.io",
+  "theme_color": "#ffffff",
+  "categories": [],
+  "screenshots": [],
+  "icons": [
+  ],
+  "shortcuts": [],
+  "lang": "ko"
+}
