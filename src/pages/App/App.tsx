@@ -19,6 +19,9 @@ export function App() {
 						alt="React logo"
 					/>
 				</a>
+				<a href="http://localhost:5173/test" target="_blank">
+					test
+				</a>
 			</div>
 			<h1>Vite + React</h1>
 			<div className="card">
