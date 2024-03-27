@@ -1,5 +1,6 @@
 export interface Condition {
 	name: string;
-	type: "string" | "select";
-	valueList?: any[];
+	value: any;
 }
+
+export type OrderDir = "ASC" | "DESC" | null;
