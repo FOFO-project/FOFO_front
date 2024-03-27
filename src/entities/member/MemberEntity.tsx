@@ -1,9 +1,12 @@
 import { Member } from './model/member-info';
-import { FindMember, UpdateMember, DeleteMember, InsertMember } from './api/member-api';
+import style from './ui/member.module.scss'
 
-const MemberCard:React.FC<Member> = (param:Member) => {
+interface MemberEntityProps {
+    param:Member
+}
+export function MemberCard({ param }: MemberEntityProps){
     return(
-        <div>
+        <div className={style.container}>
             <ul>
                 <li>{param.name}</li>
                 <li>{param.gender}</li>
