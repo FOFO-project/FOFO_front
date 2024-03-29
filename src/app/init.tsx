@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App, Test } from "../pages/pages";
+import { App, Test, MemberCardTest } from "../pages/pages";
 import "./index.css";
 import {
 	createBrowserRouter,
@@ -24,6 +24,10 @@ export function init() {
 					{
 						path: "/Test",
 						element: <Test />,
+					},
+					{
+						path: "/MemberCardTest",
+						element: <MemberCardTest />,
 					},
 				])}
 			/>

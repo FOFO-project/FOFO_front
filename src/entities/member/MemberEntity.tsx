@@ -1,19 +1,19 @@
-import { Member } from './model/member-info';
+import { Member, Address, Picture } from './model/model-integrate';
 import styles from './ui/member.module.scss'
 
-interface MemberEntityProps {
-    param:Member
+interface MemberProps {
+    data:Member;
 }
 
-export function MemberCard({ param }: MemberEntityProps){
+export function MemberInformation({ data }:MemberProps){
     return(
         <div className={styles.container}>
             <ul className={styles.memberline}>
-                <li className={styles.memberinfo}>{param.name}</li>
-                <li className={styles.memberinfo}>{param.gender}</li>
-                <li className={styles.memberinfo}>{param.age}</li>
-                <li className={styles.memberinfo}>{param.smoking_yn}</li>
-                <li className={styles.memberinfo}>{param.religion}</li>
+                <li className={styles.memberinfo}>{data.name}</li>
+                <li className={styles.memberinfo}>{data.gender}</li>
+                <li className={styles.memberinfo}>{data.age}</li>
+                <li className={styles.memberinfo}>{data.smoking_yn}</li>
+                <li className={styles.memberinfo}>{data.religion}</li>
             </ul>
         </div>
     );
