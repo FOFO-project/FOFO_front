@@ -1,8 +1,8 @@
-import { Member, Address, Picture } from './model/model-integrate';
-import styles from './ui/member.module.scss'
+import { Member, Address, Picture } from "./model/model-integrate";
+import styles from "./ui/member.module.scss";
 
 interface MemberProps {
-    data:Member;
+	data: Member;
 }
 
 export function MemberInformation({ data }:MemberProps){

@@ -6,4 +6,8 @@
 	justify-content: center;
 	flex-direction: column;
 	flex-wrap: nowrap;
+	.container {
+		width: 90%;
+		height: 90%;
+	}
 }

@@ -1,36 +1,44 @@
-import { cloneElement, ReactElement, useState } from "react";
+import { ReactElement, useReducer, useState } from "react";
 import styles from "./styles.module.scss";
-import { Condition } from "../../shared_types";
+import { Condition, Ordering, OrderingList } from "../../shared_types";
+import { ItemListPanel } from "./components/ItemListPanel";
+import { ConditionListPanel } from "./components/ConditionListPanel";
+import { OrderingListPanel } from "./components/OrderingListPanel";
 
 interface ConditionedListProps<T extends ReactElement> {
-	initItems?: T[];
+	items: T[];
+	setItems: Function;
 	conditionList: Condition[];
 }
-
-function makeConditionBox(condition: Condition) {
-	const { name, type, valueList } = condition;
-	if (type === "string") {
-		return <input></input>;
-	} else if (type === "select") {
-		return <option></option>;
-	}
-	return;
-}
-
 export function ConditionedList<T extends ReactElement>({
-	initItems,
+	items,
+	setItems,
+	conditionList,
 }: ConditionedListProps<T>) {
-	const [items, setItems] = useState<T[] | undefined>(initItems);
+	const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+	const [orderingList] = useState(new OrderingList());
+	function onOrderingChanged(ordering: Ordering) {
+		orderingList.add(ordering);
+		forceUpdate();
+		return undefined;
+	}
+	function onOrderingDelete(ordering: Ordering) {
+		orderingList.delete(ordering.condition);
+		forceUpdate();
+		return undefined;
+	}
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.condition_panel}></div>
-			<div className={styles.list_panel}>
-				{items?.map((element, i) => {
-					return cloneElement(element as ReactElement, {
-						key: i,
-					});
-				})}
-			</div>
+			<ConditionListPanel
+				conditionList={conditionList}
+				onClick={onOrderingChanged}
+			/>
+			<OrderingListPanel
+				orderingList={orderingList}
+				onClick={onOrderingDelete}
+			/>
+			<ItemListPanel items={items} orderingList={orderingList} />
 		</div>
 	);
 }
