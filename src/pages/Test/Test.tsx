@@ -8,6 +8,7 @@ export function Test() {
 		<MemberInformation
 			data={{
 				id: 1,
+				/*
 				address: {
 					id: 1,
 					zip_code: "test",
@@ -21,7 +22,10 @@ export function Test() {
 					create_dt: new Date(),
 					mod_dt: new Date(),
 				},
-
+				*/
+				address_cate1: "test si",
+				address_cate2: "test gu",
+				address_cate3: "test dong",
 				tumbnail: ["picture.image_url"],
 				name: "송수민1",
 				gender: "male",
@@ -53,6 +57,7 @@ export function Test() {
 		<MemberInformation
 			data={{
 				id: 1,
+				/*
 				address: {
 					id: 1,
 					zip_code: "test",
@@ -66,6 +71,10 @@ export function Test() {
 					create_dt: new Date(),
 					mod_dt: new Date(),
 				},
+				*/
+				address_cate1: "test si",
+				address_cate2: "test gu",
+				address_cate3: "test dong",
 
 				tumbnail: ["picture.image_url"],
 				name: "송수민2",
