@@ -6,14 +6,15 @@ interface MemberProps {
 }
 
 export function MemberInformation({ data }:MemberProps){
+    
     return(
         <div className={styles.container}>
             <ul className={styles.memberline}>
-                <li className={styles.memberinfo}>{data.name}</li>
-                <li className={styles.memberinfo}>{data.gender}</li>
-                <li className={styles.memberinfo}>{data.age}</li>
-                <li className={styles.memberinfo}>{data.smoking_yn}</li>
-                <li className={styles.memberinfo}>{data.religion}</li>
+                {
+                    Object.values(data).map((e)=>{
+                        return <li className={styles.memberinfo}>{e.toString()}</li>
+                    })
+                }
             </ul>
         </div>
     );

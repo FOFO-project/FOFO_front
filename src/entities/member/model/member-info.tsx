@@ -1,9 +1,10 @@
 // Member Models
-import { Address } from "./address-info"
 
 export interface Member {
     id:number,
-    address:Address,
+    address_cate1:String,
+    address_cate2:String,
+    address_cate3:String,
 
     tumbnail:String[],
     name:String,

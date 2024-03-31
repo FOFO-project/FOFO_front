@@ -32,7 +32,9 @@ export function MemberCardTest(){
 
     const member:Member = {
         id:1,
-        address:address,
+        address_cate1:address.category_first,
+        address_cate2:address.category_second,
+        address_cate3:address.category_third,
     
         tumbnail:[picture.image_url],
         name:"송수민",
