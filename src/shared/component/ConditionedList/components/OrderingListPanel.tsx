@@ -1,4 +1,4 @@
-import { cloneElement, ReactElement, useEffect } from "react";
+import { cloneElement, ReactElement, useEffect, useRef } from "react";
 import styles from "../styles.module.scss";
 import classNames from "classnames";
 import { Condition, Ordering, OrderingList } from "../../../shared_types";
@@ -44,8 +44,16 @@ export function OrderingListPanel({
 	orderingList,
 	onClick,
 }: OrderingListPanelProps) {
+	const containerRef = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		const container = containerRef.current;
+		if (container) {
+			container.scrollLeft = container.scrollWidth;
+		}
+	}, [orderingList.list.length]);
 	return (
 		<div
+			ref={containerRef}
 			className={classNames(
 				styles.ordering_list_panel,
 				styles.padding_border

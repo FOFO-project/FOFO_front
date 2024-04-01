@@ -14,10 +14,10 @@
 		flex-direction: row;
 		flex-wrap: nowrap;
 		place-items: center;
+		overflow-x: scroll;
 		.condition_box {
 			height: 90%;
-			flex-basis: 0;
-			flex-grow: 1;
+			min-width: 200px;
 			display: flex;
 			flex-direction: row;
 			place-items: center;
@@ -51,9 +51,11 @@
 		place-items: center;
 		background-color: lightblue;
 		margin-bottom: 5px;
+		overflow-x: scroll;
 		.ordering_item {
 			height: 100%;
 			width: 200px;
+			min-width: 200px;
 			display: flex;
 			flex-direction: row;
 			place-items: center;
