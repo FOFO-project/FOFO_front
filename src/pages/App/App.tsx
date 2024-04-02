@@ -26,6 +26,9 @@ export function App() {
 				<Link to="http://localhost:5173/membercardtest">
 					MemberCard
 				</Link>
+				<Link to="http://localhost:5173/HeaderTest">
+					header
+				</Link>
 			</div>
 			<h1>Vite + React</h1>
 			<div className="card">
