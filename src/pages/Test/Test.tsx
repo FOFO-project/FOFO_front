@@ -1,3 +1,4 @@
+import { HeaderTest } from "../pages"
 import { ConditionedList } from "../../shared/shared";
 import { MemberInformation } from "../../entities/entities";
 import styles from "../pages.module.scss";
@@ -107,6 +108,7 @@ export function Test() {
 	]);
 	return (
 		<div className={styles.Page}>
+			<HeaderTest />
 			<div className={styles.container}>
 				<ConditionedList
 					items={items}

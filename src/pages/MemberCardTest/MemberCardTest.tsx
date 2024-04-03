@@ -1,3 +1,4 @@
+import { HeaderTest } from "../pages"
 import { MemberInformation } from "../../entities/entities"
 import { Member, Address, Picture } from "../../entities/member/model/model-integrate"
 
@@ -65,6 +66,7 @@ export function MemberCardTest(){
     }
     return(
         <>
+            <HeaderTest />
             <MemberInformation data={member}/>
         </>
     );

@@ -1,12 +1,14 @@
-import { FofoHeader } from "../../shared/shared"
+import { FofoHeader } from "../../widgets/header/components/FofoHeader"
 import logo from "../../assets/fofologo-removebg-preview.png"
 
 export function HeaderTest(){
     const headerdata:any = {
         logo: logo,
-        item1: "승인관리",
-        item2: "유저관리",
-        item3: "매칭관리"
+        item1: "가입신청",
+        item2: "확정대기",
+        item3: "회원관리",
+        item4: "매칭관리",
+        item5: "매칭현황"
     }
     return(
         <>
