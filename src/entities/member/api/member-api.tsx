@@ -1,19 +1,9 @@
-import { Member } from '../model/member-info';
-import { Address } from '../model/address-info';
-import { Picture } from '../model/picture-info';
+import { Member, Address, Picture } from "../../shared/shared";
 
-export interface FindMember {
-    
-}
+export interface FindMember {}
 
-export interface UpdateMember {
+export interface UpdateMember {}
 
-}
+export interface DeleteMember {}
 
-export interface DeleteMember {
-
-}
-
-export interface InsertMember {
-
-}
+export interface InsertMember {}
