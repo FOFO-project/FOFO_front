@@ -1,4 +1,5 @@
 import { OrderedList } from "../../shared/shared";
+import { HeaderTest } from "../pages";
 import { MemberInformation } from "../../entities/entities";
 import styles from "../pages.module.scss";
 import { useState } from "react";
@@ -10,6 +11,7 @@ export function Test() {
 	);
 	return (
 		<div className={styles.Page}>
+			<HeaderTest />
 			<div className={styles.container}>
 				<OrderedList
 					items={items}

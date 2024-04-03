@@ -25,7 +25,7 @@
     color: #000;
 }
 
-.header_item {
+.header_menubox {
     display: flex;
     background-color: transparent;
     border: none;
@@ -41,8 +41,19 @@
     padding: 0 20px;
     background-color: transparent;
     justify-content: space-between;
-    color: #fff;
     border-left: 1px solid #999;
+}
+
+.header_items>a {
+    text-decoration: none;
+    background-color: transparent;
+    transition: color 0.5s ease;
+    color: #fff;
+}
+
+.header_items>a:hover {
+    color: #999;
+    cursor: pointer;
 }
 
 .header_items:first-child {

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { HeaderTest } from "../pages"
 import { useState } from "react";
 import reactLogo from "../../assets/react.svg";
 import viteLogo from "/vite.svg";
@@ -10,6 +11,7 @@ export function App() {
 	return (
 		<>
 			<div>
+				<HeaderTest />
 				<Link to="https://vitejs.dev" target="_blank">
 					<img src={viteLogo} className="logo" alt="Vite logo" />
 				</Link>
