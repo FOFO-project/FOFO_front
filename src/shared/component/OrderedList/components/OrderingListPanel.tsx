@@ -1,7 +1,7 @@
 import { cloneElement, ReactElement, useEffect, useRef } from "react";
 import styles from "../styles.module.scss";
 import classNames from "classnames";
-import { Condition, Ordering, OrderingList } from "../../../shared_types";
+import { Condition, Ordering, OrderingList } from "../../../shared";
 
 interface OrderingBoxProps {
 	ordering: Ordering;

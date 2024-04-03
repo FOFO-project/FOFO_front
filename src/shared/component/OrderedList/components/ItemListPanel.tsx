@@ -1,7 +1,7 @@
 import { cloneElement, ReactElement, useEffect } from "react";
 import styles from "../styles.module.scss";
 import classNames from "classnames";
-import { OrderingList } from "../../../shared_types";
+import { OrderingList } from "../../../shared";
 
 interface ItemListPanelProps<T extends ReactElement> {
 	items: T[];

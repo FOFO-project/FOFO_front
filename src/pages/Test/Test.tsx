@@ -1,4 +1,4 @@
-import { ConditionedList } from "../../shared/shared";
+import { OrderedList } from "../../shared/shared";
 import { MemberInformation } from "../../entities/entities";
 import styles from "../pages.module.scss";
 import { useState } from "react";
@@ -11,7 +11,7 @@ export function Test() {
 	return (
 		<div className={styles.Page}>
 			<div className={styles.container}>
-				<ConditionedList
+				<OrderedList
 					items={items}
 					setItems={setItems}
 					conditionList={[

@@ -1,6 +1,6 @@
 import styles from "../styles.module.scss";
 import classNames from "classnames";
-import { Condition, Ordering } from "../../../shared_types";
+import { Condition, Ordering } from "../../../shared";
 
 interface ConditionBoxProps {
 	condition: Condition;
