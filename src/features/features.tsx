@@ -1,4 +1,2 @@
-export { Matching } from "./components/Matching";
-
-export { findMember } from "./functions/FindMember";
-export * from "./functions/Matchings"
+export { Find } from "./Find/Find";
+export { ManualMatch } from "./ManualMatch/ManualMatch";
