@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App, Test, MemberCardTest, HeaderTest } from "../pages/pages";
+import { App, SignupManage, MemberCardTest, HeaderTest } from "../pages/pages";
 import "./index.css";
 import {
 	createBrowserRouter,
@@ -15,15 +15,15 @@ export function init() {
 				router={createBrowserRouter([
 					{
 						path: "/",
-						element: <Navigate to="/Test" />,
+						element: <Navigate to="/App" />,
 					},
 					{
 						path: "/App",
 						element: <App />,
 					},
 					{
-						path: "/Test",
-						element: <Test />,
+						path: "/SignupManage",
+						element: <SignupManage />,
 					},
 					{
 						path: "/MemberCardTest",
@@ -31,7 +31,7 @@ export function init() {
 					},
 					{
 						path: "/HeaderTest",
-						element: <HeaderTest />
+						element: <HeaderTest />,
 					},
 				])}
 			/>

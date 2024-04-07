@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { HeaderTest } from "../pages"
+import { HeaderTest } from "../pages";
 import { useState } from "react";
 import reactLogo from "../../assets/react.svg";
 import viteLogo from "/vite.svg";
@@ -22,15 +22,13 @@ export function App() {
 						alt="React logo"
 					/>
 				</Link>
-				<Link to="http://localhost:5173/test" target="_blank">
+				<Link to="http://localhost:5173/SignupManage" target="_blank">
 					test
 				</Link>
 				<Link to="http://localhost:5173/membercardtest">
 					MemberCard
 				</Link>
-				<Link to="http://localhost:5173/HeaderTest">
-					header
-				</Link>
+				<Link to="http://localhost:5173/HeaderTest">header</Link>
 			</div>
 			<h1>Vite + React</h1>
 			<div className="card">

@@ -1,6 +1,14 @@
 import { HeaderTest } from "../pages";
 import { MemberInformation } from "../../entities/entities";
-import { Member, Address, Picture } from "../../shared/shared";
+import {
+	Member,
+	Address,
+	Picture,
+	MBTI,
+	Religion,
+	ApprovalStatus,
+	MatchingStatus,
+} from "../../shared/shared";
 
 export function MemberCardTest() {
 	// for test
@@ -44,10 +52,10 @@ export function MemberCardTest() {
 		company: "한화시스템",
 		job: "개발자",
 		university: "TestUniversity",
-		mbti: "ENTJ",
+		mbti: MBTI.ENTJ,
 		smoking_yn: "N",
 		kakao_id: "test1234",
-		religion: "None",
+		religion: Religion.무교,
 		charming_point: ["good", "at", "all"],
 		filtering_condition: ["No Smoking", "No alchole"],
 		deposit_date: today,
@@ -57,8 +65,8 @@ export function MemberCardTest() {
 		pass_count: 0,
 		chance: 2,
 
-		approval_sts: "C",
-		matching_sts: "C",
+		approval_sts: ApprovalStatus.승인,
+		matching_sts: MatchingStatus["매칭 대기중"],
 
 		sts: "C",
 		create_dt: today,

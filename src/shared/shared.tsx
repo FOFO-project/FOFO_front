@@ -1,4 +1,6 @@
-export { OrderedList } from "./component/OrderedList/OrderedList";
 export { Match } from "./component/Match/Match";
-export * from "./type/listTypes";
+export { ConditionBox } from "./component/ConditionBox/ConditionBox";
+export { ItemListPanel } from "./component/ItemListPanel/ItemListPanel";
+export { Popup } from "./component/Popup/Popup";
+export * from "./type/listTypes/listTypes";
 export * from "./type/memberTypes";

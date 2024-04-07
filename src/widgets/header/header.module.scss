@@ -1,61 +1,63 @@
-.header { // 시멘틱태그(기본설정값)
-    position: fixed; // 최상단 고정
-    top: 0; // 최상단 설정
-    left: 0; // 최상단 설정
-    width: 100%;
-    box-shadow: 0 0 6px #000;
-    z-index: 999; // 겹침방지
+.header {
+	// 시멘틱태그(기본설정값)
+	position: fixed; // 최상단 고정
+	top: 0; // 최상단 설정
+	left: 0; // 최상단 설정
+	width: 100%;
+	box-shadow: 0 0 6px #000;
+	z-index: 999; // 겹침방지
 }
 
-.header_wrapper { // header wrapper 영역
-    display: flex; // 내부 항목 좌우배치를 위한 flex
-    align-items: center; // 세로축 정렬 : 가온데 정렬
-    justify-content: space-between; // 가로축 정렬 : 양 끝 펼침
-    height: 80px;
-    padding: 0 16px;
-    background-color: #000; // 기본색상
+.header_wrapper {
+	// header wrapper 영역
+	display: flex; // 내부 항목 좌우배치를 위한 flex
+	align-items: center; // 세로축 정렬 : 가온데 정렬
+	justify-content: space-between; // 가로축 정렬 : 양 끝 펼침
+	height: 80px;
+	padding: 0 16px;
+	background-color: #000; // 기본색상
 }
 
 .header_logo {
-    background-color: transparent;
-    object-fit: cover;
-    height: 80px;
-    line-height: 40px;
-    margin-left: 40px;
-    color: #000;
+	background-color: transparent;
+	object-fit: cover;
+	height: 80px;
+	line-height: 40px;
+	margin-left: 40px;
+	color: #000;
 }
 
 .header_menubox {
-    display: flex;
-    background-color: transparent;
-    border: none;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    margin-right: 40px;
-    font-size: 1.5rem;
+	display: flex;
+	background-color: transparent;
+	border: none;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-right: 40px;
+	font-size: 1.5rem;
 }
 
 .header_items {
-    border: none;
-    padding: 0 20px;
-    background-color: transparent;
-    justify-content: space-between;
-    border-left: 1px solid #999;
+	border: none;
+	padding: 0 20px;
+	background-color: transparent;
+	justify-content: space-between;
+	border-left: 1px solid #999;
 }
 
-.header_items>a {
-    text-decoration: none;
-    background-color: transparent;
-    transition: color 0.2s ease;
-    color: #fff;
+.header_items > a {
+	text-decoration: none;
+	background-color: transparent;
+	transition: color 0.5s ease;
+	color: #fff;
 }
 
-.header_items>a:hover {
-    color: #bbb;
-    cursor: pointer;
+.header_items > a:hover {
+	color: #999;
+	cursor: pointer;
 }
 
 .header_items:first-child {
-    border: none;
+	border: none;
 }

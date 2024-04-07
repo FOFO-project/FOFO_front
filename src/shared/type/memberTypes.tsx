@@ -17,6 +17,18 @@ export interface Address {
 	mod_dt: Date;
 }
 
+// Image Models
+export interface Picture {
+	id: number;
+	member_id: number;
+
+	type: String;
+	image_url: String;
+	sts: String;
+	create_dt: Date;
+	mod_dt: Date;
+}
+
 // Member Models
 export interface Member {
 	id: number;
@@ -31,10 +43,10 @@ export interface Member {
 	company?: String;
 	job?: String;
 	university?: String;
-	mbti?: String;
+	mbti?: MBTI;
 	smoking_yn?: String;
 	kakao_id: String;
-	religion?: String;
+	religion?: Religion;
 	charming_point?: String[];
 	filtering_condition?: String[];
 	deposit_date?: Date;
@@ -44,22 +56,50 @@ export interface Member {
 	pass_count?: number;
 	chance?: number;
 
-	approval_sts: String;
-	matching_sts: String;
+	approval_sts: ApprovalStatus;
+	matching_sts: MatchingStatus;
 
 	sts: String;
 	create_dt: Date;
 	mod_dt: Date;
 }
 
-// Image Models
-export interface Picture {
-	id: number;
-	member_id: number;
+export enum MBTI {
+	ISTJ = "ISTJ",
+	ISTP = "ISTP",
+	ISFJ = "ISFJ",
+	ISFP = "ISFP",
+	INTJ = "INTJ",
+	INTP = "INTP",
+	INFJ = "INFJ",
+	INFP = "INFP",
+	ESTJ = "ESTJ",
+	ESTP = "ESTP",
+	ESFJ = "ESFJ",
+	ESFP = "ESFP",
+	ENTJ = "ENTJ",
+	ENTP = "ENTP",
+	ENFJ = "ENFJ",
+	ENFP = "ENFP",
+}
 
-	type: String;
-	image_url: String;
-	sts: String;
-	create_dt: Date;
-	mod_dt: Date;
+export enum Religion {
+	기독교 = "1",
+	천주교 = "2",
+	불교 = "3",
+	원불교 = "4",
+	무교 = "5",
+	기타 = "6",
+}
+
+export enum ApprovalStatus {
+	입금대기중 = "10",
+	입금완료 = "20",
+	승인 = "30",
+}
+
+export enum MatchingStatus {
+	"매칭 대기중" = "1",
+	"매칭 진행중" = "2",
+	"매칭 완료" = "3",
 }

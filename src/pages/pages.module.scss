@@ -6,8 +6,13 @@
 	justify-content: center;
 	flex-direction: column;
 	flex-wrap: nowrap;
-	.container {
+	.Header {
+		height: auto;
+		flex-basis: 0;
+	}
+	.Panel {
 		width: 90%;
-		height: 90%;
+		height: 70%;
+		// flex: 1 0 0;
 	}
 }

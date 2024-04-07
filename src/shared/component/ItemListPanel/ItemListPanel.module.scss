@@ -1,0 +1,15 @@
+.item_list_panel {
+	flex-basis: 0;
+	flex-shrink: 0;
+	flex-grow: 1;
+	width: 100%;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	background-color: lightgray;
+}
+.padding_border {
+	border-radius: 5px;
+	padding: 5px;
+}
