@@ -1,5 +1,6 @@
 import { FofoHeader } from "../../widgets/header/components/FofoHeader"
 import logo from "../../assets/fofologo-removebg-preview.png"
+import { AutoMatching, IndividualMatching, ManualMatching } from "../../features/features";
 
 export function HeaderTest(){
     const headerdata:any = {
@@ -10,9 +11,14 @@ export function HeaderTest(){
         item4: "매칭관리",
         item5: "매칭현황"
     }
+
     return(
         <>
             <FofoHeader data={headerdata}/>
+            <AutoMatching />
+            <IndividualMatching />
+            <ManualMatching />
+            
         </>
     );
 }
