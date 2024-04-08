@@ -3,20 +3,20 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 
-export const ManualMatch = () => {
+export const AutoMatch = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		const result: any = getResult();
 		if (result !== "error") {
-			navigate("/match/result", {
+			navigate("/match/member", {
 				state: { responseData: result },
 			});
 		}
-	}, [navigate]); // navigate를 의존성 배열에 추가
+	}, []);
 
 	const btnData = {
-		btnName: "수동매칭"
+		btnName: "자동매칭"
 	};
 	return <Match data={btnData} />;
 };

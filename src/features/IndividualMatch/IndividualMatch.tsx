@@ -1,9 +1,9 @@
-import { Match } from "../../shared/shared";
+import { BlueButton } from "../../shared/shared";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 
-export const ManualMatch = () => {
+export const IndividualMatch = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -13,10 +13,10 @@ export const ManualMatch = () => {
 				state: { responseData: result },
 			});
 		}
-	}, [navigate]); // navigate를 의존성 배열에 추가
+	}, []);
 
 	const btnData = {
-		btnName: "수동매칭"
+		btnName: "개별매칭"
 	};
-	return <Match data={btnData} />;
+	return <BlueButton data={btnData} />;
 };
