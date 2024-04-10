@@ -1,9 +1,8 @@
 import axios from "axios";
-import { Member } from "../../../shared/shared";
 
-export const getResult = async (members?: Member[]) => {
+export const getResult = async (members: any[]) => {
 	try {
-		const response = await axios.post("https://fofo/match/auto", members);
+		const response = await axios.post("http://144.24.79.73:8080/match/auto", members);
 		if (response.status === 200) {
 			return response.data;
 		} else if (response.status === 400) {

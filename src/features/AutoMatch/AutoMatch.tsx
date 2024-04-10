@@ -1,22 +1,27 @@
 import { Match } from "../../shared/shared";
-import { useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 
-export const AutoMatch = () => {
+export const AutoMatch: React.FC = () => {
 	const navigate = useNavigate();
+	const [member, setMember] = useState<any>(null);
 
-	useEffect(() => {
-		const result: any = getResult();
-		if (result !== "error") {
-			navigate("/match/member", {
-				state: { responseData: result },
-			});
+	const Auto = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+		e.preventDefault();
+		const result = await getResult();
+		if(result == "error") {
+			alert("error");
+		}else {
+			setMember(result.data);
+			navigate('/match/member', {state: {members : member}})
 		}
-	}, []);
+	}
 
 	const btnData = {
-		btnName: "자동매칭"
+		btnName: "자동매칭",
+		btnFunction: Auto
 	};
+
 	return <Match data={btnData} />;
 };
