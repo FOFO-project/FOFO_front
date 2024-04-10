@@ -1,13 +1,13 @@
 // Address Models
-export interface Address {
-	zipcode: string;
-	sido: string;
-	sigungu: string;
-	eupmyundong: string;
+export class Address {
+	zipcode: string | null = null;
+	sido: string | null = null;
+	sigungu: string | null = null;
+	eupmyundong: string | null = null;
 	location: {
 		x: number;
 		y: number;
-	};
+	} | null = null;
 }
 
 export enum Gender {
@@ -60,7 +60,7 @@ export enum MatchingStatus {
 	"매칭 진행중" = "2",
 	"매칭 완료" = "3",
 }
-export enum ActuveStatus {
+export enum ActiveStatus {
 	CREATED = "CREATED",
 	UPDATED = "UPDATED",
 	DELETED = "DELETED",

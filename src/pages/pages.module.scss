@@ -11,8 +11,10 @@
 		flex-basis: 0;
 	}
 	.Panel {
+		position: relative;
 		width: 90%;
-		height: 70%;
+		height: calc(90% - 80px);
+		// top: 80px;
 		// flex: 1 0 0;
 	}
 }

@@ -8,45 +8,48 @@ interface DateConditionProps {
 	title: string;
 	targetColumn: keyof ConditionListModel;
 	conditionData: ConditionListModel;
-	setCondtitionData: Function;
+	setConditionData: Function;
 }
 export function DateCondition({
 	title,
 	targetColumn,
 	conditionData,
-	setCondtitionData,
+	setConditionData,
 }: DateConditionProps) {
 	const [isActive, setActive] = useState(false);
 	const datePickerRef = useRef<DatePicker>(null);
 
-	useEffect(() => {
-		datePickerRef.current?.setFocus();
-	});
+	//달력 활성화
+	// useEffect(() => {
+	// 	datePickerRef.current?.setFocus();
+	// });
 
 	return (
 		<div className={styles.item}>
-			<div
+			<button
 				className={styles.ToggleButton}
 				onClick={() => setActive(true)}
 			>
 				{title}
-			</div>
+			</button>
 			<Toggle isActive={isActive} setActive={setActive}>
-				<DatePicker
-					ref={datePickerRef}
-					id="datePicker"
-					selected={conditionData[targetColumn] as Date}
-					onChange={(date: Date) => {
-						setCondtitionData({
-							...conditionData,
-							[targetColumn]: date,
-						});
-					}}
-					dateFormat="yyyy-MM-dd"
-				/>
+				<div>
+					<DatePicker
+						ref={datePickerRef}
+						id="datePicker"
+						selected={conditionData[targetColumn] as Date}
+						onChange={(date: Date) => {
+							setConditionData({
+								...conditionData,
+								[targetColumn]: date,
+							});
+						}}
+						dateFormat="yyyy-MM-dd"
+					/>
+				</div>
 				<button
 					onClick={() => {
-						setCondtitionData({
+						setConditionData({
 							...conditionData,
 							[targetColumn]: undefined,
 						});

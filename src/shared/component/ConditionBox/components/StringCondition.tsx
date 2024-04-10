@@ -6,13 +6,13 @@ interface StringConditionProps {
 	title: string;
 	targetColumn: keyof ConditionListModel;
 	conditionData: ConditionListModel;
-	setCondtitionData: Function;
+	setConditionData: Function;
 }
 export function StringCondition({
 	title,
 	targetColumn,
 	conditionData,
-	setCondtitionData,
+	setConditionData,
 }: StringConditionProps) {
 	const [isActive, setActive] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -26,32 +26,36 @@ export function StringCondition({
 
 	return (
 		<div className={styles.item}>
-			<div
+			<button
 				className={styles.ToggleButton}
 				onClick={() => setActive(true)}
 			>
 				{title}
-			</div>
+			</button>
 			<Toggle isActive={isActive} setActive={setActive}>
-				<input
-					ref={inputRef}
-					autoFocus={true}
-					onInput={(e) => {
-						const inputValue = (e.target as HTMLInputElement).value;
-						setCondtitionData({
-							...conditionData,
-							[targetColumn]: inputValue,
-						});
-					}}
-					onKeyDown={(e) => {
-						if (e.key === "Enter") {
-							setActive(false);
-						}
-					}}
-				/>
+				<div>
+					<input
+						ref={inputRef}
+						autoFocus={true}
+						onInput={(e) => {
+							const inputValue = (e.target as HTMLInputElement)
+								.value;
+							setConditionData({
+								...conditionData,
+								[targetColumn]:
+									inputValue === "" ? undefined : inputValue,
+							});
+						}}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								setActive(false);
+							}
+						}}
+					/>
+				</div>
 				<button
 					onClick={() => {
-						setCondtitionData({
+						setConditionData({
 							...conditionData,
 							[targetColumn]: undefined,
 						});
