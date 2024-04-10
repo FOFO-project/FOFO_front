@@ -1,27 +1,39 @@
+import { useState } from "react";
 import { ConditionListModel } from "../../shared";
 import { DateCondition } from "./components/DateCondition";
 import { StringCondition } from "./components/StringCondition";
 import styles from "./ConditionBox.module.scss";
 
-interface ConditionBoxProps {
-	state: ConditionListModel;
-	dispatch: Function;
-}
-export function ConditionBox({ state, dispatch }: ConditionBoxProps) {
+export function ConditionBox() {
+	const [conditionData, setCondtitionData] = useState(
+		new ConditionListModel()
+	);
 	return (
 		<div className={styles.container}>
 			<DateCondition
-				state={state}
-				dispatch={dispatch}
-				title="나이"
-				targetColumn="age"
-			></DateCondition>
+				title="태어난날짜"
+				targetColumn="birthday"
+				conditionData={conditionData}
+				setCondtitionData={setCondtitionData}
+			/>
 			<StringCondition
-				state={state}
-				dispatch={dispatch}
-				title="사는 지역"
-				targetColumn="address_cate"
-			></StringCondition>
+				title="회사"
+				targetColumn="company"
+				conditionData={conditionData}
+				setCondtitionData={setCondtitionData}
+			/>
+			<StringCondition
+				title="직무"
+				targetColumn="job"
+				conditionData={conditionData}
+				setCondtitionData={setCondtitionData}
+			/>
+			<StringCondition
+				title="출신 학교"
+				targetColumn="university"
+				conditionData={conditionData}
+				setCondtitionData={setCondtitionData}
+			/>
 		</div>
 	);
 }

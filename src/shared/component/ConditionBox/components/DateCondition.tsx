@@ -1,44 +1,61 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { ConditionListModel, Popup } from "../../../shared";
-import { useReducer, useState } from "react";
+import { ConditionListModel, Toggle } from "../../../shared";
+import { useEffect, useReducer, useRef, useState } from "react";
 import styles from "../ConditionBox.module.scss";
 
 interface DateConditionProps {
-	state: ConditionListModel;
-	dispatch: Function;
 	title: string;
 	targetColumn: keyof ConditionListModel;
+	conditionData: ConditionListModel;
+	setCondtitionData: Function;
 }
 export function DateCondition({
-	state,
-	dispatch,
 	title,
 	targetColumn,
+	conditionData,
+	setCondtitionData,
 }: DateConditionProps) {
-	const [isActive, toggleActive] = useReducer((isActive: boolean) => {
-		return !isActive;
-	}, false);
-	const [date, setDate] = useState<Date | null>(null);
-	const handleDateChange = (date: Date | null) => {
-		const params: any = {};
-		params[targetColumn] = date;
-		dispatch({ type: "set", params: params });
-		setDate(date);
-	};
+	const [isActive, setActive] = useState(false);
+	const datePickerRef = useRef<DatePicker>(null);
+
+	useEffect(() => {
+		datePickerRef.current?.setFocus();
+	});
 
 	return (
 		<div className={styles.item}>
-			<div onClick={toggleActive}>{title}</div>
-			<Popup isActive={isActive} toggleActive={toggleActive}>
+			<div
+				className={styles.ToggleButton}
+				onClick={() => setActive(true)}
+			>
+				{title}
+			</div>
+			<Toggle isActive={isActive} setActive={setActive}>
 				<DatePicker
+					ref={datePickerRef}
 					id="datePicker"
-					selected={date}
-					onChange={handleDateChange}
+					selected={conditionData[targetColumn] as Date}
+					onChange={(date: Date) => {
+						setCondtitionData({
+							...conditionData,
+							[targetColumn]: date,
+						});
+					}}
 					dateFormat="yyyy-MM-dd"
 				/>
-				<button>조건지우기</button>
-			</Popup>
+				<button
+					onClick={() => {
+						setCondtitionData({
+							...conditionData,
+							[targetColumn]: undefined,
+						});
+						setActive(false);
+					}}
+				>
+					clear
+				</button>
+			</Toggle>
 		</div>
 	);
 }

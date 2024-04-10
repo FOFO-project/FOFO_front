@@ -1,4 +1,4 @@
-import { Member, Address, Picture } from "../../shared/shared";
+import { Member } from "../../shared/shared";
 import styles from "./ui/member.module.scss";
 
 interface MemberProps {

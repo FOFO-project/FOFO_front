@@ -1,0 +1,25 @@
+.to_center {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.child_container {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 500px;
+	background-color: beige;
+	//transform: translate(-125px);
+	height: auto;
+}
+
+.background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba($color: #000000, $alpha: 0);
+}

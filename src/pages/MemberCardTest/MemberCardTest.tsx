@@ -2,75 +2,42 @@ import { HeaderTest } from "../pages";
 import { MemberInformation } from "../../entities/entities";
 import {
 	Member,
-	Address,
-	Picture,
-	MBTI,
 	Religion,
-	ApprovalStatus,
-	MatchingStatus,
+	Gender,
+	AgeRelationType,
+	Mbti,
 } from "../../shared/shared";
 
 export function MemberCardTest() {
 	// for test
 	const today: Date = new Date();
 
-	const address: Address = {
-		id: 1,
-		zip_code: "test",
-		category_first: "test si",
-		category_second: "test gu",
-		category_third: "test dong",
-		detail: "test detail",
-		road_name_cd: "test road",
-		location: "incheon",
-		sts: "C",
-		create_dt: today,
-		mod_dt: today,
-	};
-
-	const picture: Picture = {
-		id: 1,
-		member_id: 1,
-
-		type: "thumb",
-		image_url: "12345",
-		sts: "C",
-		create_dt: today,
-		mod_dt: today,
-	};
-
 	const member: Member = {
-		id: 1,
-		address_cate1: address.category_first,
-		address_cate2: address.category_second,
-		address_cate3: address.category_third,
-
-		tumbnail: [picture.image_url],
-		name: "송수민",
-		gender: "male",
-		age: 30,
+		kakaoId: "opr9982",
+		address: {
+			zipcode: "07551",
+			sido: "서울특별시",
+			sigungu: "강서구",
+			eupmyundong: "등촌동",
+			location: {
+				x: 0,
+				y: 0,
+			},
+		},
+		name: "황성준",
+		gender: Gender.남자,
+		birthday: new Date(),
+		phoneNumber: "01012345678",
+		filteringConditionAgeRelation: AgeRelationType.연상,
 		company: "한화시스템",
-		job: "개발자",
-		university: "TestUniversity",
-		mbti: MBTI.ENTJ,
-		smoking_yn: "N",
-		kakao_id: "test1234",
-		religion: Religion.무교,
-		charming_point: ["good", "at", "all"],
-		filtering_condition: ["No Smoking", "No alchole"],
-		deposit_date: today,
-		note: "nothing",
-		profile_card: picture.image_url,
-
-		pass_count: 0,
-		chance: 2,
-
-		approval_sts: ApprovalStatus.승인,
-		matching_sts: MatchingStatus["매칭 대기중"],
-
-		sts: "C",
-		create_dt: today,
-		mod_dt: today,
+		job: "백엔드 개발자",
+		university: "단국대학교",
+		mbti: Mbti.INTJ,
+		smokingYn: false,
+		filteringConditionSmokingYn: false,
+		religion: Religion.기독교,
+		filteringConditionReligion: Religion.기독교,
+		charmingPoint: "저는 잘생겼습니다.",
 	};
 	return (
 		<>

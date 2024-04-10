@@ -1,48 +1,66 @@
-import { useReducer, useRef } from "react";
-import { ConditionListModel, Popup } from "../../../shared";
+import { useEffect, useRef, useState } from "react";
+import { ConditionListModel, Toggle } from "../../../shared";
 import styles from "../ConditionBox.module.scss";
 
 interface StringConditionProps {
-	state: ConditionListModel;
-	dispatch: Function;
 	title: string;
 	targetColumn: keyof ConditionListModel;
+	conditionData: ConditionListModel;
+	setCondtitionData: Function;
 }
 export function StringCondition({
-	state,
-	dispatch,
 	title,
 	targetColumn,
+	conditionData,
+	setCondtitionData,
 }: StringConditionProps) {
-	const [isActive, toggleActive] = useReducer((isActive: boolean) => {
-		return !isActive;
-	}, false);
-
+	const [isActive, setActive] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	function handleStringChange() {
-		const params: any = {};
-		params[targetColumn] = inputRef.current?.value;
-		dispatch({ type: "set", params: params });
-	}
-
-	function handleErase() {
-		const params: any = {};
-		inputRef.current!.value = "";
-		dispatch({ type: "set", params: params });
-	}
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.value =
+				conditionData[targetColumn]?.toString() || "";
+		}
+	});
 
 	return (
 		<div className={styles.item}>
-			<div onClick={() => toggleActive()}>{title}</div>
-			<Popup isActive={isActive} toggleActive={toggleActive}>
+			<div
+				className={styles.ToggleButton}
+				onClick={() => setActive(true)}
+			>
+				{title}
+			</div>
+			<Toggle isActive={isActive} setActive={setActive}>
 				<input
-					ref={inputRef} // Assign the ref to the input element
-					value={state[targetColumn] as string}
-					onChange={handleStringChange}
+					ref={inputRef}
+					autoFocus={true}
+					onInput={(e) => {
+						const inputValue = (e.target as HTMLInputElement).value;
+						setCondtitionData({
+							...conditionData,
+							[targetColumn]: inputValue,
+						});
+					}}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							setActive(false);
+						}
+					}}
 				/>
-				<button onClick={handleErase}>조건지우기</button>
-			</Popup>
+				<button
+					onClick={() => {
+						setCondtitionData({
+							...conditionData,
+							[targetColumn]: undefined,
+						});
+						setActive(false);
+					}}
+				>
+					clear
+				</button>
+			</Toggle>
 		</div>
 	);
 }

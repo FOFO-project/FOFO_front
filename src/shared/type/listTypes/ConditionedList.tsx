@@ -1,17 +1,21 @@
-import { MBTI, Religion } from "../../shared";
+import { Address, AgeRelationType, Mbti, Religion } from "../../shared";
 
 export class ConditionListModel {
-	age?: number;
-	address_cate?: String;
-	company?: String;
-	job?: String;
-	university?: String;
-	mbti?: MBTI;
-	smoking_yn?: String;
+	birthday?: Date;
+	address?: Address;
+	company?: string;
+	job?: string;
+	university?: string;
+	mbti?: Mbti;
+	smoking_yn?: string;
 	religion?: Religion;
-	filtering_condition?: String[];
-	charming_point?: String[];
+	filtering_condition: {
+		AgeRelation: AgeRelationType | null;
+		SmokingYn: boolean | null;
+		Religion: AgeRelationType | null;
+	} = { AgeRelation: null, SmokingYn: null, Religion: null };
+	charming_point?: string;
 
-	kakao_id?: String;
+	kakao_id?: string;
 	constructor() {}
 }
