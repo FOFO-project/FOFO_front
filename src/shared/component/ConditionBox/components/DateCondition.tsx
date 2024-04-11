@@ -51,7 +51,7 @@ export function DateCondition({
 					onClick={() => {
 						setConditionData({
 							...conditionData,
-							[targetColumn]: undefined,
+							[targetColumn]: null,
 						});
 						setActive(false);
 					}}

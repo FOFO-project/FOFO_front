@@ -6,17 +6,17 @@ export class Filtering {
 	Religion: Religion | null = null;
 }
 export class ConditionListModel {
-	birthday?: Date;
+	birthday: Date | null = null;
 	address: Address = new Address();
-	company?: string;
-	job?: string;
-	university?: string;
-	mbti?: Mbti;
-	smoking_yn?: boolean;
-	religion?: Religion;
+	company: string | null = null;
+	job: string | null = null;
+	university: string | null = null;
+	mbti: Mbti | null = null;
+	smoking_yn: boolean | null = null;
+	religion: Religion | null = null;
 	filtering_condition: Filtering = new Filtering();
-	charming_point?: string;
+	charming_point: string | null = null;
 
-	kakao_id?: string;
+	kakao_id: string | null = null;
 	constructor() {}
 }
