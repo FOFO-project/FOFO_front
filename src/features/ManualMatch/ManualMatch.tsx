@@ -35,9 +35,10 @@ export const ManualMatch: React.FC<MatchProps> = (param) => {
 		const result = await getResult(checkedMembers);
 		if (result == "error") {
 			alert("error");
+			return;
 		} else {
 			setMember(result.data);
-			navigate("/match/member", { state: { members: member } });
+			navigate("/match/result", { state: { members: member } });
 		}
 	};
 

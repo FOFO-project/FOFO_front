@@ -1,10 +1,14 @@
 import axios from "axios";
 
-export const getResult = async (members?: any[]) => {
+export const getResult = async (members: any[]) => {
 	try {
 		const response = await axios.post(
 			"http://144.24.79.73:8080/match/manual",
-			members
+			members,{
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}
 		);
 		if (response.status === 200) {
 			return response.data;

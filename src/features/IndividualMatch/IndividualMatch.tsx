@@ -4,36 +4,35 @@ import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 
 interface MatchProps {
-	members: Member[];
+	members:Member[];
 }
 
 export const IndividualMatch: React.FC<MatchProps> = (param) => {
 	const navigate = useNavigate();
 	const [member, setMember] = useState<any>(null);
 
-	const Individual = async (
-		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-	) => {
+	const Individual = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 		e.preventDefault();
-		const checkedMembers: Member[] = param.members;
+		const checkedMembers:Member[] = param.members;
 
-		if (checkedMembers == undefined) {
+		if(checkedMembers == undefined){
 			alert("선택된 값이 없습니다");
 			return;
 		}
 
 		const result = await getResult(checkedMembers);
-		if (result == "error") {
+		if(result == "error") {
 			alert("error");
-		} else {
-			setMember(result.data);
-			navigate("/match/member", { state: { members: member } });
+			return;
+		}else {
+			setMember(result);
+			navigate('/match/result', {state: {members : member}})
 		}
-	};
+	}
 
 	const btnData = {
-		btnName: "자동매칭",
-		btnFunction: Individual,
+		btnName: "개별매칭",
+		btnFunction: Individual
 	};
 
 	return <Match data={btnData} />;

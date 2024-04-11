@@ -13,8 +13,8 @@ export const AutoMatch: React.FC = () => {
 		if(result == "error") {
 			alert("error");
 		}else {
-			setMember(result.data);
-			navigate('/match/member', {state: {members : member}})
+			setMember(result);
+			navigate('/match/result', {state: {members : member}})
 		}
 	}
 

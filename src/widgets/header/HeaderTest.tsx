@@ -1,11 +1,5 @@
 import { FofoHeader } from "../../widgets/header/components/FofoHeader";
 import logo from "../../assets/fofologo-removebg-preview.png";
-//import { AutoMatching, IndividualMatching, ManualMatching } from "../../features/features";
-import {
-	ManualMatch,
-	IndividualMatch,
-	AutoMatch,
-} from "../../features/features";
 
 export function HeaderTest() {
 	const headerdata: any = {
@@ -20,9 +14,6 @@ export function HeaderTest() {
 	return (
 		<>
 			<FofoHeader data={headerdata} />
-			{/* <AutoMatch />
-			<IndividualMatch />
-			<ManualMatch /> */}
 		</>
 	);
 }

@@ -30,6 +30,7 @@ export function App() {
 					MemberCard
 				</Link>
 				<Link to="http://localhost:5173/HeaderTest">header</Link>
+				<Link to="http://localhost:5173/ButtonTest">header</Link>
 			</div>
 			<h1>Vite + React</h1>
 			<div className="card">
