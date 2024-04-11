@@ -9,9 +9,11 @@ export function MemberInformation({ data }: MemberProps) {
 	return (
 		<div className={styles.container}>
 			<ul className={styles.memberline}>
-				{Object.values(data).map((e) => {
+				{Object.values(data).map((e, i) => {
 					return (
-						<li className={styles.memberinfo}>{e.toString()}</li>
+						<li className={styles.memberinfo} key={i}>
+							{e.toString()}
+						</li>
 					);
 				})}
 			</ul>
