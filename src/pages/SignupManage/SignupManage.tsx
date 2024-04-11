@@ -21,6 +21,7 @@ export function SignupManage() {
 						<ConditionBox
 							conditionData={conditionData}
 							setConditionData={setConditionData}
+							lastColumn="카카오톡 ID"
 						/>
 						<MemberListPanel members={members} />
 					</div>

@@ -17,6 +17,5 @@ export class ConditionListModel {
 	filtering_condition: Filtering = new Filtering();
 	charming_point: string | null = null;
 
-	kakao_id: string | null = null;
 	constructor() {}
 }

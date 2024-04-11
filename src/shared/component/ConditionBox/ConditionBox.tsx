@@ -10,10 +10,12 @@ import AddressCondition from "./components/AddressCondition";
 interface ConditionBoxProps {
 	conditionData: ConditionListModel;
 	setConditionData: Function;
+	lastColumn: string;
 }
 export function ConditionBox({
 	conditionData,
 	setConditionData,
+	lastColumn,
 }: ConditionBoxProps) {
 	return (
 		<div className={styles.container}>
@@ -91,12 +93,16 @@ export function ConditionBox({
 				conditionData={conditionData}
 				setConditionData={setConditionData}
 			/>
-			<StringCondition
-				title="카카오톡 ID"
-				targetColumn="kakao_id"
-				conditionData={conditionData}
-				setConditionData={setConditionData}
-			/>
+			<div className={styles.item}>
+				<button
+					style={{
+						width: "100%",
+						height: "100%",
+					}}
+				>
+					{lastColumn}
+				</button>
+			</div>
 		</div>
 	);
 }
