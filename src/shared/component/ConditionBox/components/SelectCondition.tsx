@@ -27,7 +27,7 @@ export function SelectCondition({
 	Object.entries(type).forEach(([key, value]) => {
 		LabelAsValueMap.set(value, key);
 	});
-	const Options = Object.entries({ 없음: undefined, ...type }).map(
+	const Options = Object.entries({ 없음: null, ...type }).map(
 		([name, value]) => {
 			return { value: value, label: name };
 		}

@@ -43,7 +43,7 @@ export function StringCondition({
 							setConditionData({
 								...conditionData,
 								[targetColumn]:
-									inputValue === "" ? undefined : inputValue,
+									inputValue === "" ? null : inputValue,
 							});
 						}}
 						onKeyDown={(e) => {
@@ -57,7 +57,7 @@ export function StringCondition({
 					onClick={() => {
 						setConditionData({
 							...conditionData,
-							[targetColumn]: undefined,
+							[targetColumn]: null,
 						});
 						setActive(false);
 					}}
