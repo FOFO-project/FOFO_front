@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App, SignupManage, MemberCardTest, HeaderTest, ButtonTest, MemberManage } from "../pages/pages";
+import { SignupManage, MemberManage } from "../pages/pages";
 import "./index.css";
 import {
 	createBrowserRouter,
@@ -15,27 +15,11 @@ export function init() {
 				router={createBrowserRouter([
 					{
 						path: "/",
-						element: <Navigate to="/App" />,
-					},
-					{
-						path: "/App",
-						element: <App />,
+						element: <Navigate to="/SignupManage" />,
 					},
 					{
 						path: "/SignupManage",
 						element: <SignupManage />,
-					},
-					{
-						path: "/MemberCardTest",
-						element: <MemberCardTest />,
-					},
-					{
-						path: "/HeaderTest",
-						element: <HeaderTest />,
-					},
-					{
-						path: "/ButtonTest",
-						element: <ButtonTest />,
 					},
 					{
 						path: "/MemberManage",

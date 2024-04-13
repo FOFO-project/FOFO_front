@@ -1,6 +1,3 @@
-export { App } from "./App/App";
-export { MemberCardTest } from "./MemberCardTest/MemberCardTest";
 export { HeaderTest } from "../widgets/header/HeaderTest";
 export { SignupManage } from "./SignupManage/SignupManage";
-export { ButtonTest } from "./ButtonTest/ButtonTest";
 export { MemberManage } from "./MemberManage/MemberManage";

@@ -30,20 +30,18 @@ export function FofoHeader({ data }: HeaderProps) {
 							</a>
 						</li>
 						<li className={style.header_items}>
-							<a href="http://localhost:5173/HeaderTest">
-								{data.item2}
+							<a href="http://localhost:5173/">{data.item2}</a>
+						</li>
+						<li className={style.header_items}>
+							<a href="http://localhost:5173/">{data.item3}</a>
+						</li>
+						<li className={style.header_items}>
+							<a href="http://localhost:5173/MemberManage">
+								{data.item4}
 							</a>
 						</li>
 						<li className={style.header_items}>
-							<a href="http://localhost:5173/membercardtest">
-								{data.item3}
-							</a>
-						</li>
-						<li className={style.header_items}>
-							<a href="http://localhost:5173/MemberManage">{data.item4}</a>
-						</li>
-						<li className={style.header_items}>
-							<a href="http://localhost:5173/ButtonTest">{data.item5}</a>
+							<a href="http://localhost:5173/">{data.item5}</a>
 						</li>
 					</ul>
 				</div>
