@@ -11,14 +11,14 @@ export class Address {
 }
 
 export enum Gender {
-	남자 = "MAN",
-	여자 = "WOMAN",
+	MAN = "남자",
+	WOMAN = "여자",
 }
 
 export enum AgeRelationType {
-	연상 = "OLDER",
-	연하 = "YOUNGER",
-	동갑 = "SAME",
+	OLDER = "연상",
+	YOUNGER = "연하",
+	SAME = "동갑",
 }
 
 export enum Mbti {
@@ -41,29 +41,34 @@ export enum Mbti {
 }
 
 export enum Religion {
-	기독교 = "CHRISTIANITY",
-	천주교 = "CATHOLIC",
-	불교 = "BUDDHISM",
-	원불교 = "WON_BUDDHISM",
-	무교 = "NON_RELIGIOUS",
-	기타 = "OTHER",
+	CHRISTIANITY = "기독교",
+	CATHOLIC = "천주교",
+	BUDDHISM = "불교",
+	WON_BUDDHISM = "원불교",
+	NON_RELIGIOUS = "무교",
+	OTHER = "기타",
 }
 
 export enum ApprovalStatus {
-	입금대기중 = "DEPOSIT_PENDING",
-	입금완료 = "DEPOSIT_COMPLETED",
-	승인 = "APPROVED",
+	DEPOSIT_PENDING = "입금대기중",
+	DEPOSIT_COMPLETED = "입금완료",
+	APPROVED = "승인",
 }
 
 export enum MatchingStatus {
-	"매칭 대기중" = "1",
-	"매칭 진행중" = "2",
-	"매칭 완료" = "3",
+	매칭대기중,
+	매칭진행중,
+	매칭완료
 }
 export enum ActiveStatus {
 	CREATED = "CREATED",
 	UPDATED = "UPDATED",
 	DELETED = "DELETED",
+}
+
+export enum SmokingYn {
+	Y = "흡연",
+	N = "비흡연"
 }
 
 export interface Member {

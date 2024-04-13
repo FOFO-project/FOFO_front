@@ -1,4 +1,4 @@
-import { Address, AgeRelationType, Mbti, Religion } from "../../shared";
+import { Address, AgeRelationType, Mbti, Religion, SmokingYn } from "../../shared";
 
 export class Filtering {
 	AgeRelation: AgeRelationType | null = null;
@@ -12,7 +12,7 @@ export class ConditionListModel {
 	job: string | null = null;
 	university: string | null = null;
 	mbti: Mbti | null = null;
-	smoking_yn: boolean | null = null;
+	smoking_yn: SmokingYn | null = null;
 	religion: Religion | null = null;
 	filtering_condition: Filtering = new Filtering();
 	charming_point: string | null = null;

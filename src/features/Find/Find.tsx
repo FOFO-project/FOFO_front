@@ -33,7 +33,7 @@ export const Find: React.FC<FindProps> = (param) => {
 	return (
 		<>
 			<a
-				className={`${style.btn} ${style.red}`}
+				className="btn btn-success"
 				href="#"
 				onClick={search}
 			>

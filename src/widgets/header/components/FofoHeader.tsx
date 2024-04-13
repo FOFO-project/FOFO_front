@@ -40,7 +40,7 @@ export function FofoHeader({ data }: HeaderProps) {
 							</a>
 						</li>
 						<li className={style.header_items}>
-							<a href="http://localhost:5173/App">{data.item4}</a>
+							<a href="http://localhost:5173/MemberManage">{data.item4}</a>
 						</li>
 						<li className={style.header_items}>
 							<a href="http://localhost:5173/ButtonTest">{data.item5}</a>
