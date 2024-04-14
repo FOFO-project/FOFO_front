@@ -1,4 +1,4 @@
-import { cloneElement, ReactElement, useEffect } from "react";
+import { cloneElement, ReactElement } from "react";
 import styles from "./ItemListPanel.module.scss";
 import classNames from "classnames";
 

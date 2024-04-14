@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement } from "react";
 import styles from "./Toggle.module.scss";
 
 export interface ToggleProps {

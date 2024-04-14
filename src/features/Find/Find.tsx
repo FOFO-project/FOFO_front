@@ -1,5 +1,4 @@
 import { ConditionListModel, Member } from "../../shared/shared";
-import style from "../features.module.scss";
 import { useState } from "react";
 import { getResult } from "./api/getResult";
 
@@ -8,7 +7,7 @@ interface FindProps {
 }
 
 export const Find: React.FC<FindProps> = (param) => {
-	const [member, setMember] = useState<Member[]>([]);
+	const [, setMember] = useState<Member[]>([]);
 
 	const search = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -32,11 +31,7 @@ export const Find: React.FC<FindProps> = (param) => {
 	};
 	return (
 		<>
-			<a
-				className="btn btn-success"
-				href="#"
-				onClick={search}
-			>
+			<a className="btn btn-success" href="#" onClick={search}>
 				{btnData.btnName}
 			</a>
 		</>

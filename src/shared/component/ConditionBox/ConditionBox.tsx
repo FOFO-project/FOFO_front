@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { ConditionListModel, Mbti, Religion } from "../../shared";
 import { DateCondition } from "./components/DateCondition";
 import { StringCondition } from "./components/StringCondition";

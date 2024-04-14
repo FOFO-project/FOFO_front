@@ -1,7 +1,7 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ConditionListModel, Toggle } from "../../../shared";
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "../ConditionBox.module.scss";
 
 interface DateConditionProps {

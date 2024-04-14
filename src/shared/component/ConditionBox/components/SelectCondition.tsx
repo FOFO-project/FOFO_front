@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { ConditionListModel, Mbti, Toggle } from "../../../shared";
+import { useState } from "react";
+import { ConditionListModel, Toggle } from "../../../shared";
 import styles from "../ConditionBox.module.scss";
 import Select from "react-select";
 

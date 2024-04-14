@@ -1,6 +1,5 @@
-import { ConditionListModel, Member } from "../../shared/shared";
+import { ConditionListModel } from "../../shared/shared";
 import style from "../features.module.scss";
-import { useState } from "react";
 import { getResult } from "./api/getResult";
 
 interface TestFindProps {
@@ -15,7 +14,7 @@ export const TestFind: React.FC<TestFindProps> = (param) => {
 		e.preventDefault();
 		console.log(JSON.stringify(param.conditionData, null, 2));
 		try {
-			const result = await getResult(param);
+			const result = await getResult();
 			param.setMembers(result);
 		} catch (err) {
 			alert("Error : " + err);

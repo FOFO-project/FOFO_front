@@ -5,5 +5,6 @@ export { ItemListPanel } from "./component/ItemListPanel/ItemListPanel";
 export { ItemListPanelCopy } from "./component/ItemListPanel/ItemListPanelCopy";
 export { Toggle } from "./component/Toggle/Toggle";
 export { ToggleCopy } from "./component/Toggle/ToggleCopy";
+export { ApiCaller } from "./util/ApiCaller";
 export * from "./type/listTypes/listTypes";
 export * from "./type/memberTypes";

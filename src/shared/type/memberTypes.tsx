@@ -58,7 +58,7 @@ export enum ApprovalStatus {
 export enum MatchingStatus {
 	매칭대기중,
 	매칭진행중,
-	매칭완료
+	매칭완료,
 }
 export enum ActiveStatus {
 	CREATED = "CREATED",
@@ -68,25 +68,38 @@ export enum ActiveStatus {
 
 export enum SmokingYn {
 	Y = "흡연",
-	N = "비흡연"
+	N = "비흡연",
 }
 
-export interface Member {
-	memberId?: string;
-	kakaoId: string; //maxlength:20
-	address: Address;
-	name: string; //maxlength:30
-	gender: Gender;
-	birthday: Date;
-	phoneNumber: string; //maxlength:30
-	filteringConditionAgeRelation?: AgeRelationType;
-	company: string; //maxlength:20
-	job: string; //maxlength:30
-	university: string; //maxlength:30
-	mbti: Mbti;
-	smokingYn: boolean;
-	filteringConditionSmokingYn: boolean;
-	religion: Religion;
-	filteringConditionReligion: Religion;
-	charmingPoint: string; //maxlength:100
+export class Member {
+	id: number | null = null;
+	kakaoId: string | null = null;
+	name: string | null = null;
+	gender: Gender | null = null;
+	birthday: Date | null = null;
+	age: number | null = null;
+	phoneNumber: string | null = null;
+	company: string | null = null;
+	job: string | null = null;
+	university: string | null = null;
+	mbti: Mbti | null = null;
+	smokingYn: SmokingYn | null = null;
+	religion: Religion | null = null;
+	charmingPoint: string | null = null;
+	filteringConditionAgeRelation: AgeRelationType | null = null;
+	filteringSmoker: SmokingYn | null = null;
+	filteringConditionReligion: Religion | null = null;
+	//폼 입력 이외 데이터
+	depositDate: Date | null = null;
+	note: string | null = null;
+	passCount: number | null = null;
+	chance: number | null = null;
+	approvalStatus: ApprovalStatus | null = null;
+	status: ActiveStatus | null = null;
+	createdTime: Date | null = null;
+	modifiedTime: Date | null = null;
+
+	constructor(data: Partial<Member> = {}) {
+		Object.assign(this, data);
+	}
 }
