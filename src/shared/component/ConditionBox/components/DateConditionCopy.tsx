@@ -16,8 +16,8 @@ export function DateConditionCopy({
 	conditionData,
 	setConditionData,
 }: DateConditionProps) {
-	const [isActive, setActive] = useState(false);
 	const datePickerRef = useRef<DatePicker>(null);
+	const [isActive, setActive] = useState(false);
 
 	//달력 활성화
 	// useEffect(() => {
@@ -27,30 +27,34 @@ export function DateConditionCopy({
 	return (
 		<div className="col dropdown">
 			<button
-				className="btn btn-outline-dark btn-sm dropdown-toggle"
-				data-bs-toggle="dropdown" 
-				onClick={() => setActive(true)}
+				className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+				data-bs-toggle="dropdown"
+				aria-expanded="false"
+				data-bs-auto-close="true"
 			>
 				{title}
 			</button>
 			<ul className="dropdown-menu">
 				<li>
-					<div>
-						<DatePicker className="dropdown-item"
-							ref={datePickerRef}
-							id="datePicker"
-							selected={conditionData[targetColumn] as Date}
-							onChange={(date: Date) => {
-								setConditionData({
-									...conditionData,
-									[targetColumn]: date,
-								});
-							}}
-							dateFormat="yyyy-MM-dd"
-						/>
-					</div>
-					<button
-						onClick={() => {
+					<DatePicker className="dropdown-item"
+						ref={datePickerRef}
+						id="datePicker"
+						selected={conditionData[targetColumn] as Date}
+						onChange={(date: Date) => {
+							setConditionData({
+								...conditionData,
+								[targetColumn]: date,
+							});
+							setActive(true);
+						}}
+						dateFormat="yyyy-MM-dd"
+					/>
+				</li>
+				<li>
+					<a	className="btn btn-dark"
+						href="#"
+						onClick={(e) => {
+							e.preventDefault();
 							setConditionData({
 								...conditionData,
 								[targetColumn]: null,
@@ -59,7 +63,7 @@ export function DateConditionCopy({
 						}}
 					>
 						clear
-					</button>
+					</a>
 				</li>
 			</ul>
 		</div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ConditionListModel } from "../../../shared";
 
 interface SelectConditionProps {
@@ -17,6 +17,7 @@ export function SelectConditionCopy({
 	setConditionData
 }: SelectConditionProps) {
 	const [ selectedValue, setSelectedValue ] = useState("없음");
+	const [isActive, setActive] = useState(false);
 
 	const Options = [{key: null, value: "없음" }, ...Object.entries(type).map(
         ([key, value]) => {
@@ -24,27 +25,30 @@ export function SelectConditionCopy({
         }
     )];
 
-	const handleOptionClick = (key:any, value:any) => {
+	const handleOptionClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, key:any, value:any) => {
+		e.preventDefault();
 		setConditionData({
 			...conditionData,
 			[targetColumn]: key,
 		});
 		setSelectedValue(value);
+		setActive(true);
 	};
 
 	return (
 		<div className="col dropdown">
-			<button className="btn btn-outline-dark btn-sm dropdown-toggle" 
-					data-bs-toggle="dropdown" 
-					aria-expanded="false">
+			<button className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+					data-bs-toggle="dropdown"
+					aria-expanded="false"
+					data-bs-auto-close="true">
 				{selectedValue == "없음" ? title : selectedValue}
 			</button>
-			<ul className="dropdown-menu">
+			<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>
 				{Options.map((options) => (
 					<li key={options.key}>
 						<a className="dropdown-item"
 							href="#"
-							onClick={() => handleOptionClick(options.key, options.value)}
+							onClick={(e) => handleOptionClick(e, options.key, options.value)}
 						>
 							{options.value}
 						</a>

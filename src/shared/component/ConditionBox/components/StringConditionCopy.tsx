@@ -14,6 +14,7 @@ export function StringConditionCopy({
 	setConditionData,
 }: StringConditionProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
+	const [isActive, setActive] = useState(false);
 
 	useEffect(() => {
 		if (inputRef.current) {
@@ -24,10 +25,10 @@ export function StringConditionCopy({
 
 	return (
 		<div className="col dropdown">
-			<button className='btn btn-outline-dark btn-sm dropdown-toggle'
+			<button className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
 					data-bs-toggle="dropdown" 
 					aria-expanded="false"
-					data-bs-auto-close="outside">
+					data-bs-auto-close="true">
 				{title}
 			</button>
 			<form className="dropdown-menu p-2">
@@ -38,12 +39,13 @@ export function StringConditionCopy({
 						autoFocus={true}
 						onInput={(e) => {
 							const inputValue = (e.target as HTMLInputElement)
-								.value;
+							.value;
 							setConditionData({
 								...conditionData,
 								[targetColumn]:
 									inputValue === "" ? null : inputValue,
 							});
+							setActive(true);
 						}}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") {
@@ -54,17 +56,20 @@ export function StringConditionCopy({
 									[targetColumn]:
 										inputValue === "" ? null : inputValue,
 								});
+								setActive(true);
 							}
 						}}
 					/>
 				</div>
-				<a className="btn btn-outline-secondary"
+				<a className="btn btn-dark"
 					href="#"
-					onClick={() => {
+					onClick={(e) => {
+						e.preventDefault();
 						setConditionData({
 							...conditionData,
 							[targetColumn]: null,
 						});
+						setActive(false);
 					}}
 					>clear
 				</a>

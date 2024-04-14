@@ -2,7 +2,7 @@ import { Address, AgeRelationType, Mbti, Religion, SmokingYn } from "../../share
 
 export class Filtering {
 	AgeRelation: AgeRelationType | null = null;
-	SmokingYn: boolean | null = null;
+	SmokingYn: SmokingYn | null = null;
 	Religion: Religion | null = null;
 }
 export class ConditionListModel {
