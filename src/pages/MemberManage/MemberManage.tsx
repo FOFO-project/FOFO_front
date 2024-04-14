@@ -43,10 +43,10 @@ export function MemberManage() {
 								<AutoMatch />
 							</div>
 							<div className={`${style.buttonBox}`}>
-								<IndividualMatch />
+								<IndividualMatch members={[]}/>
 							</div>
 							<div className={`${style.buttonBox}`}>
-								<ManualMatch />
+								<ManualMatch members={[]}/>
 							</div>
 						</div>
 					</div>

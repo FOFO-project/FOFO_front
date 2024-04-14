@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { SignupManage, MemberManage } from "../pages/pages";
+import { SignupManage, MemberManage, MemberForm } from "../pages/pages";
 import "./index.css";
 import {
 	createBrowserRouter,
@@ -15,7 +15,11 @@ export function init() {
 				router={createBrowserRouter([
 					{
 						path: "/",
-						element: <Navigate to="/SignupManage" />,
+						element: <Navigate to="/MemberForm" />,
+					},
+					{
+						path: "/MemberForm",
+						element: <MemberForm />,
 					},
 					{
 						path: "/SignupManage",

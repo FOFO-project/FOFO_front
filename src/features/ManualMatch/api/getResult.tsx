@@ -4,10 +4,11 @@ export const getResult = async (members: any[]) => {
 	try {
 		const response = await axios.post(
 			"http://144.24.79.73:8080/match/manual",
-			members,{
-				headers : {
-					'Content-Type' : 'application/json'
-				}
+			members,
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
 			}
 		);
 		if (response.status === 200) {

@@ -5,7 +5,7 @@ import classNames from "classnames";
 interface ItemListPanelProps<T extends ReactElement> {
 	items: T[];
 }
-export function ItemListPanel<T extends ReactElement>({
+export function ItemListPanelCopy<T extends ReactElement>({
 	items,
 }: ItemListPanelProps<T>) {
 	return (

@@ -1,4 +1,3 @@
-import { ReactElement, useReducer, useState } from "react";
 import style from "../header.module.scss";
 
 interface HeaderProps {
