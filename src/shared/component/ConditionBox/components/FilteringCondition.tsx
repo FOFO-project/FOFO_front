@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import styles from "../ConditionBox.module.scss";
+import React, { useState } from "react";
 import {
 	AgeRelationType,
+	SmokingYn,
 	ConditionListModel,
 	Filtering,
 	Religion,
-	Toggle,
 } from "../../../shared";
-import Select from "react-select";
 
 interface FilteringConditionProps {
 	title: string;
@@ -21,84 +19,144 @@ export function FilteringCondition({
 }: FilteringConditionProps) {
 	const [isActive, setActive] = useState(false);
 
-	const ageRelationOptions = [
-		["상관없음", null],
-		...Object.entries(AgeRelationType),
-	].map(([name, value]) => {
-		return { value: value, label: name };
-	});
-	const smokingOption = [
-		{ value: null, label: "상관없음" },
-		{ value: true, label: "YES" },
-		{ value: false, label: "NO" },
-	];
+	const [ selectedAgeValue, setSelectedAgeValue ] = useState("없음");
+	const [ selectedSmokingValue, setSelectedSmokingValue ] = useState("없음");
+	const [ selectedRelValue, setSelectedRelValue ] = useState("없음");
 
-	const religionOption = [
+	const ageRelationOptions = [
+		["상관없음",null],
+		...Object.entries(AgeRelationType),
+	].map(([key, value]) => {
+		return { key: key, value: value };
+	});
+	const smokingOptions = [
+		["상관없음",null],
+		...Object.entries(SmokingYn),
+	].map(([key, value]) => {
+		return { key: key, value: value };
+	});
+
+	const religionOptions = [
 		["상관없음", null],
 		...Object.entries(Religion),
-	].map(([name, value]) => {
-		return { value: value, label: name };
+	].map(([key, value]) => {
+		return { key: key, value: value };
 	});
 
-	function onSelect(newValue: any, targetFilter: keyof Filtering) {
+	function handleOptionClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, key: any, value:any, targetFilter: keyof Filtering) {
+		e.preventDefault();
 		const filteringCondition = conditionData.filtering_condition;
 		setConditionData({
 			...conditionData,
 			filtering_condition: Object.assign(filteringCondition, {
-				[targetFilter]: newValue?.value,
+				[targetFilter]: key,
 			}),
 		});
+		if(targetFilter == "AgeRelation"){
+			setSelectedAgeValue(value);
+		} else if(targetFilter == "SmokingYn"){
+			setSelectedSmokingValue(value)
+		} else if(targetFilter == "Religion"){
+			setSelectedRelValue(value);
+		} 
+		setActive(true);
 	}
+
+	function handleClearClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>){
+		e.preventDefault();
+		setConditionData({
+			...conditionData,
+			filtering_condtion: new Filtering()
+		})
+		setSelectedAgeValue("없음");
+		setSelectedSmokingValue("없음");
+		setSelectedRelValue("없음");
+		setActive(false);
+	}
+
 	return (
-		<div className={styles.item}>
+		<div className="dropdown">
 			<button
-				className={styles.ToggleButton}
-				onClick={() => setActive(true)}
+				className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+				data-bs-toggle="dropdown"
+				aria-expanded="false"
+				data-bs-auto-close="outside"
 			>
 				{title}
 			</button>
-			<Toggle isActive={isActive} setActive={setActive}>
-				<div>
-					<h3>
-						{`나이조건: ${conditionData.filtering_condition.AgeRelation}`}
-					</h3>
-					<Select
-						options={ageRelationOptions}
-						onChange={(newValue) => {
-							onSelect(newValue, "AgeRelation");
-						}}
-					/>
-					<h3>
-						{`흡연조건: ${conditionData.filtering_condition.SmokingYn}`}
-					</h3>
-					<Select
-						options={smokingOption}
-						onChange={(newValue) => {
-							onSelect(newValue, "SmokingYn");
-						}}
-					/>
-					<h3>
-						{`종교조건: ${conditionData.filtering_condition.Religion}`}
-					</h3>
-					<Select
-						options={religionOption}
-						onChange={(newValue: any) => {
-							onSelect(newValue, "Religion");
-						}}
-					/>
-					<button
-						onClick={() => {
-							setConditionData({
-								...conditionData,
-								filtering_condition: new Filtering(),
-							});
-							setActive(false);
-						}}
+			<ul className="dropdown-menu">
+				<li className="dropdown-item">
+					<div className="col dropdown">
+						<button className="btn btn-dark btn-sm dropdown-toggle" 
+								data-bs-toggle="dropdown" 
+								aria-expanded="false">
+							{selectedAgeValue == "없음" ? title : selectedAgeValue}
+						</button>
+						<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>
+							{ageRelationOptions.map((options) => (
+								<li key={options.key}>
+									<a className="dropdown-item"
+										href="#"
+										onClick={(e) => handleOptionClick(e, options.key, options.value, "AgeRelation")}
+									>
+										{options.value}
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				</li>
+				<li className="dropdown-item">
+					<div className="col dropdown">
+						<button className="btn btn-dark btn-sm dropdown-toggle" 
+								data-bs-toggle="dropdown" 
+								aria-expanded="false">
+							{selectedSmokingValue == "없음" ? title : selectedSmokingValue}
+						</button>
+						<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>
+							{smokingOptions.map((options) => (
+								<li key={options.key}>
+									<a className="dropdown-item"
+										href="#"
+										onClick={(e) => handleOptionClick(e, options.key, options.value, "SmokingYn")}
+									>
+										{options.value}
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				</li>
+				<li className="dropdown-item">
+					<div className="col dropdown">
+						<button className="btn btn-dark btn-sm dropdown-toggle" 
+								data-bs-toggle="dropdown" 
+								aria-expanded="false">
+							{selectedRelValue == "없음" ? title : selectedRelValue}
+						</button>
+						<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>
+							{religionOptions.map((options) => (
+								<li key={options.key}>
+									<a className="dropdown-item"
+										href="#"
+										onClick={(e) => handleOptionClick(e, options.key, options.value, "Religion")}
+									>
+										{options.value}
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a className="dropdown-item"
+						href="#"
+						onClick={(e) => handleClearClick(e)}
 					>
 						clear
-					</button>
-				</div>
-			</Toggle>
+					</a>
+				</li>
+			</ul>
 		</div>
 	);
 }

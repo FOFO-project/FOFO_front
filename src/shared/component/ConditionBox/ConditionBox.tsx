@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ConditionListModel, Mbti, Religion } from "../../shared";
+import { ConditionListModel, Mbti, Religion, SmokingYn } from "../../shared";
 import { DateCondition } from "./components/DateCondition";
 import { StringCondition } from "./components/StringCondition";
 import styles from "./ConditionBox.module.scss";
@@ -68,10 +68,7 @@ export function ConditionBox({
 			<SelectCondition
 				title="흡연여부"
 				targetColumn="smoking_yn"
-				type={{
-					YES: true,
-					NO: false,
-				}}
+				type={SmokingYn}
 				conditionData={conditionData}
 				setConditionData={setConditionData}
 			/>

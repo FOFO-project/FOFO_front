@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ConditionListModel, Toggle } from "../../../shared";
-import styles from "../ConditionBox.module.scss";
+import { ConditionListModel } from "../../../shared";
 
 interface StringConditionProps {
 	title: string;
@@ -14,8 +13,8 @@ export function StringCondition({
 	conditionData,
 	setConditionData,
 }: StringConditionProps) {
-	const [isActive, setActive] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
+	const [isActive, setActive] = useState(false);
 
 	useEffect(() => {
 		if (inputRef.current) {
@@ -25,46 +24,56 @@ export function StringCondition({
 	});
 
 	return (
-		<div className={styles.item}>
-			<button
-				className={styles.ToggleButton}
-				onClick={() => setActive(true)}
-			>
+		<div className="dropdown">
+			<button className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+					data-bs-toggle="dropdown" 
+					aria-expanded="false"
+					data-bs-auto-close="true">
 				{title}
 			</button>
-			<Toggle isActive={isActive} setActive={setActive}>
-				<div>
-					<input
+			<form className="dropdown-menu p-2">
+				<div className="mb-3">
+					<input type="text" 
+						className="form-control" 
 						ref={inputRef}
 						autoFocus={true}
 						onInput={(e) => {
 							const inputValue = (e.target as HTMLInputElement)
-								.value;
+							.value;
 							setConditionData({
 								...conditionData,
 								[targetColumn]:
 									inputValue === "" ? null : inputValue,
 							});
+							setActive(true);
 						}}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") {
-								setActive(false);
+								const inputValue = (e.target as HTMLInputElement)
+								.value;
+								setConditionData({
+									...conditionData,
+									[targetColumn]:
+										inputValue === "" ? null : inputValue,
+								});
+								setActive(true);
 							}
 						}}
 					/>
 				</div>
-				<button
-					onClick={() => {
+				<a className="btn btn-dark"
+					href="#"
+					onClick={(e) => {
+						e.preventDefault();
 						setConditionData({
 							...conditionData,
 							[targetColumn]: null,
 						});
 						setActive(false);
 					}}
-				>
-					clear
-				</button>
-			</Toggle>
+					>clear
+				</a>
+			</form>
 		</div>
 	);
 }

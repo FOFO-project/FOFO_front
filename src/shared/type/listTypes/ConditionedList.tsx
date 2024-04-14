@@ -6,6 +6,7 @@ export class Filtering {
 	Religion: Religion | null = null;
 }
 export class ConditionListModel {
+	name: string | null = null;
 	birthday: Date | null = null;
 	address: Address = new Address();
 	company: string | null = null;
@@ -16,6 +17,9 @@ export class ConditionListModel {
 	religion: Religion | null = null;
 	filtering_condition: Filtering = new Filtering();
 	charming_point: string | null = null;
+	rem: string | null = null;
+	kakao: string | null = null;
+	deposit_date: Date | null = null;
 
 	constructor() {}
 }

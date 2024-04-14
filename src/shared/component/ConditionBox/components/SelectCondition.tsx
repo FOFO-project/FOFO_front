@@ -1,65 +1,64 @@
-import { useEffect, useRef, useState } from "react";
-import { ConditionListModel, Mbti, Toggle } from "../../../shared";
-import styles from "../ConditionBox.module.scss";
-import Select from "react-select";
+import React, { useState } from "react";
+import { ConditionListModel } from "../../../shared";
 
 interface SelectConditionProps {
 	title: string;
+	type: { [s: string]: any };
 	targetColumn: keyof ConditionListModel;
 	conditionData: ConditionListModel;
 	setConditionData: Function;
-	type: { [s: string]: any };
 }
+
 export function SelectCondition({
 	title,
+	type,
 	targetColumn,
 	conditionData,
-	setConditionData,
-	type,
+	setConditionData
 }: SelectConditionProps) {
+	const [ selectedValue, setSelectedValue ] = useState("없음");
 	const [isActive, setActive] = useState(false);
-	const [menuIsOpen, setMenuIsOpen] = useState(false);
-	function setAllActive(arg: boolean) {
-		setActive(arg);
-		setMenuIsOpen(arg);
-	}
-	const LabelAsValueMap = new Map();
-	Object.entries(type).forEach(([key, value]) => {
-		LabelAsValueMap.set(value, key);
-	});
-	const Options = Object.entries({ 없음: null, ...type }).map(
-		([name, value]) => {
-			return { value: value, label: name };
+
+	const Options = [{key: null, value: "없음" }, ...Object.entries(type).map(
+        ([key, value]) => {
+            return { key: key, value: value};
+        }
+    )];
+
+	const handleOptionClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, key:any, value:any) => {
+		e.preventDefault();
+		setConditionData({
+			...conditionData,
+			[targetColumn]: key,
+		});
+		setSelectedValue(value);
+		if(key == null){
+			setActive(false);
+		} else{
+			setActive(true);
 		}
-	);
+	};
 
 	return (
-		<div className={styles.item}>
-			<button
-				className={styles.ToggleButton}
-				onClick={() => setAllActive(true)}
-			>
-				{title}
+		<div className="dropdown">
+			<button className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+					data-bs-toggle="dropdown"
+					aria-expanded="false"
+					data-bs-auto-close="outside">
+				{selectedValue == "없음" ? title : selectedValue}
 			</button>
-			<Toggle isActive={isActive} setActive={setAllActive}>
-				<Select
-					closeMenuOnSelect={true}
-					options={Options}
-					menuIsOpen={menuIsOpen}
-					onChange={(newValue) => {
-						setConditionData({
-							...conditionData,
-							[targetColumn]: newValue?.value,
-						});
-					}}
-					onMenuOpen={() => setAllActive(true)}
-					onMenuClose={() => setAllActive(false)}
-					defaultValue={{
-						value: conditionData[targetColumn],
-						label: LabelAsValueMap.get(conditionData[targetColumn]),
-					}}
-				/>
-			</Toggle>
+			<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>
+				{Options.map((options) => (
+					<li key={options.key}>
+						<a className="dropdown-item"
+							href="#"
+							onClick={(e) => handleOptionClick(e, options.key, options.value)}
+						>
+							{options.value}
+						</a>
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 }

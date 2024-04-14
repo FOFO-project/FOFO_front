@@ -1,8 +1,7 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { ConditionListModel, Toggle } from "../../../shared";
-import { useEffect, useReducer, useRef, useState } from "react";
-import styles from "../ConditionBox.module.scss";
+import { ConditionListModel } from "../../../shared";
+import { useRef, useState } from "react";
 
 interface DateConditionProps {
 	title: string;
@@ -16,8 +15,8 @@ export function DateCondition({
 	conditionData,
 	setConditionData,
 }: DateConditionProps) {
-	const [isActive, setActive] = useState(false);
 	const datePickerRef = useRef<DatePicker>(null);
+	const [isActive, setActive] = useState(false);
 
 	//달력 활성화
 	// useEffect(() => {
@@ -25,16 +24,18 @@ export function DateCondition({
 	// });
 
 	return (
-		<div className={styles.item}>
+		<div className="dropdown">
 			<button
-				className={styles.ToggleButton}
-				onClick={() => setActive(true)}
+				className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+				data-bs-toggle="dropdown"
+				aria-expanded="false"
+				data-bs-auto-close="true"
 			>
 				{title}
 			</button>
-			<Toggle isActive={isActive} setActive={setActive}>
-				<div>
-					<DatePicker
+			<ul className="dropdown-menu">
+				<li>
+					<DatePicker className="dropdown-item"
 						ref={datePickerRef}
 						id="datePicker"
 						selected={conditionData[targetColumn] as Date}
@@ -43,22 +44,27 @@ export function DateCondition({
 								...conditionData,
 								[targetColumn]: date,
 							});
+							setActive(true);
 						}}
 						dateFormat="yyyy-MM-dd"
 					/>
-				</div>
-				<button
-					onClick={() => {
-						setConditionData({
-							...conditionData,
-							[targetColumn]: null,
-						});
-						setActive(false);
-					}}
-				>
-					clear
-				</button>
-			</Toggle>
+				</li>
+				<li>
+					<a	className="btn btn-dark"
+						href="#"
+						onClick={(e) => {
+							e.preventDefault();
+							setConditionData({
+								...conditionData,
+								[targetColumn]: null,
+							});
+							setActive(false);
+						}}
+					>
+						clear
+					</a>
+				</li>
+			</ul>
 		</div>
 	);
 }

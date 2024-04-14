@@ -1,8 +1,5 @@
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { Address, ConditionListModel, Toggle } from "../../../shared";
-import { useEffect, useReducer, useRef, useState } from "react";
-import styles from "../ConditionBox.module.scss";
+import { Address, ConditionListModel } from "../../../shared";
+import { useEffect, useRef, useState } from "react";
 
 interface AddressConditionProps {
 	title: string;
@@ -15,6 +12,7 @@ export function AddressCondition({
 	setConditionData,
 }: AddressConditionProps) {
 	const [isActive, setActive] = useState(false);
+	
 	const REF = {
 		sido: useRef<HTMLInputElement>(null),
 		sigungu: useRef<HTMLInputElement>(null),
@@ -47,78 +45,94 @@ export function AddressCondition({
 	}
 
 	return (
-		<div className={styles.item}>
-			<button
-				className={styles.ToggleButton}
-				onClick={() => setActive(true)}
-			>
+		<div className={`dropdown`}>
+			<button className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+					data-bs-toggle="dropdown" 
+					aria-expanded="false"
+					data-bs-auto-close="true"
+					>
 				{title}
 			</button>
-			<Toggle isActive={isActive} setActive={setActive}>
-				<div>
-					<input
+			<form className="dropdown-menu p-4">
+				<div className="mb-3">
+					<input type="text" 
+						className="form-control" 
 						ref={REF.sido}
 						placeholder="시도"
+						autoFocus={true}
 						onInput={(e) => {
 							const inputValue = (e.target as HTMLInputElement)
 								.value;
 							onChange(inputValue, "sido");
+							setActive(true);
 						}}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") {
-								const nextElement = (e.target as any)
-									.nextElementSibling;
-								if (nextElement) {
-									nextElement.focus();
-								}
+								const inputValue = (e.target as HTMLInputElement)
+									.value;
+								onChange(inputValue, "sido");
 							}
+							setActive(true);
 						}}
 					/>
-					<input
+				</div>
+				<div className="mb-3">
+					<input type="text" 
+						className="form-control" 
 						ref={REF.sigungu}
 						placeholder="시군구"
+						autoFocus={true}
 						onInput={(e) => {
 							const inputValue = (e.target as HTMLInputElement)
 								.value;
 							onChange(inputValue, "sigungu");
+							setActive(true);
 						}}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") {
-								const nextElement = (e.target as any)
-									.nextElementSibling;
-								if (nextElement) {
-									nextElement.focus();
-								}
-							}
-						}}
-					/>
-					<input
-						ref={REF.eupmyundong}
-						placeholder="읍면동"
-						onInput={(e) => {
-							const inputValue = (e.target as HTMLInputElement)
-								.value;
-							onChange(inputValue, "eupmyundong");
-						}}
-						onKeyDown={(e) => {
-							if (e.key === "Enter") {
-								setActive(false);
+								const inputValue = (e.target as HTMLInputElement)
+									.value;
+								onChange(inputValue, "sigungu");
+								setActive(true);
 							}
 						}}
 					/>
 				</div>
-				<button
-					onClick={() => {
+				<div className="mb-3">
+					<input type="text" 
+						className="form-control" 
+						ref={REF.eupmyundong}
+						placeholder="읍면동"
+						autoFocus={true}
+						onInput={(e) => {
+							const inputValue = (e.target as HTMLInputElement)
+								.value;
+							onChange(inputValue, "eupmyundong");
+							setActive(true);
+						}}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								const inputValue = (e.target as HTMLInputElement)
+									.value;
+								onChange(inputValue, "eupmyundong");
+								setActive(true);
+							}
+						}}
+					/>
+				</div>
+				<a className="btn btn-dark"
+					href="#"
+					onClick={(e) => {
+						e.preventDefault();
 						setConditionData({
 							...conditionData,
 							address: new Address(),
 						});
 						setActive(false);
 					}}
-				>
-					clear
-				</button>
-			</Toggle>
+					>clear
+				</a>
+			</form>
 		</div>
 	);
 }
