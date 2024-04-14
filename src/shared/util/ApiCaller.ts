@@ -12,19 +12,20 @@ export const ApiCaller = Object.freeze({
 		});
 		return response.json();
 	},
-	post: async (url: string, data: any) => {
+	post: async (url: string, data?: any) => {
+		console.log(data ? JSON.stringify(data, null, 2) : "");
 		const response = await fetch(config.server_url + url, {
 			method: "POST",
 			headers: HEADER,
-			body: JSON.stringify(data),
+			body: data ? JSON.stringify(data) : "",
 		});
 		return response.json();
 	},
-	put: async (url: string, data: any) => {
+	put: async (url: string, data?: any) => {
 		const response = await fetch(config.server_url + url, {
 			method: "PUT",
 			headers: HEADER,
-			body: JSON.stringify(data),
+			body: data ? JSON.stringify(data) : "",
 		});
 		return response.json();
 	},

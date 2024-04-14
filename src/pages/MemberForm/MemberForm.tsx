@@ -1,17 +1,19 @@
 import { useState } from "react";
 import {
-	Member,
 	Gender,
 	AgeRelationType,
 	Mbti,
 	Religion,
 	SmokingYn,
 	ApiCaller,
+	MemberFormDTO,
 } from "../../shared/shared";
-import page_styles from "../pages.module.scss";
 import { useAsync } from "react-async";
+import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
 
 export function MemberForm() {
+	const navigate = useNavigate();
 	useAsync({
 		promiseFn: async () => {
 			return ApiCaller.get("/members").then((e) => {
@@ -21,7 +23,7 @@ export function MemberForm() {
 		},
 	});
 
-	const [formData, setFormData] = useState(new Member({}));
+	const [formData, setFormData] = useState(new MemberFormDTO({}));
 
 	const handleChange = (e: any) => {
 		const { name, value, type, checked } = e.target;
@@ -35,14 +37,34 @@ export function MemberForm() {
 					: value,
 		}));
 	};
+	const handleAddressChange = (e: any) => {
+		const { name, value } = e.target;
+		setFormData((prevData) => ({
+			...prevData,
+			address: {
+				...prevData.address,
+				[name]: value.length === 0 ? null : value,
+			},
+		}));
+	};
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		console.log(JSON.stringify(formData, null, 2));
+		ApiCaller.post("/member", formData).then((e) => {
+			if (e.status === 200) {
+				alert("Success");
+				navigate("/MemberForm");
+			} else {
+				alert(e.message);
+			}
+		});
 	};
 
 	return (
-		<div className={page_styles.Page}>
-			<form className="container mt-5" onSubmit={handleSubmit}>
+		<div>
+			<form
+				className={classNames("container mt-5")}
+				onSubmit={handleSubmit}
+			>
 				<h5>내 정보</h5>
 				<div className="mb-3">
 					<label htmlFor="kakaoId" className="form-label">
@@ -57,6 +79,47 @@ export function MemberForm() {
 						onChange={handleChange}
 					/>
 				</div>
+				<h6>주소</h6>
+				<div className="mb-3">
+					<label htmlFor="sido" className="form-label">
+						시도:
+					</label>
+					<input
+						type="text"
+						className="form-control"
+						id="sido"
+						name="sido"
+						value={formData.address.sido || ""}
+						onChange={handleAddressChange}
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="sigungu" className="form-label">
+						시군구:
+					</label>
+					<input
+						type="text"
+						className="form-control"
+						id="sigungu"
+						name="sigungu"
+						value={formData.address.sigungu || ""}
+						onChange={handleAddressChange}
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="eupmyundong" className="form-label">
+						읍면동:
+					</label>
+					<input
+						type="text"
+						className="form-control"
+						id="eupmyundong"
+						name="eupmyundong"
+						value={formData.address.eupmyundong || ""}
+						onChange={handleAddressChange}
+					/>
+				</div>
+				<h6>내 정보</h6>
 				<div className="mb-3">
 					<label htmlFor="name" className="form-label">
 						이름(Name):
@@ -82,8 +145,11 @@ export function MemberForm() {
 						onChange={handleChange}
 					>
 						<option value="">선택 안함</option>
-						<option value={Gender.MAN}>Male</option>
-						<option value={Gender.WOMAN}>Female</option>
+						{Object.entries(Gender).map(([key, value]) => (
+							<option key={key} value={key}>
+								{value}
+							</option>
+						))}
 					</select>
 				</div>
 				<div className="mb-3">
@@ -124,9 +190,9 @@ export function MemberForm() {
 						onChange={handleChange}
 					>
 						<option value="">선택 안함</option>
-						{Object.values(Mbti).map((type) => (
-							<option key={type} value={type}>
-								{type}
+						{Object.entries(Mbti).map(([key, value]) => (
+							<option key={key} value={key}>
+								{value}
 							</option>
 						))}
 					</select>
@@ -143,9 +209,9 @@ export function MemberForm() {
 						onChange={handleChange}
 					>
 						<option value="">선택 안함</option>
-						{Object.values(SmokingYn).map((religion) => (
-							<option key={religion} value={religion}>
-								{religion}
+						{Object.entries(SmokingYn).map(([key, value]) => (
+							<option key={key} value={key}>
+								{value}
 							</option>
 						))}
 					</select>
@@ -162,9 +228,9 @@ export function MemberForm() {
 						onChange={handleChange}
 					>
 						<option value="">선택 안함</option>
-						{Object.values(Religion).map((religion) => (
-							<option key={religion} value={religion}>
-								{religion}
+						{Object.entries(Religion).map(([key, value]) => (
+							<option key={key} value={key}>
+								{value}
 							</option>
 						))}
 					</select>
@@ -184,22 +250,22 @@ export function MemberForm() {
 				<h5>원하는 상대 정보</h5>
 				<div className="mb-3">
 					<label
-						htmlFor="filteringConditionAgeRelation"
+						htmlFor="filteringAgeRelation"
 						className="form-label"
 					>
 						연상/동갑.연하(Age Relation):
 					</label>
 					<select
 						className="form-select"
-						id="filteringConditionAgeRelation"
-						name="filteringConditionAgeRelation"
-						value={formData.filteringConditionAgeRelation || ""}
+						id="filteringAgeRelation"
+						name="filteringAgeRelation"
+						value={formData.filteringAgeRelation || ""}
 						onChange={handleChange}
 					>
 						<option value="">상관없음</option>
-						{Object.values(AgeRelationType).map((type) => (
-							<option key={type} value={type}>
-								{type}
+						{Object.entries(AgeRelationType).map(([key, value]) => (
+							<option key={key} value={key}>
+								{value}
 							</option>
 						))}
 					</select>
@@ -216,31 +282,28 @@ export function MemberForm() {
 						onChange={handleChange}
 					>
 						<option value="">상관없음</option>
-						{Object.values(SmokingYn).map((type) => (
-							<option key={type} value={type}>
-								{type}
+						{Object.entries(SmokingYn).map(([key, value]) => (
+							<option key={key} value={key}>
+								{value}
 							</option>
 						))}
 					</select>
 				</div>
 				<div className="mb-3">
-					<label
-						htmlFor="filteringConditionReligion"
-						className="form-label"
-					>
+					<label htmlFor="filteringReligion" className="form-label">
 						종교(Religion):
 					</label>
 					<select
 						className="form-select"
-						id="filteringConditionReligion"
-						name="filteringConditionReligion"
-						value={formData.filteringConditionReligion || ""}
+						id="filteringReligion"
+						name="filteringReligion"
+						value={formData.filteringReligion || ""}
 						onChange={handleChange}
 					>
 						<option value="">상관없음</option>
-						{Object.values(Religion).map((type) => (
-							<option key={type} value={type}>
-								{type}
+						{Object.entries(Religion).map(([key, value]) => (
+							<option key={key} value={key}>
+								{value}
 							</option>
 						))}
 					</select>

@@ -19,18 +19,18 @@ export function FilteringCondition({
 }: FilteringConditionProps) {
 	const [isActive, setActive] = useState(false);
 
-	const [ selectedAgeValue, setSelectedAgeValue ] = useState("없음");
-	const [ selectedSmokingValue, setSelectedSmokingValue ] = useState("없음");
-	const [ selectedRelValue, setSelectedRelValue ] = useState("없음");
+	const [selectedAgeValue, setSelectedAgeValue] = useState("없음");
+	const [selectedSmokingValue, setSelectedSmokingValue] = useState("없음");
+	const [selectedRelValue, setSelectedRelValue] = useState("없음");
 
 	const ageRelationOptions = [
-		["상관없음",null],
+		["상관없음", null],
 		...Object.entries(AgeRelationType),
 	].map(([key, value]) => {
 		return { key: key, value: value };
 	});
 	const smokingOptions = [
-		["상관없음",null],
+		["상관없음", null],
 		...Object.entries(SmokingYn),
 	].map(([key, value]) => {
 		return { key: key, value: value };
@@ -43,7 +43,12 @@ export function FilteringCondition({
 		return { key: key, value: value };
 	});
 
-	function handleOptionClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, key: any, value:any, targetFilter: keyof Filtering) {
+	function handleOptionClick(
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+		key: any,
+		value: any,
+		targetFilter: keyof Filtering
+	) {
 		e.preventDefault();
 		const filteringCondition = conditionData.filtering_condition;
 		setConditionData({
@@ -52,22 +57,24 @@ export function FilteringCondition({
 				[targetFilter]: key,
 			}),
 		});
-		if(targetFilter == "AgeRelation"){
+		if (targetFilter == "AgeRelation") {
 			setSelectedAgeValue(value);
-		} else if(targetFilter == "SmokingYn"){
-			setSelectedSmokingValue(value)
-		} else if(targetFilter == "Religion"){
+		} else if (targetFilter == "SmokingYn") {
+			setSelectedSmokingValue(value);
+		} else if (targetFilter == "Religion") {
 			setSelectedRelValue(value);
-		} 
+		}
 		setActive(true);
 	}
 
-	function handleClearClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>){
+	function handleClearClick(
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+	) {
 		e.preventDefault();
 		setConditionData({
 			...conditionData,
-			filtering_condtion: new Filtering()
-		})
+			filtering_condtion: new Filtering(),
+		});
 		setSelectedAgeValue("없음");
 		setSelectedSmokingValue("없음");
 		setSelectedRelValue("없음");
@@ -77,7 +84,9 @@ export function FilteringCondition({
 	return (
 		<div className="dropdown">
 			<button
-				className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+				className={`btn ${
+					isActive == false ? "btn-outline-dark" : "btn-dark"
+				} btn-lg dropdown-toggle`}
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
 				data-bs-auto-close="outside"
@@ -87,17 +96,32 @@ export function FilteringCondition({
 			<ul className="dropdown-menu">
 				<li className="dropdown-item">
 					<div className="col dropdown">
-						<button className="btn btn-dark btn-sm dropdown-toggle" 
-								data-bs-toggle="dropdown" 
-								aria-expanded="false">
-							{selectedAgeValue == "없음" ? title : selectedAgeValue}
+						<button
+							className="btn btn-dark btn-sm dropdown-toggle"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							{selectedAgeValue == "없음"
+								? title
+								: selectedAgeValue}
 						</button>
-						<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>
+						<ul
+							className="dropdown-menu"
+							style={{ maxHeight: "150px", overflowY: "auto" }}
+						>
 							{ageRelationOptions.map((options) => (
 								<li key={options.key}>
-									<a className="dropdown-item"
+									<a
+										className="dropdown-item"
 										href="#"
-										onClick={(e) => handleOptionClick(e, options.key, options.value, "AgeRelation")}
+										onClick={(e) =>
+											handleOptionClick(
+												e,
+												options.key,
+												options.value,
+												"AgeRelation"
+											)
+										}
 									>
 										{options.value}
 									</a>
@@ -108,17 +132,32 @@ export function FilteringCondition({
 				</li>
 				<li className="dropdown-item">
 					<div className="col dropdown">
-						<button className="btn btn-dark btn-sm dropdown-toggle" 
-								data-bs-toggle="dropdown" 
-								aria-expanded="false">
-							{selectedSmokingValue == "없음" ? title : selectedSmokingValue}
+						<button
+							className="btn btn-dark btn-sm dropdown-toggle"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							{selectedSmokingValue == "없음"
+								? title
+								: selectedSmokingValue}
 						</button>
-						<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>
+						<ul
+							className="dropdown-menu"
+							style={{ maxHeight: "150px", overflowY: "auto" }}
+						>
 							{smokingOptions.map((options) => (
 								<li key={options.key}>
-									<a className="dropdown-item"
+									<a
+										className="dropdown-item"
 										href="#"
-										onClick={(e) => handleOptionClick(e, options.key, options.value, "SmokingYn")}
+										onClick={(e) =>
+											handleOptionClick(
+												e,
+												options.key,
+												options.value,
+												"SmokingYn"
+											)
+										}
 									>
 										{options.value}
 									</a>
@@ -129,17 +168,32 @@ export function FilteringCondition({
 				</li>
 				<li className="dropdown-item">
 					<div className="col dropdown">
-						<button className="btn btn-dark btn-sm dropdown-toggle" 
-								data-bs-toggle="dropdown" 
-								aria-expanded="false">
-							{selectedRelValue == "없음" ? title : selectedRelValue}
+						<button
+							className="btn btn-dark btn-sm dropdown-toggle"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							{selectedRelValue == "없음"
+								? title
+								: selectedRelValue}
 						</button>
-						<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>
+						<ul
+							className="dropdown-menu"
+							style={{ maxHeight: "150px", overflowY: "auto" }}
+						>
 							{religionOptions.map((options) => (
 								<li key={options.key}>
-									<a className="dropdown-item"
+									<a
+										className="dropdown-item"
 										href="#"
-										onClick={(e) => handleOptionClick(e, options.key, options.value, "Religion")}
+										onClick={(e) =>
+											handleOptionClick(
+												e,
+												options.key,
+												options.value,
+												"Religion"
+											)
+										}
 									>
 										{options.value}
 									</a>
@@ -149,7 +203,8 @@ export function FilteringCondition({
 					</div>
 				</li>
 				<li>
-					<a className="dropdown-item"
+					<a
+						className="dropdown-item"
 						href="#"
 						onClick={(e) => handleClearClick(e)}
 					>

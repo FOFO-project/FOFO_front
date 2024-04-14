@@ -1,14 +1,21 @@
-import { Address, AgeRelationType, Mbti, Religion, SmokingYn } from "../../shared";
+import {
+	AddressFormDTO,
+	AgeRelationType,
+	Mbti,
+	Religion,
+	SmokingYn,
+} from "../../shared";
 
 export class Filtering {
 	AgeRelation: AgeRelationType | null = null;
 	SmokingYn: SmokingYn | null = null;
 	Religion: Religion | null = null;
 }
+
 export class ConditionListModel {
 	name: string | null = null;
 	birthday: Date | null = null;
-	address: Address = new Address();
+	address: AddressFormDTO = new AddressFormDTO();
 	company: string | null = null;
 	job: string | null = null;
 	university: string | null = null;
@@ -21,5 +28,7 @@ export class ConditionListModel {
 	kakao: string | null = null;
 	deposit_date: Date | null = null;
 
-	constructor() {}
+	constructor(data: Partial<ConditionListModel> = {}) {
+		Object.assign(this, data);
+	}
 }
