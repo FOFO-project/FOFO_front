@@ -1,7 +1,7 @@
 import { HeaderTest } from "../pages";
 import { MemberManagePanel } from "../../widgets/listPanels/MemberManagePanel/MemberManagePanel";
-import { ConditionListModel } from "../../shared/shared";
-import { useState } from "react";
+import { ConditionListModel, ApiCaller } from "../../shared/shared";
+import { useState, useEffect } from "react";
 import style from "../pages.module.scss";
 import { AutoMatch, IndividualMatch, ManualMatch, Find } from "../../features/features";
 
@@ -12,8 +12,13 @@ export function MemberManage() {
     const [womanConditionData, setWomanConditionData] = useState(
 		new ConditionListModel()
 	);
-	const [mans, setMas] = useState([]);
+	const [mans, setMans] = useState([]);
 	const [womans, setWomans] = useState([]);
+	
+	useEffect(() => {
+		ApiCaller.get("/members")
+				.then((e) => setMans(e.data.content?e.data.content:[]));
+	},[]);
 
 	return (
 		<>

@@ -19,7 +19,7 @@ interface ConditionProps {
 export function MemberManagePanel({ memberListProps, conditionProps }:{memberListProps:MemberListProps, conditionProps:ConditionProps}) {
     const { members } = memberListProps;
     const { conditionData, setConditionData } = conditionProps;
-
+    
 	return (
 		<>
             <table className={`table table-bordered ${style.container}`}>
@@ -144,7 +144,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                     </tr>
                 </thead>
                 <tbody>
-                    {members.map((member) => (
+                    {members?.map((member) => (
                         <tr key={member.id}>
                             <td>
                                 <input type="checkbox"/>
@@ -153,10 +153,10 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 {member.name}
                             </td>
                             <td>
-                                {member.birthday ? member.birthday.toString() : ""}
+                                {member.getBirthdayString()}
                             </td>
                             <td>
-                                {member.address?.toString()}
+                                {member.getAddressString()}
                             </td>
                             <td>
                                 {member.company}
@@ -174,7 +174,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 {member.smokingYn}
                             </td>
                             <td>
-                                {member.filteringAgeRelation}
+                                {member.getFilteringString()}
                             </td>
                             <td>
                                 {member.charmingPoint}
@@ -183,7 +183,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 {member.kakaoId}
                             </td>
                             <td>
-                                {member.depositDate?.toString()}
+                                {member.getDepositDateString()}
                             </td>
                             <td>
                                 {member.note}
