@@ -3,7 +3,7 @@ export { ConditionBox } from "./component/ConditionBox/ConditionBox";
 export { ItemListPanel } from "./component/ItemListPanel/ItemListPanel";
 export { Member } from "./type/Entity/Member";
 export { Address } from "./type/Entity/Address";
-export { Location } from "./type/Entity/Location";
+export { GeoPoint } from "./type/Entity/GeoPoint";
 export { MemberFormDTO } from "./type/DTO/MemberFormDTO";
 export { AddressFormDTO } from "./type/DTO/AddressFormDTO";
 export { ConditionListModel, Filtering } from "./type/DTO/ConditionListModel";

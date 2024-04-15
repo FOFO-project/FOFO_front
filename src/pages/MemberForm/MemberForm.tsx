@@ -7,6 +7,7 @@ import {
 	SmokingYn,
 	ApiCaller,
 	MemberFormDTO,
+	Member,
 } from "../../shared/shared";
 import { useAsync } from "react-async";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +18,10 @@ export function MemberForm() {
 	useAsync({
 		promiseFn: async () => {
 			return ApiCaller.get("/members").then((e) => {
-				console.log(e);
+				for (const mem of e.data.content) {
+					const temp = new Member(mem);
+					console.log(temp);
+				}
 				return e;
 			});
 		},
@@ -26,7 +30,10 @@ export function MemberForm() {
 	const [formData, setFormData] = useState(new MemberFormDTO({}));
 
 	const handleChange = (e: any) => {
-		const { name, value, type, checked } = e.target;
+		let { name, value, type, checked } = e.target;
+		if (name === "smokingYn") {
+			value = value === "Y" ? true : false;
+		}
 		setFormData((prevData) => ({
 			...prevData,
 			[name]:
@@ -80,6 +87,19 @@ export function MemberForm() {
 					/>
 				</div>
 				<h6>주소</h6>
+				<div className="mb-3">
+					<label htmlFor="zipcode" className="form-label">
+						우편번호:
+					</label>
+					<input
+						type="text"
+						className="form-control"
+						id="zipcode"
+						name="zipcode"
+						value={formData.address.zipcode || ""}
+						onChange={handleAddressChange}
+					/>
+				</div>
 				<div className="mb-3">
 					<label htmlFor="sido" className="form-label">
 						시도:
@@ -175,6 +195,45 @@ export function MemberForm() {
 						id="phoneNumber"
 						name="phoneNumber"
 						value={formData.phoneNumber || ""}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="company" className="form-label">
+						회사명(Company):
+					</label>
+					<input
+						type="text"
+						className="form-control"
+						id="company"
+						name="company"
+						value={formData.company || ""}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="job" className="form-label">
+						직무(Job):
+					</label>
+					<input
+						type="text"
+						className="form-control"
+						id="job"
+						name="job"
+						value={formData.job || ""}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="university" className="form-label">
+						출신학교(University):
+					</label>
+					<input
+						type="text"
+						className="form-control"
+						id="university"
+						name="university"
+						value={formData.university || ""}
 						onChange={handleChange}
 					/>
 				</div>

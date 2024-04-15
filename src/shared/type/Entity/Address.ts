@@ -1,4 +1,4 @@
-import { ActiveStatus, Location } from "../../shared";
+import { ActiveStatus, GeoPoint } from "../../shared";
 
 // Address Models
 export class Address {
@@ -7,7 +7,7 @@ export class Address {
 	sido: string | null = null;
 	sigungu: string | null = null;
 	eupmyundong: string | null = null;
-	location: Location = new Location();
+	location: GeoPoint = new GeoPoint();
 	status: ActiveStatus | null = null;
 	createdTime: string | null = null;
 	modifiedTime: string | null = null;
