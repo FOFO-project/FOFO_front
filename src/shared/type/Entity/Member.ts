@@ -38,6 +38,37 @@ export class Member {
 	createdTime: Date | null = null;
 	modifiedTime: Date | null = null;
 
+	getBirthdayString(): string {
+		if (this.birthday) {
+			return this.birthday.toISOString().split("T")[0];
+		}
+		return "";
+	}
+	getFilteringString(): string {
+		let res = [
+			this.filteringAgeRelation,
+			this.filteringReligion,
+			this.filteringSmoker,
+		].map((e) => (e ? e.toString() : "None"));
+		return res.join(" | ");
+	}
+	getDepositDateString(): string {
+		if (this.depositDate) {
+			return (
+				this.depositDate.toISOString().split("T")[0] +
+				" " +
+				this.depositDate.toTimeString().split(" ")[0]
+			);
+		}
+		return "";
+	}
+	getAddressString(): string {
+		if (this.address) {
+			return `${this.address.sido} ${this.address.sigungu} ${this.address.eupmyundong}`;
+		}
+		return "";
+	}
+
 	constructor(data: Partial<Member> = {}) {
 		Object.assign(this, data);
 	}
