@@ -1,4 +1,4 @@
-import { Address, ConditionListModel } from "../../../shared";
+import { AddressFormDTO, ConditionListModel } from "../../../shared";
 import { useEffect, useRef, useState } from "react";
 
 interface AddressConditionProps {
@@ -12,7 +12,7 @@ export function AddressCondition({
 	setConditionData,
 }: AddressConditionProps) {
 	const [isActive, setActive] = useState(false);
-	
+
 	const REF = {
 		sido: useRef<HTMLInputElement>(null),
 		sigungu: useRef<HTMLInputElement>(null),
@@ -21,7 +21,7 @@ export function AddressCondition({
 
 	useEffect(() => {
 		for (const [name, ref] of Object.entries(REF) as [
-			keyof Address,
+			keyof AddressFormDTO,
 			any //React.RefObject<HTMLInputElement>
 		][]) {
 			if (ref.current) {
@@ -34,7 +34,7 @@ export function AddressCondition({
 		}
 	});
 
-	function onChange(inputValue: string, targetFilter: keyof Address) {
+	function onChange(inputValue: string, targetFilter: keyof AddressFormDTO) {
 		const address = conditionData.address;
 		setConditionData({
 			...conditionData,
@@ -46,17 +46,21 @@ export function AddressCondition({
 
 	return (
 		<div className={`dropdown`}>
-			<button className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
-					data-bs-toggle="dropdown" 
-					aria-expanded="false"
-					data-bs-auto-close="true"
-					>
+			<button
+				className={`btn ${
+					isActive == false ? "btn-outline-dark" : "btn-dark"
+				} btn-lg dropdown-toggle`}
+				data-bs-toggle="dropdown"
+				aria-expanded="false"
+				data-bs-auto-close="true"
+			>
 				{title}
 			</button>
 			<form className="dropdown-menu p-4">
 				<div className="mb-3">
-					<input type="text" 
-						className="form-control" 
+					<input
+						type="text"
+						className="form-control"
 						ref={REF.sido}
 						placeholder="시도"
 						autoFocus={true}
@@ -68,8 +72,9 @@ export function AddressCondition({
 						}}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") {
-								const inputValue = (e.target as HTMLInputElement)
-									.value;
+								const inputValue = (
+									e.target as HTMLInputElement
+								).value;
 								onChange(inputValue, "sido");
 							}
 							setActive(true);
@@ -77,8 +82,9 @@ export function AddressCondition({
 					/>
 				</div>
 				<div className="mb-3">
-					<input type="text" 
-						className="form-control" 
+					<input
+						type="text"
+						className="form-control"
 						ref={REF.sigungu}
 						placeholder="시군구"
 						autoFocus={true}
@@ -90,8 +96,9 @@ export function AddressCondition({
 						}}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") {
-								const inputValue = (e.target as HTMLInputElement)
-									.value;
+								const inputValue = (
+									e.target as HTMLInputElement
+								).value;
 								onChange(inputValue, "sigungu");
 								setActive(true);
 							}
@@ -99,8 +106,9 @@ export function AddressCondition({
 					/>
 				</div>
 				<div className="mb-3">
-					<input type="text" 
-						className="form-control" 
+					<input
+						type="text"
+						className="form-control"
 						ref={REF.eupmyundong}
 						placeholder="읍면동"
 						autoFocus={true}
@@ -112,25 +120,28 @@ export function AddressCondition({
 						}}
 						onKeyDown={(e) => {
 							if (e.key === "Enter") {
-								const inputValue = (e.target as HTMLInputElement)
-									.value;
+								const inputValue = (
+									e.target as HTMLInputElement
+								).value;
 								onChange(inputValue, "eupmyundong");
 								setActive(true);
 							}
 						}}
 					/>
 				</div>
-				<a className="btn btn-dark"
+				<a
+					className="btn btn-dark"
 					href="#"
 					onClick={(e) => {
 						e.preventDefault();
 						setConditionData({
 							...conditionData,
-							address: new Address(),
+							address: new AddressFormDTO(),
 						});
 						setActive(false);
 					}}
-					>clear
+				>
+					clear
 				</a>
 			</form>
 		</div>
