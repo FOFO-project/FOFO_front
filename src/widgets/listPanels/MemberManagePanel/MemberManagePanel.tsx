@@ -23,10 +23,10 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
 	return (
 		<>
             <table className={`table table-bordered ${style.container}`}>
-                <thead className="">
-                    <tr className="">
+                <thead>
+                    <tr>
                         <th className="col bg-black text-light">
-                            
+                            #
                         </th>
                         <th className={`col bg-black`}>
                             <StringCondition
@@ -143,7 +143,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-group-divider">
                     {members?.map((member) => (
                         <tr key={member.id}>
                             <td>
@@ -172,6 +172,9 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                             </td>
                             <td>
                                 {member.smokingYn}
+                            </td>
+                            <td>
+                                {member.religion}
                             </td>
                             <td>
                                 {member.getFilteringString()}

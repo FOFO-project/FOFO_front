@@ -1,6 +1,6 @@
 import { HeaderTest } from "../pages";
 import { MemberManagePanel } from "../../widgets/listPanels/MemberManagePanel/MemberManagePanel";
-import { ConditionListModel, ApiCaller } from "../../shared/shared";
+import { ConditionListModel, ApiCaller, Member } from "../../shared/shared";
 import { useState, useEffect } from "react";
 import style from "../pages.module.scss";
 import { AutoMatch, IndividualMatch, ManualMatch, Find } from "../../features/features";
@@ -17,7 +17,11 @@ export function MemberManage() {
 	
 	useEffect(() => {
 		ApiCaller.get("/members")
-				.then((e) => setMans(e.data.content?e.data.content:[]));
+			.then((e) =>{
+			console.log(e.data.content);
+			console.log(typeof e.data.content[0].birthday);
+			setMans(e.data.content?e.data.content.map((e:any) => new Member(e)):[]);
+			})
 	},[]);
 
 	return (

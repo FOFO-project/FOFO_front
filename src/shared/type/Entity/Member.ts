@@ -39,11 +39,22 @@ export class Member {
 	modifiedTime: Date | null = null;
 
 	getBirthdayString(): string {
-		if (this.birthday) {
-			return this.birthday.toISOString().split("T")[0];
-		}
-		return "";
+		const formattedDate = this.birthday?.toISOString().slice(0,10).replace(/-/g, ''); // YYYYMMDD 형식
+		// if(this.birthday == null){
+		// 	return "생일입력필요"
+		// }
+		// const year = this.birthday.getFullYear();
+		// let month:any = this.birthday.getMonth() + 1;
+		// let day:any = this.birthday.getDate();
+		// if(month < 10){
+		// 	month = '0' + month;
+		// }
+		// if(day < 10){
+		// 	day = '0' + day;
+		// }
+		return `${formattedDate}`;
 	}
+
 	getFilteringString(): string {
 		let res = [
 			this.filteringAgeRelation,
@@ -52,16 +63,25 @@ export class Member {
 		].map((e) => (e ? e.toString() : "None"));
 		return res.join(" | ");
 	}
+	
 	getDepositDateString(): string {
-		if (this.depositDate) {
-			return (
-				this.depositDate.toISOString().split("T")[0] +
-				" " +
-				this.depositDate.toTimeString().split(" ")[0]
-			);
-		}
-		return "";
+		const formattedDate = this.depositDate?.toISOString().slice(0,10).replace(/-/g, ''); // YYYYMMDD 형식
+		// if(this.depositDate == null){
+		// 	return "생일입력필요"
+		// }
+		// const year = this.depositDate.getFullYear();
+		// let month:any = this.depositDate.getMonth() + 1;
+		// let day:any = this.depositDate.getDate();
+		// if(month < 10){
+		// 	month = '0' + month;
+		// }
+		// if(day < 10){
+		// 	day = '0' + day;
+		// }
+		// return `${year}${month}${day}`;
+		return `${formattedDate}`;
 	}
+	
 	getAddressString(): string {
 		if (this.address) {
 			return `${this.address.sido} ${this.address.sigungu} ${this.address.eupmyundong}`;
@@ -70,6 +90,12 @@ export class Member {
 	}
 
 	constructor(data: Partial<Member> = {}) {
-		Object.assign(this, data);
-	}
+        data.birthday = data.birthday ? new Date(data.birthday) : null;
+        data.depositDate = data.depositDate ? new Date(data.depositDate) : null;
+        data.createdTime = data.createdTime ? new Date(data.createdTime) : null;
+        data.modifiedTime = data.modifiedTime
+            ? new Date(data.modifiedTime)
+            : null;
+        Object.assign(this, data);
+    }
 }
