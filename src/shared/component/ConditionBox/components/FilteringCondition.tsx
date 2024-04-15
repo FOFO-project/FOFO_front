@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import style from "../ConditionBox.module.scss";
+
 import {
 	AgeRelationType,
 	SmokingYn,
@@ -86,7 +88,7 @@ export function FilteringCondition({
 			<button
 				className={`btn ${
 					isActive == false ? "btn-light" : "btn-dark"
-				} btn-lg dropdown-toggle`}
+				} btn-lg dropdown-toggle ${style.btnbox}`}
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
 				data-bs-auto-close="outside"

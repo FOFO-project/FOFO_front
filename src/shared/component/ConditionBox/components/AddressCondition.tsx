@@ -1,5 +1,6 @@
 import { AddressFormDTO, ConditionListModel } from "../../../shared";
 import { useEffect, useRef, useState } from "react";
+import style from "../ConditionBox.module.scss"
 
 interface AddressConditionProps {
 	title: string;
@@ -49,7 +50,7 @@ export function AddressCondition({
 			<button
 				className={`btn ${
 					isActive == false ? "btn-light" : "btn-dark"
-				} btn-lg dropdown-toggle`}
+				} btn-lg dropdown-toggle ${style.btnbox}`}
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
 				data-bs-auto-close="true"

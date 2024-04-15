@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ConditionListModel } from "../../../shared";
+import style from "../ConditionBox.module.scss";
 
 interface SelectConditionProps {
 	title: string;
@@ -41,7 +42,7 @@ export function SelectCondition({
 
 	return (
 		<div className="dropdown">
-			<button className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle`}
+			<button className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle ${style.btnbox}`}
 					data-bs-toggle="dropdown"
 					aria-expanded="false"
 					data-bs-auto-close="outside">

@@ -1,6 +1,19 @@
 .container {
     width: 720px;
-    height: 700px;
+    height: 750px;
     overflow: auto;
     white-space: nowrap;
+}
+
+td {
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+td:first-child{
+    border-left: none;
+}
+
+td:last-child{
+    border-right: none;
 }

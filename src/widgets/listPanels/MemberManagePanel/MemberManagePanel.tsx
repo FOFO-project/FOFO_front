@@ -22,7 +22,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
     
 	return (
 		<>
-            <table className={`table table-bordered ${style.container}`}>
+            <table className={`table ${style.container}`}>
                 <thead>
                     <tr>
                         <th className="col bg-black text-light">
@@ -143,12 +143,12 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                         </th>
                     </tr>
                 </thead>
-                <tbody className="table-group-divider">
+                <tbody>
                     {members?.map((member) => (
-                        <tr key={member.id}>
-                            <td>
+                        <tr key={member.id} className="align-middle">
+                            <th scope="row">
                                 <input type="checkbox"/>
-                            </td>
+                            </th>
                             <td>
                                 {member.name}
                             </td>

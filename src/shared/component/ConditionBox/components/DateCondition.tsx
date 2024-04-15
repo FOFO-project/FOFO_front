@@ -2,6 +2,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ConditionListModel } from "../../../shared";
 import { useRef, useState } from "react";
+import style from "../ConditionBox.module.scss";
 
 interface DateConditionProps {
 	title: string;
@@ -26,7 +27,7 @@ export function DateCondition({
 	return (
 		<div className="dropdown">
 			<button
-				className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle`}
+				className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle ${style.btnbox}`}
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
 				data-bs-auto-close="true"
