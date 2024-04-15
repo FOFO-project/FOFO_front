@@ -39,7 +39,14 @@ export class Member {
 	modifiedTime: Date | null = null;
 
 	getBirthdayString(): string {
-		const formattedDate = this.birthday?.toISOString().slice(0,10).replace(/-/g, ''); // YYYYMMDD 형식
+		try {
+			return new Date(this.birthday ? this.birthday : "-")
+				.toISOString()
+				.slice(0, 10)
+				.replace(/-/g, ""); // YYYYMMDD 형식
+		} catch (e) {
+			return "날짜 없음";
+		}
 		// if(this.birthday == null){
 		// 	return "생일입력필요"
 		// }
@@ -52,7 +59,6 @@ export class Member {
 		// if(day < 10){
 		// 	day = '0' + day;
 		// }
-		return `${formattedDate}`;
 	}
 
 	getFilteringString(): string {
@@ -63,12 +69,17 @@ export class Member {
 		].map((e) => (e ? e.toString() : "None"));
 		return res.join(" | ");
 	}
-	
+
 	getDepositDateString(): string {
-		const formattedDate = this.depositDate?.toISOString().slice(0,10).replace(/-/g, ''); // YYYYMMDD 형식
-		// if(this.depositDate == null){
-		// 	return "생일입력필요"
-		// }
+		try {
+			return new Date(this.depositDate ? this.depositDate : "-")
+				.toISOString()
+				.slice(0, 10)
+				.replace(/-/g, ""); // YYYYMMDD 형식
+		} catch (e) {
+			return "날짜 없음";
+		}
+
 		// const year = this.depositDate.getFullYear();
 		// let month:any = this.depositDate.getMonth() + 1;
 		// let day:any = this.depositDate.getDate();
@@ -79,9 +90,8 @@ export class Member {
 		// 	day = '0' + day;
 		// }
 		// return `${year}${month}${day}`;
-		return `${formattedDate}`;
 	}
-	
+
 	getAddressString(): string {
 		if (this.address) {
 			return `${this.address.sido} ${this.address.sigungu} ${this.address.eupmyundong}`;
@@ -90,12 +100,6 @@ export class Member {
 	}
 
 	constructor(data: Partial<Member> = {}) {
-        data.birthday = data.birthday ? new Date(data.birthday) : null;
-        data.depositDate = data.depositDate ? new Date(data.depositDate) : null;
-        data.createdTime = data.createdTime ? new Date(data.createdTime) : null;
-        data.modifiedTime = data.modifiedTime
-            ? new Date(data.modifiedTime)
-            : null;
-        Object.assign(this, data);
-    }
+		Object.assign(this, data);
+	}
 }
