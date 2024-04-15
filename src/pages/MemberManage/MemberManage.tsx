@@ -19,7 +19,7 @@ export function MemberManage() {
 		<>
 		<HeaderTest />
 		<div className={`container-fulid ${style.contentwrap}`}>
-			<div className={`row`}>
+			<div className={`row ${style.positioning}`}>
 				<div className={`col-5`}>
 					<div className={`${style.contents}`}>
 						<MemberManagePanel
@@ -28,7 +28,7 @@ export function MemberManage() {
 						/>
 					</div>
 				</div>
-				<div className="col-5">
+				<div className={`col-5`}>
 					<div className={`${style.contents}`}>
 						<MemberManagePanel
 							memberListProps={{members:womans}}
@@ -38,7 +38,7 @@ export function MemberManage() {
 				</div>
 				<div className="col-1">
 					<div className="p-3">
-						<div className={`align-self-start ${style.buttonWrap}`}>
+						<div className={`${style.buttonWrap}`}>
 							<div className={`${style.buttonBox}`}>
 								<AutoMatch />
 							</div>
