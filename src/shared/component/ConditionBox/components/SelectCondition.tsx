@@ -41,7 +41,7 @@ export function SelectCondition({
 
 	return (
 		<div className="dropdown">
-			<button className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+			<button className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle`}
 					data-bs-toggle="dropdown"
 					aria-expanded="false"
 					data-bs-auto-close="outside">

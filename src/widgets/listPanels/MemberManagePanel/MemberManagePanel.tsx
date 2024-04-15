@@ -23,9 +23,12 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
 	return (
 		<>
             <table className={`table table-bordered ${style.container}`}>
-                <thead>
-                    <tr>
-                        <th className={`col`}>
+                <thead className="">
+                    <tr className="">
+                        <th className="col bg-black text-light">
+                            
+                        </th>
+                        <th className={`col bg-black`}>
                             <StringCondition
                                 title="이름"
                                 targetColumn="name"
@@ -33,7 +36,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <DateCondition
                                 title="태어난날짜"
                                 targetColumn="birthday"
@@ -41,14 +44,14 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <AddressCondition
                                 title="사는지역"
                                 conditionData={conditionData}
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <StringCondition
                                 title="회사"
                                 targetColumn="company"
@@ -56,7 +59,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <StringCondition
                             title="직무"
                             targetColumn="job"
@@ -64,7 +67,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                             setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <StringCondition
                                 title="출신학교"
                                 targetColumn="university"
@@ -72,7 +75,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <SelectCondition
                                 title="MBTI"
                                 targetColumn="mbti"
@@ -81,7 +84,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <SelectCondition
                                 title="흡연여부"
                                 targetColumn="smoking_yn"
@@ -90,7 +93,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <SelectCondition
                                 title="종교"
                                 targetColumn="religion"
@@ -99,14 +102,14 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <FilteringCondition
                                 title="절대 안되는 부분"
                                 conditionData={conditionData}
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <StringCondition
                                 title="어필 사항"
                                 targetColumn="charming_point"
@@ -114,7 +117,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <StringCondition
                                 title="카카오톡"
                                 targetColumn="kakao"
@@ -122,7 +125,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <DateCondition
                                 title="입금일"
                                 targetColumn="deposit_date"
@@ -130,7 +133,7 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                                 setConditionData={setConditionData}
                             />
                         </th>
-                        <th className={`col`}>
+                        <th className={`col bg-black`}>
                             <StringCondition
                                 title="관리자멘트"
                                 targetColumn="rem"
@@ -141,9 +144,52 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        
-                    }
+                    {members.map((member) => (
+                        <tr key={member.id}>
+                            <td>
+                                <input type="checkbox"/>
+                            </td>
+                            <td>
+                                {member.name}
+                            </td>
+                            <td>
+                                {member.birthday ? member.birthday.toString() : ""}
+                            </td>
+                            <td>
+                                {member.address?.toString()}
+                            </td>
+                            <td>
+                                {member.company}
+                            </td>
+                            <td>
+                                {member.job}
+                            </td>
+                            <td>
+                                {member.university}
+                            </td>
+                            <td>
+                                {member.mbti}
+                            </td>
+                            <td>
+                                {member.smokingYn}
+                            </td>
+                            <td>
+                                {member.filteringAgeRelation}
+                            </td>
+                            <td>
+                                {member.charmingPoint}
+                            </td>
+                            <td>
+                                {member.kakaoId}
+                            </td>
+                            <td>
+                                {member.depositDate?.toString()}
+                            </td>
+                            <td>
+                                {member.note}
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </>

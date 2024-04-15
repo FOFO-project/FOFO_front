@@ -48,7 +48,7 @@ export function AddressCondition({
 		<div className={`dropdown`}>
 			<button
 				className={`btn ${
-					isActive == false ? "btn-outline-dark" : "btn-dark"
+					isActive == false ? "btn-light" : "btn-dark"
 				} btn-lg dropdown-toggle`}
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
@@ -56,94 +56,96 @@ export function AddressCondition({
 			>
 				{title}
 			</button>
-			<form className="dropdown-menu p-4">
-				<div className="mb-3">
-					<input
-						type="text"
-						className="form-control"
-						ref={REF.sido}
-						placeholder="시도"
-						autoFocus={true}
-						onInput={(e) => {
-							const inputValue = (e.target as HTMLInputElement)
-								.value;
-							onChange(inputValue, "sido");
-							setActive(true);
-						}}
-						onKeyDown={(e) => {
-							if (e.key === "Enter") {
-								const inputValue = (
-									e.target as HTMLInputElement
-								).value;
+			<div className="dropdown-menu">
+				<form className="p-4">
+					<div className="mb-3">
+						<input
+							type="text"
+							className="form-control"
+							ref={REF.sido}
+							placeholder="시도"
+							autoFocus={true}
+							onInput={(e) => {
+								const inputValue = (e.target as HTMLInputElement)
+									.value;
 								onChange(inputValue, "sido");
-							}
-							setActive(true);
-						}}
-					/>
-				</div>
-				<div className="mb-3">
-					<input
-						type="text"
-						className="form-control"
-						ref={REF.sigungu}
-						placeholder="시군구"
-						autoFocus={true}
-						onInput={(e) => {
-							const inputValue = (e.target as HTMLInputElement)
-								.value;
-							onChange(inputValue, "sigungu");
-							setActive(true);
-						}}
-						onKeyDown={(e) => {
-							if (e.key === "Enter") {
-								const inputValue = (
-									e.target as HTMLInputElement
-								).value;
+								setActive(true);
+							}}
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									const inputValue = (
+										e.target as HTMLInputElement
+									).value;
+									onChange(inputValue, "sido");
+								}
+								setActive(true);
+							}}
+						/>
+					</div>
+					<div className="mb-3">
+						<input
+							type="text"
+							className="form-control"
+							ref={REF.sigungu}
+							placeholder="시군구"
+							autoFocus={true}
+							onInput={(e) => {
+								const inputValue = (e.target as HTMLInputElement)
+									.value;
 								onChange(inputValue, "sigungu");
 								setActive(true);
-							}
-						}}
-					/>
-				</div>
-				<div className="mb-3">
-					<input
-						type="text"
-						className="form-control"
-						ref={REF.eupmyundong}
-						placeholder="읍면동"
-						autoFocus={true}
-						onInput={(e) => {
-							const inputValue = (e.target as HTMLInputElement)
-								.value;
-							onChange(inputValue, "eupmyundong");
-							setActive(true);
-						}}
-						onKeyDown={(e) => {
-							if (e.key === "Enter") {
-								const inputValue = (
-									e.target as HTMLInputElement
-								).value;
+							}}
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									const inputValue = (
+										e.target as HTMLInputElement
+									).value;
+									onChange(inputValue, "sigungu");
+									setActive(true);
+								}
+							}}
+						/>
+					</div>
+					<div className="mb-3">
+						<input
+							type="text"
+							className="form-control"
+							ref={REF.eupmyundong}
+							placeholder="읍면동"
+							autoFocus={true}
+							onInput={(e) => {
+								const inputValue = (e.target as HTMLInputElement)
+									.value;
 								onChange(inputValue, "eupmyundong");
 								setActive(true);
-							}
+							}}
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									const inputValue = (
+										e.target as HTMLInputElement
+									).value;
+									onChange(inputValue, "eupmyundong");
+									setActive(true);
+								}
+							}}
+						/>
+					</div>
+					<a
+						className="btn btn-dark"
+						href="#"
+						onClick={(e) => {
+							e.preventDefault();
+							setConditionData({
+								...conditionData,
+								address: new AddressFormDTO(),
+							});
+							setActive(false);
 						}}
-					/>
-				</div>
-				<a
-					className="btn btn-dark"
-					href="#"
-					onClick={(e) => {
-						e.preventDefault();
-						setConditionData({
-							...conditionData,
-							address: new AddressFormDTO(),
-						});
-						setActive(false);
-					}}
-				>
-					clear
-				</a>
-			</form>
+					>
+						clear
+					</a>
+				</form>
+			</div>
 		</div>
 	);
 }

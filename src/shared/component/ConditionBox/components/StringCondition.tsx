@@ -25,30 +25,20 @@ export function StringCondition({
 
 	return (
 		<div className="dropdown">
-			<button className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+			<button className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle`}
 					data-bs-toggle="dropdown" 
 					aria-expanded="false"
 					data-bs-auto-close="true">
 				{title}
 			</button>
-			<form className="dropdown-menu p-2">
-				<div className="mb-3">
-					<input type="text" 
-						className="form-control" 
-						ref={inputRef}
-						autoFocus={true}
-						onInput={(e) => {
-							const inputValue = (e.target as HTMLInputElement)
-							.value;
-							setConditionData({
-								...conditionData,
-								[targetColumn]:
-									inputValue === "" ? null : inputValue,
-							});
-							setActive(true);
-						}}
-						onKeyDown={(e) => {
-							if (e.key === "Enter") {
+			<div className="dropdown-menu">
+				<form className="p-2">
+					<div className="mb-3">
+						<input type="text" 
+							className="form-control" 
+							ref={inputRef}
+							autoFocus={true}
+							onInput={(e) => {
 								const inputValue = (e.target as HTMLInputElement)
 								.value;
 								setConditionData({
@@ -57,23 +47,35 @@ export function StringCondition({
 										inputValue === "" ? null : inputValue,
 								});
 								setActive(true);
-							}
+							}}
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									const inputValue = (e.target as HTMLInputElement)
+									.value;
+									setConditionData({
+										...conditionData,
+										[targetColumn]:
+											inputValue === "" ? null : inputValue,
+									});
+									setActive(true);
+								}
+							}}
+						/>
+					</div>
+					<a className="btn btn-dark"
+						href="#"
+						onClick={(e) => {
+							e.preventDefault();
+							setConditionData({
+								...conditionData,
+								[targetColumn]: null,
+							});
+							setActive(false);
 						}}
-					/>
-				</div>
-				<a className="btn btn-dark"
-					href="#"
-					onClick={(e) => {
-						e.preventDefault();
-						setConditionData({
-							...conditionData,
-							[targetColumn]: null,
-						});
-						setActive(false);
-					}}
-					>clear
-				</a>
-			</form>
+						>clear
+					</a>
+				</form>
+			</div>
 		</div>
 	);
 }

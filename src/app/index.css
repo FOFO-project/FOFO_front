@@ -1,4 +1,4 @@
-/* * {
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -6,8 +6,11 @@
 	color: inherit;
 }
 
+body{
+	overflow: hidden;
+}
+
 html,
-body,
 div,
 span,
 applet,
@@ -94,7 +97,6 @@ video {
 	font: inherit;
 	vertical-align: baseline;
 	background-color: inherit;
-	overflow: hidden;
 }
 
 article,
@@ -131,7 +133,7 @@ q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-} */
+}
 
 /* :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

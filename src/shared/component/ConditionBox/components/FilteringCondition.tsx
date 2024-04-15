@@ -85,7 +85,7 @@ export function FilteringCondition({
 		<div className="dropdown">
 			<button
 				className={`btn ${
-					isActive == false ? "btn-outline-dark" : "btn-dark"
+					isActive == false ? "btn-light" : "btn-dark"
 				} btn-lg dropdown-toggle`}
 				data-bs-toggle="dropdown"
 				aria-expanded="false"

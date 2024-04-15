@@ -26,7 +26,7 @@ export function DateCondition({
 	return (
 		<div className="dropdown">
 			<button
-				className={`btn ${isActive == false ? 'btn-outline-dark' : 'btn-dark'} btn-lg dropdown-toggle`}
+				className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle`}
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
 				data-bs-auto-close="true"
