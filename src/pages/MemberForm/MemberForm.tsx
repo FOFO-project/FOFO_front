@@ -7,12 +7,13 @@ import {
 	SmokingYn,
 	ApiCaller,
 	Fomatter,
-	MemberFormDTO,
+	AppendMemberRequestDto,
 	Member,
 } from "../../shared/shared";
 import { useAsync } from "react-async";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
+import { labelColumnsMap, getMissingValueColumns } from "./labelColumnsMap";
 
 export function MemberForm() {
 	const navigate = useNavigate();
@@ -28,8 +29,7 @@ export function MemberForm() {
 		},
 	});
 
-	const [formData, setFormData] = useState(new MemberFormDTO({}));
-
+	const [formData, setFormData] = useState(new AppendMemberRequestDto({}));
 	const handlePhoneNumberChange = (e: any) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
@@ -52,9 +52,6 @@ export function MemberForm() {
 	};
 	const handleChange = (e: any) => {
 		let { name, value, type, checked } = e.target;
-		if (["smokingYn", "filteringSmoker"].includes(name)) {
-			value = value === "Y" ? true : false;
-		}
 		setFormData((prevData) => ({
 			...prevData,
 			[name]:
@@ -77,6 +74,11 @@ export function MemberForm() {
 	};
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
+		const missing = getMissingValueColumns(formData);
+		if (missing.length > 0) {
+			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
+			return;
+		}
 		ApiCaller.post("/member", formData)
 			.then((response) => {
 				alert("Success");
@@ -86,6 +88,7 @@ export function MemberForm() {
 				console.error(e);
 				alert("Fail");
 			});
+		return;
 	};
 
 	return (
@@ -97,7 +100,7 @@ export function MemberForm() {
 				<h5>내 정보</h5>
 				<div className="mb-3">
 					<label htmlFor="kakaoId" className="form-label">
-						카카오톡 ID(Kakao ID):
+						{labelColumnsMap.kakaoId}
 					</label>
 					<input
 						type="text"
@@ -111,7 +114,7 @@ export function MemberForm() {
 				<h6>주소</h6>
 				<div className="mb-3">
 					<label htmlFor="zipcode" className="form-label">
-						우편번호:
+						{labelColumnsMap.address.zipcode}
 					</label>
 					<input
 						type="text"
@@ -124,7 +127,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="sido" className="form-label">
-						시도:
+						{labelColumnsMap.address.sido}
 					</label>
 					<input
 						type="text"
@@ -137,7 +140,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="sigungu" className="form-label">
-						시군구:
+						{labelColumnsMap.address.sigungu}
 					</label>
 					<input
 						type="text"
@@ -150,7 +153,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="eupmyundong" className="form-label">
-						읍면동:
+						{labelColumnsMap.address.eupmyundong}
 					</label>
 					<input
 						type="text"
@@ -164,7 +167,7 @@ export function MemberForm() {
 				<h6>내 정보</h6>
 				<div className="mb-3">
 					<label htmlFor="name" className="form-label">
-						이름(Name):
+						{labelColumnsMap.name}
 					</label>
 					<input
 						type="text"
@@ -177,7 +180,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="gender" className="form-label">
-						성별(Gender):
+						{labelColumnsMap.gender}
 					</label>
 					<select
 						className="form-select"
@@ -196,7 +199,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="birthday" className="form-label">
-						생년월일(Birthday):
+						{labelColumnsMap.birthday}
 					</label>
 					<input
 						type="date"
@@ -212,7 +215,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="phoneNumber" className="form-label">
-						전화번호(Phone Number):
+						{labelColumnsMap.phoneNumber}
 					</label>
 					<input
 						type="text"
@@ -225,7 +228,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="company" className="form-label">
-						회사명(Company):
+						{labelColumnsMap.company}
 					</label>
 					<input
 						type="text"
@@ -238,7 +241,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="job" className="form-label">
-						직무(Job):
+						{labelColumnsMap.job}
 					</label>
 					<input
 						type="text"
@@ -251,7 +254,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="university" className="form-label">
-						출신학교(University):
+						{labelColumnsMap.university}
 					</label>
 					<input
 						type="text"
@@ -264,7 +267,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="mbti" className="form-label">
-						MBTI:
+						{labelColumnsMap.mbti}
 					</label>
 					<select
 						className="form-select"
@@ -283,19 +286,13 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="smokingYn" className="form-label">
-						흡연여부(Smoking):
+						{labelColumnsMap.smokingYn}
 					</label>
 					<select
 						className="form-select"
 						id="smokingYn"
 						name="smokingYn"
-						value={
-							formData.smokingYn === null
-								? ""
-								: formData.smokingYn
-								? "Y"
-								: "N"
-						}
+						value={formData.smokingYn || ""}
 						onChange={handleChange}
 					>
 						<option value="">선택 안함</option>
@@ -308,7 +305,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="religion" className="form-label">
-						종교(Religion):
+						{labelColumnsMap.religion}
 					</label>
 					<select
 						className="form-select"
@@ -327,7 +324,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="charmingPoint" className="form-label">
-						어필 사항(Charming Point):
+						{labelColumnsMap.charmingPoint}
 					</label>
 					<textarea
 						className="form-control"
@@ -343,7 +340,7 @@ export function MemberForm() {
 						htmlFor="filteringAgeRelation"
 						className="form-label"
 					>
-						연상/동갑.연하(Age Relation):
+						{labelColumnsMap.filteringAgeRelation}
 					</label>
 					<select
 						className="form-select"
@@ -362,19 +359,13 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="filteringSmoker" className="form-label">
-						흡연여부(Smoking):
+						{labelColumnsMap.filteringSmoker}
 					</label>
 					<select
 						className="form-select"
 						id="filteringSmoker"
 						name="filteringSmoker"
-						value={
-							formData.filteringSmoker === null
-								? ""
-								: formData.filteringSmoker
-								? "Y"
-								: "N"
-						}
+						value={formData.filteringSmoker || ""}
 						onChange={handleChange}
 					>
 						<option value="">상관없음</option>
@@ -387,7 +378,7 @@ export function MemberForm() {
 				</div>
 				<div className="mb-3">
 					<label htmlFor="filteringReligion" className="form-label">
-						종교(Religion):
+						{labelColumnsMap.filteringReligion}
 					</label>
 					<select
 						className="form-select"

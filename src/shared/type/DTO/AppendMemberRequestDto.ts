@@ -7,7 +7,7 @@ import {
 	SmokingYn,
 } from "../../shared";
 
-export class MemberFormDTO {
+export class AppendMemberRequestDto {
 	kakaoId: string | null = null;
 	address: AddressFormDTO = new AddressFormDTO();
 	name: string | null = null;
@@ -25,7 +25,7 @@ export class MemberFormDTO {
 	filteringReligion: Religion | null = null;
 	charmingPoint: string | null = null;
 
-	constructor(data: Partial<MemberFormDTO> = {}) {
+	constructor(data: Partial<AppendMemberRequestDto> = {}) {
 		Object.assign(this, data);
 	}
 }
