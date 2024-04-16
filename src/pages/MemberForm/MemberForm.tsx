@@ -6,6 +6,7 @@ import {
 	Religion,
 	SmokingYn,
 	ApiCaller,
+	Fomatter,
 	MemberFormDTO,
 	Member,
 } from "../../shared/shared";
@@ -29,9 +30,29 @@ export function MemberForm() {
 
 	const [formData, setFormData] = useState(new MemberFormDTO({}));
 
+	const handlePhoneNumberChange = (e: any) => {
+		const { name, value } = e.target;
+		setFormData((prevData) => ({
+			...prevData,
+			[name]: Fomatter.PhoneNumber(value),
+		}));
+	};
+	const handleDateChange = (e: any) => {
+		let { name, value, type, checked } = e.target;
+		value = new Date(value);
+		setFormData((prevData) => ({
+			...prevData,
+			[name]:
+				type === "checkbox"
+					? checked
+					: value.length === 0
+					? null
+					: value,
+		}));
+	};
 	const handleChange = (e: any) => {
 		let { name, value, type, checked } = e.target;
-		if (name === "smokingYn") {
+		if (["smokingYn", "filteringSmoker"].includes(name)) {
 			value = value === "Y" ? true : false;
 		}
 		setFormData((prevData) => ({
@@ -56,14 +77,15 @@ export function MemberForm() {
 	};
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		ApiCaller.post("/member", formData).then((e) => {
-			if (e.status === 200) {
+		ApiCaller.post("/member", formData)
+			.then((response) => {
 				alert("Success");
 				navigate("/MemberForm");
-			} else {
-				alert(e.message);
-			}
-		});
+			})
+			.catch((e) => {
+				console.error(e);
+				alert("Fail");
+			});
 	};
 
 	return (
@@ -181,8 +203,11 @@ export function MemberForm() {
 						className="form-control"
 						id="birthday"
 						name="birthday"
-						value={formData.birthday?.toString() || ""}
-						onChange={handleChange}
+						value={
+							formData.birthday?.toISOString().substring(0, 10) ||
+							""
+						}
+						onChange={handleDateChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -195,7 +220,7 @@ export function MemberForm() {
 						id="phoneNumber"
 						name="phoneNumber"
 						value={formData.phoneNumber || ""}
-						onChange={handleChange}
+						onChange={handlePhoneNumberChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -264,7 +289,13 @@ export function MemberForm() {
 						className="form-select"
 						id="smokingYn"
 						name="smokingYn"
-						value={formData.smokingYn || ""}
+						value={
+							formData.smokingYn === null
+								? ""
+								: formData.smokingYn
+								? "Y"
+								: "N"
+						}
 						onChange={handleChange}
 					>
 						<option value="">선택 안함</option>
@@ -337,7 +368,13 @@ export function MemberForm() {
 						className="form-select"
 						id="filteringSmoker"
 						name="filteringSmoker"
-						value={formData.filteringSmoker || ""}
+						value={
+							formData.filteringSmoker === null
+								? ""
+								: formData.filteringSmoker
+								? "Y"
+								: "N"
+						}
 						onChange={handleChange}
 					>
 						<option value="">상관없음</option>

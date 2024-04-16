@@ -10,15 +10,29 @@ export const ApiCaller = Object.freeze({
 			method: "GET",
 			headers: HEADER,
 		});
+		if (!response.ok) {
+			const error: any = new Error(
+				`HTTP error! Status: ${response.status}`
+			);
+			error.data = await response.json();
+			throw error;
+		}
 		return response.json();
 	},
 	post: async (url: string, data?: any) => {
-		console.log(data ? JSON.stringify(data, null, 2) : "");
+		console.log(JSON.stringify(data, null, 2));
 		const response = await fetch(config.server_url + url, {
 			method: "POST",
 			headers: HEADER,
 			body: data ? JSON.stringify(data) : "",
 		});
+		if (!response.ok) {
+			const error: any = new Error(
+				`HTTP error! Status: ${response.status}`
+			);
+			error.data = await response.json();
+			throw error;
+		}
 		return response.json();
 	},
 	put: async (url: string, data?: any) => {
@@ -27,6 +41,13 @@ export const ApiCaller = Object.freeze({
 			headers: HEADER,
 			body: data ? JSON.stringify(data) : "",
 		});
+		if (!response.ok) {
+			const error: any = new Error(
+				`HTTP error! Status: ${response.status}`
+			);
+			error.data = await response.json();
+			throw error;
+		}
 		return response.json();
 	},
 	delete: async (url: string) => {
@@ -34,6 +55,13 @@ export const ApiCaller = Object.freeze({
 			method: "DELETE",
 			headers: HEADER,
 		});
+		if (!response.ok) {
+			const error: any = new Error(
+				`HTTP error! Status: ${response.status}`
+			);
+			error.data = await response.json();
+			throw error;
+		}
 		return response.json();
 	},
 });
