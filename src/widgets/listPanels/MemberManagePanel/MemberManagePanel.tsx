@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Member } from "../../../shared/shared";
 import { ConditionListModel, Mbti, Religion, SmokingYn } from "../../../shared/shared";
 import { SelectCondition
@@ -17,8 +18,19 @@ interface ConditionProps {
 }
 
 export function MemberManagePanel({ memberListProps, conditionProps }:{memberListProps:MemberListProps, conditionProps:ConditionProps}) {
+    const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
     const { members } = memberListProps;
     const { conditionData, setConditionData } = conditionProps;
+
+    // checkbox handler
+    const checkboxHandler = (memberId:any) => {
+        setSelectedItems((preSelectedItems:number[]) => {
+            const isSelectedItems = preSelectedItems.includes(memberId);
+            return isSelectedItems ?
+                    preSelectedItems.filter((id) => id !== memberId) :
+                    [...preSelectedItems, memberId];
+        });
+    }
     
 	return (
         <div className={style.container}>
@@ -147,9 +159,11 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                     {members?.map((member) => (
                         <tr key={member.id} className="align-middle" 
                             style={{height:100}}>
-                            <th scope="row">
-                                <input type="checkbox"/>
-                            </th>
+                            <td scope="row">
+                                <input type="checkbox"
+                                        onChange={()=> checkboxHandler(member.id)}
+                                        checked={selectedItems.includes(member.id as any)}/>
+                            </td>
                             <td>
                                 {member.name}
                             </td>
