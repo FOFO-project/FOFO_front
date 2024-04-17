@@ -31,6 +31,7 @@ export function DateCondition({
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
 				data-bs-auto-close="true"
+				style={{width:180, height:60}}
 			>
 				{title}
 			</button>

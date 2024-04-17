@@ -1,8 +1,11 @@
 .container {
     width: 720px;
     height: 750px;
-    overflow: auto;
-    white-space: nowrap;
+}
+
+thead {
+    position: sticky;
+    top: 0;
 }
 
 td {

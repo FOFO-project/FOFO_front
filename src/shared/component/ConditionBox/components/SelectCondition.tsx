@@ -45,7 +45,8 @@ export function SelectCondition({
 			<button className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle ${style.btnbox}`}
 					data-bs-toggle="dropdown"
 					aria-expanded="false"
-					data-bs-auto-close="outside">
+					data-bs-auto-close="outside"
+					style={{width:180, height:60}}>
 				{selectedValue == "없음" ? title : selectedValue}
 			</button>
 			<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>

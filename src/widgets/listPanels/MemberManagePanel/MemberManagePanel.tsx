@@ -21,11 +21,11 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
     const { conditionData, setConditionData } = conditionProps;
     
 	return (
-		<>
-            <table className={`table ${style.container}`}>
+        <div className={style.container}>
+            <table className={`table`}>
                 <thead>
                     <tr>
-                        <th className="col bg-black text-light">
+                        <th className="col bg-black text-light align-middle">
                             #
                         </th>
                         <th className={`col bg-black`}>
@@ -145,7 +145,8 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                 </thead>
                 <tbody>
                     {members?.map((member) => (
-                        <tr key={member.id} className="align-middle">
+                        <tr key={member.id} className="align-middle" 
+                            style={{height:100}}>
                             <th scope="row">
                                 <input type="checkbox"/>
                             </th>
@@ -195,6 +196,6 @@ export function MemberManagePanel({ memberListProps, conditionProps }:{memberLis
                     ))}
                 </tbody>
             </table>
-        </>
+        </div>
 	);
 }
