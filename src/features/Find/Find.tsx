@@ -1,28 +1,24 @@
-import { ConditionListModel, Member } from "../../shared/shared";
-import { useState } from "react";
+import { ConditionListModel } from "../../shared/shared";
 import { getResult } from "./api/getResult";
 
 interface FindProps {
 	conditionData: ConditionListModel;
+	setMembers: Function;
 }
 
-export const Find: React.FC<FindProps> = (param) => {
-	const [ member, setMember] = useState<Member[]>([]);
-	
+export const Find: React.FC<FindProps> = ({
+	conditionData,
+	setMembers,
+}: FindProps) => {
 	const search = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
 	) => {
 		e.preventDefault();
 		try {
-			const result = await getResult(param);
-			if (result == "error") {
-				alert("조회에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
-				return;
-			} else {
-				setMember(result);
-			}
+			const result = await getResult(conditionData);
+			setMembers(result);
 		} catch (err) {
-			alert("Error : " + err);
+			alert("조회에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
 		}
 	};
 

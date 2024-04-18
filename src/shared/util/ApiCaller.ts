@@ -5,7 +5,22 @@ const HEADER = {
 };
 
 export const ApiCaller = Object.freeze({
-	get: async (url: string) => {
+	get: async (url: string, params?: Record<string, any>) => {
+		let fullUrl = config.server_url + url;
+
+		if (params) {
+			const queryString = Object.keys(params)
+				.map(
+					(key) =>
+						`${encodeURIComponent(key)}=${encodeURIComponent(
+							params[key]
+						)}`
+				)
+				.join("&");
+
+			fullUrl += `?${queryString}`;
+		}
+
 		const response = await fetch(config.server_url + url, {
 			method: "GET",
 			headers: HEADER,
@@ -50,7 +65,21 @@ export const ApiCaller = Object.freeze({
 		}
 		return response.json();
 	},
-	delete: async (url: string) => {
+	delete: async (url: string, params?: Record<string, any>) => {
+		let fullUrl = config.server_url + url;
+
+		if (params) {
+			const queryString = Object.keys(params)
+				.map(
+					(key) =>
+						`${encodeURIComponent(key)}=${encodeURIComponent(
+							params[key]
+						)}`
+				)
+				.join("&");
+
+			fullUrl += `?${queryString}`;
+		}
 		const response = await fetch(config.server_url + url, {
 			method: "DELETE",
 			headers: HEADER,
