@@ -10,18 +10,25 @@ export const ApiCaller = Object.freeze({
 
 		if (params) {
 			const queryString = Object.keys(params)
-				.map(
-					(key) =>
-						`${encodeURIComponent(key)}=${encodeURIComponent(
-							params[key]
-						)}`
-				)
+				.map((key) => {
+					const value = params[key];
+					if (value === null || value === undefined) {
+						return encodeURIComponent(key);
+					}
+					return `${encodeURIComponent(key)}=${encodeURIComponent(
+						value
+					)}`;
+				})
 				.join("&");
 
-			fullUrl += `?${queryString}`;
+			if (queryString) {
+				fullUrl += `?${queryString}`;
+			}
 		}
 
-		const response = await fetch(config.server_url + url, {
+		console.log(fullUrl);
+
+		const response = await fetch(fullUrl, {
 			method: "GET",
 			headers: HEADER,
 		});
@@ -70,17 +77,23 @@ export const ApiCaller = Object.freeze({
 
 		if (params) {
 			const queryString = Object.keys(params)
-				.map(
-					(key) =>
-						`${encodeURIComponent(key)}=${encodeURIComponent(
-							params[key]
-						)}`
-				)
+				.map((key) => {
+					const value = params[key];
+					if (value === null || value === undefined) {
+						return encodeURIComponent(key);
+					}
+					return `${encodeURIComponent(key)}=${encodeURIComponent(
+						value
+					)}`;
+				})
 				.join("&");
 
-			fullUrl += `?${queryString}`;
+			if (queryString) {
+				fullUrl += `?${queryString}`;
+			}
 		}
-		const response = await fetch(config.server_url + url, {
+
+		const response = await fetch(fullUrl, {
 			method: "DELETE",
 			headers: HEADER,
 		});
