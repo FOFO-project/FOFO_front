@@ -12,7 +12,7 @@ export class AppendMemberRequestDto {
 	address: AddressFormDTO = new AddressFormDTO();
 	name: string | null = null;
 	gender: Gender | null = null;
-	birthday: Date | null = null;
+	birthday: string | null = null;
 	phoneNumber: string | null = null;
 	filteringAgeRelation: AgeRelationType | null = null;
 	company: string | null = null;
