@@ -31,7 +31,7 @@ export function init() {
 					},
 					{
 						path: "/MatchingManage",
-						element: <MemberManage />,
+						element: <MatchingManage />,
 					},
 				])}
 			/>

@@ -25,23 +25,16 @@ export function MatchingManage() {
 
 	return (
 		<>
-		<HeaderTest />
-		<div className={`container-fulid ${style.contentwrap}`}>
-			<div className={`row ${style.positioning}`}>
-				<div className={`col-5`}>
-					<div className={`${style.contents}`}>
+			<HeaderTest />
+			<div className="row">
+				<div className={`col-10 ${style.contentwrap}`}>
+					<Find param={{manConditionData}}/>
+					<div className={`${style.tablebox}`}>
 						<MatchingManagePanel
 							memberListProps={{members:mans}}
 							conditionProps={{conditionData:manConditionData,setConditionData:setManConditionData}}
 							title={"남자"}
 						/>
-					</div>
-				</div>
-				<div className={`col-5`}>
-					<div className={style.findButtonWrap}>
-						<Find param={{manConditionData}}/>
-					</div>
-					<div className={`${style.contents}`}>
 						<MatchingManagePanel
 							memberListProps={{members:womans}}
 							conditionProps={{conditionData:womanConditionData,setConditionData:setWomanConditionData}}
@@ -49,7 +42,7 @@ export function MatchingManage() {
 						/>
 					</div>
 				</div>
-				<div className={`col-1 ${style.matchButtonWrap}`}>
+				<div className={`col-2 ${style.matchButtonWrap}`}>
 					<div className={``}>
 						<div className={`${style.matchButtonBox}`}>
 							<AutoMatch />
@@ -63,7 +56,6 @@ export function MatchingManage() {
 					</div>
 				</div>
 			</div>
-		</div>
 		</>
 	);
 }

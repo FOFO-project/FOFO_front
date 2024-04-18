@@ -33,8 +33,8 @@ export function MatchingManagePanel({ memberListProps, conditionProps, title }:{
     }
     
 	return (
-        <div className={style.container}>
-            <table className={`table`}>
+        <>
+            <table className={`table ${style.container}`}>
                 <thead>
                     <tr>
                         <th className="col bg-black text-light align-middle">
@@ -160,9 +160,6 @@ export function MatchingManagePanel({ memberListProps, conditionProps, title }:{
                         <tr key={member.id} className="align-middle" 
                             style={{height:100}}>
                             <td scope="row">
-                                <input type="checkbox"
-                                        onChange={()=> checkboxHandler(member.id)}
-                                        checked={selectedItems.includes(member.id as any)}/>
                             </td>
                             <td>
                                 {member.name}
@@ -210,6 +207,6 @@ export function MatchingManagePanel({ memberListProps, conditionProps, title }:{
                     ))}
                 </tbody>
             </table>
-        </div>
+        </>
 	);
 }
