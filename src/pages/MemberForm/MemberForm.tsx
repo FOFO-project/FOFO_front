@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	Gender,
 	AgeRelationType,
@@ -8,28 +8,26 @@ import {
 	ApiCaller,
 	Fomatter,
 	AppendMemberRequestDto,
-	Member,
 } from "../../shared/shared";
-import { useAsync } from "react-async";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import classNames from "classnames";
 import { labelColumnsMap, getMissingValueColumns } from "./labelColumnsMap";
 
 export function MemberForm() {
+	const { memberId } = useParams();
 	const navigate = useNavigate();
-	useAsync({
-		promiseFn: async () => {
-			return ApiCaller.get("/members").then((e) => {
-				for (const mem of e.data.content) {
-					const temp = new Member(mem);
-					console.log(temp);
-				}
+	const [formData, setFormData] = useState(new AppendMemberRequestDto({}));
+
+	useEffect(() => {
+		if (memberId) {
+			ApiCaller.get(`/members/${memberId}`).then((e) => {
+				console.log(new AppendMemberRequestDto(e.data));
+				setFormData(new AppendMemberRequestDto(e.data));
 				return e;
 			});
-		},
-	});
+		}
+	}, []);
 
-	const [formData, setFormData] = useState(new AppendMemberRequestDto({}));
 	const handlePhoneNumberChange = (e: any) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
@@ -207,8 +205,11 @@ export function MemberForm() {
 						id="birthday"
 						name="birthday"
 						value={
-							formData.birthday?.toISOString().substring(0, 10) ||
-							""
+							formData.birthday
+								? new Date(formData.birthday)
+										.toISOString()
+										.substring(0, 10)
+								: ""
 						}
 						onChange={handleDateChange}
 					/>
