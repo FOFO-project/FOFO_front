@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { SignupManage, MemberManage, MemberForm } from "../pages/pages";
+import { SignupManage, MemberManage, MemberForm, MatchingManage } from "../pages/pages";
 import "./index.css";
 import {
 	createBrowserRouter,
@@ -27,6 +27,10 @@ export function init() {
 					},
 					{
 						path: "/MemberManage",
+						element: <MemberManage />,
+					},
+					{
+						path: "/MatchingManage",
 						element: <MemberManage />,
 					},
 				])}

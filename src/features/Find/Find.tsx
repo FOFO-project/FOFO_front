@@ -7,8 +7,8 @@ interface FindProps {
 }
 
 export const Find: React.FC<FindProps> = (param) => {
-	const [, setMember] = useState<Member[]>([]);
-
+	const [ member, setMember] = useState<Member[]>([]);
+	
 	const search = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
 	) => {

@@ -6,7 +6,7 @@ import { SelectCondition
     , AddressCondition
     , FilteringCondition
     , DateCondition } from "../../../shared/component/ConditionBox/ConditionIntegrage";
-import style from "./MemberManagePanel.module.scss";
+import style from "./MatchingManagePanel.module.scss";
 
 
 interface MemberListProps {
@@ -17,7 +17,7 @@ interface ConditionProps {
 	setConditionData: Function;
 }
 
-export function MemberManagePanel({ memberListProps, conditionProps, title }:{memberListProps:MemberListProps, conditionProps:ConditionProps, title:string}) {
+export function MatchingManagePanel({ memberListProps, conditionProps, title }:{memberListProps:MemberListProps, conditionProps:ConditionProps, title:string}) {
     const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
     const { members } = memberListProps;
     const { conditionData, setConditionData } = conditionProps;

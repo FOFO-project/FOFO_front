@@ -1,0 +1,29 @@
+.contentwrap {
+	margin-top: 30px;
+	padding-left: 80px;
+}
+
+.contents {
+	overflow: auto;
+	border: 1px solid #000;
+	border-radius: 5px;
+	margin-top: 15px;
+	margin-left: 40px;
+}
+
+.matchButtonWrap {
+    display: flex; 
+    flex-direction: column;
+    justify-content:flex-end;
+}
+
+.matchButtonBox {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.findButtonWrap {
+    display: flex;
+    justify-content: end;
+}
+

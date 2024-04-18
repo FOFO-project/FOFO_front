@@ -1,11 +1,11 @@
 import { HeaderTest } from "../pages";
-import { MemberManagePanel } from "../../widgets/listPanels/MemberManagePanel/MemberManagePanel";
+import { MatchingManagePanel } from "../../widgets/listPanels/MatchingPanel/MatchingManagePanel";
 import { ConditionListModel, ApiCaller, Member } from "../../shared/shared";
 import { useState, useEffect } from "react";
-import style from "./MemberManage.module.scss";
+import style from "./MatchingManage.module.scss";
 import { AutoMatch, IndividualMatch, ManualMatch, Find } from "../../features/features";
 
-export function MemberManage() {
+export function MatchingManage() {
 	const [manConditionData, setManConditionData] = useState(
 		new ConditionListModel()
 	);
@@ -19,10 +19,6 @@ export function MemberManage() {
 	useEffect(() => {
 		ApiCaller.get("/members")
 			.then((e) =>{
-			for(var i = 0; e.data.content.gender == 'MAN'; i++){
-				
-			}
-
 			setMans(e.data.content?e.data.content.map((e:any) => new Member(e)):[]);
 			})
 	},[]);
@@ -33,11 +29,8 @@ export function MemberManage() {
 		<div className={`container-fulid ${style.contentwrap}`}>
 			<div className={`row ${style.positioning}`}>
 				<div className={`col-5`}>
-					<div className={style.findButtonWrap}>
-						<Find param={{manConditionData}}/>
-					</div>
 					<div className={`${style.contents}`}>
-						<MemberManagePanel
+						<MatchingManagePanel
 							memberListProps={{members:mans}}
 							conditionProps={{conditionData:manConditionData,setConditionData:setManConditionData}}
 							title={"남자"}
@@ -49,7 +42,7 @@ export function MemberManage() {
 						<Find param={{manConditionData}}/>
 					</div>
 					<div className={`${style.contents}`}>
-						<MemberManagePanel
+						<MatchingManagePanel
 							memberListProps={{members:womans}}
 							conditionProps={{conditionData:womanConditionData,setConditionData:setWomanConditionData}}
 							title={"여자"}
