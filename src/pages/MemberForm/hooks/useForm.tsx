@@ -22,7 +22,7 @@ export function useFormData(initData: AppendMemberRequestDto): [
 		}));
 	};
 	const handleDateChange = (e: any) => {
-		let { name, value, type, checked } = e.target;
+		let { name, value } = e.target;
 		value = new Date(value).toISOString();
 		setFormData((prevData) => ({
 			...prevData,
@@ -30,7 +30,7 @@ export function useFormData(initData: AppendMemberRequestDto): [
 		}));
 	};
 	const handleChange = (e: any) => {
-		let { name, value, type, checked } = e.target;
+		let { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
 			[name]: value.length === 0 ? null : value,

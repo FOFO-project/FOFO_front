@@ -19,7 +19,7 @@ export function MatchingManage() {
 	);
 
 	const [mans, setMans] = useState([]);
-	const [womans, setWomans] = useState([]);
+	const [womans, _setWomans] = useState([]);
 
 	useEffect(() => {
 		ApiCaller.get("/members").then((e) => {
