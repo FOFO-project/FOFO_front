@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import ReactDOM from "react-dom/client";
 import {
 	SignupManage,
@@ -15,35 +15,35 @@ import {
 
 export function init() {
 	ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-		<React.StrictMode>
-			<RouterProvider
-				router={createBrowserRouter([
-					{
-						path: "/",
-						element: <Navigate to="/MemberForm" />,
-					},
-					{
-						path: "/MemberForm",
-						element: <MemberForm />,
-					},
-					{
-						path: "/MemberForm/:memberId",
-						element: <MemberForm />,
-					},
-					{
-						path: "/SignupManage",
-						element: <SignupManage />,
-					},
-					{
-						path: "/MemberManage",
-						element: <MemberManage />,
-					},
-					{
-						path: "/MatchingManage",
-						element: <MatchingManage />,
-					},
-				])}
-			/>
-		</React.StrictMode>
+		//<React.StrictMode>
+		<RouterProvider
+			router={createBrowserRouter([
+				{
+					path: "/",
+					element: <Navigate to="/MemberForm" />,
+				},
+				{
+					path: "/MemberForm",
+					element: <MemberForm />,
+				},
+				{
+					path: "/MemberForm/:memberId",
+					element: <MemberForm />,
+				},
+				{
+					path: "/SignupManage",
+					element: <SignupManage />,
+				},
+				{
+					path: "/MemberManage",
+					element: <MemberManage />,
+				},
+				{
+					path: "/MatchingManage",
+					element: <MatchingManage />,
+				},
+			])}
+		/>
+		//</React.StrictMode>
 	);
 }

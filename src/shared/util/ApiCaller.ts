@@ -26,8 +26,6 @@ export const ApiCaller = Object.freeze({
 			}
 		}
 
-		console.log(fullUrl);
-
 		const response = await fetch(fullUrl, {
 			method: "GET",
 			headers: HEADER,

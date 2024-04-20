@@ -1,4 +1,4 @@
-import { AppendMemberRequestDto } from "../../shared/shared";
+import { AppendMemberRequestDto } from "../../../shared/shared";
 
 export const labelColumnsMap: any = {
 	kakaoId: "카카오톡 ID(Kakao ID)",
@@ -28,9 +28,9 @@ export function getMissingValueColumns(data: AppendMemberRequestDto) {
 	const except: (keyof AppendMemberRequestDto)[] = [
 		"address",
 		"charmingPoint",
-		// "filteringAgeRelation",
-		// "filteringSmoker",
-		// "filteringReligion",
+		"filteringAgeRelation",
+		"filteringSmoker",
+		"filteringReligion",
 	];
 	const missing = [];
 	for (const key of Object.keys(data)) {

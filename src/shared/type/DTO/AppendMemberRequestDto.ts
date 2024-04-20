@@ -25,7 +25,11 @@ export class AppendMemberRequestDto {
 	filteringReligion: Religion | null = null;
 	charmingPoint: string | null = null;
 
-	constructor(data: Partial<AppendMemberRequestDto> = {}) {
-		Object.assign(this, data);
+	constructor(data: any = {}) {
+		for (const key in data as AppendMemberRequestDto) {
+			if (this.hasOwnProperty(key)) {
+				this[key as keyof this] = data[key];
+			}
+		}
 	}
 }

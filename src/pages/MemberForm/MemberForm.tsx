@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
 	Gender,
 	AgeRelationType,
@@ -6,69 +6,52 @@ import {
 	Religion,
 	SmokingYn,
 	ApiCaller,
-	Fomatter,
 	AppendMemberRequestDto,
 } from "../../shared/shared";
 import { useNavigate, useParams } from "react-router-dom";
 import classNames from "classnames";
-import { labelColumnsMap, getMissingValueColumns } from "./labelColumnsMap";
+import {
+	labelColumnsMap,
+	getMissingValueColumns,
+} from "./model/labelColumnsMap";
+import { useFormData } from "./hooks/useForm";
 
 export function MemberForm() {
 	const { memberId } = useParams();
 	const navigate = useNavigate();
-	const [formData, setFormData] = useState(new AppendMemberRequestDto({}));
-
+	const [formData, setters] = useFormData(new AppendMemberRequestDto());
 	useEffect(() => {
 		if (memberId) {
-			ApiCaller.get(`/members/${memberId}`).then((e) => {
-				console.log(new AppendMemberRequestDto(e.data));
-				setFormData(new AppendMemberRequestDto(e.data));
-				return e;
-			});
+			ApiCaller.get(`/members/${memberId}`)
+				.then((e) => {
+					setters.setFormData(new AppendMemberRequestDto(e.data));
+					return e;
+				})
+				.catch((e) => {
+					alert("해당 유저ID의 정보가 없습니다" + e);
+					navigate("/MemberForm");
+				});
 		}
 	}, []);
 
-	const handlePhoneNumberChange = (e: any) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({
-			...prevData,
-			[name]: Fomatter.PhoneNumber(value),
-		}));
-	};
-	const handleDateChange = (e: any) => {
-		let { name, value, type, checked } = e.target;
-		value = new Date(value);
-		setFormData((prevData) => ({
-			...prevData,
-			[name]:
-				type === "checkbox"
-					? checked
-					: value.length === 0
-					? null
-					: value,
-		}));
-	};
-	const handleChange = (e: any) => {
-		let { name, value, type, checked } = e.target;
-		setFormData((prevData) => ({
-			...prevData,
-			[name]:
-				type === "checkbox"
-					? checked
-					: value.length === 0
-					? null
-					: value,
-		}));
-	};
-	const handleAddressChange = (e: any) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({
-			...prevData,
-			address: {
-				...prevData.address,
-				[name]: value.length === 0 ? null : value,
-			},
-		}));
+	const handleEdit = (e: any) => {
+		//수정 api 개발시 수정필요
+		e.preventDefault();
+		const missing = getMissingValueColumns(formData);
+		if (missing.length > 0) {
+			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
+			return;
+		}
+		ApiCaller.post("/member", formData)
+			.then(() => {
+				alert("수정완료");
+				navigate("/MemberForm");
+			})
+			.catch((e) => {
+				console.error(e);
+				alert("Fail");
+			});
+		return;
 	};
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
@@ -78,8 +61,8 @@ export function MemberForm() {
 			return;
 		}
 		ApiCaller.post("/member", formData)
-			.then((response) => {
-				alert("Success");
+			.then(() => {
+				alert("제출완료");
 				navigate("/MemberForm");
 			})
 			.catch((e) => {
@@ -91,10 +74,7 @@ export function MemberForm() {
 
 	return (
 		<div>
-			<form
-				className={classNames("container mt-5")}
-				onSubmit={handleSubmit}
-			>
+			<form className={classNames("container mt-5")}>
 				<h5>내 정보</h5>
 				<div className="mb-3">
 					<label htmlFor="kakaoId" className="form-label">
@@ -106,7 +86,7 @@ export function MemberForm() {
 						id="kakaoId"
 						name="kakaoId"
 						value={formData.kakaoId || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					/>
 				</div>
 				<h6>주소</h6>
@@ -120,7 +100,7 @@ export function MemberForm() {
 						id="zipcode"
 						name="zipcode"
 						value={formData.address.zipcode || ""}
-						onChange={handleAddressChange}
+						onChange={setters.handleAddressChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -133,7 +113,7 @@ export function MemberForm() {
 						id="sido"
 						name="sido"
 						value={formData.address.sido || ""}
-						onChange={handleAddressChange}
+						onChange={setters.handleAddressChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -146,7 +126,7 @@ export function MemberForm() {
 						id="sigungu"
 						name="sigungu"
 						value={formData.address.sigungu || ""}
-						onChange={handleAddressChange}
+						onChange={setters.handleAddressChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -159,7 +139,7 @@ export function MemberForm() {
 						id="eupmyundong"
 						name="eupmyundong"
 						value={formData.address.eupmyundong || ""}
-						onChange={handleAddressChange}
+						onChange={setters.handleAddressChange}
 					/>
 				</div>
 				<h6>내 정보</h6>
@@ -173,7 +153,7 @@ export function MemberForm() {
 						id="name"
 						name="name"
 						value={formData.name || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -185,9 +165,9 @@ export function MemberForm() {
 						id="gender"
 						name="gender"
 						value={formData.gender || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					>
-						<option value="">선택 안함</option>
+						<option value="">선택해주세요</option>
 						{Object.entries(Gender).map(([key, value]) => (
 							<option key={key} value={key}>
 								{value}
@@ -211,7 +191,7 @@ export function MemberForm() {
 										.substring(0, 10)
 								: ""
 						}
-						onChange={handleDateChange}
+						onChange={setters.handleDateChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -224,7 +204,7 @@ export function MemberForm() {
 						id="phoneNumber"
 						name="phoneNumber"
 						value={formData.phoneNumber || ""}
-						onChange={handlePhoneNumberChange}
+						onChange={setters.handlePhoneNumberChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -237,7 +217,7 @@ export function MemberForm() {
 						id="company"
 						name="company"
 						value={formData.company || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -250,7 +230,7 @@ export function MemberForm() {
 						id="job"
 						name="job"
 						value={formData.job || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -263,7 +243,7 @@ export function MemberForm() {
 						id="university"
 						name="university"
 						value={formData.university || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					/>
 				</div>
 				<div className="mb-3">
@@ -275,9 +255,9 @@ export function MemberForm() {
 						id="mbti"
 						name="mbti"
 						value={formData.mbti || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					>
-						<option value="">선택 안함</option>
+						<option value="">선택해주세요</option>
 						{Object.entries(Mbti).map(([key, value]) => (
 							<option key={key} value={key}>
 								{value}
@@ -294,9 +274,9 @@ export function MemberForm() {
 						id="smokingYn"
 						name="smokingYn"
 						value={formData.smokingYn || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					>
-						<option value="">선택 안함</option>
+						<option value="">선택해주세요</option>
 						{Object.entries(SmokingYn).map(([key, value]) => (
 							<option key={key} value={key}>
 								{value}
@@ -313,9 +293,9 @@ export function MemberForm() {
 						id="religion"
 						name="religion"
 						value={formData.religion || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					>
-						<option value="">선택 안함</option>
+						<option value="">선택해주세요</option>
 						{Object.entries(Religion).map(([key, value]) => (
 							<option key={key} value={key}>
 								{value}
@@ -332,10 +312,10 @@ export function MemberForm() {
 						id="charmingPoint"
 						name="charmingPoint"
 						value={formData.charmingPoint || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					/>
 				</div>
-				<h5>원하는 상대 정보</h5>
+				<h5>절대 안되는 상대 정보</h5>
 				<div className="mb-3">
 					<label
 						htmlFor="filteringAgeRelation"
@@ -348,7 +328,7 @@ export function MemberForm() {
 						id="filteringAgeRelation"
 						name="filteringAgeRelation"
 						value={formData.filteringAgeRelation || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					>
 						<option value="">상관없음</option>
 						{Object.entries(AgeRelationType).map(([key, value]) => (
@@ -367,7 +347,7 @@ export function MemberForm() {
 						id="filteringSmoker"
 						name="filteringSmoker"
 						value={formData.filteringSmoker || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					>
 						<option value="">상관없음</option>
 						{Object.entries(SmokingYn).map(([key, value]) => (
@@ -386,7 +366,7 @@ export function MemberForm() {
 						id="filteringReligion"
 						name="filteringReligion"
 						value={formData.filteringReligion || ""}
-						onChange={handleChange}
+						onChange={setters.handleChange}
 					>
 						<option value="">상관없음</option>
 						{Object.entries(Religion).map(([key, value]) => (
@@ -396,9 +376,23 @@ export function MemberForm() {
 						))}
 					</select>
 				</div>
-				<button type="submit" className="btn btn-primary">
-					Submit
-				</button>
+				{memberId ? (
+					<button
+						type="submit"
+						className="btn btn-primary"
+						onClick={handleEdit}
+					>
+						수정
+					</button>
+				) : (
+					<button
+						type="submit"
+						className="btn btn-primary"
+						onClick={handleSubmit}
+					>
+						제출
+					</button>
+				)}
 			</form>
 		</div>
 	);
