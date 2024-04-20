@@ -1,19 +1,19 @@
 import { FofoHeader } from "../../widgets/widgets";
 import page_styles from "../pages.module.scss";
-import styles from "./SignupManage.module.scss";
+import styles from "./ApprovalManage.module.scss";
 import {
 	ApiCaller,
 	ApprovalStatus,
 	ConditionListModel,
 	Member,
 } from "../../shared/shared";
-import { Reject, ConfirmDeposit } from "../../features/features";
 import { useEffect, useState } from "react";
 import { MemberManagePanel } from "../../widgets/widgets";
-export function SignupManage() {
+import { Approve } from "../../features/Approve/Approve";
+export function ApprovalManage() {
 	const [conditionData, setConditionData] = useState(
 		new ConditionListModel({
-			approvalStatus: ApprovalStatus.DEPOSIT_PENDING,
+			approvalStatus: ApprovalStatus.DEPOSIT_COMPLETED,
 		})
 	);
 	const [members, setMembers] = useState([]);
@@ -54,8 +54,7 @@ export function SignupManage() {
 						/>
 					</div>
 					<div className={styles.buttonContainer}>
-						<ConfirmDeposit selected={selectedItems} />
-						<Reject selected={selectedItems} />
+						<Approve selected={selectedItems} />
 					</div>
 				</div>
 			</div>

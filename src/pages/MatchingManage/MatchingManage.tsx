@@ -1,43 +1,60 @@
-import { HeaderTest } from "../pages";
+import { FofoHeader } from "../../widgets/widgets";
 import { MatchingManagePanel } from "../../widgets/listPanels/MatchingPanel/MatchingManagePanel";
 import { ConditionListModel, ApiCaller, Member } from "../../shared/shared";
 import { useState, useEffect } from "react";
 import style from "./MatchingManage.module.scss";
-import { AutoMatch, IndividualMatch, ManualMatch, Find } from "../../features/features";
+import {
+	AutoMatch,
+	IndividualMatch,
+	ManualMatch,
+	Find,
+} from "../../features/features";
 
 export function MatchingManage() {
 	const [manConditionData, setManConditionData] = useState(
 		new ConditionListModel()
 	);
-    const [womanConditionData, setWomanConditionData] = useState(
+	const [womanConditionData, setWomanConditionData] = useState(
 		new ConditionListModel()
 	);
 
 	const [mans, setMans] = useState([]);
 	const [womans, setWomans] = useState([]);
-	
+
 	useEffect(() => {
-		ApiCaller.get("/members")
-			.then((e) =>{
-			setMans(e.data.content?e.data.content.map((e:any) => new Member(e)):[]);
-			})
-	},[]);
+		ApiCaller.get("/members").then((e) => {
+			setMans(
+				e.data.content
+					? e.data.content.map((e: any) => new Member(e))
+					: []
+			);
+		});
+	}, []);
 
 	return (
 		<>
-			<HeaderTest />
+			<FofoHeader className={style.Header} />
 			<div className="row">
 				<div className={`col-10 ${style.contentwrap}`}>
-					<Find param={{manConditionData}}/>
+					<Find
+						conditionData={manConditionData}
+						setMembers={setMans}
+					/>
 					<div className={`${style.tablebox}`}>
 						<MatchingManagePanel
-							memberListProps={{members:mans}}
-							conditionProps={{conditionData:manConditionData,setConditionData:setManConditionData}}
+							memberListProps={{ members: mans }}
+							conditionProps={{
+								conditionData: manConditionData,
+								setConditionData: setManConditionData,
+							}}
 							title={"남자"}
 						/>
 						<MatchingManagePanel
-							memberListProps={{members:womans}}
-							conditionProps={{conditionData:womanConditionData,setConditionData:setWomanConditionData}}
+							memberListProps={{ members: womans }}
+							conditionProps={{
+								conditionData: womanConditionData,
+								setConditionData: setWomanConditionData,
+							}}
 							title={"여자"}
 						/>
 					</div>
@@ -48,10 +65,10 @@ export function MatchingManage() {
 							<AutoMatch />
 						</div>
 						<div className={`${style.matchButtonBox}`}>
-							<IndividualMatch members={[]}/>
+							<IndividualMatch members={[]} />
 						</div>
 						<div className={`${style.matchButtonBox}`}>
-							<ManualMatch members={[]}/>
+							<ManualMatch members={[]} />
 						</div>
 					</div>
 				</div>

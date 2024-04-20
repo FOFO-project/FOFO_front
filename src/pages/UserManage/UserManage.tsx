@@ -1,10 +1,10 @@
-import { HeaderTest } from "../pages";
+import { FofoHeader } from "../../widgets/widgets";
 import styles from "../pages.module.scss";
 
 export function UserManage() {
 	return (
 		<div className={styles.Page}>
-			<HeaderTest />
+			<FofoHeader />
 			<div className={styles.container}></div>
 		</div>
 	);

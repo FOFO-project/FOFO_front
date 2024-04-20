@@ -15,6 +15,7 @@ import {
 	getMissingValueColumns,
 } from "./model/labelColumnsMap";
 import { useFormData } from "./hooks/useForm";
+import style from "./MemberForm.module.scss";
 
 export function MemberForm() {
 	const { memberId } = useParams();
@@ -42,10 +43,29 @@ export function MemberForm() {
 			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
 			return;
 		}
-		ApiCaller.post("/member", formData)
+		ApiCaller.patch(`/members/${memberId}`, formData)
 			.then(() => {
-				alert("수정완료");
-				navigate("/MemberForm");
+				alert("회원 수정 완료");
+				navigate(`/MemberForm/${memberId}`);
+			})
+			.catch((e) => {
+				console.error(e);
+				alert("Fail");
+			});
+		return;
+	};
+
+	const handleDelete = (e: any) => {
+		e.preventDefault();
+		const missing = getMissingValueColumns(formData);
+		if (missing.length > 0) {
+			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
+			return;
+		}
+		ApiCaller.delete(`/members/${memberId}`, formData)
+			.then(() => {
+				alert("회원 삭제 완료");
+				navigate(`/MemberForm/${memberId}`);
 			})
 			.catch((e) => {
 				console.error(e);
@@ -376,23 +396,34 @@ export function MemberForm() {
 						))}
 					</select>
 				</div>
-				{memberId ? (
-					<button
-						type="submit"
-						className="btn btn-primary"
-						onClick={handleEdit}
-					>
-						수정
-					</button>
-				) : (
-					<button
-						type="submit"
-						className="btn btn-primary"
-						onClick={handleSubmit}
-					>
-						제출
-					</button>
-				)}
+				<div className={style.buttonContainer}>
+					{memberId ? (
+						<button
+							type="submit"
+							className="btn btn-primary"
+							onClick={handleEdit}
+						>
+							수정
+						</button>
+					) : (
+						<button
+							type="submit"
+							className="btn btn-primary"
+							onClick={handleSubmit}
+						>
+							제출
+						</button>
+					)}
+					{memberId ? (
+						<button
+							type="submit"
+							className="btn btn-primary"
+							onClick={handleDelete}
+						>
+							삭제
+						</button>
+					) : null}
+				</div>
 			</form>
 		</div>
 	);

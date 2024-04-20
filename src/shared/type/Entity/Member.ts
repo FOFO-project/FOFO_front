@@ -47,18 +47,6 @@ export class Member {
 		} catch (e) {
 			return "날짜 없음";
 		}
-		// if(this.birthday == null){
-		// 	return "생일입력필요"
-		// }
-		// const year = this.birthday.getFullYear();
-		// let month:any = this.birthday.getMonth() + 1;
-		// let day:any = this.birthday.getDate();
-		// if(month < 10){
-		// 	month = '0' + month;
-		// }
-		// if(day < 10){
-		// 	day = '0' + day;
-		// }
 	}
 
 	getFilteringString(): string {
@@ -79,17 +67,6 @@ export class Member {
 		} catch (e) {
 			return "날짜 없음";
 		}
-
-		// const year = this.depositDate.getFullYear();
-		// let month:any = this.depositDate.getMonth() + 1;
-		// let day:any = this.depositDate.getDate();
-		// if(month < 10){
-		// 	month = '0' + month;
-		// }
-		// if(day < 10){
-		// 	day = '0' + day;
-		// }
-		// return `${year}${month}${day}`;
 	}
 
 	getAddressString(): string {

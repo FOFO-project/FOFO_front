@@ -5,6 +5,7 @@ import {
 	MemberManage,
 	MemberForm,
 	MatchingManage,
+	ApprovalManage,
 } from "../pages/pages";
 import "./index.css";
 import {
@@ -20,7 +21,7 @@ export function init() {
 			router={createBrowserRouter([
 				{
 					path: "/",
-					element: <Navigate to="/MemberForm" />,
+					element: <Navigate to="/SignupManage" />,
 				},
 				{
 					path: "/MemberForm",
@@ -33,6 +34,10 @@ export function init() {
 				{
 					path: "/SignupManage",
 					element: <SignupManage />,
+				},
+				{
+					path: "/ApprovalManage",
+					element: <ApprovalManage />,
 				},
 				{
 					path: "/MemberManage",

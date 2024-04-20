@@ -1,32 +1,33 @@
 .container {
-    display: flex;
+	display: flex;
 }
 
 .btn {
-    background-color: transparent;
-    text-decoration: none;
-    font-size: 1rem;
-    color: #fff;
-    padding: 5px 10px 5px 10px;
-    margin: 10px 20px;
-    border-radius: 5px;
-    display: flex;
-    transition: color 0.2s ease;
+	width: 100px;
+	// background-color: transparent;
+	// text-decoration: none;
+	font-size: 1rem;
+	color: #fff;
+	padding: 5px 10px 5px 10px;
+	margin: 10px;
+	border-radius: 5px;
+	// display: flex;
+	transition: color 0.2s ease;
 }
 
 .btn.blue {
-    background-color: #1f75d9;
+	background-color: #1f75d9;
 }
 
 .btn.red {
-    background-color: #d91f1f;
+	background-color: #d91f1f;
 }
 
 .btn:hover {
-    color: #ccc;
-    cursor: pointer;
+	color: #ccc;
+	cursor: pointer;
 }
 
 .btn:active {
-    transform: translateY(2px);
+	transform: translateY(2px);
 }

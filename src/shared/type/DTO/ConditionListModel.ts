@@ -1,6 +1,9 @@
 import {
 	AddressFormDTO,
 	AgeRelationType,
+	ApprovalStatus,
+	Gender,
+	MatchingStatus,
 	Mbti,
 	Religion,
 	SmokingYn,
@@ -27,6 +30,10 @@ export class ConditionListModel {
 	rem: string | null = null;
 	kakao: string | null = null;
 	deposit_date: Date | null = null;
+
+	gender: Gender | null = null;
+	approvalStatus: ApprovalStatus | null = null;
+	matchingStatus: MatchingStatus | null = null;
 
 	constructor(data: Partial<ConditionListModel> = {}) {
 		Object.assign(this, data);

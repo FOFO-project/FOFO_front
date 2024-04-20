@@ -13,9 +13,12 @@ import {
 	DateCondition,
 } from "../../../shared/component/ConditionBox/ConditionIntegrage";
 import style from "./MemberManagePanel.module.scss";
+import { Find } from "../../../features/Find/Find";
+import classNames from "classnames";
 
 interface MemberListProps {
 	members: Member[];
+	setMembers: Function;
 }
 interface ConditionProps {
 	conditionData: ConditionListModel;
@@ -37,7 +40,7 @@ export function MemberManagePanel({
 	selectedProps: SelectedProps;
 	title: string;
 }) {
-	const { members } = memberListProps;
+	const { members, setMembers } = memberListProps;
 	const { conditionData, setConditionData } = conditionProps;
 	const { selectedItems, setSelectedItems } = selectedProps;
 
@@ -53,161 +56,171 @@ export function MemberManagePanel({
 
 	return (
 		<div className={style.container}>
-			<table className={`table`}>
-				<thead>
-					<tr>
-						<th className="col bg-black text-light align-middle">
-							{title}
-						</th>
-						<th className={`col bg-black`}>
-							<StringCondition
-								title="이름"
-								targetColumn="name"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<DateCondition
-								title="태어난날짜"
-								targetColumn="birthday"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<AddressCondition
-								title="사는지역"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<StringCondition
-								title="회사"
-								targetColumn="company"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<StringCondition
-								title="직무"
-								targetColumn="job"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<StringCondition
-								title="출신학교"
-								targetColumn="university"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<SelectCondition
-								title="MBTI"
-								targetColumn="mbti"
-								type={Mbti}
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<SelectCondition
-								title="흡연여부"
-								targetColumn="smoking_yn"
-								type={SmokingYn}
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<SelectCondition
-								title="종교"
-								targetColumn="religion"
-								type={Religion}
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<FilteringCondition
-								title="절대 안되는 부분"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<StringCondition
-								title="어필 사항"
-								targetColumn="charming_point"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<StringCondition
-								title="카카오톡"
-								targetColumn="kakao"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<DateCondition
-								title="입금일"
-								targetColumn="deposit_date"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-						<th className={`col bg-black`}>
-							<StringCondition
-								title="관리자멘트"
-								targetColumn="rem"
-								conditionData={conditionData}
-								setConditionData={setConditionData}
-							/>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{members?.map((member) => (
-						<tr
-							key={member.id}
-							className="align-middle"
-							style={{ height: 100 }}
-						>
-							<td scope="row">
-								<input
-									type="checkbox"
-									onChange={() => checkboxHandler(member.id)}
-									checked={selectedItems.includes(
-										member.id as any
-									)}
+			<div className={style.button_container}>
+				<Find conditionData={conditionData} setMembers={setMembers} />
+			</div>
+			<div className={style.table_container}>
+				<table className={classNames(`table`)}>
+					<thead>
+						<tr>
+							<th
+								className="col bg-black text-light align-middle"
+								style={{ minWidth: 30 }}
+							>
+								{title}
+							</th>
+							<th className={`col bg-black`}>
+								<StringCondition
+									title="이름"
+									targetColumn="name"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
 								/>
-							</td>
-							<td>{member.name}</td>
-							<td>{member.getBirthdayString()}</td>
-							<td>{member.getAddressString()}</td>
-							<td>{member.company}</td>
-							<td>{member.job}</td>
-							<td>{member.university}</td>
-							<td>{member.mbti}</td>
-							<td>{member.smokingYn}</td>
-							<td>{member.religion}</td>
-							<td>{member.getFilteringString()}</td>
-							<td>{member.charmingPoint}</td>
-							<td>{member.kakaoId}</td>
-							<td>{member.getDepositDateString()}</td>
-							<td>{member.note}</td>
+							</th>
+							<th className={`col bg-black`}>
+								<DateCondition
+									title="태어난날짜"
+									targetColumn="birthday"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<AddressCondition
+									title="사는지역"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<StringCondition
+									title="회사"
+									targetColumn="company"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<StringCondition
+									title="직무"
+									targetColumn="job"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<StringCondition
+									title="출신학교"
+									targetColumn="university"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<SelectCondition
+									title="MBTI"
+									targetColumn="mbti"
+									type={Mbti}
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<SelectCondition
+									title="흡연여부"
+									targetColumn="smoking_yn"
+									type={SmokingYn}
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<SelectCondition
+									title="종교"
+									targetColumn="religion"
+									type={Religion}
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<FilteringCondition
+									title="절대 안되는 부분"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<StringCondition
+									title="어필 사항"
+									targetColumn="charming_point"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<StringCondition
+									title="카카오톡"
+									targetColumn="kakao"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<DateCondition
+									title="입금일"
+									targetColumn="deposit_date"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
+							<th className={`col bg-black`}>
+								<StringCondition
+									title="관리자멘트"
+									targetColumn="rem"
+									conditionData={conditionData}
+									setConditionData={setConditionData}
+								/>
+							</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{members?.map((member) => (
+							<tr
+								key={member.id}
+								className="align-middle"
+								style={{ height: 100 }}
+							>
+								<td scope="row">
+									<input
+										type="checkbox"
+										onChange={() =>
+											checkboxHandler(member.id)
+										}
+										checked={selectedItems.includes(
+											member.id as any
+										)}
+									/>
+								</td>
+								<td>{member.name}</td>
+								<td>{member.getBirthdayString()}</td>
+								<td>{member.getAddressString()}</td>
+								<td>{member.company}</td>
+								<td>{member.job}</td>
+								<td>{member.university}</td>
+								<td>{member.mbti}</td>
+								<td>{member.smokingYn}</td>
+								<td>{member.religion}</td>
+								<td>{member.getFilteringString()}</td>
+								<td>{member.charmingPoint}</td>
+								<td>{member.kakaoId}</td>
+								<td>{member.getDepositDateString()}</td>
+								<td>{member.note}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 }

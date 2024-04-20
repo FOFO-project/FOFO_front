@@ -2,6 +2,7 @@ import { Match, Member } from "../../shared/shared";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
+import style from "../features.module.scss";
 
 interface MatchProps {
 	members: Member[];
@@ -46,5 +47,5 @@ export const ManualMatch: React.FC<MatchProps> = (param) => {
 		btnName: "수동매칭",
 		btnFunction: Manual,
 	};
-	return <Match data={btnData} />;
+	return <Match data={btnData} className={style.btn} />;
 };

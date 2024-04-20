@@ -1,21 +1,36 @@
-import { HeaderTest } from "../pages";
-import { MemberManagePanel } from "../../widgets/listPanels/MemberManagePanel/MemberManagePanel";
-import { ConditionListModel, ApiCaller, Member } from "../../shared/shared";
+import { FofoHeader } from "../../widgets/widgets";
+import { MemberManagePanel } from "../../widgets/widgets";
+import {
+	ConditionListModel,
+	ApiCaller,
+	Member,
+	Gender,
+	ApprovalStatus,
+	MatchingStatus,
+} from "../../shared/shared";
 import { useState, useEffect } from "react";
 import style from "./MemberManage.module.scss";
+import page_styles from "../pages.module.scss";
 import {
 	AutoMatch,
 	IndividualMatch,
 	ManualMatch,
-	Find,
 } from "../../features/features";
 
 export function MemberManage() {
 	const [manConditionData, setManConditionData] = useState(
-		new ConditionListModel()
+		new ConditionListModel({
+			gender: Gender.남자,
+			approvalStatus: ApprovalStatus.APPROVED,
+			matchingStatus: MatchingStatus.MATCHING_PENDING,
+		})
 	);
 	const [womanConditionData, setWomanConditionData] = useState(
-		new ConditionListModel()
+		new ConditionListModel({
+			gender: Gender.여자,
+			approvalStatus: ApprovalStatus.APPROVED,
+			matchingStatus: MatchingStatus.MATCHING_PENDING,
+		})
 	);
 	const [mans, setMans] = useState([]);
 	const [womans, setWomans] = useState([]);
@@ -24,7 +39,13 @@ export function MemberManage() {
 	const [womanSelectedItems, setWomanSelectedItems] = useState<number[]>([]);
 
 	useEffect(() => {
-		ApiCaller.get("/members").then((e) => {
+		ApiCaller.get(
+			"/members",
+			new ConditionListModel({
+				approvalStatus: ApprovalStatus.APPROVED,
+				matchingStatus: MatchingStatus.MATCHING_PENDING,
+			})
+		).then((e) => {
 			for (var i = 0; e.data.content.gender == "MAN"; i++) {}
 
 			setMans(
@@ -36,20 +57,17 @@ export function MemberManage() {
 	}, []);
 
 	return (
-		<>
-			<HeaderTest />
-			<div className={`container-fulid ${style.contentwrap}`}>
-				<div className={`row ${style.positioning}`}>
-					<div className={`col-5`}>
-						<div className={style.findButtonWrap}>
-							<Find
-								conditionData={manConditionData}
-								setMembers={setMans}
-							/>
-						</div>
-						<div className={`${style.contents}`}>
+		<div className={page_styles.Page}>
+			<FofoHeader className={page_styles.Header} />
+			<div className={page_styles.Panel}>
+				<div className={style.container}>
+					<div className={style.contentsContainer}>
+						<div className={style.contents}>
 							<MemberManagePanel
-								memberListProps={{ members: mans }}
+								memberListProps={{
+									members: mans,
+									setMembers: setMans,
+								}}
 								conditionProps={{
 									conditionData: manConditionData,
 									setConditionData: setManConditionData,
@@ -61,17 +79,12 @@ export function MemberManage() {
 								title={"남자"}
 							/>
 						</div>
-					</div>
-					<div className={`col-5`}>
-						<div className={style.findButtonWrap}>
-							<Find
-								conditionData={womanConditionData}
-								setMembers={setWomans}
-							/>
-						</div>
-						<div className={`${style.contents}`}>
+						<div className={style.contents}>
 							<MemberManagePanel
-								memberListProps={{ members: womans }}
+								memberListProps={{
+									members: womans,
+									setMembers: setWomans,
+								}}
 								conditionProps={{
 									conditionData: womanConditionData,
 									setConditionData: setWomanConditionData,
@@ -84,21 +97,13 @@ export function MemberManage() {
 							/>
 						</div>
 					</div>
-					<div className={`col-1 ${style.matchButtonWrap}`}>
-						<div className={``}>
-							<div className={`${style.matchButtonBox}`}>
-								<AutoMatch />
-							</div>
-							<div className={`${style.matchButtonBox}`}>
-								<IndividualMatch members={[]} />
-							</div>
-							<div className={`${style.matchButtonBox}`}>
-								<ManualMatch members={[]} />
-							</div>
-						</div>
+					<div className={style.buttonContainer}>
+						<AutoMatch />
+						<IndividualMatch members={[]} />
+						<ManualMatch members={[]} />
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

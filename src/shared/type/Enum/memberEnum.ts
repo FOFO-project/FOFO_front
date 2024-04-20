@@ -1,6 +1,6 @@
 export enum Gender {
-	MAN = "남자",
-	WOMAN = "여자",
+	남자 = "MAN",
+	여자 = "WOMAN",
 }
 
 export enum AgeRelationType {
@@ -38,15 +38,15 @@ export enum Religion {
 }
 
 export enum ApprovalStatus {
-	DEPOSIT_PENDING = "입금대기중",
-	DEPOSIT_COMPLETED = "입금완료",
-	APPROVED = "승인",
+	DEPOSIT_PENDING = "DEPOSIT_PENDING", //"입금대기중",
+	DEPOSIT_COMPLETED = "DEPOSIT_COMPLETED", //"입금완료",
+	APPROVED = "APPROVED", //"승인",
 }
 
 export enum MatchingStatus {
-	매칭대기중,
-	매칭진행중,
-	매칭완료,
+	MATCHING_PENDING = "MATCHING_PENDING", //"매칭대기중",
+	MATCHING_PROGRESSING = "MATCHING_PROGRESSING", //"매칭진행중",
+	MATCHING_COMPLETED = "MATCHING_COMPLETED", //"매칭완료",
 }
 
 export enum ActiveStatus {
