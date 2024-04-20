@@ -18,36 +18,41 @@ export function init() {
 	ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 		//<React.StrictMode>
 		<RouterProvider
-			router={createBrowserRouter([
+			router={createBrowserRouter(
+				[
+					{
+						path: "/",
+						element: <Navigate to="/SignupManage" />,
+					},
+					{
+						path: "/MemberForm",
+						element: <MemberForm />,
+					},
+					{
+						path: "/MemberForm/:memberId",
+						element: <MemberForm />,
+					},
+					{
+						path: "/SignupManage",
+						element: <SignupManage />,
+					},
+					{
+						path: "/ApprovalManage",
+						element: <ApprovalManage />,
+					},
+					{
+						path: "/MemberManage",
+						element: <MemberManage />,
+					},
+					{
+						path: "/MatchingManage",
+						element: <MatchingManage />,
+					},
+				],
 				{
-					path: "/",
-					element: <Navigate to="/SignupManage" />,
-				},
-				{
-					path: "/MemberForm",
-					element: <MemberForm />,
-				},
-				{
-					path: "/MemberForm/:memberId",
-					element: <MemberForm />,
-				},
-				{
-					path: "/SignupManage",
-					element: <SignupManage />,
-				},
-				{
-					path: "/ApprovalManage",
-					element: <ApprovalManage />,
-				},
-				{
-					path: "/MemberManage",
-					element: <MemberManage />,
-				},
-				{
-					path: "/MatchingManage",
-					element: <MatchingManage />,
-				},
-			])}
+					basename: "/page",
+				}
+			)}
 		/>
 		//</React.StrictMode>
 	);

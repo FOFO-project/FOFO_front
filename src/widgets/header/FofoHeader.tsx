@@ -1,8 +1,10 @@
 import style from "./header.module.scss";
 import logo from "../../assets/fofologo-removebg-preview.png";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 
 export function FofoHeader({ className }: { className?: string }) {
+	const navigate = useNavigate();
 	const data = [
 		{
 			title: "가입신청",
@@ -38,7 +40,14 @@ export function FofoHeader({ className }: { className?: string }) {
 						{data.map((item, index) => {
 							return (
 								<li key={index} className={style.header_items}>
-									<a href={`${item.url}`}>{item.title}</a>
+									<a
+										href=""
+										onClick={() => {
+											navigate(item.url);
+										}}
+									>
+										{item.title}
+									</a>
 								</li>
 							);
 						})}
