@@ -1,29 +1,28 @@
 import style from "./header.module.scss";
 import logo from "../../assets/fofologo-removebg-preview.png";
 import classNames from "classnames";
-import config from "../../app/config";
 
 export function FofoHeader({ className }: { className?: string }) {
 	const data = [
 		{
 			title: "가입신청",
-			url: `${config.base_url}/SignupManage`,
+			url: "/SignupManage",
 		},
 		{
 			title: "확정대기",
-			url: `${config.base_url}/ApprovalManage`,
+			url: "/ApprovalManage",
 		},
 		{
 			title: "회원관리",
-			url: `${config.base_url}/MemberManage`,
+			url: "/MemberManage",
 		},
 		{
 			title: "매칭관리",
-			url: `${config.base_url}/MatchingManage`,
+			url: "/MatchingManage",
 		},
 		{
 			title: "매칭현황",
-			url: `${config.base_url}/`,
+			url: "/",
 		},
 	];
 	return (
