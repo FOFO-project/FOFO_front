@@ -99,8 +99,16 @@ export function MemberManage() {
 					</div>
 					<div className={style.buttonContainer}>
 						<AutoMatch />
-						<IndividualMatch members={[]} />
-						<ManualMatch members={[]} />
+						<IndividualMatch
+							memberIds={[
+								...manSelectedItems,
+								...womanSelectedItems,
+							]}
+						/>
+						<ManualMatch
+							manIds={manSelectedItems}
+							womanIds={womanSelectedItems}
+						/>
 					</div>
 				</div>
 			</div>

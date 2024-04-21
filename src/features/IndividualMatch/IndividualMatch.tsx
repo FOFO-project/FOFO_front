@@ -1,35 +1,33 @@
-import { Match, Member } from "../../shared/shared";
-import { useState } from "react";
+import { Match } from "../../shared/shared";
 import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 import style from "../features.module.scss";
 
 interface MatchProps {
-	members: Member[];
+	memberIds: number[];
 }
 
-export const IndividualMatch: React.FC<MatchProps> = (param) => {
+export const IndividualMatch: React.FC<MatchProps> = ({
+	memberIds,
+}: MatchProps) => {
 	const navigate = useNavigate();
-	const [member, setMember] = useState<any>(null);
 
 	const Individual = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
 	) => {
 		e.preventDefault();
-		const checkedMembers: Member[] = param.members;
 
-		if (checkedMembers == undefined) {
+		if (memberIds.length === 0) {
 			alert("선택된 값이 없습니다");
 			return;
 		}
 
-		const result = await getResult(checkedMembers);
-		if (result == "error") {
-			alert("error");
-			return;
-		} else {
-			setMember(result);
-			navigate("/match/result", { state: { members: member } });
+		try {
+			const result = await getResult(memberIds);
+			alert(`개별매칭 완료. (실패 : ${result.length}건)`);
+			navigate("/MatchManage");
+		} catch (err) {
+			alert("매칭에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
 		}
 	};
 

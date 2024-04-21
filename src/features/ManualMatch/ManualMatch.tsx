@@ -1,45 +1,38 @@
-import { Match, Member } from "../../shared/shared";
-import { useState } from "react";
+import { Match } from "../../shared/shared";
 import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 import style from "../features.module.scss";
 
 interface MatchProps {
-	members: Member[];
+	manIds: number[];
+	womanIds: number[];
 }
 
-export const ManualMatch: React.FC<MatchProps> = (param) => {
+export const ManualMatch: React.FC<MatchProps> = ({
+	manIds,
+	womanIds,
+}: MatchProps) => {
 	const navigate = useNavigate();
-	const [member, setMember] = useState<any>(null);
-
 	const Manual = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
 	) => {
 		e.preventDefault();
-		const checkedMembers: Member[] = param.members;
 
-		if (checkedMembers == undefined) {
-			alert("선택된 값이 없습니다.");
-			return;
-		}
-		if (checkedMembers.length != 2) {
+		if (manIds.length !== 1 || womanIds.length !== 1) {
 			alert("수동매칭의 경우 남, 녀 각 1명씩 선택해야합니다.");
 			return;
 		}
-		const firstItem = checkedMembers[0];
-		const sencondItem = checkedMembers[1];
-		if (firstItem.gender == sencondItem.gender) {
-			alert("수동매칭의 경우 같은성별은 선택할 수 없습니다.");
-			return;
-		}
 
-		const result = await getResult(checkedMembers);
-		if (result == "error") {
-			alert("error");
-			return;
-		} else {
-			setMember(result.data);
-			navigate("/match/result", { state: { members: member } });
+		try {
+			const result = await getResult(manIds[0], womanIds[0]);
+			if (result === "SUCCESS") {
+				alert(`수동매칭 완료.`);
+				navigate("/MatchManage");
+			} else {
+				throw new Error();
+			}
+		} catch (err) {
+			alert("수동매칭 실패.");
 		}
 	};
 

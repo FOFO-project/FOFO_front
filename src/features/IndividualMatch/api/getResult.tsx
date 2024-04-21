@@ -1,20 +1,11 @@
 import axios from "axios";
+import { ApiCaller } from "../../../shared/shared";
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
-export const getResult = async (members: any[]) => {
-	try {
-		const response = await axios.post(
-			"http://144.24.79.73:8080/match/auto",
-			members
-		);
-		if (response.status === 200) {
-			return response.data;
-		} else if (response.status === 400) {
-			return "error";
-		} else {
-			// Handle other status codes
-		}
-	} catch (error) {
-		console.error("err:", error);
-	}
+export const getResult = async (memberIds: number[]) => {
+	return ApiCaller.post("/match/auto", {
+		memberIdList: memberIds,
+	}).then((e) => {
+		return e.data ? e.data.unmatchedMemberIdList : [];
+	});
 };

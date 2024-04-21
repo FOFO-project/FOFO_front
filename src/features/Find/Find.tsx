@@ -1,5 +1,7 @@
+import classNames from "classnames";
 import { ConditionListModel } from "../../shared/shared";
 import { getResult } from "./api/getResult";
+import style from "../features.module.scss";
 
 interface FindProps {
 	conditionData: ConditionListModel;
@@ -27,7 +29,11 @@ export const Find: React.FC<FindProps> = ({
 	};
 	return (
 		<>
-			<a className="btn btn-success" href="#" onClick={search}>
+			<a
+				className={classNames("btn", "btn-primary", style.btn)}
+				href="#"
+				onClick={search}
+			>
 				{btnData.btnName}
 			</a>
 		</>

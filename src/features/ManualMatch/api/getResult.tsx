@@ -1,24 +1,10 @@
-import axios from "axios";
+import { ApiCaller } from "../../../shared/shared";
 
-export const getResult = async (members: any[]) => {
-	try {
-		const response = await axios.post(
-			"http://144.24.79.73:8080/match/manual",
-			members,
-			{
-				headers: {
-					"Content-Type": "application/json",
-				},
-			}
-		);
-		if (response.status === 200) {
-			return response.data;
-		} else if (response.status === 400) {
-			return "error";
-		} else {
-			// Handle other status codes
-		}
-	} catch (error) {
-		console.error("err:", error);
-	}
+export const getResult = async (manId: number, womanId: number) => {
+	return ApiCaller.post("/match/manual", {
+		manMemberId: manId,
+		womanMemberId: womanId,
+	}).then((e) => {
+		return e.data.result;
+	});
 };

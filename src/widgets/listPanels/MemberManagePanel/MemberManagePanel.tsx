@@ -11,7 +11,7 @@ import {
 	AddressCondition,
 	FilteringCondition,
 	DateCondition,
-} from "../../../shared/component/ConditionBox/ConditionIntegrage";
+} from "../../../shared/shared";
 import style from "./MemberManagePanel.module.scss";
 import { Find } from "../../../features/Find/Find";
 import classNames from "classnames";
