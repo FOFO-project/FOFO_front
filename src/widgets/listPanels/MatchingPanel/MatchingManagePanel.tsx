@@ -1,10 +1,10 @@
-import { Matching } from "../../../shared/shared";
+import { Matching, MatchRequestDto } from "../../../shared/shared";
 import { NoneCondition } from "../../../shared/shared";
 import style from "./MatchingManagePanel.module.scss";
 import classNames from "classnames";
 
 interface SelectedProps {
-	selectedItems: number[];
+	selectedItems: MatchRequestDto[];
 	setSelectedItems: Function;
 }
 interface MatchingManagePanelProps {
@@ -52,6 +52,9 @@ export function MatchingManagePanel({
 								<NoneCondition title="절대 안되는 부분" />
 							</th>
 							<th className={`col bg-black`}>
+								<NoneCondition title="매칭 상태" />
+							</th>
+							<th className={`col bg-black`}>
 								<NoneCondition title="이름" />
 							</th>
 							<th className={`col bg-black`}>
@@ -87,6 +90,10 @@ export function MatchingManagePanel({
 								<td>{matching.man?.getBirthdayString()}</td>
 								<td>{matching.man?.getAddressString()}</td>
 								<td>{matching.man?.getFilteringString()}</td>
+								<td>
+									<input type="text" name="" id="" />
+									<input type="text" name="" id="" />
+								</td>
 								<td>{matching.woman?.name}</td>
 								<td>{matching.woman?.getBirthdayString()}</td>
 								<td>{matching.woman?.getAddressString()}</td>
