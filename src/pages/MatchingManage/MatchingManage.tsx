@@ -7,7 +7,7 @@ import style from "./MatchingManage.module.scss";
 import page_styles from "../pages.module.scss";
 
 export function MatchingManage() {
-	const [matchings, _setMatchings] = useState([]);
+	const [matchings, setMatchings] = useState([]);
 
 	const [selectedItems, setSelectedItems] = useState<MatchRequestDto[]>([]);
 
@@ -20,6 +20,7 @@ export function MatchingManage() {
 						<div className={style.contents}>
 							<MatchingManagePanel
 								matchings={matchings}
+								setMatchings={setMatchings}
 								selectedProps={{
 									selectedItems: selectedItems,
 									setSelectedItems: setSelectedItems,

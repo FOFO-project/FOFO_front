@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Matching, MatchRequestDto } from "../../../shared/shared";
 import { NoneCondition } from "../../../shared/shared";
-// import { FindMatch } from "../../../features/features";
+import { FindMatch } from "../../../features/features";
 import style from "./MatchingManagePanel.module.scss";
 import classNames from "classnames";
 
@@ -11,18 +11,22 @@ interface SelectedProps {
 }
 interface MatchingManagePanelProps {
 	matchings: Matching[];
+	setMatchings: Function;
 	selectedProps: SelectedProps;
 	title: string;
 }
 export function MatchingManagePanel({
 	matchings,
+	setMatchings,
 	selectedProps,
 	title,
 }: MatchingManagePanelProps) {
 	const { selectedItems, setSelectedItems } = selectedProps;
-
 	let [manHeartClicked, setManHeartClicked] = useState(false);
 	let [womanHeartClicked, setWomanHeartClicked] = useState(false);
+	
+	// 매칭중(MATCHING_PENDING)
+	const conditionData = "20";
 
 	// checkbox handler
 	const checkboxHandler = (matchingId: any) => {
@@ -37,29 +41,36 @@ export function MatchingManagePanel({
 	const ManHeart = (matchingId: any) => {
 		manHeartClicked = !manHeartClicked;
 		setManHeartClicked(manHeartClicked);
-
-		setSelectedItems((matchingId:number, manHeartClicked:Boolean) => {
-			const isSelectedItems = selectedItems.map((item) => {
-				if(item.id === matchingId){
-					return {...item, manAgreement: manHeartClicked}
+		matchings.forEach((item) => {
+			if(item.id === matchingId){
+				if(manHeartClicked){
+					matchings[matchingId] = {...item, manAgreement: "Y"};
+				} else{
+					matchings[matchingId] = {...item, manAgreement: "N"};
 				}
-			});
-			return 
-
+				
+			}
 		});
+		setMatchings(matchings.slice());
 	}
 
-	const WomanHeart = (matchId:number) => {
+	const WomanHeart = (matchingId: any) => {
+		let womanAgreementChanged;
 		womanHeartClicked = !womanHeartClicked;
 		setWomanHeartClicked(womanHeartClicked);
-		selectedItems[matchId].womanAgreement = womanHeartClicked;
+		matchings.map((item) => {
+			if(item.id === matchingId){
+				womanAgreementChanged = {...item, womanAgreement: manHeartClicked};
+			}
+		});
+		setMatchings(matchings.slice());
 	}
 
 	return (
 		<div className={style.container}>
 			<div className={style.button_container}>
 				<div className={style.button_container}>
-					{/* <FindMatch conditionData={conditionData} setMembers={setMembers} /> */}
+					<FindMatch conditionData={conditionData} setMembers={setMatchings} />
 				</div>
 			</div>
 			<div className={style.table_container}>

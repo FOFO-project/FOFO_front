@@ -1,4 +1,5 @@
 export { FindMember } from "./FindMember/FindMember";
+export { FindMatch } from "./FindMatch/FindMatch"
 export { ManualMatch } from "./ManualMatch/ManualMatch";
 export { AutoMatch } from "./AutoMatch/AutoMatch";
 export { IndividualMatch } from "./IndividualMatch/IndividualMatch";

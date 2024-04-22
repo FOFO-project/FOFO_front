@@ -3,7 +3,7 @@ import { MatchRequestDto } from "../DTO/MatchRequestDto"
 import { Member } from "./Member";
 
 export class Matching {
-	id: string | null = null;
+	id: number | null = null;
 	man: Member | null = null;
 	woman: Member | null = null;
 	manAgreement: string | null = null;
@@ -18,8 +18,12 @@ export class Matching {
 
 	MatchRequestDto(): MatchRequestDto {
 		return {
-			id: this.id?,
-			
+			id: this.id,
+			manId: this.man?.id? this.man.id:null,
+			manAgreement: this.manAgreement,
+			womanId: this.woman? this.woman.id:null,
+			womanAgreement: this.womanAgreement,
+			matchStatus: this.matchStatus
 		}
 	}
 }
