@@ -18,4 +18,17 @@ export const Fomatter = {
 				.slice(0, 13);
 		}
 	},
+
+	HeightFormat(height: string): string {
+		// Remove all non-numeric characters
+		let cleaned = height.replace(/\D/g, "");
+
+		// Convert negative values to positive
+		if (cleaned.startsWith("-")) {
+			cleaned = cleaned.slice(1);
+		}
+
+		// Return only the first 3 digits
+		return cleaned.slice(0, 3);
+	},
 };

@@ -13,6 +13,7 @@ export class AppendMemberRequestDto {
 	name: string | null = null;
 	gender: Gender | null = null;
 	birthday: string | null = null;
+	height: number | null = null;
 	phoneNumber: string | null = null;
 	filteringAgeRelation: AgeRelationType | null = null;
 	company: string | null = null;

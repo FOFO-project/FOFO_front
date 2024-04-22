@@ -11,6 +11,7 @@ export const labelColumnsMap: any = {
 	name: "이름(Name)",
 	gender: "성별(Gender)",
 	birthday: "생년월일(Birthday)",
+	height: "키(Height)",
 	phoneNumber: "전화번호(Phone Number)",
 	company: "회사명(Company)",
 	job: "직무(Job)",

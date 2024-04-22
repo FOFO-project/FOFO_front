@@ -215,6 +215,25 @@ export function MemberForm() {
 					/>
 				</div>
 				<div className="mb-3">
+					<label htmlFor="height" className="form-label">
+						{labelColumnsMap.height}
+					</label>
+					<div className="input-group">
+						<input
+							type="number"
+							className="form-control"
+							id="height"
+							name="height"
+							value={formData.height || ""}
+							onChange={setters.handleHeightChange}
+							min="0"
+							max="1000"
+							step="1"
+						/>
+						<span className="input-group-text">cm</span>
+					</div>
+				</div>
+				<div className="mb-3">
 					<label htmlFor="phoneNumber" className="form-label">
 						{labelColumnsMap.phoneNumber}
 					</label>

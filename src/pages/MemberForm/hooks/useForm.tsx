@@ -5,6 +5,7 @@ export function useFormData(initData: AppendMemberRequestDto): [
 	AppendMemberRequestDto,
 	{
 		setFormData: Function;
+		handleHeightChange: ChangeEventHandler;
 		handlePhoneNumberChange: ChangeEventHandler;
 		handleDateChange: ChangeEventHandler;
 		handleChange: ChangeEventHandler;
@@ -14,6 +15,13 @@ export function useFormData(initData: AppendMemberRequestDto): [
 	const [formData, setFormData] = useState(
 		new AppendMemberRequestDto(initData)
 	);
+	const handleHeightChange = (e: any) => {
+		const { name, value } = e.target;
+		setFormData((prevData) => ({
+			...prevData,
+			[name]: Fomatter.HeightFormat(value),
+		}));
+	};
 	const handlePhoneNumberChange = (e: any) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
@@ -48,6 +56,7 @@ export function useFormData(initData: AppendMemberRequestDto): [
 	};
 	const setters = {
 		setFormData,
+		handleHeightChange,
 		handlePhoneNumberChange,
 		handleDateChange,
 		handleChange,
