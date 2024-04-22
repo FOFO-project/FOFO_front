@@ -9,7 +9,8 @@ export { GeoPoint } from "./type/Entity/GeoPoint";
 export { AppendMemberRequestDto } from "./type/DTO/AppendMemberRequestDto";
 export { AddressFormDTO } from "./type/DTO/AddressFormDTO";
 export { ConditionListModel, Filtering } from "./type/DTO/ConditionListModel";
-export { MatchRequestDto } from "./type/DTO/MatchRequestDto"
+export { FindMembersConditionDto } from "./type/DTO/FindMembersConditionDto";
+export { MatchRequestDto } from "./type/DTO/MatchRequestDto";
 export { ApiCaller } from "./util/ApiCaller";
 export { Fomatter } from "./util/Fomatter";
 export * from "./type/Enum/memberEnum";

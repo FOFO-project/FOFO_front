@@ -17,7 +17,9 @@ export const FindMember: React.FC<FindProps> = ({
 	) => {
 		e.preventDefault();
 		try {
-			const result = await getResult(conditionData);
+			const result = await getResult(
+				ConditionListModel.toFindMembersConditionDto(conditionData)
+			);
 			setMembers(result);
 		} catch (err) {
 			alert("조회에 실패하였습니다. 관리자에게 문의 부탁드립니다.");

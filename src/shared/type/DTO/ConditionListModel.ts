@@ -2,6 +2,7 @@ import {
 	AddressFormDTO,
 	AgeRelationType,
 	ApprovalStatus,
+	FindMembersConditionDto,
 	Gender,
 	MatchingStatus,
 	Mbti,
@@ -30,10 +31,35 @@ export class ConditionListModel {
 	rem: string | null = null;
 	kakao: string | null = null;
 	deposit_date: Date | null = null;
-
 	gender: Gender | null = null;
 	approvalStatus: ApprovalStatus | null = null;
 	matchingStatus: MatchingStatus | null = null;
+
+	static toFindMembersConditionDto(
+		model: ConditionListModel
+	): FindMembersConditionDto {
+		return new FindMembersConditionDto({
+			kakaoId: model.kakao,
+			name: model.name,
+			gender: model.gender,
+			yearOfBirthday: model.birthday,
+			filteringAgeRelation: model.filtering_condition.AgeRelation,
+			company: model.company,
+			job: model.job,
+			university: model.university,
+			mbti: model.mbti,
+			smokingYn: model.smoking_yn,
+			filteringSmoker: model.filtering_condition.SmokingYn,
+			religion: model.religion,
+			filteringReligion: model.filtering_condition.Religion,
+			approvalStatus: model.approvalStatus,
+			zipcode: model.address.zipcode,
+			sido: model.address.sido,
+			sigungu: model.address.sigungu,
+			eupmyundong: model.address.eupmyundong,
+			matchingStatus: model.matchingStatus,
+		});
+	}
 
 	constructor(data: Partial<ConditionListModel> = {}) {
 		Object.assign(this, data);

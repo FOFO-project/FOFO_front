@@ -20,15 +20,16 @@ export function SignupManage() {
 	const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
 	useEffect(() => {
-		ApiCaller.get("/members", new ConditionListModel(conditionData)).then(
-			(e) => {
-				setMembers(
-					e.data.content
-						? e.data.content.map((e: any) => new Member(e))
-						: []
-				);
-			}
-		);
+		ApiCaller.get(
+			"/members",
+			ConditionListModel.toFindMembersConditionDto(conditionData)
+		).then((e) => {
+			setMembers(
+				e.data.content
+					? e.data.content.map((e: any) => new Member(e))
+					: []
+			);
+		});
 	}, []);
 
 	return (

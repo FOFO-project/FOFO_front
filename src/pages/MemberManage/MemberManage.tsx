@@ -41,10 +41,12 @@ export function MemberManage() {
 	useEffect(() => {
 		ApiCaller.get(
 			"/members",
-			new ConditionListModel({
-				approvalStatus: ApprovalStatus.APPROVED,
-				matchingStatus: MatchingStatus.MATCHING_PENDING,
-			})
+			ConditionListModel.toFindMembersConditionDto(
+				new ConditionListModel({
+					approvalStatus: ApprovalStatus.APPROVED,
+					matchingStatus: MatchingStatus.MATCHING_PENDING,
+				})
+			)
 		).then((e) => {
 			for (var i = 0; e.data.content.gender == "MAN"; i++) {}
 
