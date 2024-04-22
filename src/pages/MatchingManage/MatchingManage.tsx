@@ -8,8 +8,8 @@ import page_styles from "../pages.module.scss";
 
 export function MatchingManage() {
 	const [matchings, setMatchings] = useState([]);
-
 	const [selectedItems, setSelectedItems] = useState<MatchRequestDto[]>([]);
+	const matchingStatus = "20";
 
 	return (
 		<div className={page_styles.Page}>
@@ -26,6 +26,7 @@ export function MatchingManage() {
 									setSelectedItems: setSelectedItems,
 								}}
 								title={""}
+								pageType={matchingStatus}
 							/>
 						</div>
 					</div>

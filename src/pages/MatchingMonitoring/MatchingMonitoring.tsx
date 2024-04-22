@@ -1,15 +1,14 @@
 import { FofoHeader } from "../../widgets/widgets";
 import { MatchingManagePanel } from "../../widgets/listPanels/MatchingPanel/MatchingManagePanel";
-import { MatchingConfirm, MatchingCancel } from "../../features/features";
 import { MatchRequestDto } from "../../shared/shared";
 import { useState } from "react";
-import style from "./MatchingManage.module.scss";
+import style from "./MatchingMonitoring.module.scss";
 import page_styles from "../pages.module.scss";
 
-export function MatchingManage() {
+export function MatchingMonitoring() {
 	const [matchings, setMatchings] = useState([]);
-
 	const [selectedItems, setSelectedItems] = useState<MatchRequestDto[]>([]);
+	const matchingStatus = "30";
 
 	return (
 		<div className={page_styles.Page}>
@@ -26,13 +25,9 @@ export function MatchingManage() {
 									setSelectedItems: setSelectedItems,
 								}}
 								title={""}
+								pageType={matchingStatus}
 							/>
 						</div>
-					</div>
-					<div className={style.buttonContainer}>
-						<MatchingConfirm 
-							matchData={selectedItems}/>
-						<MatchingCancel matchItems={selectedItems}/>
 					</div>
 				</div>
 			</div>

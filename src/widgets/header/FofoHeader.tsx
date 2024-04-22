@@ -22,6 +22,10 @@ export function FofoHeader({ className }: { className?: string }) {
 			title: "매칭관리",
 			url: "/MatchingManage",
 		},
+		{
+			title: "매칭현황",
+			url: "/MatchingMonitoring",
+		},
 	];
 	return (
 		<>
