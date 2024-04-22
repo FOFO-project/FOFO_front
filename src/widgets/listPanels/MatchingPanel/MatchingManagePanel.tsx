@@ -1,5 +1,7 @@
+import { useState } from "react"
 import { Matching, MatchRequestDto } from "../../../shared/shared";
 import { NoneCondition } from "../../../shared/shared";
+// import { FindMatch } from "../../../features/features";
 import style from "./MatchingManagePanel.module.scss";
 import classNames from "classnames";
 
@@ -19,6 +21,9 @@ export function MatchingManagePanel({
 }: MatchingManagePanelProps) {
 	const { selectedItems, setSelectedItems } = selectedProps;
 
+	let [manHeartClicked, setManHeartClicked] = useState(false);
+	let [womanHeartClicked, setWomanHeartClicked] = useState(false);
+
 	// checkbox handler
 	const checkboxHandler = (matchingId: any) => {
 		setSelectedItems((preSelectedItems: number[]) => {
@@ -29,9 +34,34 @@ export function MatchingManagePanel({
 		});
 	};
 
+	const ManHeart = (matchingId: any) => {
+		manHeartClicked = !manHeartClicked;
+		setManHeartClicked(manHeartClicked);
+
+		setSelectedItems((matchingId:number, manHeartClicked:Boolean) => {
+			const isSelectedItems = selectedItems.map((item) => {
+				if(item.id === matchingId){
+					return {...item, manAgreement: manHeartClicked}
+				}
+			});
+			return 
+
+		});
+	}
+
+	const WomanHeart = (matchId:number) => {
+		womanHeartClicked = !womanHeartClicked;
+		setWomanHeartClicked(womanHeartClicked);
+		selectedItems[matchId].womanAgreement = womanHeartClicked;
+	}
+
 	return (
 		<div className={style.container}>
-			<div className={style.button_container}></div>
+			<div className={style.button_container}>
+				<div className={style.button_container}>
+					{/* <FindMatch conditionData={conditionData} setMembers={setMembers} /> */}
+				</div>
+			</div>
 			<div className={style.table_container}>
 				<table className={classNames(`table`)}>
 					<thead>
@@ -90,9 +120,11 @@ export function MatchingManagePanel({
 								<td>{matching.man?.getBirthdayString()}</td>
 								<td>{matching.man?.getAddressString()}</td>
 								<td>{matching.man?.getFilteringString()}</td>
-								<td>
-									<input type="text" name="" id="" />
-									<input type="text" name="" id="" />
+								<td className={style.heart_container}>
+									<div className={`${style.heart_left} ${manHeartClicked ? style.heart_clicked : style.heart_unclicked}`}
+										onClick={ManHeart(matching.id)}></div>
+									<div className={`${style.heart_right} ${womanHeartClicked ? style.heartClicked : style.heart_unclicked}`}
+										onClick={WomanHeart(matching.id)}></div>
 								</td>
 								<td>{matching.woman?.name}</td>
 								<td>{matching.woman?.getBirthdayString()}</td>

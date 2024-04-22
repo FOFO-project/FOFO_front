@@ -1,3 +1,5 @@
+import { Matching } from "../../shared";
+
 export class MatchRequestDto {
     id: number | null = null;
     manId: number | null = null;

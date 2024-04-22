@@ -8,7 +8,7 @@ interface FindProps {
 	setMembers: Function;
 }
 
-export const Find: React.FC<FindProps> = ({
+export const FindMember: React.FC<FindProps> = ({
 	conditionData,
 	setMembers,
 }: FindProps) => {

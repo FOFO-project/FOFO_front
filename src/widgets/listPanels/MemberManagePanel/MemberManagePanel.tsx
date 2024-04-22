@@ -13,7 +13,7 @@ import {
 	DateCondition,
 } from "../../../shared/shared";
 import style from "./MemberManagePanel.module.scss";
-import { Find } from "../../../features/Find/Find";
+import { FindMember } from "../../../features/features";
 import classNames from "classnames";
 
 interface MemberListProps {
@@ -57,7 +57,7 @@ export function MemberManagePanel({
 	return (
 		<div className={style.container}>
 			<div className={style.button_container}>
-				<Find conditionData={conditionData} setMembers={setMembers} />
+				<FindMember conditionData={conditionData} setMembers={setMembers} />
 			</div>
 			<div className={style.table_container}>
 				<table className={classNames(`table`)}>
