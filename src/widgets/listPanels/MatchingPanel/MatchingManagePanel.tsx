@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { ReactHTMLElement, useState } from "react"
 import { Matching, MatchRequestDto } from "../../../shared/shared";
 import { NoneCondition } from "../../../shared/shared";
 import { FindMatch } from "../../../features/features";
@@ -26,7 +26,9 @@ export function MatchingManagePanel({
 	let [womanHeartClicked, setWomanHeartClicked] = useState(false);
 	
 	// 매칭중(MATCHING_PENDING)
-	const conditionData = "20";
+	const conditionData = {
+		matchingStatus: "20"
+	};
 
 	// checkbox handler
 	const checkboxHandler = (matchingId: any) => {
@@ -43,24 +45,18 @@ export function MatchingManagePanel({
 		setManHeartClicked(manHeartClicked);
 		matchings.forEach((item) => {
 			if(item.id === matchingId){
-				if(manHeartClicked){
-					matchings[matchingId] = {...item, manAgreement: "Y"};
-				} else{
-					matchings[matchingId] = {...item, manAgreement: "N"};
-				}
-				
+				item.manAgreement = manHeartClicked ? "Y" : "N";
 			}
 		});
 		setMatchings(matchings.slice());
 	}
 
 	const WomanHeart = (matchingId: any) => {
-		let womanAgreementChanged;
 		womanHeartClicked = !womanHeartClicked;
 		setWomanHeartClicked(womanHeartClicked);
 		matchings.map((item) => {
 			if(item.id === matchingId){
-				womanAgreementChanged = {...item, womanAgreement: manHeartClicked};
+				item.womanAgreement = womanHeartClicked ? "Y" : "N";
 			}
 		});
 		setMatchings(matchings.slice());
@@ -70,7 +66,7 @@ export function MatchingManagePanel({
 		<div className={style.container}>
 			<div className={style.button_container}>
 				<div className={style.button_container}>
-					<FindMatch conditionData={conditionData} setMembers={setMatchings} />
+					<FindMatch conditionData={conditionData} setMatchings={setMatchings} />
 				</div>
 			</div>
 			<div className={style.table_container}>
@@ -133,9 +129,9 @@ export function MatchingManagePanel({
 								<td>{matching.man?.getFilteringString()}</td>
 								<td className={style.heart_container}>
 									<div className={`${style.heart_left} ${manHeartClicked ? style.heart_clicked : style.heart_unclicked}`}
-										onClick={ManHeart(matching.id)}></div>
+										onClick={(e) => ManHeart(matching.id)}></div>
 									<div className={`${style.heart_right} ${womanHeartClicked ? style.heartClicked : style.heart_unclicked}`}
-										onClick={WomanHeart(matching.id)}></div>
+										onClick={(e) => WomanHeart(matching.id)}></div>
 								</td>
 								<td>{matching.woman?.name}</td>
 								<td>{matching.woman?.getBirthdayString()}</td>

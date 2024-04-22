@@ -1,16 +1,15 @@
 import classNames from "classnames";
-import { MatchRequestDto } from "../../shared/shared";
 import { getResult } from "./api/getResult";
 import style from "../features.module.scss";
 
 interface FindProps {
-	conditionData: string;
-	setMembers: Function;
+	conditionData: Object;
+	setMatchings: Function;
 }
 
 export const FindMatch: React.FC<FindProps> = ({
 	conditionData,
-	setMembers,
+	setMatchings,
 }: FindProps) => {
 	const search = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -18,7 +17,7 @@ export const FindMatch: React.FC<FindProps> = ({
 		e.preventDefault();
 		try {
 			const result = await getResult(conditionData);
-			setMembers(result);
+			setMatchings(result);
 		} catch (err) {
 			alert("조회에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
 		}
