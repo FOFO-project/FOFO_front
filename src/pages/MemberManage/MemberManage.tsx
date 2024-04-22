@@ -20,14 +20,14 @@ import {
 export function MemberManage() {
 	const [manConditionData, setManConditionData] = useState(
 		new ConditionListModel({
-			gender: Gender.남자,
+			gender: Gender.MAN,
 			approvalStatus: ApprovalStatus.APPROVED,
 			matchingStatus: MatchingStatus.MATCHING_PENDING,
 		})
 	);
 	const [womanConditionData, setWomanConditionData] = useState(
 		new ConditionListModel({
-			gender: Gender.여자,
+			gender: Gender.WOMAN,
 			approvalStatus: ApprovalStatus.APPROVED,
 			matchingStatus: MatchingStatus.MATCHING_PENDING,
 		})

@@ -1,6 +1,6 @@
 export enum Gender {
-	남자 = "MAN",
-	여자 = "WOMAN",
+	MAN = "MAN",
+	WOMAN = "WOMAN",
 }
 
 export enum AgeRelationType {

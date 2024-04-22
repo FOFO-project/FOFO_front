@@ -23,6 +23,7 @@ export const labelColumnsMap: any = {
 	filteringAgeRelation: "연상/동갑/연하(Age Relation)",
 	filteringSmoker: "상대방 흡연여부(Smoking)",
 	filteringReligion: "상대방 종교(Religion)",
+	note: "관리자 멘트(Note)",
 };
 
 export function getMissingValueColumns(data: AppendMemberRequestDto) {
@@ -32,6 +33,7 @@ export function getMissingValueColumns(data: AppendMemberRequestDto) {
 		"filteringAgeRelation",
 		"filteringSmoker",
 		"filteringReligion",
+		"note",
 	];
 	const missing = [];
 	for (const key of Object.keys(data)) {

@@ -80,7 +80,7 @@ export function MemberForm() {
 			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
 			return;
 		}
-		ApiCaller.post("/member", formData)
+		ApiCaller.post("/member", AppendMemberRequestDto.exceptNote(formData))
 			.then(() => {
 				alert("제출완료");
 				navigate("/MemberForm");
@@ -415,6 +415,20 @@ export function MemberForm() {
 						))}
 					</select>
 				</div>
+				{memberId ? (
+					<div className="mb-3">
+						<label htmlFor="note" className="form-label">
+							{labelColumnsMap.note}
+						</label>
+						<textarea
+							className="form-control"
+							id="note"
+							name="note"
+							value={formData.note || ""}
+							onChange={setters.handleChange}
+						/>
+					</div>
+				) : null}
 				<div className={style.buttonContainer}>
 					{memberId ? (
 						<button

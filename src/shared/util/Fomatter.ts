@@ -3,7 +3,7 @@ export const Fomatter = {
 		if (!phoneNumber) return phoneNumber;
 
 		// Remove all non-numeric characters
-		const cleaned = phoneNumber.replace(/\D/g, "");
+		let cleaned = phoneNumber.replace(/\D/g, "");
 
 		// Apply formatting based on length
 		if (cleaned.length <= 4) {
@@ -13,13 +13,15 @@ export const Fomatter = {
 		} else if (cleaned.length <= 8) {
 			return cleaned.replace(/(\d{3})(\d{4})?/, "$1-$2");
 		} else {
+			if (cleaned.slice(0, 3) !== "010") {
+				cleaned = "010" + cleaned.slice(3);
+			}
 			return cleaned
 				.replace(/(\d{3})(\d{4})(\d{4})?/, "$1-$2-$3")
 				.slice(0, 13);
 		}
 	},
-
-	HeightFormat(height: string): string {
+	HeightFormat(height: string): number {
 		// Remove all non-numeric characters
 		let cleaned = height.replace(/\D/g, "");
 
@@ -29,6 +31,6 @@ export const Fomatter = {
 		}
 
 		// Return only the first 3 digits
-		return cleaned.slice(0, 3);
+		return parseInt(cleaned.slice(0, 3));
 	},
 };

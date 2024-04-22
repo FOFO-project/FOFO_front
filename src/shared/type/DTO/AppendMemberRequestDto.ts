@@ -14,7 +14,7 @@ export class AppendMemberRequestDto {
 	gender: Gender | null = null;
 	birthday: string | null = null;
 	height: number | null = null;
-	phoneNumber: string | null = null;
+	phoneNumber: string | null = "010";
 	filteringAgeRelation: AgeRelationType | null = null;
 	company: string | null = null;
 	job: string | null = null;
@@ -25,6 +25,14 @@ export class AppendMemberRequestDto {
 	religion: Religion | null = null;
 	filteringReligion: Religion | null = null;
 	charmingPoint: string | null = null;
+
+	//수정시에만 활성화
+	note: string | null = null;
+
+	static exceptNote(dto: AppendMemberRequestDto) {
+		const { note, ...rest } = dto;
+		return rest;
+	}
 
 	constructor(data: any = {}) {
 		for (const key in data as AppendMemberRequestDto) {
