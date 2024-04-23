@@ -80,7 +80,7 @@ export function MemberForm() {
 			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
 			return;
 		}
-		ApiCaller.post("/member", formData)
+		ApiCaller.post("/member", AppendMemberRequestDto.exceptNote(formData))
 			.then(() => {
 				alert("제출완료");
 				navigate("/MemberForm");
@@ -213,6 +213,25 @@ export function MemberForm() {
 						}
 						onChange={setters.handleDateChange}
 					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="height" className="form-label">
+						{labelColumnsMap.height}
+					</label>
+					<div className="input-group">
+						<input
+							type="number"
+							className="form-control"
+							id="height"
+							name="height"
+							value={formData.height || ""}
+							onChange={setters.handleHeightChange}
+							min="0"
+							max="1000"
+							step="1"
+						/>
+						<span className="input-group-text">cm</span>
+					</div>
 				</div>
 				<div className="mb-3">
 					<label htmlFor="phoneNumber" className="form-label">
@@ -396,6 +415,20 @@ export function MemberForm() {
 						))}
 					</select>
 				</div>
+				{memberId ? (
+					<div className="mb-3">
+						<label htmlFor="note" className="form-label">
+							{labelColumnsMap.note}
+						</label>
+						<textarea
+							className="form-control"
+							id="note"
+							name="note"
+							value={formData.note || ""}
+							onChange={setters.handleChange}
+						/>
+					</div>
+				) : null}
 				<div className={style.buttonContainer}>
 					{memberId ? (
 						<button
