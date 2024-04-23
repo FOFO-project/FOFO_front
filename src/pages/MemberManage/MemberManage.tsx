@@ -22,14 +22,12 @@ export function MemberManage() {
 		new ConditionListModel({
 			gender: Gender.MAN,
 			approvalStatus: ApprovalStatus.APPROVED,
-			matchingStatus: MatchingStatus.MATCHING_PENDING,
 		})
 	);
 	const [womanConditionData, setWomanConditionData] = useState(
 		new ConditionListModel({
 			gender: Gender.WOMAN,
 			approvalStatus: ApprovalStatus.APPROVED,
-			matchingStatus: MatchingStatus.MATCHING_PENDING,
 		})
 	);
 	const [mans, setMans] = useState<Member[]>([]);
@@ -48,13 +46,13 @@ export function MemberManage() {
 				})
 			)
 		).then((e) => {
-			let manList:Member[] = [];
-			let womanList:Member[] = [];
+			let manList: Member[] = [];
+			let womanList: Member[] = [];
 			for (var i = 0; i < e.data.content.length; i++) {
 				let member = new Member(e.data.content[i]);
-				if(member.gender == Gender.MAN){
+				if (member.gender == Gender.MAN) {
 					manList.push(member);
-				} else{
+				} else {
 					womanList.push(member);
 				}
 			}
