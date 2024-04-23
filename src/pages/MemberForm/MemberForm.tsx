@@ -388,12 +388,8 @@ export function MemberForm() {
 						value={formData.filteringSmoker || ""}
 						onChange={setters.handleChange}
 					>
-						<option value="">상관없음</option>
-						{Object.entries(SmokingYn).map(([key, value]) => (
-							<option key={key} value={key}>
-								{value}
-							</option>
-						))}
+						<option value="N">상관없음</option>
+						<option value="Y">비흡연</option>
 					</select>
 				</div>
 				<div className="mb-3">

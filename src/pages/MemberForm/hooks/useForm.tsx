@@ -41,7 +41,12 @@ export function useFormData(initData: AppendMemberRequestDto): [
 		let { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
-			[name]: value.length === 0 ? null : value,
+			[name]:
+				value.length === 0
+					? null
+					: typeof value === "string"
+					? value.trim()
+					: value,
 		}));
 	};
 	const handleAddressChange = (e: any) => {

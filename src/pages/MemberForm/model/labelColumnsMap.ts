@@ -20,9 +20,9 @@ export const labelColumnsMap: any = {
 	smokingYn: "흡연여부(Smoking)",
 	religion: "종교(Religion)",
 	charmingPoint: "어필 사항(Charming Point)",
-	filteringAgeRelation: "연상/동갑/연하(Age Relation)",
+	filteringAgeRelation: "절대 안되는 나이조건(연상/동갑/연하)(Age Relation)",
 	filteringSmoker: "상대방 흡연여부(Smoking)",
-	filteringReligion: "상대방 종교(Religion)",
+	filteringReligion: "절대 안되는 종교(Religion)",
 	note: "관리자 멘트(Note)",
 };
 
@@ -31,7 +31,7 @@ export function getMissingValueColumns(data: AppendMemberRequestDto) {
 		"address",
 		"charmingPoint",
 		"filteringAgeRelation",
-		"filteringSmoker",
+		//"filteringSmoker",
 		"filteringReligion",
 		"note",
 	];
