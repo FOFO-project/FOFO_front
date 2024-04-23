@@ -8,7 +8,7 @@ import page_styles from "../pages.module.scss";
 export function MatchingMonitoring() {
 	const [matchings, setMatchings] = useState([]);
 	const [selectedItems, setSelectedItems] = useState<MatchRequestDto[]>([]);
-	const matchingStatus = "30";
+	const matchingStatus = "MATCHING_COMPLETED";
 
 	return (
 		<div className={page_styles.Page}>

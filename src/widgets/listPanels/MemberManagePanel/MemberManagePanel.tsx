@@ -184,7 +184,7 @@ export function MemberManagePanel({
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody className="text-center">
 						{members?.map((member) => (
 							<tr
 								key={member.id}

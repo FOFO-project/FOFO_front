@@ -6,6 +6,7 @@ import {
 	MemberForm,
 	MatchingManage,
 	ApprovalManage,
+	MatchingMonitoring
 } from "../pages/pages";
 import "./index.css";
 import {
@@ -47,6 +48,10 @@ export function init() {
 					{
 						path: "/MatchingManage",
 						element: <MatchingManage />,
+					},
+					{
+						path: "/MatchingMonitoring",
+						element: <MatchingMonitoring />,
 					},
 				],
 				{

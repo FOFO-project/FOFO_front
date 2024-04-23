@@ -109,7 +109,7 @@ export function MatchingManagePanel({
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody className="text-center">
 						{matchings?.map((matching) => (
 							<tr
 								key={matching.id}
