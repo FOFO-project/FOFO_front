@@ -69,9 +69,7 @@ export function MatchingManagePanel({
 	return (
 		<div className={style.container}>
 			<div className={style.button_container}>
-				<div className={style.button_container}>
-					<FindMatch conditionData={conditionData} setMatchings={setMatchings} />
-				</div>
+				<FindMatch conditionData={conditionData} setMatchings={setMatchings} />
 			</div>
 			<div className={style.table_container}>
 				<table className={classNames(`table`)}>

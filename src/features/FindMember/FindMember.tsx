@@ -12,6 +12,7 @@ export const FindMember: React.FC<FindProps> = ({
 	conditionData,
 	setMembers,
 }: FindProps) => {
+	console.log(conditionData);
 	const search = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
 	) => {
