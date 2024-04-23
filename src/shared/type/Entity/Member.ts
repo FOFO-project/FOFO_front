@@ -14,7 +14,7 @@ export class Member {
 	kakaoId: string | null = null;
 	address: Address | null = null;
 	name: string | null = null;
-	gender: Gender | null = null;
+	gender: Gender | "MAN" | "WOMAN" | null = null;
 	birthday: Date | null = null;
 	age: number | null = null;
 	phoneNumber: string | null = null;
@@ -77,6 +77,12 @@ export class Member {
 	}
 
 	constructor(data: Partial<Member> = {}) {
+		data.gender =
+			data.gender === "MAN"
+				? Gender.MAN
+				: data.gender === "WOMAN"
+				? Gender.WOMAN
+				: null;
 		Object.assign(this, data);
 	}
 }
