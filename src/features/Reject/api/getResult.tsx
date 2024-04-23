@@ -1,4 +1,4 @@
-import { ApiCaller, Member } from "../../../shared/shared";
+import { ApiCaller } from "../../../shared/shared";
 
 export const getResult = async (selected: any) => {
 	return ApiCaller.delete("/members", {

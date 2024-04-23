@@ -1,7 +1,6 @@
 import {
 	AgeRelationType,
 	ApprovalStatus,
-	Gender,
 	MatchingStatus,
 	Mbti,
 	Religion,

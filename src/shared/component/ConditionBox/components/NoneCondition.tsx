@@ -1,5 +1,3 @@
-import style from "../ConditionBox.module.scss";
-
 interface NoneCondtionProps {
 	title: string;
 }
