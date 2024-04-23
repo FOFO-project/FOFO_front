@@ -32,8 +32,8 @@ export function MemberManage() {
 			matchingStatus: MatchingStatus.MATCHING_PENDING,
 		})
 	);
-	const [mans, setMans] = useState([]);
-	const [womans, setWomans] = useState([]);
+	const [mans, setMans] = useState<Member[]>([]);
+	const [womans, setWomans] = useState<Member[]>([]);
 
 	const [manSelectedItems, setManSelectedItems] = useState<number[]>([]);
 	const [womanSelectedItems, setWomanSelectedItems] = useState<number[]>([]);
@@ -48,13 +48,18 @@ export function MemberManage() {
 				})
 			)
 		).then((e) => {
-			for (var i = 0; e.data.content.gender == "MAN"; i++) {}
-
-			setMans(
-				e.data.content
-					? e.data.content.map((e: any) => new Member(e))
-					: []
-			);
+			let manList:Member[] = [];
+			let womanList:Member[] = [];
+			for (var i = 0; i < e.data.content.length; i++) {
+				let member = new Member(e.data.content[i]);
+				if(member.gender == Gender.MAN){
+					manList.push(member);
+				} else{
+					womanList.push(member);
+				}
+			}
+			setMans(manList);
+			setWomans(womanList);
 		});
 	}, []);
 

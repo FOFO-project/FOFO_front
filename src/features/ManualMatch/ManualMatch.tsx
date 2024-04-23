@@ -32,7 +32,7 @@ export const ManualMatch: React.FC<MatchProps> = ({
 				throw new Error();
 			}
 		} catch (err) {
-			alert("수동매칭 실패.");
+			alert("매칭에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
 		}
 	};
 
