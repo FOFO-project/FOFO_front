@@ -41,7 +41,12 @@ export class ConditionListModel {
 		return new FindMembersConditionDto({
 			kakaoId: model.kakao,
 			name: model.name,
-			gender: model.gender,
+			gender:
+				model.gender === "남자"
+					? "MAN"
+					: model.gender === "여자"
+					? "WOMAN"
+					: null,
 			yearOfBirthday: model.birthday,
 			filteringAgeRelation: model.filtering_condition.AgeRelation,
 			company: model.company,
