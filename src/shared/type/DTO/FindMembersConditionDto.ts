@@ -27,6 +27,7 @@ export class FindMembersConditionDto {
 	sigungu: string | null = null;
 	eupmyundong: string | null = null;
 	matchingStatus: MatchingStatus | null = null;
+	matchableYn: "Y" | "N" | null = null;
 
 	constructor(data: Partial<FindMembersConditionDto> = {}) {
 		Object.assign(this, data);

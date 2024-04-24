@@ -14,6 +14,7 @@ export function ApprovalManage() {
 	const [conditionData, setConditionData] = useState(
 		new ConditionListModel({
 			approvalStatus: ApprovalStatus.DEPOSIT_COMPLETED,
+			matchableYn: "Y",
 		})
 	);
 	const [members, setMembers] = useState([]);

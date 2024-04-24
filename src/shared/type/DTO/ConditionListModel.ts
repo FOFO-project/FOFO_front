@@ -34,6 +34,7 @@ export class ConditionListModel {
 	gender: Gender | null = null;
 	approvalStatus: ApprovalStatus | null = null;
 	matchingStatus: MatchingStatus | null = null;
+	matchableYn: "Y" | "N" = "Y";
 
 	static toFindMembersConditionDto(
 		model: ConditionListModel
@@ -63,6 +64,7 @@ export class ConditionListModel {
 			sigungu: model.address.sigungu,
 			eupmyundong: model.address.eupmyundong,
 			matchingStatus: model.matchingStatus,
+			matchableYn: model.matchableYn,
 		});
 	}
 
