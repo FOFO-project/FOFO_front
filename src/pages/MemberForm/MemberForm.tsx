@@ -388,6 +388,7 @@ export function MemberForm() {
 						value={formData.filteringSmoker || ""}
 						onChange={setters.handleChange}
 					>
+						<option value="">선택해주세요</option>
 						<option value="N">상관없음</option>
 						<option value="Y">비흡연</option>
 					</select>
