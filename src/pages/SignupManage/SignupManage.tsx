@@ -14,6 +14,7 @@ export function SignupManage() {
 	const [conditionData, setConditionData] = useState(
 		new ConditionListModel({
 			approvalStatus: ApprovalStatus.DEPOSIT_PENDING,
+			matchableYn: "Y",
 		})
 	);
 	const [members, setMembers] = useState([]);
