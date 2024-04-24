@@ -44,9 +44,9 @@ export enum ApprovalStatus {
 }
 
 export enum MatchingStatus {
-	MATCHING_PENDING = "10", //"매칭대기중",
-	MATCHING_PROGRESSING = "20", //"매칭진행중",
-	MATCHING_COMPLETED = "30", //"매칭완료",
+	MATCHING_PENDING = "MATCHING_PENDING", //"매칭대기중",
+	MATCHING_PROGRESSING = "MATCHING_PROGRESSING", //"매칭진행중",
+	MATCHING_COMPLETED = "MATCHING_COMPLETED", //"매칭완료",
 }
 
 export enum ActiveStatus {

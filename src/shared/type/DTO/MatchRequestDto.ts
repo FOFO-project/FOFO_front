@@ -4,7 +4,7 @@ export class MatchRequestDto {
     manAgreement: string | null = null;
     womanId: number | null = null;
     womanAgreement: string | null = null;
-	matchStatus: string | null = null;
+	matchingStatus: string | null = null;
     
 	constructor(data: any = {}) {
 		for (const key in data as MatchRequestDto) {

@@ -1,10 +1,10 @@
-import { Match, MatchRequestDto } from "../../shared/shared";
+import { Match, Matching } from "../../shared/shared";
 import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 import style from "../features.module.scss";
 
 interface MatchProps {
-    matchItems: MatchRequestDto[];
+    matchItems: Matching[];
 }
 
 export const MatchingCancel: React.FC<MatchProps> = ({
@@ -21,8 +21,8 @@ export const MatchingCancel: React.FC<MatchProps> = ({
 			return;
 		}
 
-		const matchIds = (matchItems:MatchRequestDto[]) => {
-			return matchItems.map((item:MatchRequestDto) => item["id"])
+		const matchIds = (matchItems:Matching[]) => {
+			return matchItems.map((item:Matching) => item["id"])
 					.filter(id => id !== undefined && id !== null);
 		}
 

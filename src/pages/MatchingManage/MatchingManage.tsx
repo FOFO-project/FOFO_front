@@ -8,7 +8,7 @@ import page_styles from "../pages.module.scss";
 
 export function MatchingManage() {
 	const [matchings, setMatchings] = useState<Matching[]>([]);
-	const [selectedItems, setSelectedItems] = useState<MatchRequestDto[]>([]);
+	const [selectedItems, setSelectedItems] = useState<Matching[]>([]);
 	const matchingStatus = "MATCHING_PENDING";
 
 	// page 진입 시 최초 조회 로직

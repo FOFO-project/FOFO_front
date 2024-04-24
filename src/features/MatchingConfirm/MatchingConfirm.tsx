@@ -1,10 +1,10 @@
-import { Match, MatchRequestDto } from "../../shared/shared";
+import { Match, Matching } from "../../shared/shared";
 import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 import style from "../features.module.scss";
 
 interface MatchProps {
-    matchData: MatchRequestDto[];
+    matchData: Matching[];
 }
 
 export const MatchingConfirm: React.FC<MatchProps> = ({
@@ -22,7 +22,8 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 		}
 
 		try {
-			const result = await getResult(matchData);
+			console.log(matchData);
+			const result = await getResult(matchData.map(e => e.MatchRequestDto()));
 			if (result === "SUCCESS") {
 				alert(`매칭확정 완료.`);
 				navigate("/MatchingManage");

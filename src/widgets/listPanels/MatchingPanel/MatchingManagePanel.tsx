@@ -31,18 +31,17 @@ export function MatchingManagePanel({
 	};
 
 	// checkbox handler
-	const checkboxHandler = (matchingId: any) => {
-		setSelectedItems((preSelectedItems: number[]) => {
-			const isSelectedItems = preSelectedItems.includes(matchingId);
+	const checkboxHandler = (match: Matching) => {
+		setSelectedItems((preSelectedItems: Matching[]) => {
+			const isSelectedItems = preSelectedItems.includes(match);
 			return isSelectedItems
-				? preSelectedItems.filter((id) => id !== matchingId)
-				: [...preSelectedItems, matchingId];
+				? preSelectedItems.filter((item) => item.id !== match.id)
+				: [...preSelectedItems, match];
 		});
 	};
 
 	const ManHeart = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>, matchingId: any) => {
 		e.preventDefault();
-		console.log(matchingId);
 		matchings.forEach((item) => {
 			if(item.id === matchingId){
 				item.manAgreement = item.manAgreement === "Y" ? "N" : "Y";
@@ -113,10 +112,10 @@ export function MatchingManagePanel({
 									<input
 										type="checkbox"
 										onChange={() =>
-											checkboxHandler(matching.id)
+											checkboxHandler(matching)
 										}
 										checked={selectedItems.includes(
-											matching.id as any
+											matching as any
 										)}
 										disabled={pageType === "20" ? true:false}
 									/>
