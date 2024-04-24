@@ -13,7 +13,7 @@ export const AutoMatch: React.FC = () => {
 			alert(`자동매칭 완료. (실패 : ${result.length}건)`);
 			navigate("/MatchManage");
 		} catch (err) {
-			alert("매칭에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
+			alert(err);
 		}
 	};
 

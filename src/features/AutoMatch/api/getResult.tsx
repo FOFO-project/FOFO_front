@@ -7,5 +7,7 @@ export const getResult = async () => {
 		memberIdList: [],
 	}).then((e) => {
 		return e.data ? e.data.unmatchedMemberIdList : [];
+	}).catch((e) => {
+		throw JSON.stringify(e.data.error.data);
 	});
 };

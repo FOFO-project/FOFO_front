@@ -6,5 +6,7 @@ export const getResult = async (manId: number, womanId: number) => {
 		womanMemberId: womanId,
 	}).then((e) => {
 		return e.data.result;
+	}).catch((e) => {
+		throw JSON.stringify(e.data.error.data);
 	});
 };
