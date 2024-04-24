@@ -24,8 +24,6 @@ export function MatchingManagePanel({
 	pageType
 }: MatchingManagePanelProps) {
 	const { selectedItems, setSelectedItems } = selectedProps;
-	let [manHeartClicked, setManHeartClicked] = useState(false);
-	let [womanHeartClicked, setWomanHeartClicked] = useState(false);
 	
 	// 매칭중(MATCHING_PENDING)
 	const conditionData = {
@@ -44,11 +42,10 @@ export function MatchingManagePanel({
 
 	const ManHeart = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>, matchingId: any) => {
 		e.preventDefault();
-		manHeartClicked = !manHeartClicked;
-		setManHeartClicked(manHeartClicked);
+		console.log(matchingId);
 		matchings.forEach((item) => {
 			if(item.id === matchingId){
-				item.manAgreement = manHeartClicked ? "Y" : "N";
+				item.manAgreement = item.manAgreement === "Y" ? "N" : "Y";
 			}
 		});
 		setMatchings(matchings.slice());
@@ -56,11 +53,9 @@ export function MatchingManagePanel({
 
 	const WomanHeart = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>, matchingId: any) => {
 		e.preventDefault();
-		womanHeartClicked = !womanHeartClicked;
-		setWomanHeartClicked(womanHeartClicked);
 		matchings.map((item) => {
 			if(item.id === matchingId){
-				item.womanAgreement = womanHeartClicked ? "Y" : "N";
+				item.womanAgreement = item.womanAgreement === "Y" ? "N" : "Y";
 			}
 		});
 		setMatchings(matchings.slice());
@@ -130,13 +125,23 @@ export function MatchingManagePanel({
 								<td>{matching.man?.getBirthdayString()}</td>
 								<td>{matching.man?.getAddressString()}</td>
 								<td>{matching.man?.getFilteringString()}</td>
-								<td className={style.heart_container}>
-									<button className={`${style.heart_left} ${manHeartClicked ? style.heart_clicked : style.heart_unclicked}`}
-										onClick={(e) => ManHeart(e, matching.id)}
-										disabled={pageType === "20" ? true:false}></button>
-									<button className={`${style.heart_right} ${womanHeartClicked ? style.heartClicked : style.heart_unclicked}`}
-										onClick={(e) => WomanHeart(e, matching.id)}
-										disabled={pageType === "20" ? true:false}></button>
+								<td>
+									<div className='row'>
+										<div className={`col ${style.left_box}`}>
+											<button className={`${style.heart_button}`}
+												onClick={(e) => ManHeart(e, matching.id)}
+												disabled={pageType === "20" ? true:false}>
+													<div className={matching.manAgreement == "Y" ? style.heart_clicked_left : style.heart_unclicked_left}></div>
+											</button>
+										</div>
+										<div className={`col ${style.right_box}`}>
+											<button className={`${style.heart_button}`}
+												onClick={(e) => WomanHeart(e, matching.id)}
+												disabled={pageType === "20" ? true:false}>
+													<div className={matching.womanAgreement == "Y" ? style.heart_clicked_right : style.heart_unclicked_right}></div>
+											</button>
+										</div>
+									</div>
 								</td>
 								<td>{matching.woman?.name}</td>
 								<td>{matching.woman?.getBirthdayString()}</td>

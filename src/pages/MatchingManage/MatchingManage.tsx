@@ -17,7 +17,9 @@ export function MatchingManage() {
 			"/match/result",
 			{matchingStatus:matchingStatus}
 		).then((e) => {
-			const matchingList:Matching[] = [...e.data.content];
+			const matchingList:Matching[] = e.data.content.map((e:any) =>{
+				return new Matching(e);
+			});
 			setMatchings(matchingList);
 		});
 	}, []);
