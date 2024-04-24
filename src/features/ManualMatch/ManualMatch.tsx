@@ -27,7 +27,7 @@ export const ManualMatch: React.FC<MatchProps> = ({
 			const result = await getResult(manIds[0], womanIds[0]);
 			if (result === "SUCCESS") {
 				alert(`수동매칭 완료.`);
-				navigate("/MatchManage");
+				navigate("/MatchingManage");
 			} else {
 				throw new Error();
 			}

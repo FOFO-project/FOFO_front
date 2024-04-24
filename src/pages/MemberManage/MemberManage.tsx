@@ -42,7 +42,7 @@ export function MemberManage() {
 			ConditionListModel.toFindMembersConditionDto(
 				new ConditionListModel({
 					approvalStatus: ApprovalStatus.APPROVED,
-					matchingStatus: MatchingStatus.MATCHING_PENDING,
+					// matchingStatus: MatchingStatus.MATCHING_PENDING,
 				})
 			)
 		).then((e) => {

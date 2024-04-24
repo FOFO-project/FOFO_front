@@ -25,7 +25,7 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 			const result = await getResult(matchData);
 			if (result === "SUCCESS") {
 				alert(`매칭확정 완료.`);
-				navigate("/MatchManage");
+				navigate("/MatchingManage");
 			} else {
 				throw new Error();
 			}

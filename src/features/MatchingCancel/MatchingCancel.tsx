@@ -30,7 +30,7 @@ export const MatchingCancel: React.FC<MatchProps> = ({
 			const result = await getResult(matchIds(matchItems));
 			if (result === "SUCCESS") {
 				alert(`매칭취소 완료.`);
-				navigate("/MatchManage");
+				navigate("/MatchingManage");
 			} else {
 				throw new Error();
 			}
