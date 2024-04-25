@@ -11,7 +11,7 @@ export class FindMembersConditionDto {
 	kakaoId: string | null = null;
 	name: string | null = null;
 	gender: "MAN" | "WOMAN" | null = null;
-	yearOfBirthday: Date | null = null;
+	yearOfBirthday: string | null = null;
 	filteringAgeRelation: AgeRelationType | null = null;
 	company: string | null = null;
 	job: string | null = null;

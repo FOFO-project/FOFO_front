@@ -48,7 +48,9 @@ export class ConditionListModel {
 					: model.gender === "여자"
 					? "WOMAN"
 					: null,
-			yearOfBirthday: model.birthday,
+			yearOfBirthday: model.birthday
+				? model.birthday.getFullYear() + ""
+				: null,
 			filteringAgeRelation: model.filtering_condition.AgeRelation,
 			company: model.company,
 			job: model.job,
