@@ -31,7 +31,7 @@ export function getMissingValueColumns(data: AppendMemberRequestDto) {
 		"address",
 		"charmingPoint",
 		"filteringAgeRelation",
-		"filteringSmoker",
+		// "filteringSmoker",
 		"filteringReligion",
 		"note",
 	];
