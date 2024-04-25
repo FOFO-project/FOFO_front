@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
 	Gender,
 	AgeRelationType,
@@ -8,7 +7,7 @@ import {
 	ApiCaller,
 	AppendMemberRequestDto,
 } from "../../shared/shared";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import {
 	labelColumnsMap,
@@ -18,61 +17,9 @@ import { useFormData } from "./hooks/useForm";
 import style from "./MemberForm.module.scss";
 
 export function MemberForm() {
-	const { memberId } = useParams();
 	const navigate = useNavigate();
 	const [formData, setters] = useFormData(new AppendMemberRequestDto());
-	useEffect(() => {
-		if (memberId) {
-			ApiCaller.get(`/members/${memberId}`)
-				.then((e) => {
-					setters.setFormData(new AppendMemberRequestDto(e.data));
-					return e;
-				})
-				.catch((e) => {
-					alert("해당 유저ID의 정보가 없습니다" + e);
-					navigate("/MemberForm");
-				});
-		}
-	}, []);
 
-	const handleEdit = (e: any) => {
-		//수정 api 개발시 수정필요
-		e.preventDefault();
-		const missing = getMissingValueColumns(formData);
-		if (missing.length > 0) {
-			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
-			return;
-		}
-		ApiCaller.patch(`/members/${memberId}`, formData)
-			.then(() => {
-				alert("회원 수정 완료");
-				navigate(`/MemberForm/${memberId}`);
-			})
-			.catch((e) => {
-				console.error(e);
-				alert("Fail");
-			});
-		return;
-	};
-
-	const handleDelete = (e: any) => {
-		e.preventDefault();
-		const missing = getMissingValueColumns(formData);
-		if (missing.length > 0) {
-			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
-			return;
-		}
-		ApiCaller.delete(`/members/${memberId}`, formData)
-			.then(() => {
-				alert("회원 삭제 완료");
-				navigate(`/MemberForm/${memberId}`);
-			})
-			.catch((e) => {
-				console.error(e);
-				alert("Fail");
-			});
-		return;
-	};
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		const missing = getMissingValueColumns(formData);
@@ -412,47 +359,14 @@ export function MemberForm() {
 						))}
 					</select>
 				</div>
-				{memberId ? (
-					<div className="mb-3">
-						<label htmlFor="note" className="form-label">
-							{labelColumnsMap.note}
-						</label>
-						<textarea
-							className="form-control"
-							id="note"
-							name="note"
-							value={formData.note || ""}
-							onChange={setters.handleChange}
-						/>
-					</div>
-				) : null}
 				<div className={style.buttonContainer}>
-					{memberId ? (
-						<button
-							type="submit"
-							className="btn btn-primary"
-							onClick={handleEdit}
-						>
-							수정
-						</button>
-					) : (
-						<button
-							type="submit"
-							className="btn btn-primary"
-							onClick={handleSubmit}
-						>
-							제출
-						</button>
-					)}
-					{memberId ? (
-						<button
-							type="submit"
-							className="btn btn-primary"
-							onClick={handleDelete}
-						>
-							삭제
-						</button>
-					) : null}
+					<button
+						type="submit"
+						className="btn btn-primary"
+						onClick={handleSubmit}
+					>
+						제출
+					</button>
 				</div>
 			</form>
 		</div>
