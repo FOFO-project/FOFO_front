@@ -12,13 +12,16 @@ export function MatchingMonitoring() {
 
 	// page 진입 시 최초 조회 로직
 	useEffect(() => {
-		ApiCaller.get(
-			"/match/result",
-			{matchingStatus:matchingStatus}
-		).then((e) => {
-			const matchingList:Matching[] = [...e.data.content];
-			setMatchings(matchingList);
-		});
+		ApiCaller.get("/match/result", { matchingStatus: matchingStatus }).then(
+			(e) => {
+				const matchingList: Matching[] = e.data.content.map(
+					(e: any) => {
+						return new Matching(e);
+					}
+				);
+				setMatchings(matchingList);
+			}
+		);
 	}, []);
 
 	return (

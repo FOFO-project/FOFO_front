@@ -13,16 +13,16 @@ export function MatchingManage() {
 
 	// page 진입 시 최초 조회 로직
 	useEffect(() => {
-		ApiCaller.get(
-			"/match/result",
-			{matchingStatus:matchingStatus}
-		).then((e) => {
-			const matchingList:Matching[] = e.data.content.map((e:any) =>{
-				console.log(e)
-				return new Matching(e);
-			});
-			setMatchings(matchingList);
-		});
+		ApiCaller.get("/match/result", { matchingStatus: matchingStatus }).then(
+			(e) => {
+				const matchingList: Matching[] = e.data.content.map(
+					(e: any) => {
+						return new Matching(e);
+					}
+				);
+				setMatchings(matchingList);
+			}
+		);
 	}, []);
 
 	return (
@@ -45,9 +45,8 @@ export function MatchingManage() {
 						</div>
 					</div>
 					<div className={style.buttonContainer}>
-						<MatchingConfirm 
-							matchData={selectedItems}/>
-						<MatchingCancel matchItems={selectedItems}/>
+						<MatchingConfirm matchData={selectedItems} />
+						<MatchingCancel matchItems={selectedItems} />
 					</div>
 				</div>
 			</div>
