@@ -13,9 +13,10 @@ export function Approve({ selected }: ApproveProps) {
 		try {
 			const result = await getResult(selected);
 			alert(`확정완료 완료. (실패 : ${result.length}건)`);
-			navigate("/MemberManage");
+			navigate("/ApprovalManage");
 		} catch (err) {
 			alert("확정에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
+			navigate("/ApprovalManage");
 		}
 	}
 	return (

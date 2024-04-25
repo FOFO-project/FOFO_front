@@ -25,9 +25,10 @@ export const IndividualMatch: React.FC<MatchProps> = ({
 		try {
 			const result = await getResult(memberIds);
 			alert(`개별매칭 완료. (실패 : ${result.length}건)`);
-			navigate("/MatchingManage");
+			navigate("/MemberManage");
 		} catch (err) {
 			alert(err);
+			navigate("/MemberManage");
 		}
 	};
 

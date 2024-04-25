@@ -21,6 +21,7 @@ export function Reject({ selected }: RejectProps) {
 			navigate("/SignupManage");
 		} catch (err) {
 			alert("거절에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
+			navigate("/SignupManage");
 		}
 	}
 	return (

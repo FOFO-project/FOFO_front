@@ -32,6 +32,7 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 			}
 		} catch (err) {
 			alert("매칭확정 실패.");
+			navigate("/MatchingManage");
 		}
 	};
 

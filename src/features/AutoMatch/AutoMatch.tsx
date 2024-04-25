@@ -11,9 +11,10 @@ export const AutoMatch: React.FC = () => {
 		try {
 			const result = await getResult();
 			alert(`자동매칭 완료. (실패 : ${result.length}건)`);
-			navigate("/MatchManage");
+			navigate("/MemberManage");
 		} catch (err) {
 			alert(err);
+			navigate("/MemberManage");
 		}
 	};
 

@@ -36,6 +36,7 @@ export const MatchingCancel: React.FC<MatchProps> = ({
 			}
 		} catch (err) {
 			alert("매칭취소 실패.");
+			navigate("/MatchingManage");
 		}
 	};
 
