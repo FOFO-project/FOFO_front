@@ -45,7 +45,7 @@ export function useFormData(initData: AppendMemberRequestDto): [
 				value.length === 0
 					? null
 					: typeof value === "string"
-					? value.trim()
+					? value
 					: value,
 		}));
 	};

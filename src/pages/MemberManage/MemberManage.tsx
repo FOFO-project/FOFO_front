@@ -6,7 +6,6 @@ import {
 	Member,
 	Gender,
 	ApprovalStatus,
-	MatchingStatus,
 } from "../../shared/shared";
 import { useState, useEffect } from "react";
 import style from "./MemberManage.module.scss";
