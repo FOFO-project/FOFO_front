@@ -1,12 +1,11 @@
-import { useState } from "react"
-import { Matching, MatchRequestDto } from "../../../shared/shared";
+import { Matching } from "../../../shared/shared";
 import { NoneCondition } from "../../../shared/shared";
 import { FindMatch } from "../../../features/features";
 import style from "./MatchingManagePanel.module.scss";
 import classNames from "classnames";
 
 interface SelectedProps {
-	selectedItems: MatchRequestDto[];
+	selectedItems: Matching[];
 	setSelectedItems: Function;
 }
 interface MatchingManagePanelProps {

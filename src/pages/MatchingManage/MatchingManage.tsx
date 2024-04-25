@@ -1,7 +1,7 @@
 import { FofoHeader } from "../../widgets/widgets";
 import { MatchingManagePanel } from "../../widgets/listPanels/MatchingPanel/MatchingManagePanel";
 import { MatchingConfirm, MatchingCancel } from "../../features/features";
-import { MatchRequestDto, Matching, ApiCaller } from "../../shared/shared";
+import { Matching, ApiCaller } from "../../shared/shared";
 import { useState, useEffect } from "react";
 import style from "./MatchingManage.module.scss";
 import page_styles from "../pages.module.scss";
@@ -18,6 +18,7 @@ export function MatchingManage() {
 			{matchingStatus:matchingStatus}
 		).then((e) => {
 			const matchingList:Matching[] = e.data.content.map((e:any) =>{
+				console.log(e)
 				return new Matching(e);
 			});
 			setMatchings(matchingList);

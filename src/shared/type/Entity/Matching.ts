@@ -8,7 +8,7 @@ export class Matching {
 	woman: Member | null = null;
 	manAgreement: string | null = null;
 	womanAgreement: string | null = null;
-	matchStatus: MatchingStatus | null = null;
+	matchingStatus: MatchingStatus | null = null;
 	createdTime: Date | null = null;
 	updatedTime: Date | null = null;
 
@@ -29,7 +29,7 @@ export class Matching {
 			manAgreement: this.manAgreement,
 			womanId: this.woman ? this.woman.id : null,
 			womanAgreement: this.womanAgreement,
-			matchStatus: this.matchStatus,
+			matchingStatus: this.matchingStatus,
 		};
 	}
 }

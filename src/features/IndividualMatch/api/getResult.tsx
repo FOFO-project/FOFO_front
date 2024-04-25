@@ -8,6 +8,6 @@ export const getResult = async (memberIds: number[]) => {
 	}).then((e) => {
 		return e.data ? e.data.unmatchedMemberIdList : [];
 	}).catch((e) => {
-		throw JSON.stringify(e.data.error.data);
+		throw JSON.stringify(e.error.data);
 	});
 };
