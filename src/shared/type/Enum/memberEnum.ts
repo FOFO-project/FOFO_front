@@ -34,7 +34,7 @@ export enum Religion {
 	BUDDHISM = "불교",
 	WON_BUDDHISM = "원불교",
 	NON_RELIGIOUS = "무교",
-	OTHER = "기타",
+	OTHERS = "기타",
 }
 
 export enum ApprovalStatus {
