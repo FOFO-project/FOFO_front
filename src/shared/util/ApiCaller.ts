@@ -83,38 +83,6 @@ export const ApiCaller = Object.freeze({
 			throw error;
 		}
 		return response.json();
-		// let fullUrl = config.api_url + url;
-
-		// if (params) {
-		// 	const queryString = Object.keys(params)
-		// 		.map((key) => {
-		// 			const value = params[key];
-		// 			if (value === null || value === undefined) {
-		// 				return encodeURIComponent(key);
-		// 			}
-		// 			return `${encodeURIComponent(key)}=${encodeURIComponent(
-		// 				value
-		// 			)}`;
-		// 		})
-		// 		.join("&");
-
-		// 	if (queryString) {
-		// 		fullUrl += `?${queryString}`;
-		// 	}
-		// }
-
-		// const response = await fetch(fullUrl, {
-		// 	method: "DELETE",
-		// 	headers: HEADER,
-		// });
-		// if (!response.ok) {
-		// 	const error: any = new Error(
-		// 		`HTTP error! Status: ${response.status}`
-		// 	);
-		// 	error.data = await response.json();
-		// 	throw error;
-		// }
-		// return response.json();
 	},
 	patch: async (url: string, data?: any) => {
 		const response = await fetch(config.api_url + url, {
