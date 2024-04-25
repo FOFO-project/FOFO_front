@@ -9,7 +9,7 @@ import {
 } from "../../shared/shared";
 import { useEffect, useState } from "react";
 import { MemberManagePanel } from "../../widgets/widgets";
-import { Approve } from "../../features/Approve/Approve";
+import { Approve } from "../../features/ApprovalManage/Approve/Approve";
 export function ApprovalManage() {
 	const [conditionData, setConditionData] = useState(
 		new ConditionListModel({
