@@ -67,7 +67,7 @@ export function MemberForm() {
 						<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div className="modal-body">
-						<p className={style.modal_title}><strong>개인정보 수집 미 이용에 동의해 주세요.<br /> 동의한 사람에 한해 가입이 진행됩니다.</strong></p>
+						<p className={style.modal_title}><strong>개인정보 수집 및 이용에 동의해 주세요.<br /> 동의한 사람에 한해 가입이 진행됩니다.</strong></p>
 						<hr />
 						<p className={style.modal_content}><strong>1. 수집 목적:</strong> 본인 확인 및 지원자의 정보에 맞는 상대방을 연결하는데 이용</p>
 						<p className={style.modal_content}><strong>2. 수집 항목:</strong> 개인식별정보(성명,생년월일,주소,전화번호,kakaoId,학력 등)</p>
