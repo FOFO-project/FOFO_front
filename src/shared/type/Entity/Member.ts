@@ -54,7 +54,7 @@ export class Member {
 			this.filteringAgeRelation,
 			this.filteringReligion,
 			this.filteringSmoker,
-		].map((e) => (e ? e.toString() : "None"));
+		].map((e) => (e ? e.toString() : "상관없음"));
 		return res.join(" | ");
 	}
 

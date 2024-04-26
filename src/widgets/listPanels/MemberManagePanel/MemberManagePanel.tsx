@@ -1,9 +1,10 @@
-import { Member } from "../../../shared/shared";
+import { Gender, Member } from "../../../shared/shared";
 import {
 	ConditionListModel,
 	Mbti,
 	Religion,
 	SmokingYn,
+	ApprovalStatus
 } from "../../../shared/shared";
 import {
 	SelectCondition,
@@ -11,6 +12,7 @@ import {
 	AddressCondition,
 	FilteringCondition,
 	DateCondition,
+	NoneCondition
 } from "../../../shared/shared";
 import style from "./MemberManagePanel.module.scss";
 import { FindMember } from "../../../features/features";
@@ -182,13 +184,18 @@ export function MemberManagePanel({
 									setConditionData={setConditionData}
 								/>
 							</th>
+							{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING &&
+							<th className={`col bg-black`}>
+								<NoneCondition title="프로필카드" />
+							</th>
+							}
 						</tr>
 					</thead>
 					<tbody className="text-center">
 						{members?.map((member) => (
 							<tr
 								key={member.id}
-								className="align-middle"
+								className={`align-middle ${member.gender === Gender.MAN ? "table-primary" : "table-danger"}`}
 								style={{ height: 100 }}
 							>
 								<td scope="row">
@@ -216,6 +223,7 @@ export function MemberManagePanel({
 								<td>{member.kakaoId}</td>
 								<td>{member.getDepositDateString()}</td>
 								<td>{member.note}</td>
+								{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING && <td>{member.note}</td>}
 							</tr>
 						))}
 					</tbody>

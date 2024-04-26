@@ -24,11 +24,11 @@ export const IndividualMatch: React.FC<MatchProps> = ({
 
 		try {
 			const result = await getResult(memberIds);
-			alert(`개별매칭 완료. (실패 : ${result.length}건)`);
-			navigate("/MemberManage");
+			alert(`개별매칭 완료. (실패 : ${result.length/2}건)`);
+			window.location.reload();
 		} catch (err) {
 			alert(err);
-			navigate("/MemberManage");
+			window.location.reload();
 		}
 	};
 

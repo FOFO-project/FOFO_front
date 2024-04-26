@@ -13,10 +13,10 @@ export function ConfirmDeposit({ selected }: ConfirmDepositProps) {
 		try {
 			const result = await getResult(selected);
 			alert(`입금확인 완료. (실패 : ${result.length}건)`);
-			navigate("/SignupManage");
+			window.location.reload();
 		} catch (err) {
 			alert("입금확인에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
-			navigate("/SignupManage");
+			window.location.reload();
 		}
 	}
 	return (

@@ -18,10 +18,10 @@ export function Reject({ selected }: RejectProps) {
 		try {
 			const result = await getResult(selected);
 			alert(`등록거절 완료. (실패 : ${result.length}건)`);
-			navigate("/SignupManage");
+			window.location.reload();
 		} catch (err) {
 			alert("거절에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
-			navigate("/SignupManage");
+			window.location.reload();
 		}
 	}
 	return (

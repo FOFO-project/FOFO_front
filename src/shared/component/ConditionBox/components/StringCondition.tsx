@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, KeyboardEvent } from "react";
 import { ConditionListModel } from "../../../shared";
 import style from "../ConditionBox.module.scss";
 
@@ -23,6 +23,18 @@ export function StringCondition({
 				conditionData[targetColumn]?.toString() || "";
 		}
 	});
+
+    const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const inputValue = e.currentTarget.value;
+            setConditionData({
+                ...conditionData,
+                [targetColumn]: inputValue === '' ? null : inputValue,
+            });
+            setActive(true);
+        }
+    };
 
 	return (
 		<div className="dropdown">
@@ -50,18 +62,7 @@ export function StringCondition({
 								});
 								setActive(true);
 							}}
-							onKeyDown={(e) => {
-								if (e.key === "Enter") {
-									const inputValue = (e.target as HTMLInputElement)
-									.value;
-									setConditionData({
-										...conditionData,
-										[targetColumn]:
-											inputValue === "" ? null : inputValue,
-									});
-									setActive(true);
-								}
-							}}
+							onKeyDown={handleInputKeyDown}
 						/>
 					</div>
 					<a className="btn btn-dark"

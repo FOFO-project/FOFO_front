@@ -26,13 +26,13 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 			const result = await getResult(matchData.map(e => e.MatchRequestDto()));
 			if (result === "SUCCESS") {
 				alert(`매칭확정 완료.`);
-				navigate("/MatchingManage");
+				window.location.reload();
 			} else {
 				throw new Error();
 			}
 		} catch (err) {
 			alert("매칭확정 실패.");
-			navigate("/MatchingManage");
+			window.location.reload();
 		}
 	};
 
