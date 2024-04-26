@@ -51,9 +51,9 @@ export class Member {
 
 	getFilteringString(): string {
 		let res = [
-			this.filteringAgeRelation,
-			this.filteringReligion,
-			this.filteringSmoker,
+			AgeRelationType[this.filteringAgeRelation],
+			SmokingYn[this.filteringSmoker],
+			Religion[this.filteringReligion],
 		].map((e) => (e ? e.toString() : "상관없음"));
 		return res.join(" | ");
 	}

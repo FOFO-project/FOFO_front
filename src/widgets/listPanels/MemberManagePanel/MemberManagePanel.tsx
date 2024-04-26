@@ -216,8 +216,8 @@ export function MemberManagePanel({
 								<td>{member.job}</td>
 								<td>{member.university}</td>
 								<td>{member.mbti}</td>
-								<td>{member.smokingYn}</td>
-								<td>{member.religion}</td>
+								<td>{SmokingYn[member.smokingYn]}</td>
+								<td>{Religion[member.religion]}</td>
 								<td>{member.getFilteringString()}</td>
 								<td>{member.charmingPoint}</td>
 								<td>{member.kakaoId}</td>
