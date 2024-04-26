@@ -49,7 +49,7 @@ export class ConditionListModel {
 					? "WOMAN"
 					: null,
 			yearOfBirthday: model.birthday
-				? model.birthday.getFullYear() + ""
+				? model.birthday.toISOString().split("T")[0]
 				: null,
 			filteringAgeRelation: model.filtering_condition.AgeRelation,
 			company: model.company,
