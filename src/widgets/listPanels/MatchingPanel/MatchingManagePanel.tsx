@@ -116,7 +116,7 @@ export function MatchingManagePanel({
 										checked={selectedItems.includes(
 											matching as any
 										)}
-										disabled={pageType === "MATCHING_PENDING" ? true:false}
+										disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}
 									/>
 								</td>
 								<td>{matching.man?.name}</td>
@@ -128,14 +128,14 @@ export function MatchingManagePanel({
 										<div className={`col ${style.left_box}`}>
 											<button className={`${style.heart_button}`}
 												onClick={(e) => ManHeart(e, matching.id)}
-												disabled={pageType === "MATCHING_PENDING" ? true:false}>
+												disabled={pageType === "MATCHING_COMPLETED" ? true:false}>
 													<div className={matching.manAgreement == "Y" ? style.heart_clicked_left : style.heart_unclicked_left}></div>
 											</button>
 										</div>
 										<div className={`col ${style.right_box}`}>
 											<button className={`${style.heart_button}`}
 												onClick={(e) => WomanHeart(e, matching.id)}
-												disabled={pageType === "MATCHING_PENDING" ? true:false}>
+												disabled={pageType === "MATCHING_COMPLETED" ? true:false}>
 													<div className={matching.womanAgreement == "Y" ? style.heart_clicked_right : style.heart_unclicked_right}></div>
 											</button>
 										</div>

@@ -10,7 +10,7 @@ export const AutoMatch: React.FC = () => {
 		e.preventDefault();
 		try {
 			const result = await getResult();
-			alert(`자동매칭 완료. (실패 : ${result.length/2}건)`);
+			alert(`자동매칭 완료. (실패 : ${result.length}건)`);
 			window.location.reload();
 		} catch (err) {
 			alert(err);
