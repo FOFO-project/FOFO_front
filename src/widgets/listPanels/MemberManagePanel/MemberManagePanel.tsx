@@ -68,6 +68,20 @@ export function MemberManagePanel({
 		console.log(selectedItems);
 	};
 
+	// 관리자멘트
+	const handleNoteChange = (e: React.ChangeEvent<HTMLInputElement>, memberId: number) => {
+		e.preventDefault();
+		const updatedNote = e.target.value;
+		const updatedMembers = members.map((item) => {
+			if (item.id === memberId) {
+				return { ...item, note: updatedNote };
+			} else{
+				return { ...item }
+			}
+		});
+		setMembers(updatedMembers);
+	};
+
 	return (
 		<div className={style.container}>
 			<div className={style.button_container}>
@@ -238,7 +252,15 @@ export function MemberManagePanel({
 								<td>{member.charmingPoint}</td>
 								<td>{member.kakaoId}</td>
 								<td>{member.getDepositDateString()}</td>
-								<td>{member.note}</td>
+								<td>
+									<input className="form-control"
+										type="text" 
+										name="관리자멘트"
+										value={member.note || ""}
+										onChange={(e) => handleNoteChange(e, member.id as number)}
+										readOnly={conditionData.approvalStatus!==ApprovalStatus.DEPOSIT_COMPLETED}
+									/>
+								</td>
 								{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING && <td>{member.note}</td>}
 							</tr>
 						))}

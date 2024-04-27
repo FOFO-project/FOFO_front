@@ -47,7 +47,7 @@ export class Member {
 		} catch (e) {
 			return "날짜 없음";
 		}
-	}
+	};
 
 	getFilteringString(): string {
 		let res = [
@@ -56,7 +56,7 @@ export class Member {
 			Religion[this.filteringReligion],
 		].map((e) => (e ? e.toString() : "상관없음"));
 		return res.join(" | ");
-	}
+	};
 
 	getDepositDateString(): string {
 		try {
@@ -67,14 +67,14 @@ export class Member {
 		} catch (e) {
 			return "날짜 없음";
 		}
-	}
+	};
 
 	getAddressString(): string {
 		if (this.address) {
 			return `${this.address.sido} ${this.address.sigungu} ${this.address.eupmyundong}`;
 		}
 		return "";
-	}
+	};
 
 	constructor(data: Partial<Member> = {}) {
 		data.gender =

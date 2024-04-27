@@ -75,7 +75,7 @@ export function FilteringCondition({
 		e.preventDefault();
 		setConditionData({
 			...conditionData,
-			filtering_condtion: new Filtering(),
+			filtering_condition: new Filtering(),
 		});
 		setSelectedAgeValue("없음");
 		setSelectedSmokingValue("없음");

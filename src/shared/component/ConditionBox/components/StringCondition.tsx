@@ -38,7 +38,7 @@ export function StringCondition({
 
 	return (
 		<div className="dropdown">
-			<button className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle ${style.btnbox}`}
+			<button className={`btn ${isActive?'btn-dark':'btn-light'} btn-lg dropdown-toggle ${style.btnbox}`}
 					data-bs-toggle="dropdown" 
 					aria-expanded="false"
 					data-bs-auto-close="true"
