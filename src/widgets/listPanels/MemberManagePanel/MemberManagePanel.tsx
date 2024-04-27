@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Gender, Member } from "../../../shared/shared";
 import {
 	ConditionListModel,
@@ -45,6 +46,8 @@ export function MemberManagePanel({
 	const { members, setMembers } = memberListProps;
 	const { conditionData, setConditionData } = conditionProps;
 	const { selectedItems, setSelectedItems } = selectedProps;
+	// 전체선택
+	const [ selectAll, setSelectAll ] = useState(false);
 
 	// checkbox handler
 	const checkboxHandler = (memberId: any) => {
@@ -54,6 +57,15 @@ export function MemberManagePanel({
 				? preSelectedItems.filter((id) => id !== memberId)
 				: [...preSelectedItems, memberId];
 		});
+	};
+	
+	// 전체선택
+	const selectAllHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		const newSelectAll = !selectAll;
+		setSelectAll(newSelectAll);
+		setSelectedItems(newSelectAll ? members.map(member => member.id as number) : []);
+		console.log(selectedItems);
 	};
 
 	return (
@@ -69,7 +81,11 @@ export function MemberManagePanel({
 								className="col bg-black text-light align-middle"
 								style={{ minWidth: 30 }}
 							>
-								{title}
+								<button className={`btn btn-md ${selectAll ? 'btn-dark' : 'btn-light'}`}
+										onClick={(e) => selectAllHandler(e)}
+									>
+									{title}
+								</button>
 							</th>
 							<th className={`col bg-black`}>
 								<StringCondition

@@ -52,7 +52,7 @@ export function SignupManage() {
 								selectedItems: selectedItems,
 								setSelectedItems: setSelectedItems,
 							}}
-							title={" "}
+							title={"전체"}
 						/>
 					</div>
 					<div className={styles.buttonContainer}>
