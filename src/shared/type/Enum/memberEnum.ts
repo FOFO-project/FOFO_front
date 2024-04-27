@@ -59,3 +59,38 @@ export enum SmokingYn {
 	Y = "흡연",
 	N = "비흡연",
 }
+
+export const ageFilteringMap = new Map<string | null, string>([
+	["OLDER","연상"],
+	["YOUNGER","연하"],
+	["SAME","동갑"],
+	[null, '상관없음']
+]);
+export const religionFilteringMap = new Map<string | null, string>([
+    ["CHRISTIANITY", "기독교"],
+    ["CATHOLIC", "천주교"],
+    ["BUDDHISM", "불교"],
+    ["WON_BUDDHISM", "원불교"],
+    ["NON_RELIGIOUS", "무교"],
+    ["OTHERS", "기타"],
+    [null, "상관없음"]
+]);
+export const smokerFilteringMap = new Map<string | null, string>([
+	["Y","비흡연"],
+	["N","상관없음"]
+]);
+
+export const smokingYnMap = new Map<string | null, string>([
+	["Y", "흡연"],
+	["N", "비흡연"],
+	[null, "입력값 없음"]
+]);
+export const religionMap = new Map<string | null, string>([
+    ["CHRISTIANITY", "기독교"],
+    ["CATHOLIC", "천주교"],
+    ["BUDDHISM", "불교"],
+    ["WON_BUDDHISM", "원불교"],
+    ["NON_RELIGIOUS", "무교"],
+    ["OTHERS", "기타"],
+	[null, "입력값 없음"]
+]);

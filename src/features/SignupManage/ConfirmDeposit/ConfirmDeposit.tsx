@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import style from "../../features.module.scss";
 import { getResult } from "./api/getResult";
@@ -8,7 +7,6 @@ interface ConfirmDepositProps {
 }
 
 export function ConfirmDeposit({ selected }: ConfirmDepositProps) {
-	const navigate = useNavigate();
 	async function confirmSelected() {
 		try {
 			const result = await getResult(selected);

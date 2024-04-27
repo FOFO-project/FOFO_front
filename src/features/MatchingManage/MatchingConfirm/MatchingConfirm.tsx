@@ -1,5 +1,4 @@
 import { Match, Matching } from "../../../shared/shared";
-import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 import style from "../../features.module.scss";
 
@@ -10,7 +9,6 @@ interface MatchProps {
 export const MatchingConfirm: React.FC<MatchProps> = ({
     matchData
 }: MatchProps) => {
-	const navigate = useNavigate();
 	const Confirm = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
 	) => {
@@ -22,7 +20,6 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 		}
 
 		try {
-			console.log(matchData);
 			const result = await getResult(matchData.map(e => e.MatchRequestDto()));
 			if (result === "SUCCESS") {
 				alert(`매칭확정 완료.`);

@@ -1,5 +1,4 @@
 import { Match, Matching } from "../../../shared/shared";
-import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 import style from "../../features.module.scss";
 
@@ -10,7 +9,6 @@ interface MatchProps {
 export const MatchingCancel: React.FC<MatchProps> = ({
     matchItems
 }: MatchProps) => {
-	const navigate = useNavigate();
 	const Cancel = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
 	) => {

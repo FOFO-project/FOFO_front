@@ -5,7 +5,9 @@ import {
 	Mbti,
 	Religion,
 	SmokingYn,
-	ApprovalStatus
+	ApprovalStatus,
+	smokingYnMap,
+	religionMap
 } from "../../../shared/shared";
 import {
 	SelectCondition,
@@ -198,6 +200,7 @@ export function MemberManagePanel({
 									setConditionData={setConditionData}
 								/>
 							</th>
+							{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING &&
 							<th className={`col bg-black`}>
 								<DateCondition
 									title="입금일"
@@ -206,6 +209,7 @@ export function MemberManagePanel({
 									setConditionData={setConditionData}
 								/>
 							</th>
+							}
 							<th className={`col bg-black`}>
 								<StringCondition
 									title="관리자멘트"
@@ -240,18 +244,23 @@ export function MemberManagePanel({
 									/>
 								</td>
 								<td>{member.name}</td>
-								<td>{member.getBirthdayString()}</td>
-								<td>{member.getAddressString()}</td>
+								<td>{Member.getBirthdayString(member.birthday)}</td>
+								<td>{Member.getAddressString(member.address)}</td>
 								<td>{member.company}</td>
 								<td>{member.job}</td>
 								<td>{member.university}</td>
 								<td>{member.mbti}</td>
-								<td>{SmokingYn[member.smokingYn]}</td>
-								<td>{Religion[member.religion]}</td>
-								<td>{member.getFilteringString()}</td>
+								<td>{smokingYnMap.get(member.smokingYn)}</td>
+								<td>{religionMap.get(member.religion)}</td>
+								<td>{Member.getFilteringString(
+												member.filteringAgeRelation,
+												member.filteringSmoker,
+												member.filteringReligion)}</td>
 								<td>{member.charmingPoint}</td>
 								<td>{member.kakaoId}</td>
-								<td>{member.getDepositDateString()}</td>
+								{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING &&
+								<td>{Member.getDepositDateString(member.depositDate)}</td>
+								}
 								<td>
 									<input className="form-control"
 										type="text" 
@@ -261,7 +270,9 @@ export function MemberManagePanel({
 										readOnly={conditionData.approvalStatus!==ApprovalStatus.DEPOSIT_COMPLETED}
 									/>
 								</td>
-								{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING && <td>{member.note}</td>}
+								{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING && <td>
+									<img src="" alt="profile_card" />
+								</td>}
 							</tr>
 						))}
 					</tbody>

@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { useNavigate } from "react-router-dom";
 import style from "../../features.module.scss";
 import { getResult } from "./api/getResult";
 
@@ -8,7 +7,6 @@ interface RejectProps {
 }
 
 export function Reject({ selected }: RejectProps) {
-	const navigate = useNavigate();
 	async function rejectSelected() {
 		if (selected.length < 1) {
 			alert("선택된 값이 없습니다.");

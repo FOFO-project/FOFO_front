@@ -1,5 +1,4 @@
 import { Match } from "../../../shared/shared";
-import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 import style from "../../features.module.scss";
 
@@ -12,7 +11,6 @@ export const ManualMatch: React.FC<MatchProps> = ({
 	manIds,
 	womanIds,
 }: MatchProps) => {
-	const navigate = useNavigate();
 	const Manual = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
 	) => {

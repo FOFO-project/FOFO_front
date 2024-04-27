@@ -1,5 +1,5 @@
 import { Matching } from "../../../shared/shared";
-import { NoneCondition } from "../../../shared/shared";
+import { NoneCondition, Member } from "../../../shared/shared";
 import { FindMatch } from "../../../features/features";
 import style from "./MatchingManagePanel.module.scss";
 import classNames from "classnames";
@@ -120,9 +120,12 @@ export function MatchingManagePanel({
 									/>
 								</td>
 								<td>{matching.man?.name}</td>
-								<td>{matching.man?.getBirthdayString()}</td>
-								<td>{matching.man?.getAddressString()}</td>
-								<td>{matching.man?.getFilteringString()}</td>
+								<td>{Member.getBirthdayString(matching.man?.birthday?matching.man?.birthday:null)}</td>
+								<td>{Member.getAddressString(matching.man?.address?matching.man?.address:null)}</td>
+								<td>{Member.getFilteringString(matching.man?.filteringAgeRelation?matching.man?.filteringAgeRelation:null,
+																matching.man?.filteringSmoker?matching.man?.filteringSmoker:null,
+																matching.man?.filteringReligion?matching.man?.filteringReligion:null
+								)}</td>
 								<td>
 									<div className='row'>
 										<div className={`col ${style.left_box}`}>
@@ -142,9 +145,12 @@ export function MatchingManagePanel({
 									</div>
 								</td>
 								<td>{matching.woman?.name}</td>
-								<td>{matching.woman?.getBirthdayString()}</td>
-								<td>{matching.woman?.getAddressString()}</td>
-								<td>{matching.woman?.getFilteringString()}</td>
+								<td>{Member.getBirthdayString(matching.woman?.birthday?matching.woman?.birthday:null)}</td>
+								<td>{Member.getAddressString(matching.woman?.address?matching.woman?.address:null)}</td>
+								<td>{Member.getFilteringString(matching.woman?.filteringAgeRelation?matching.woman?.filteringAgeRelation:null,
+																matching.woman?.filteringSmoker?matching.woman?.filteringSmoker:null,
+																matching.woman?.filteringReligion?matching.woman?.filteringReligion:null
+								)}</td>
 							</tr>
 						))}
 					</tbody>

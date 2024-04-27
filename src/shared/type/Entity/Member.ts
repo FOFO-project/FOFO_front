@@ -1,11 +1,13 @@
 import {
 	ActiveStatus,
-	AgeRelationType,
 	ApprovalStatus,
 	Gender,
 	Mbti,
 	Religion,
 	SmokingYn,
+	ageFilteringMap,
+	smokerFilteringMap,
+	religionFilteringMap
 } from "../../shared";
 import { Address } from "./Address";
 
@@ -18,15 +20,15 @@ export class Member {
 	birthday: Date | null = null;
 	age: number | null = null;
 	phoneNumber: string | null = null;
-	filteringAgeRelation: AgeRelationType | null = null;
+	filteringAgeRelation: string | null = null;
 	company: string | null = null;
 	job: string | null = null;
 	university: string | null = null;
 	mbti: Mbti | null = null;
 	smokingYn: SmokingYn | null = null;
-	filteringSmoker: SmokingYn | null = null;
+	filteringSmoker: string | null = null;
 	religion: Religion | null = null;
-	filteringReligion: Religion | null = null;
+	filteringReligion: string | null = null;
 	charmingPoint: string | null = null;
 	//폼 입력 이외 데이터
 	depositDate: Date | null = null;
@@ -38,43 +40,41 @@ export class Member {
 	createdTime: Date | null = null;
 	modifiedTime: Date | null = null;
 
-	getBirthdayString(): string {
-		try {
-			return new Date(this.birthday ? this.birthday : "-")
-				.toISOString()
-				.slice(0, 10)
-				.replace(/-/g, ""); // YYYYMMDD 형식
-		} catch (e) {
-			return "날짜 없음";
-		}
-	};
+	static getBirthdayString(birthday: Date | null): string {
+        try {
+            return birthday ? new Date(birthday).toLocaleDateString() : "";
+        } catch (e) {
+            return "날짜 없음";
+        }
+    }
 
-	getFilteringString(): string {
-		let res = [
-			AgeRelationType[this.filteringAgeRelation],
-			SmokingYn[this.filteringSmoker],
-			Religion[this.filteringReligion],
-		].map((e) => (e ? e.toString() : "상관없음"));
-		return res.join(" | ");
-	};
+	static getFilteringString(
+        filteringAgeRelation: string | null,
+        filteringSmoker: string | null,
+        filteringReligion: string | null
+    ): string {
+        let res = [
+            ageFilteringMap.get(filteringAgeRelation),
+            smokerFilteringMap.get(filteringSmoker),
+            religionFilteringMap.get(filteringReligion),
+        ];
+        return res.join(" | ");
+    }
 
-	getDepositDateString(): string {
-		try {
-			return new Date(this.depositDate ? this.depositDate : "-")
-				.toISOString()
-				.slice(0, 10)
-				.replace(/-/g, ""); // YYYYMMDD 형식
-		} catch (e) {
-			return "날짜 없음";
-		}
-	};
+	static getDepositDateString(depositDate: Date | null): string {
+        try {
+            return depositDate ? new Date(depositDate).toLocaleDateString() : "";
+        } catch (e) {
+            return "날짜 없음";
+        }
+    }
 
-	getAddressString(): string {
-		if (this.address) {
-			return `${this.address.sido} ${this.address.sigungu} ${this.address.eupmyundong}`;
-		}
-		return "";
-	};
+	static getAddressString(address: Address | null): string {
+        if (address) {
+            return `${address.sido} ${address.sigungu} ${address.eupmyundong}`;
+        }
+        return "";
+    }
 
 	constructor(data: Partial<Member> = {}) {
 		data.gender =

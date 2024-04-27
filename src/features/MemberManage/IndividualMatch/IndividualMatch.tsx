@@ -1,5 +1,4 @@
 import { Match } from "../../../shared/shared";
-import { useNavigate } from "react-router-dom";
 import { getResult } from "./api/getResult";
 import style from "../../features.module.scss";
 
@@ -10,7 +9,6 @@ interface MatchProps {
 export const IndividualMatch: React.FC<MatchProps> = ({
 	memberIds,
 }: MatchProps) => {
-	const navigate = useNavigate();
 
 	const Individual = async (
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
