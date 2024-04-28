@@ -20,6 +20,7 @@ import style from "./MemberForm.module.scss";
 export function MemberForm() {
 	const navigate = useNavigate();
 	const [formData, setters] = useFormData(new AppendMemberRequestDto());
+	const [uploadFiles, setuploadFiles] = useState<File[]>([]);
 
 	// 개인정보 수집 이용 동의서
 	const [informationAgreeStatus, setInformationAgreeStatus] = useState("N");
@@ -54,6 +55,17 @@ export function MemberForm() {
 				alert("Fail");
 			});
 		return;
+	};
+
+	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		e.preventDefault();
+		if (e.target.files) {
+			const files = Array.from(e.target.files).filter(file => file.type.startsWith('image/'));
+			if (files.length + setuploadFiles.length > 3) {
+				alert("이미지 파일은 최대 3개까지 선택 가능합니다.");
+			}
+			setuploadFiles([...files].slice(0, 3));
+		}
 	};
 
 	return (
@@ -135,6 +147,16 @@ export function MemberForm() {
 			{/* 유저 입력폼 */}
 			<form className={classNames("container mt-5")}>
 				<h5>내 정보</h5>
+				<div className="mb-3">
+					<label className="form-label">사진</label>
+					<input
+						type="file"
+						className="form-control"
+						accept="image/*"
+						multiple
+						onChange={handleImageChange}
+					/>
+				</div>
 				<div className="mb-3">
 					<label htmlFor="kakaoId" className="form-label">
 						{labelColumnsMap.kakaoId}

@@ -26,6 +26,9 @@ export class AppendMemberRequestDto {
 	filteringReligion: Religion | null = null;
 	charmingPoint: string | null = null;
 
+	// 썸네일
+	profileImages: File[] | null = null;
+
 	//수정시에만 활성화
 	note: string | null = null;
 
