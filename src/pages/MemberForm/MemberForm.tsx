@@ -50,7 +50,7 @@ export function MemberForm() {
 				navigate("/MemberForm");
 				window.location.reload();
 			})
-			.catch((e) => {
+			.catch(() => {
 				alert("Fail");
 			});
 		return;
