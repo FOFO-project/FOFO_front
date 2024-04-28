@@ -264,7 +264,7 @@ export function MemberManagePanel({
 								</td>
 								<td
 									onClick={() => {
-										navigate("/MemberMange/" + member.id);
+										navigate("/MemberEdit/" + member.id);
 									}}
 								>
 									{member.name}
