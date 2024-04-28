@@ -7,131 +7,73 @@ import {
 	ApiCaller,
 	AppendMemberRequestDto,
 } from "../../shared/shared";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import classNames from "classnames";
 import {
 	labelColumnsMap,
 	getMissingValueColumns,
 } from "./model/labelColumnsMap";
 import { useFormData } from "./hooks/useForm";
-import style from "./MemberForm.module.scss";
+import style from "./MemberEdit.module.scss";
+import { useNavigate, useParams } from "react-router-dom";
 
-export function MemberForm() {
+export function MemberEdit() {
+	const { memberId } = useParams();
 	const navigate = useNavigate();
-	const [formData, setters] = useFormData(new AppendMemberRequestDto());
-
 	// 개인정보 수집 이용 동의서
-	const [informationAgreeStatus, setInformationAgreeStatus] = useState("N");
+	const [formData, setters] = useFormData(new AppendMemberRequestDto());
+	useEffect(() => {
+		if (memberId) {
+			ApiCaller.get(`/members/${memberId}`)
+				.then((e) => {
+					setters.setFormData(new AppendMemberRequestDto(e.data));
+					return e;
+				})
+				.catch((e) => {
+					alert("해당 유저ID의 정보가 없습니다" + e);
+					navigate("/SignupManage");
+				});
+		}
+	}, []);
 
-	const InformationAgreement = (
-		e: React.MouseEvent<HTMLButtonElement>,
-		param: string
-	) => {
-		e.preventDefault();
-		setInformationAgreeStatus(param);
-	};
-
-	const handleSubmit = (e: any) => {
+	const handleEdit = (e: any) => {
+		//수정 api 개발시 수정필요
 		e.preventDefault();
 		const missing = getMissingValueColumns(formData);
 		if (missing.length > 0) {
 			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
 			return;
 		}
-
-		if (informationAgreeStatus == "N") {
-			alert(`개인정보 수집 및 이용 동의가 필요합니다.`);
-			return;
-		}
-		ApiCaller.post("/member", AppendMemberRequestDto.exceptNote(formData))
+		ApiCaller.patch(`/members/${memberId}`, formData)
 			.then(() => {
-				alert("제출완료");
-				navigate("/MemberForm");
-				window.location.reload();
+				alert("회원 수정 완료");
+				navigate(`/MemberForm/${memberId}`);
 			})
 			.catch((e) => {
-				alert("Fail");
+				alert(e);
 			});
 		return;
 	};
 
+	const handleDelete = (e: any) => {
+		e.preventDefault();
+		const missing = getMissingValueColumns(formData);
+		if (missing.length > 0) {
+			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
+			return;
+		}
+		ApiCaller.delete(`/members/${memberId}`, formData)
+			.then(() => {
+				alert("회원 삭제 완료");
+				navigate(`/MemberForm/${memberId}`);
+			})
+			.catch((e) => {
+				alert(e);
+			});
+		return;
+	};
 	return (
 		<div>
-			{/* 개인정보 이용 동의서 모달 */}
-			<div
-				className="modal fade"
-				id="staticBackdrop"
-				data-bs-backdrop="static"
-				data-bs-keyboard="false"
-				tabIndex={-1}
-				aria-labelledby="staticBackdropLabel"
-				aria-hidden="true"
-			>
-				<div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h1
-								className="modal-title fs-6"
-								id="staticBackdropLabel"
-							>
-								개인정보 수집/이용 동의서
-							</h1>
-							<button
-								type="button"
-								className="btn-close"
-								data-bs-dismiss="modal"
-								aria-label="Close"
-							></button>
-						</div>
-						<div className="modal-body">
-							<p className={style.modal_title}>
-								<strong>
-									개인정보 수집 및 이용에 동의해 주세요.
-									<br /> 동의한 사람에 한해 가입이 진행됩니다.
-								</strong>
-							</p>
-							<hr />
-							<p className={style.modal_content}>
-								<strong>1. 수집 목적:</strong> 본인 확인 및
-								지원자의 정보에 맞는 상대방을 연결하는데 이용
-							</p>
-							<p className={style.modal_content}>
-								<strong>2. 수집 항목:</strong>{" "}
-								개인식별정보(성명,생년월일,주소,전화번호,kakaoId,학력
-								등)
-							</p>
-							<p className={style.modal_content}>
-								<strong>3. 보유 및 이용 기간:</strong> 정보
-								제출일로부터 1년 이하
-							</p>
-							<p className={style.modal_content}>
-								* 귀하는 이에 대한 동의를 거부할 수 있으며,
-								다만, 동의가 없을 경우 가입 진행이 불가능 할 수
-								있음을 알려드립니다.
-							</p>
-						</div>
-						<div className="modal-footer">
-							<button
-								type="button"
-								className="btn btn-sm btn-secondary"
-								data-bs-dismiss="modal"
-								onClick={(e) => InformationAgreement(e, "N")}
-							>
-								동의안함
-							</button>
-							<button
-								type="button"
-								className="btn btn-sm btn-primary"
-								data-bs-dismiss="modal"
-								onClick={(e) => InformationAgreement(e, "Y")}
-							>
-								동의
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
 			{/* 유저 입력폼 */}
 			<form className={classNames("container mt-5")}>
 				<h5>내 정보</h5>
@@ -393,6 +335,18 @@ export function MemberForm() {
 						onChange={setters.handleChange}
 					/>
 				</div>
+				<div className="mb-3">
+					<label htmlFor="note" className="form-label">
+						{labelColumnsMap.note}
+					</label>
+					<textarea
+						className="form-control"
+						id="note"
+						name="note"
+						value={formData.note || ""}
+						onChange={setters.handleChange}
+					/>
+				</div>
 				<h5>절대 안되는 상대 정보</h5>
 				<div className="mb-3">
 					<label
@@ -453,19 +407,18 @@ export function MemberForm() {
 				</div>
 				<div className={style.buttonContainer}>
 					<button
-						type="button"
+						type="submit"
 						className={`btn btn-primary ${style.btn_item}`}
-						data-bs-toggle="modal"
-						data-bs-target="#staticBackdrop"
+						onClick={handleEdit}
 					>
-						개인정보 이용 동의서
+						수정
 					</button>
 					<button
 						type="submit"
 						className={`btn btn-primary ${style.btn_item}`}
-						onClick={handleSubmit}
+						onClick={handleDelete}
 					>
-						제출
+						삭제
 					</button>
 				</div>
 			</form>

@@ -4,9 +4,10 @@ import {
 	SignupManage,
 	MemberManage,
 	MemberForm,
+	MemberEdit,
 	MatchingManage,
 	ApprovalManage,
-	MatchingMonitoring
+	MatchingMonitoring,
 } from "../pages/pages";
 import "./index.css";
 import {
@@ -30,8 +31,8 @@ export function init() {
 						element: <MemberForm />,
 					},
 					{
-						path: "/MemberForm/:memberId",
-						element: <MemberForm />,
+						path: "/MemberEdit/:memberId",
+						element: <MemberEdit />,
 					},
 					{
 						path: "/SignupManage",

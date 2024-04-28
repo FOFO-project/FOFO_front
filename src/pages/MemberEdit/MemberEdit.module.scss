@@ -1,0 +1,23 @@
+body {
+	overflow-x: hidden;
+}
+
+.modal_title {
+	font-size: 0.7em;
+}
+
+.modal_content {
+	font-size: 0.6em;
+}
+
+.buttonContainer {
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	justify-content: center;
+	margin: 20px;
+
+	.btn_item {
+		margin: 0 5px;
+	}
+}

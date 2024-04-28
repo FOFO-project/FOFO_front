@@ -7,7 +7,7 @@ import {
 	SmokingYn,
 	ApprovalStatus,
 	smokingYnMap,
-	religionMap
+	religionMap,
 } from "../../../shared/shared";
 import {
 	SelectCondition,
@@ -15,11 +15,12 @@ import {
 	AddressCondition,
 	FilteringCondition,
 	DateCondition,
-	NoneCondition
+	NoneCondition,
 } from "../../../shared/shared";
 import style from "./MemberManagePanel.module.scss";
 import { FindMember } from "../../../features/features";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 
 interface MemberListProps {
 	members: Member[];
@@ -45,11 +46,12 @@ export function MemberManagePanel({
 	selectedProps: SelectedProps;
 	title: string;
 }) {
+	const navigate = useNavigate();
 	const { members, setMembers } = memberListProps;
 	const { conditionData, setConditionData } = conditionProps;
 	const { selectedItems, setSelectedItems } = selectedProps;
 	// 전체선택
-	const [ selectAll, setSelectAll ] = useState(false);
+	const [selectAll, setSelectAll] = useState(false);
 
 	// checkbox handler
 	const checkboxHandler = (memberId: any) => {
@@ -60,25 +62,30 @@ export function MemberManagePanel({
 				: [...preSelectedItems, memberId];
 		});
 	};
-	
+
 	// 전체선택
-	const selectAllHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
+	const selectAllHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		const newSelectAll = !selectAll;
 		setSelectAll(newSelectAll);
-		setSelectedItems(newSelectAll ? members.map(member => member.id as number) : []);
+		setSelectedItems(
+			newSelectAll ? members.map((member) => member.id as number) : []
+		);
 		console.log(selectedItems);
 	};
 
 	// 관리자멘트
-	const handleNoteChange = (e: React.ChangeEvent<HTMLInputElement>, memberId: number) => {
+	const handleNoteChange = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		memberId: number
+	) => {
 		e.preventDefault();
 		const updatedNote = e.target.value;
 		const updatedMembers = members.map((item) => {
 			if (item.id === memberId) {
 				return { ...item, note: updatedNote };
-			} else{
-				return { ...item }
+			} else {
+				return { ...item };
 			}
 		});
 		setMembers(updatedMembers);
@@ -87,7 +94,10 @@ export function MemberManagePanel({
 	return (
 		<div className={style.container}>
 			<div className={style.button_container}>
-				<FindMember conditionData={conditionData} setMembers={setMembers} />
+				<FindMember
+					conditionData={conditionData}
+					setMembers={setMembers}
+				/>
 			</div>
 			<div className={style.table_container}>
 				<table className={classNames(`table`)}>
@@ -97,9 +107,12 @@ export function MemberManagePanel({
 								className="col bg-black text-light align-middle"
 								style={{ minWidth: 30 }}
 							>
-								<button className={`btn btn-md ${selectAll ? 'btn-dark' : 'btn-light'}`}
-										onClick={(e) => selectAllHandler(e)}
-									>
+								<button
+									className={`btn btn-md ${
+										selectAll ? "btn-dark" : "btn-light"
+									}`}
+									onClick={(e) => selectAllHandler(e)}
+								>
 									{title}
 								</button>
 							</th>
@@ -200,16 +213,17 @@ export function MemberManagePanel({
 									setConditionData={setConditionData}
 								/>
 							</th>
-							{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING &&
-							<th className={`col bg-black`}>
-								<DateCondition
-									title="입금일"
-									targetColumn="deposit_date"
-									conditionData={conditionData}
-									setConditionData={setConditionData}
-								/>
-							</th>
-							}
+							{conditionData.approvalStatus !==
+								ApprovalStatus.DEPOSIT_PENDING && (
+								<th className={`col bg-black`}>
+									<DateCondition
+										title="입금일"
+										targetColumn="deposit_date"
+										conditionData={conditionData}
+										setConditionData={setConditionData}
+									/>
+								</th>
+							)}
 							<th className={`col bg-black`}>
 								<StringCondition
 									title="관리자멘트"
@@ -218,18 +232,23 @@ export function MemberManagePanel({
 									setConditionData={setConditionData}
 								/>
 							</th>
-							{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING &&
-							<th className={`col bg-black`}>
-								<NoneCondition title="프로필카드" />
-							</th>
-							}
+							{conditionData.approvalStatus !==
+								ApprovalStatus.DEPOSIT_PENDING && (
+								<th className={`col bg-black`}>
+									<NoneCondition title="프로필카드" />
+								</th>
+							)}
 						</tr>
 					</thead>
 					<tbody className="text-center">
 						{members?.map((member) => (
 							<tr
 								key={member.id}
-								className={`align-middle ${member.gender === Gender.MAN ? "table-primary" : "table-danger"}`}
+								className={`align-middle ${
+									member.gender === Gender.MAN
+										? "table-primary"
+										: "table-danger"
+								}`}
 								style={{ height: 100 }}
 							>
 								<td scope="row">
@@ -243,36 +262,70 @@ export function MemberManagePanel({
 										)}
 									/>
 								</td>
-								<td>{member.name}</td>
-								<td>{Member.getBirthdayString(member.birthday)}</td>
-								<td>{Member.getAddressString(member.address)}</td>
+								<td>
+									<div
+										onClick={() => {
+											navigate(
+												"/MemberEdit/" + member.id
+											);
+										}}
+									>
+										{member.name}
+									</div>
+								</td>
+								<td>
+									{Member.getBirthdayString(member.birthday)}
+								</td>
+								<td>
+									{Member.getAddressString(member.address)}
+								</td>
 								<td>{member.company}</td>
 								<td>{member.job}</td>
 								<td>{member.university}</td>
 								<td>{member.mbti}</td>
 								<td>{smokingYnMap.get(member.smokingYn)}</td>
 								<td>{religionMap.get(member.religion)}</td>
-								<td>{Member.getFilteringString(
-												member.filteringAgeRelation,
-												member.filteringSmoker,
-												member.filteringReligion)}</td>
+								<td>
+									{Member.getFilteringString(
+										member.filteringAgeRelation,
+										member.filteringSmoker,
+										member.filteringReligion
+									)}
+								</td>
 								<td>{member.charmingPoint}</td>
 								<td>{member.kakaoId}</td>
-								{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING &&
-								<td>{Member.getDepositDateString(member.depositDate)}</td>
-								}
+								{conditionData.approvalStatus !==
+									ApprovalStatus.DEPOSIT_PENDING && (
+									<td>
+										{Member.getDepositDateString(
+											member.depositDate
+										)}
+									</td>
+								)}
 								<td>
-									<input className="form-control"
-										type="text" 
+									<input
+										className="form-control"
+										type="text"
 										name="관리자멘트"
 										value={member.note || ""}
-										onChange={(e) => handleNoteChange(e, member.id as number)}
-										readOnly={conditionData.approvalStatus!==ApprovalStatus.DEPOSIT_COMPLETED}
+										onChange={(e) =>
+											handleNoteChange(
+												e,
+												member.id as number
+											)
+										}
+										readOnly={
+											conditionData.approvalStatus !==
+											ApprovalStatus.DEPOSIT_COMPLETED
+										}
 									/>
 								</td>
-								{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING && <td>
-									<img src="" alt="profile_card" />
-								</td>}
+								{conditionData.approvalStatus !==
+									ApprovalStatus.DEPOSIT_PENDING && (
+									<td>
+										<img src="" alt="profile_card" />
+									</td>
+								)}
 							</tr>
 						))}
 					</tbody>
