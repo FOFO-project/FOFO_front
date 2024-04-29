@@ -26,15 +26,18 @@ export const labelColumnsMap: any = {
 	note: "관리자 멘트(Note)",
 };
 
+export const except: string[] = [
+	"sido",
+	"sigungu",
+	"eupmyundong",
+	"charmingPoint",
+	"filteringAgeRelation",
+	// "filteringSmoker",
+	"filteringReligion",
+	"note",
+];
+
 export function getMissingValueColumns(data: AppendMemberRequestDto) {
-	const except: (keyof AppendMemberRequestDto)[] = [
-		"address",
-		"charmingPoint",
-		"filteringAgeRelation",
-		// "filteringSmoker",
-		"filteringReligion",
-		"note",
-	];
 	const missing = [];
 	for (const key of Object.keys(data)) {
 		if (except.includes(key as keyof AppendMemberRequestDto)) {
