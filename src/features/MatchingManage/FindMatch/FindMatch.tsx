@@ -3,7 +3,7 @@ import { getResult } from "./api/getResult";
 import style from "../../features.module.scss";
 
 interface FindProps {
-	conditionData: Object;
+	conditionData: any;
 	setMatchings: Function;
 }
 
@@ -16,7 +16,12 @@ export const FindMatch: React.FC<FindProps> = ({
 	) => {
 		e.preventDefault();
 		try {
-			const result = await getResult(conditionData);
+			let result;
+			if(conditionData.matchingStatus === "MATCHING_NOTCOMPLETED"){
+				result = await getResult({});
+			} else {
+				result = await getResult(conditionData);
+			}
 			setMatchings(result);
 		} catch (err) {
 			alert("조회에 실패하였습니다. 관리자에게 문의 부탁드립니다.");

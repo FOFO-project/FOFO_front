@@ -76,6 +76,13 @@ export class Member {
         return "";
     }
 
+	static getCountAndChanceString(passCount:number | null, chance:number | null) : string {
+		if(passCount && chance){
+			return `${passCount} / ${chance}`;
+		}
+		return "";
+	}
+
 	constructor(data: Partial<Member> = {}) {
 		data.gender =
 			data.gender === "MAN"
