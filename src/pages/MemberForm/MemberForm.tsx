@@ -39,8 +39,6 @@ export function MemberForm() {
 			return;
 		}
 
-		console.log(AppendMemberRequestDto.toFormData(formData));
-
 		ApiCaller.formDataPost(
 			"/member",
 			AppendMemberRequestDto.toFormData(formData)
