@@ -1,7 +1,7 @@
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import { AppendMemberRequestDto, Fomatter } from "../../../shared/shared";
 
-export function useFormData(initData: AppendMemberRequestDto): [
+export function useFormData(): [
 	AppendMemberRequestDto,
 	{
 		setFormData: Function;
@@ -9,12 +9,13 @@ export function useFormData(initData: AppendMemberRequestDto): [
 		handlePhoneNumberChange: ChangeEventHandler;
 		handleDateChange: ChangeEventHandler;
 		handleChange: ChangeEventHandler;
-		handleAddressChange: ChangeEventHandler;
+	},
+	{
+		getValue: (column: keyof AppendMemberRequestDto) => string;
+		getDateValue: (column: keyof AppendMemberRequestDto) => string;
 	}
 ] {
-	const [formData, setFormData] = useState(
-		new AppendMemberRequestDto(initData)
-	);
+	const [formData, setFormData] = useState(new AppendMemberRequestDto());
 	const handleHeightChange = (e: any) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
@@ -49,24 +50,25 @@ export function useFormData(initData: AppendMemberRequestDto): [
 					: value,
 		}));
 	};
-	const handleAddressChange = (e: any) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({
-			...prevData,
-			address: {
-				...prevData.address,
-				[name]: value.length === 0 ? null : value,
-			},
-		}));
-	};
 	const setters = {
 		setFormData,
 		handleHeightChange,
 		handlePhoneNumberChange,
 		handleDateChange,
 		handleChange,
-		handleAddressChange,
+	};
+	const getters = {
+		getValue: (column: keyof AppendMemberRequestDto) => {
+			return formData[column] ? formData[column].toString() : "";
+		},
+		getDateValue: (column: keyof AppendMemberRequestDto) => {
+			return formData[column]
+				? new Date(formData[column] as string)
+						.toISOString()
+						.substr(0, 10)
+				: "";
+		},
 	};
 
-	return [formData, setters];
+	return [formData, setters, getters];
 }

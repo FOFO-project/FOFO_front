@@ -3,6 +3,9 @@ import config from "../../app/config";
 const HEADER = {
 	"Content-Type": "application/json",
 };
+const FORM_HEADER = {
+	"Content-Type": "multipart/form-data",
+};
 
 export const ApiCaller = Object.freeze({
 	get: async (url: string, params?: Record<string, any>) => {
@@ -89,6 +92,20 @@ export const ApiCaller = Object.freeze({
 			method: "PATCH",
 			headers: HEADER,
 			body: data ? JSON.stringify(data) : "",
+		});
+		if (!response.ok) {
+			const error: any = new Error(
+				`HTTP error! Status: ${response.status}`
+			);
+			error.data = await response.json();
+			throw error;
+		}
+		return response.json();
+	},
+	formDataPost: async (url: string, data: FormData) => {
+		const response = await fetch(config.api_url + url, {
+			method: "POST",
+			body: data,
 		});
 		if (!response.ok) {
 			const error: any = new Error(

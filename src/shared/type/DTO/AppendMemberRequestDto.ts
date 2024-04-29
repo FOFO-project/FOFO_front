@@ -9,7 +9,9 @@ import {
 
 export class AppendMemberRequestDto {
 	kakaoId: string | null = null;
-	address: AddressFormDTO = new AddressFormDTO();
+	sido: string | null = null;
+	sigungu: string | null = null;
+	eupmyundong: string | null = null;
 	name: string | null = null;
 	gender: Gender | null = null;
 	birthday: string | null = null;
@@ -25,17 +27,7 @@ export class AppendMemberRequestDto {
 	religion: Religion | null = null;
 	filteringReligion: Religion | null = null;
 	charmingPoint: string | null = null;
-
-	// 썸네일
-	profileImages: File[] | null = null;
-
-	//수정시에만 활성화
-	note: string | null = null;
-
-	static exceptNote(dto: AppendMemberRequestDto) {
-		const { note, ...rest } = dto;
-		return rest;
-	}
+	userProfileImages: File[] | null = null;
 
 	constructor(data: any = {}) {
 		for (const key in data as AppendMemberRequestDto) {
@@ -43,5 +35,26 @@ export class AppendMemberRequestDto {
 				this[key as keyof this] = data[key];
 			}
 		}
+	}
+
+	static toFormData(source: any) {
+		const formData = new FormData();
+		for (const key in source) {
+			if (key === "userProfileImages") {
+				const files = source.userProfileImages as Blob[];
+				if (files) {
+					for (const file of files) {
+						formData.append("userProfileImages", file);
+					}
+				}
+				continue;
+			}
+			formData.append(key, source[key] as string);
+		}
+
+		for (let value of formData.entries()) {
+			console.log(value);
+		}
+		return formData;
 	}
 }
