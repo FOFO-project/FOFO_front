@@ -1,5 +1,5 @@
 import { Matching } from "../../../shared/shared";
-import { NoneCondition, Member } from "../../../shared/shared";
+import { NoneCondition, Member, MatchingStatus } from "../../../shared/shared";
 import { FindMatch } from "../../../features/features";
 import style from "./MatchingManagePanel.module.scss";
 import classNames from "classnames";
@@ -13,7 +13,7 @@ interface MatchingManagePanelProps {
 	setMatchings: Function;
 	selectedProps: SelectedProps;
 	title: string;
-	pageType: string;
+	pageType: Object;
 }
 export function MatchingManagePanel({
 	matchings,
@@ -24,7 +24,7 @@ export function MatchingManagePanel({
 }: MatchingManagePanelProps) {
 	const { selectedItems, setSelectedItems } = selectedProps;
 	
-	// 매칭중(MATCHING_PENDING)
+	// 매칭중(MATCHING_NOTCOMPLETED)
 	const conditionData = {
 		matchingStatus: pageType
 	};
@@ -104,7 +104,7 @@ export function MatchingManagePanel({
 						{matchings?.map((matching) => (
 							<tr
 								key={matching.id}
-								className="align-middle"
+								className={`align-middle ${matching.matchingStatus === MatchingStatus.MATCHING_PROGRESSING ? "table-success" : ""}`}
 								style={{ height: 100 }}
 							>
 								<td scope="row">
@@ -131,14 +131,14 @@ export function MatchingManagePanel({
 										<div className={`col ${style.left_box}`}>
 											<button className={`${style.heart_button}`}
 												onClick={(e) => ManHeart(e, matching.id)}
-												disabled={pageType === "MATCHING_COMPLETED" ? true:false}>
+												disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}>
 													<div className={matching.manAgreement == "Y" ? style.heart_clicked_left : style.heart_unclicked_left}></div>
 											</button>
 										</div>
 										<div className={`col ${style.right_box}`}>
 											<button className={`${style.heart_button}`}
 												onClick={(e) => WomanHeart(e, matching.id)}
-												disabled={pageType === "MATCHING_COMPLETED" ? true:false}>
+												disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}>
 													<div className={matching.womanAgreement == "Y" ? style.heart_clicked_right : style.heart_unclicked_right}></div>
 											</button>
 										</div>

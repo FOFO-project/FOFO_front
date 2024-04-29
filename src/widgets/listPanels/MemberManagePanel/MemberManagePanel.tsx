@@ -111,6 +111,11 @@ export function MemberManagePanel({
 									setConditionData={setConditionData}
 								/>
 							</th>
+							{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING &&
+							<th className={`col bg-black`}>
+								<NoneCondition title="패스/찬스" />
+							</th>
+							}
 							<th className={`col bg-black`}>
 								<DateCondition
 									title="태어난날짜"
@@ -244,6 +249,9 @@ export function MemberManagePanel({
 									/>
 								</td>
 								<td>{member.name}</td>
+								{conditionData.approvalStatus !== ApprovalStatus.DEPOSIT_PENDING &&
+								<td>{Member.getCountAndChanceString(member.passCount, member.chance)}</td>
+								}
 								<td>{Member.getBirthdayString(member.birthday)}</td>
 								<td>{Member.getAddressString(member.address)}</td>
 								<td>{member.company}</td>
