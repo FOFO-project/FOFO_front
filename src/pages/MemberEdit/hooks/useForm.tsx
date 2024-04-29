@@ -1,8 +1,8 @@
 import { ChangeEventHandler, useState } from "react";
-import { AppendMemberRequestDto, Fomatter } from "../../../shared/shared";
+import { UpdateMemberRequestDto, Fomatter } from "../../../shared/shared";
 
-export function useFormData(initData: AppendMemberRequestDto): [
-	AppendMemberRequestDto,
+export function useFormData(initData: UpdateMemberRequestDto): [
+	UpdateMemberRequestDto,
 	{
 		setFormData: Function;
 		handleHeightChange: ChangeEventHandler;
@@ -13,7 +13,7 @@ export function useFormData(initData: AppendMemberRequestDto): [
 	}
 ] {
 	const [formData, setFormData] = useState(
-		new AppendMemberRequestDto(initData)
+		new UpdateMemberRequestDto(initData)
 	);
 	const handleHeightChange = (e: any) => {
 		const { name, value } = e.target;

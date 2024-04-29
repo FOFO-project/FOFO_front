@@ -1,4 +1,4 @@
-import { AppendMemberRequestDto } from "../../../shared/shared";
+import { UpdateMemberRequestDto } from "../../../shared/shared";
 
 export const labelColumnsMap: any = {
 	kakaoId: "카카오톡 ID(Kakao ID)",
@@ -26,8 +26,8 @@ export const labelColumnsMap: any = {
 	note: "관리자 멘트(Note)",
 };
 
-export function getMissingValueColumns(data: AppendMemberRequestDto) {
-	const except: (keyof AppendMemberRequestDto)[] = [
+export function getMissingValueColumns(data: UpdateMemberRequestDto) {
+	const except: (keyof UpdateMemberRequestDto)[] = [
 		"address",
 		"charmingPoint",
 		"filteringAgeRelation",
@@ -37,10 +37,10 @@ export function getMissingValueColumns(data: AppendMemberRequestDto) {
 	];
 	const missing = [];
 	for (const key of Object.keys(data)) {
-		if (except.includes(key as keyof AppendMemberRequestDto)) {
+		if (except.includes(key as keyof UpdateMemberRequestDto)) {
 			continue;
 		}
-		if (data[key as keyof AppendMemberRequestDto] === null) {
+		if (data[key as keyof UpdateMemberRequestDto] === null) {
 			missing.push(labelColumnsMap[key]);
 		}
 	}

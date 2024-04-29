@@ -5,7 +5,7 @@ import {
 	Religion,
 	SmokingYn,
 	ApiCaller,
-	AppendMemberRequestDto,
+	UpdateMemberRequestDto,
 } from "../../shared/shared";
 import { useEffect } from "react";
 import classNames from "classnames";
@@ -21,12 +21,12 @@ export function MemberEdit() {
 	const { memberId } = useParams();
 	const navigate = useNavigate();
 	// 개인정보 수집 이용 동의서
-	const [formData, setters] = useFormData(new AppendMemberRequestDto());
+	const [formData, setters] = useFormData(new UpdateMemberRequestDto());
 	useEffect(() => {
 		if (memberId) {
 			ApiCaller.get(`/members/${memberId}`)
 				.then((e) => {
-					setters.setFormData(new AppendMemberRequestDto(e.data));
+					setters.setFormData(new UpdateMemberRequestDto(e.data));
 					return e;
 				})
 				.catch((e) => {

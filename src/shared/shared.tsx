@@ -7,6 +7,7 @@ export { Matching } from "./type/Entity/Matching";
 export { Address } from "./type/Entity/Address";
 export { GeoPoint } from "./type/Entity/GeoPoint";
 export { AppendMemberRequestDto } from "./type/DTO/AppendMemberRequestDto";
+export { UpdateMemberRequestDto } from "./type/DTO/UpdateMemberRequestDto";
 export { AddressFormDTO } from "./type/DTO/AddressFormDTO";
 export { ConditionListModel, Filtering } from "./type/DTO/ConditionListModel";
 export { FindMembersConditionDto } from "./type/DTO/FindMembersConditionDto";

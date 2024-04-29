@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import { AppendMemberRequestDto, Fomatter } from "../../../shared/shared";
 
 export function useFormData(): [
@@ -58,10 +58,10 @@ export function useFormData(): [
 		handleChange,
 	};
 	const getters = {
-		getValue: (column: keyof AppendMemberRequestDto) => {
-			return formData[column] ? formData[column].toString() : "";
+		getValue: (column: keyof AppendMemberRequestDto): string => {
+			return formData[column] ? formData[column] + "" : "";
 		},
-		getDateValue: (column: keyof AppendMemberRequestDto) => {
+		getDateValue: (column: keyof AppendMemberRequestDto): string => {
 			return formData[column]
 				? new Date(formData[column] as string)
 						.toISOString()

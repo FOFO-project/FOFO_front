@@ -1,4 +1,5 @@
 import {
+	AddressFormDTO,
 	AgeRelationType,
 	Gender,
 	Mbti,
@@ -6,11 +7,9 @@ import {
 	SmokingYn,
 } from "../../shared";
 
-export class AppendMemberRequestDto {
+export class UpdateMemberRequestDto {
 	kakaoId: string | null = null;
-	sido: string | null = null;
-	sigungu: string | null = null;
-	eupmyundong: string | null = null;
+	address: AddressFormDTO = new AddressFormDTO();
 	name: string | null = null;
 	gender: Gender | null = null;
 	birthday: string | null = null;
@@ -26,31 +25,14 @@ export class AppendMemberRequestDto {
 	religion: Religion | null = null;
 	filteringReligion: Religion | null = null;
 	charmingPoint: string | null = null;
-	userProfileImages: File[] | null = null;
+	note: string | null = null;
+	profileCardImage: string | null = null;
 
 	constructor(data: any = {}) {
-		for (const key in data as AppendMemberRequestDto) {
+		for (const key in data as UpdateMemberRequestDto) {
 			if (this.hasOwnProperty(key)) {
 				this[key as keyof this] = data[key];
 			}
 		}
-	}
-
-	static toFormData(source: any) {
-		const formData = new FormData();
-		for (const key in source) {
-			if (key === "userProfileImages") {
-				const files = source.userProfileImages as Blob[];
-				if (files) {
-					for (const file of files) {
-						formData.append("userProfileImages", file);
-					}
-				}
-				continue;
-			}
-			formData.append(key, source[key] as string);
-		}
-
-		return formData;
 	}
 }

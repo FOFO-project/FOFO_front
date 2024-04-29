@@ -3,9 +3,6 @@ import config from "../../app/config";
 const HEADER = {
 	"Content-Type": "application/json",
 };
-const FORM_HEADER = {
-	"Content-Type": "multipart/form-data",
-};
 
 export const ApiCaller = Object.freeze({
 	get: async (url: string, params?: Record<string, any>) => {
