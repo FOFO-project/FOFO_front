@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useState } from "react";
-import { UpdateMemberRequestDto, Fomatter } from "../../../shared/shared";
+import { UpdateMemberRequestDto, Formatter } from "../../../shared/shared";
 
 export function useFormData(initData: UpdateMemberRequestDto): [
 	UpdateMemberRequestDto,
@@ -22,14 +22,14 @@ export function useFormData(initData: UpdateMemberRequestDto): [
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
-			[name]: Fomatter.HeightFormat(value),
+			[name]: Formatter.HeightFormat(value),
 		}));
 	};
 	const handlePhoneNumberChange = (e: any) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
-			[name]: Fomatter.PhoneNumber(value),
+			[name]: Formatter.PhoneNumber(value),
 		}));
 	};
 	const handleDateChange = (e: any) => {

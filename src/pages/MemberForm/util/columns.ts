@@ -24,7 +24,6 @@ export const labelColumnsMap: any = {
 };
 
 export const except: string[] = [
-	"height",
 	"filteringAgeRelation",
 	"filteringReligion",
 	"charmingPoint",

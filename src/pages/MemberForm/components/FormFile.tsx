@@ -1,7 +1,8 @@
 import { except, labelColumnsMap } from "../util/columns";
 import style from "../MemberForm.module.scss";
-import { AppendMemberRequestDto } from "../../../shared/shared";
+import { AppendMemberRequestDto, Formatter } from "../../../shared/shared";
 import { useState } from "react";
+import config from "../../../app/config";
 
 interface FormFileProps {
 	column: keyof AppendMemberRequestDto;
@@ -21,8 +22,12 @@ export function FormFile({ column, setFormData }: FormFileProps) {
 		}));
 	}
 	const onChange = [
-		(e: any) => {
-			const file = e.target.files[0];
+		async (e: any) => {
+			const file = (await Formatter.resizeImage(
+				e.target.files[0],
+				config.resize_image_size
+			).catch(() => null)) as File;
+
 			if (file) {
 				let newFiles = files ? files.slice() : [];
 				newFiles[0] = file;
@@ -33,15 +38,23 @@ export function FormFile({ column, setFormData }: FormFileProps) {
 				updateForm(null);
 			}
 		},
-		(e: any) => {
+		async (e: any) => {
+			const file = (await Formatter.resizeImage(
+				e.target.files[0],
+				config.resize_image_size
+			).catch(() => null)) as File;
 			let newFiles = files.slice();
-			newFiles[1] = e.target.files[0];
+			newFiles[1] = file;
 			setFiles(newFiles);
 			updateForm(newFiles.filter((f) => f));
 		},
-		(e: any) => {
+		async (e: any) => {
+			const file = (await Formatter.resizeImage(
+				e.target.files[0],
+				config.resize_image_size
+			).catch(() => null)) as File;
 			let newFiles = files.slice();
-			newFiles[2] = e.target.files[0];
+			newFiles[2] = file;
 			setFiles(newFiles);
 			updateForm(newFiles.filter((f) => f));
 		},

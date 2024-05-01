@@ -15,8 +15,8 @@ export class UpdateMemberRequestDto {
 	gender: Gender | null = null;
 	birthday: string | null = null;
 	height: number | null = null;
-	phoneNumber: string | null = "010";
 	filteringAgeRelation: AgeRelationType | null = null;
+	phoneNumber: string | null = null;
 	company: string | null = null;
 	job: string | null = null;
 	university: string | null = null;

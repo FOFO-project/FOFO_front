@@ -8,7 +8,7 @@ interface FormFileProps {
 }
 export function FormFile({ column, setFormData }: FormFileProps) {
 	const [file, setFile] = useState<File>();
-	
+
 	function updateForm(value: any) {
 		setFormData(() => ({
 			[column]: value,
@@ -18,6 +18,11 @@ export function FormFile({ column, setFormData }: FormFileProps) {
 	const onChange = () => {
 		(e: any) => {
 			const updatefile = e.target.file;
+			// const updatefile = (await Formatter.resizeImage(
+			// 	e.target.files[0],
+			// 	config.resize_image_size
+			// ).catch(() => null)) as File;
+
 			if (updatefile) {
 				let newFile = updatefile ? updatefile : file;
 				setFile(newFile);
@@ -26,7 +31,7 @@ export function FormFile({ column, setFormData }: FormFileProps) {
 				setFile(undefined);
 				updateForm(null);
 			}
-		}
+		};
 	};
 	return (
 		<div className="mb-3">
