@@ -325,9 +325,9 @@ export function MemberManagePanel({
 												member.id as number
 											)
 										}
-										readOnly={
-											conditionData.approvalStatus !==
-											ApprovalStatus.DEPOSIT_COMPLETED
+										readOnly={true
+											// conditionData.approvalStatus !==
+											// ApprovalStatus.DEPOSIT_COMPLETED
 										}
 									/>
 								</td>

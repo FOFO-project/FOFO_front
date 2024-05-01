@@ -1,4 +1,5 @@
 import {
+	AddressFormDTO,
 	AgeRelationType,
 	Gender,
 	Mbti,
@@ -11,6 +12,7 @@ export class UpdateMemberRequestDto {
 	sido: string | null = null;
 	sigungu: string | null = null;
 	eupmyundong: string | null = null;
+	address: AddressFormDTO = new AddressFormDTO();
 	name: string | null = null;
 	gender: Gender | null = null;
 	birthday: string | null = null;

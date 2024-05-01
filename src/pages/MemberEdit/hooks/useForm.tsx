@@ -9,10 +9,14 @@ export function useFormData(initData: UpdateMemberRequestDto): [
 		handlePhoneNumberChange: ChangeEventHandler;
 		handleDateChange: ChangeEventHandler;
 		handleChange: ChangeEventHandler;
+		handleAddressChange: ChangeEventHandler;
 	},
 	{
 		getValue: (column: keyof UpdateMemberRequestDto) => string;
 		getDateValue: (column: keyof UpdateMemberRequestDto) => string;
+		getSiDoValue: any;
+		getSiGunGuValue: any;
+		getEupMyunDongValue: any;
 	}
 ] {
 	const [formData, setFormData] = useState(
@@ -52,13 +56,23 @@ export function useFormData(initData: UpdateMemberRequestDto): [
 					: value,
 		}));
 	};
-
+	const handleAddressChange = (e: any) => {
+		const { name, value } = e.target;
+		setFormData((prevData) => ({
+			...prevData,
+			address: {
+				...prevData.address,
+				[name]: value.length === 0 ? null : value,
+			},
+		}));
+	};
 	const setters = {
 		setFormData,
 		handleHeightChange,
 		handlePhoneNumberChange,
 		handleDateChange,
 		handleChange,
+		handleAddressChange,
 	};
 
 	const getters = {
@@ -71,6 +85,15 @@ export function useFormData(initData: UpdateMemberRequestDto): [
 						.toISOString()
 						.substr(0, 10)
 				: "";
+		},
+		getSiDoValue: () => {
+			return formData["address"].sido ? formData["address"].sido + "" : "";
+		},
+		getSiGunGuValue: () => {
+			return formData["address"].sigungu ? formData["address"].sigungu + "" : "";
+		},
+		getEupMyunDongValue: () => {
+			return formData["address"].eupmyundong ? formData["address"].eupmyundong + "" : "";
 		},
 	};
 

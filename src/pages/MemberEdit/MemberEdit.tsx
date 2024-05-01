@@ -91,19 +91,19 @@ export function MemberEdit() {
 				/>
 				<h6>주소</h6>
 				<FormInput
-					column="sido"
+					column="address"
 					getValue={getters.getValue}
-					onChange={setters.handleChange}
+					onChange={setters.handleAddressChange}
 				/>
 				<FormInput
-					column="sigungu"
+					column="address"
 					getValue={getters.getValue}
-					onChange={setters.handleChange}
+					onChange={setters.handleAddressChange}
 				/>
 				<FormInput
-					column="eupmyundong"
+					column="address"
 					getValue={getters.getValue}
-					onChange={setters.handleChange}
+					onChange={setters.handleAddressChange}
 				/>
 				<h6>내 정보</h6>
 				<FormInput
@@ -124,6 +124,7 @@ export function MemberEdit() {
 				/>
 				<FormNumber
 					column="height"
+					getValue={getters.getValue}
 					onChange={setters.handleHeightChange}
 				/>
 				<FormInput
