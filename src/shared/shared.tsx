@@ -13,5 +13,5 @@ export { ConditionListModel, Filtering } from "./type/DTO/ConditionListModel";
 export { FindMembersConditionDto } from "./type/DTO/FindMembersConditionDto";
 export { MatchRequestDto } from "./type/DTO/MatchRequestDto";
 export { ApiCaller } from "./util/ApiCaller";
-export { Fomatter } from "./util/Fomatter";
+export { Formatter } from "./util/Formatter";
 export * from "./type/Enum/memberEnum";
