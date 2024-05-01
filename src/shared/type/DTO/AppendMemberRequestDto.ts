@@ -39,6 +39,9 @@ export class AppendMemberRequestDto {
 	static toFormData(source: any) {
 		const formData = new FormData();
 		for (const key in source) {
+			if (source[key] === null) {
+				continue;
+			}
 			if (key === "userProfileImages") {
 				const files = source.userProfileImages as Blob[];
 				if (files) {
