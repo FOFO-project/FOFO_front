@@ -9,7 +9,10 @@ export function useFormData(initData: UpdateMemberRequestDto): [
 		handlePhoneNumberChange: ChangeEventHandler;
 		handleDateChange: ChangeEventHandler;
 		handleChange: ChangeEventHandler;
-		handleAddressChange: ChangeEventHandler;
+	},
+	{
+		getValue: (column: keyof UpdateMemberRequestDto) => string;
+		getDateValue: (column: keyof UpdateMemberRequestDto) => string;
 	}
 ] {
 	const [formData, setFormData] = useState(
@@ -49,24 +52,27 @@ export function useFormData(initData: UpdateMemberRequestDto): [
 					: value,
 		}));
 	};
-	const handleAddressChange = (e: any) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({
-			...prevData,
-			address: {
-				...prevData.address,
-				[name]: value.length === 0 ? null : value,
-			},
-		}));
-	};
+
 	const setters = {
 		setFormData,
 		handleHeightChange,
 		handlePhoneNumberChange,
 		handleDateChange,
 		handleChange,
-		handleAddressChange,
 	};
 
-	return [formData, setters];
+	const getters = {
+		getValue: (column: keyof UpdateMemberRequestDto): string => {
+			return formData[column] ? formData[column] + "" : "";
+		},
+		getDateValue: (column: keyof UpdateMemberRequestDto): string => {
+			return formData[column]
+				? new Date(formData[column] as string)
+						.toISOString()
+						.substr(0, 10)
+				: "";
+		},
+	};
+
+	return [formData, setters, getters];
 }

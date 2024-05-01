@@ -1,13 +1,10 @@
-import { AppendMemberRequestDto } from "../../../shared/shared";
+import { UpdateMemberRequestDto } from "../../../shared/shared";
 
 export const labelColumnsMap: any = {
 	kakaoId: "카카오톡 ID(Kakao ID)",
-	address: {
-		zipcode: "우편번호",
-		sido: "시도",
-		sigungu: "시군구",
-		eupmyundong: "읍면동",
-	},
+	sido: "시도",
+	sigungu: "시군구",
+	eupmyundong: "읍면동",
 	name: "이름(Name)",
 	gender: "성별(Gender)",
 	birthday: "생년월일(Birthday)",
@@ -27,23 +24,19 @@ export const labelColumnsMap: any = {
 };
 
 export const except: string[] = [
-	"sido",
-	"sigungu",
-	"eupmyundong",
-	"charmingPoint",
+	"height",
 	"filteringAgeRelation",
-	// "filteringSmoker",
 	"filteringReligion",
-	"note",
+	"charmingPoint",
 ];
 
-export function getMissingValueColumns(data: AppendMemberRequestDto) {
+export function getMissingValueColumns(data: UpdateMemberRequestDto) {
 	const missing = [];
 	for (const key of Object.keys(data)) {
-		if (except.includes(key as keyof AppendMemberRequestDto)) {
+		if (except.includes(key as keyof UpdateMemberRequestDto)) {
 			continue;
 		}
-		if (data[key as keyof AppendMemberRequestDto] === null) {
+		if (data[key as keyof UpdateMemberRequestDto] === null) {
 			missing.push(labelColumnsMap[key]);
 		}
 	}

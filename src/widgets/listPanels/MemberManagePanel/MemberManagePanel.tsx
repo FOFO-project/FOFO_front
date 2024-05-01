@@ -20,6 +20,8 @@ import {
 import style from "./MemberManagePanel.module.scss";
 import { FindMember } from "../../../features/features";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
+
 
 interface MemberListProps {
 	members: Member[];
@@ -45,6 +47,7 @@ export function MemberManagePanel({
 	selectedProps: SelectedProps;
 	title: string;
 }) {
+	const navigate = useNavigate();
 	const { members, setMembers } = memberListProps;
 	const { conditionData, setConditionData } = conditionProps;
 	const { selectedItems, setSelectedItems } = selectedProps;
@@ -265,7 +268,13 @@ export function MemberManagePanel({
 										)}
 									/>
 								</td>
-								<td>{member.name}</td>
+								<td
+									onClick={() => {
+										navigate("/MemberEdit/" + member.id);
+									}}
+								>
+									{member.name}
+								</td>
 								{conditionData.approvalStatus !==
 									ApprovalStatus.DEPOSIT_PENDING && (
 									<td>
