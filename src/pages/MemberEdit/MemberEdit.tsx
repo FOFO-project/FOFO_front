@@ -6,7 +6,6 @@ import {
 	SmokingYn,
 	ApiCaller,
 	UpdateMemberRequestDto,
-	Formatter,
 } from "../../shared/shared";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
