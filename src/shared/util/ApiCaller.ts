@@ -113,4 +113,18 @@ export const ApiCaller = Object.freeze({
 		}
 		return response.json();
 	},
+	formDataPatch: async (url: string, data: FormData) => {
+		const response = await fetch(config.api_url + url, {
+			method: "PATCH",
+			body: data,
+		});
+		if (!response.ok) {
+			const error: any = new Error(
+				`HTTP error! Status: ${response.status}`
+			);
+			error.data = await response.json();
+			throw error;
+		}
+		return response.json();
+	},
 });

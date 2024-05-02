@@ -3,3 +3,4 @@ export { FormInput } from "./components/FormInput";
 export { FormNumber } from "./components/FormNumber";
 export { FormSelect } from "./components/FormSelect";
 export { FormTextarea } from "./components/FormTextarea";
+export { FormAddress } from "./components/FormAddress";

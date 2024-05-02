@@ -9,9 +9,6 @@ import {
 
 export class UpdateMemberRequestDto {
 	kakaoId: string | null = null;
-	sido: string | null = null;
-	sigungu: string | null = null;
-	eupmyundong: string | null = null;
 	address: AddressFormDTO = new AddressFormDTO();
 	name: string | null = null;
 	gender: Gender | null = null;
@@ -36,7 +33,11 @@ export class UpdateMemberRequestDto {
 	constructor(data: any = {}) {
 		for (const key in data as UpdateMemberRequestDto) {
 			if (this.hasOwnProperty(key)) {
-				this[key as keyof this] = data[key];
+				if(key === "address"){
+					this["address"] = new AddressFormDTO(data[key]);
+				} else{
+					this[key as keyof this] = data[key];
+				}
 			}
 		}
 	}
@@ -53,8 +54,14 @@ export class UpdateMemberRequestDto {
 					formData.append("profileCardImage", file);
 				}
 				continue;
+			} else if (typeof source[key] === 'object') {
+				// If the value is an object, stringify it and create a Blob
+				const json = JSON.stringify(source[key]);
+				const blob = new Blob([json], { type: 'application/json' });
+				formData.append(key, blob, key + '.json');
+			} else {
+				formData.append(key, source[key]);
 			}
-			formData.append(key, source[key] as string);
 		}
 		return formData;
 	}

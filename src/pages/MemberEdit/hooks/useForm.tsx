@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useState } from "react";
-import { UpdateMemberRequestDto, Formatter } from "../../../shared/shared";
+import { UpdateMemberRequestDto, Formatter, Address, AddressFormDTO } from "../../../shared/shared";
 
 export function useFormData(initData: UpdateMemberRequestDto): [
 	UpdateMemberRequestDto,
@@ -14,9 +14,7 @@ export function useFormData(initData: UpdateMemberRequestDto): [
 	{
 		getValue: (column: keyof UpdateMemberRequestDto) => string;
 		getDateValue: (column: keyof UpdateMemberRequestDto) => string;
-		getSiDoValue: any;
-		getSiGunGuValue: any;
-		getEupMyunDongValue: any;
+		getAddressValue: (column: keyof AddressFormDTO) => string;
 	}
 ] {
 	const [formData, setFormData] = useState(
@@ -86,14 +84,8 @@ export function useFormData(initData: UpdateMemberRequestDto): [
 						.substr(0, 10)
 				: "";
 		},
-		getSiDoValue: () => {
-			return formData["address"].sido ? formData["address"].sido + "" : "";
-		},
-		getSiGunGuValue: () => {
-			return formData["address"].sigungu ? formData["address"].sigungu + "" : "";
-		},
-		getEupMyunDongValue: () => {
-			return formData["address"].eupmyundong ? formData["address"].eupmyundong + "" : "";
+		getAddressValue: (column: keyof AddressFormDTO): string => {
+			return formData["address"][column] ? formData["address"][column] + "" : "";
 		},
 	};
 

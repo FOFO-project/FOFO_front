@@ -11,13 +11,14 @@ import { useEffect } from "react";
 import classNames from "classnames";
 import {
 	getMissingValueColumns,
-} from "./model/labelColumnsMap";
+} from "./util/columns";
 import { useFormData } from "./hooks/useForm";
 import { FormFile, 
 		FormInput, 
 		FormNumber, 
 		FormSelect, 
-		FormTextarea 
+		FormTextarea,
+		FormAddress
 } from "./MemberEditComponent";
 import style from "./MemberEdit.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
@@ -46,12 +47,12 @@ export function MemberEdit() {
 		e.preventDefault();
 		const missing = getMissingValueColumns(formData);
 		console.log(formData);
-		console.log(missing);
+		console.log(UpdateMemberRequestDto.toFormData(formData));
 		if (missing.length > 0) {
 			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
 			return;
 		}
-		ApiCaller.patch(`/members/${memberId}`, formData)
+		ApiCaller.formDataPatch(`/members/${memberId}`, UpdateMemberRequestDto.toFormData(formData))
 			.then(() => {
 				alert("회원 수정 완료");
 				navigate(`/MemberManage`);
@@ -90,19 +91,19 @@ export function MemberEdit() {
 					onChange={setters.handleChange}
 				/>
 				<h6>주소</h6>
-				<FormInput
+				<FormAddress
 					column="sido"
-					getValue={getters.getSiDoValue}
+					getValue={getters.getAddressValue}
 					onChange={setters.handleAddressChange}
 				/>
-				<FormInput
+				<FormAddress
 					column="sigungu"
-					getValue={getters.getSiGunGuValue}
+					getValue={getters.getAddressValue}
 					onChange={setters.handleAddressChange}
 				/>
-				<FormInput
+				<FormAddress
 					column="eupmyundong"
-					getValue={getters.getEupMyunDongValue}
+					getValue={getters.getAddressValue}
 					onChange={setters.handleAddressChange}
 				/>
 				<h6>내 정보</h6>

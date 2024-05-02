@@ -1,4 +1,4 @@
-import { UpdateMemberRequestDto } from "../../../shared/shared";
+import { AddressFormDTO, UpdateMemberRequestDto } from "../../../shared/shared";
 
 export const labelColumnsMap: any = {
 	kakaoId: "카카오톡 ID(Kakao ID)",
@@ -21,6 +21,7 @@ export const labelColumnsMap: any = {
 	filteringSmoker: "상대방 흡연여부(Smoking)",
 	filteringReligion: "절대 안되는 종교(Religion)",
 	note: "관리자 멘트(Note)",
+	profileCardImage: "프로필 카드(profileCardImage)"
 };
 
 export const except: string[] = [
@@ -28,11 +29,27 @@ export const except: string[] = [
 	"filteringAgeRelation",
 	"filteringReligion",
 	"charmingPoint",
+	"note",
+	"profileCardImage",
+	"zipcode",
+	"location"
 ];
 
 export function getMissingValueColumns(data: UpdateMemberRequestDto) {
 	const missing = [];
 	for (const key of Object.keys(data)) {
+		console.log(key)
+		if (key === "address") {
+			for (const item of Object.keys(data[key])) {
+				console.log(item);
+				if (except.includes(item as keyof AddressFormDTO)) {
+					continue;
+				}
+				if (data[key][item as keyof AddressFormDTO] === null) {
+					missing.push(labelColumnsMap[item]);
+				}
+			}
+		}
 		if (except.includes(key as keyof UpdateMemberRequestDto)) {
 			continue;
 		}

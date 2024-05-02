@@ -15,28 +15,22 @@ export function FormFile({ column, setFormData }: FormFileProps) {
 		}));
 	}
 
-	const onChange = () => {
-		(e: any) => {
-			const updatefile = e.target.file;
-			// const updatefile = (await Formatter.resizeImage(
-			// 	e.target.files[0],
-			// 	config.resize_image_size
-			// ).catch(() => null)) as File;
-
-			if (updatefile) {
-				let newFile = updatefile ? updatefile : file;
-				setFile(newFile);
-				updateForm(newFile);
-			} else {
-				setFile(undefined);
-				updateForm(null);
-			}
-		};
+	const onChange = (e: any) => {
+		const updatefile = e.target.file;
+		console.log(updatefile);
+		if (updatefile) {
+			let newFile = updatefile ? updatefile : file;
+			setFile(newFile);
+			updateForm(newFile);
+		} else {
+			setFile(undefined);
+			updateForm(null);
+		}
 	};
+
 	return (
 		<div className="mb-3">
 			<label className="form-label">{labelColumnsMap[column]}</label>
-			<h6>프로필카드</h6>
 			<input
 				type="file"
 				className="form-control"
