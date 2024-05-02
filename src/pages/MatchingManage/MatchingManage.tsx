@@ -1,7 +1,11 @@
 import { FofoHeader } from "../../widgets/widgets";
 import { MatchingManagePanel } from "../../widgets/listPanels/MatchingPanel/MatchingManagePanel";
-import { MatchingConfirm, MatchingCancel, MatchingProceed } from "../../features/features";
-import { Matching, ApiCaller } from "../../shared/shared";
+import {
+	MatchingConfirm,
+	MatchingCancel,
+	MatchingProceed,
+} from "../../features/features";
+import { Matching, ApiCaller, MatchingStatus } from "../../shared/shared";
 import { useState, useEffect } from "react";
 import style from "./MatchingManage.module.scss";
 import page_styles from "../pages.module.scss";
@@ -13,16 +17,12 @@ export function MatchingManage() {
 
 	// page 진입 시 최초 조회 로직
 	useEffect(() => {
-		ApiCaller.get("/match/result",{}).then(
-			(e) => {
-				const matchingList: Matching[] = e.data.content.map(
-					(e: any) => {
-						return new Matching(e);
-					}
-				);
-				setMatchings(matchingList);
-			}
-		);
+		ApiCaller.get("/match/result", {}).then((e) => {
+			const matchingList: Matching[] = e.data.content.map((e: any) => {
+				return new Matching(e);
+			});
+			setMatchings(matchingList);
+		});
 	}, []);
 
 	return (
@@ -45,8 +45,20 @@ export function MatchingManage() {
 						</div>
 					</div>
 					<div className={style.buttonContainer}>
-						<MatchingProceed matchData={selectedItems} />
-						<MatchingConfirm matchData={selectedItems} />
+						<MatchingProceed
+							matchData={selectedItems.filter(
+								(matching) =>
+									matching.matchingStatus ===
+									MatchingStatus.MATCHING_PENDING
+							)}
+						/>
+						<MatchingConfirm
+							matchData={selectedItems.filter(
+								(matching) =>
+									matching.matchingStatus ===
+									MatchingStatus.MATCHING_PROGRESSING
+							)}
+						/>
 						<MatchingCancel matchItems={selectedItems} />
 					</div>
 				</div>
