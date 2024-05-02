@@ -25,7 +25,8 @@ import config from "../../app/config";
 
 export function MemberEdit() {
 	const { memberId } = useParams();
-	const [imageUrl, setImageUrl] = useState<string>("");
+	const [profileCardUrl, setProfileCardUrl] = useState<string>("");
+	const [profileUrls, setProfileUrls] = useState<string[]>([]);
 	const navigate = useNavigate();
 	// 개인정보 수집 이용 동의서
 	const [formData, setters, getters] = useFormData(
@@ -35,10 +36,20 @@ export function MemberEdit() {
 		if (memberId) {
 			ApiCaller.get(`/members/${memberId}`)
 				.then(async (res) => {
-					const { profileImageId } = res.data;
+					const { profileImageId, userProfileImageIds } = res.data;
 					if (profileImageId) {
-						setImageUrl(
+						setProfileCardUrl(
 							`${config.api_url}/images/${profileImageId}`
+						);
+					}
+					if (userProfileImageIds) {
+						setProfileUrls(
+							userProfileImageIds
+								.filter((e: string | null) => e)
+								.map(
+									(e: string) =>
+										`${config.api_url}/images/${e}`
+								)
 						);
 					}
 					setters.setFormData(new UpdateMemberRequestDto(res.data));
@@ -100,6 +111,23 @@ export function MemberEdit() {
 					getValue={getters.getValue}
 					onChange={setters.handleChange}
 				/>
+				<h6>프로필이미지</h6>
+
+				{profileUrls.map((e) => {
+					return (
+						<span>
+							<img
+								key={e}
+								src={e}
+								alt="profileCardImage"
+								style={{
+									width: `20%`,
+									padding: "10px",
+								}}
+							/>
+						</span>
+					);
+				})}
 				<h6>주소</h6>
 				<FormAddress
 					column="sido"
@@ -194,18 +222,19 @@ export function MemberEdit() {
 					getValue={getters.getValue}
 					onChange={setters.handleChange}
 				/>
-				{imageUrl !== "" ? (
+				{profileCardUrl !== "" ? (
 					<img
-						src={imageUrl}
+						src={profileCardUrl}
 						alt="profileCardImage"
 						style={{
 							width: `${config.profile_image_size}px`,
+							padding: "10px",
 						}}
 					/>
 				) : null}
 				<FormFile
 					column="profileCardImage"
-					setImageUrl={setImageUrl}
+					setImageUrl={setProfileCardUrl}
 					setFormData={setters.setFormData}
 				/>
 				<h5>절대 안되는 상대 정보</h5>
