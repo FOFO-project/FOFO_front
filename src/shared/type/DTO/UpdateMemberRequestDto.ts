@@ -33,9 +33,9 @@ export class UpdateMemberRequestDto {
 	constructor(data: any = {}) {
 		for (const key in data as UpdateMemberRequestDto) {
 			if (this.hasOwnProperty(key)) {
-				if(key === "address"){
+				if (key === "address") {
 					this["address"] = new AddressFormDTO(data[key]);
-				} else{
+				} else {
 					this[key as keyof this] = data[key];
 				}
 			}
@@ -48,17 +48,22 @@ export class UpdateMemberRequestDto {
 			if (source[key] === null) {
 				continue;
 			}
+
 			if (key === "profileCardImage") {
 				const file = source.profileCardImage as Blob;
 				if (file) {
 					formData.append("profileCardImage", file);
 				}
 				continue;
-			} else if (typeof source[key] === 'object') {
-				// If the value is an object, stringify it and create a Blob
-				const json = JSON.stringify(source[key]);
-				const blob = new Blob([json], { type: 'application/json' });
-				formData.append(key, blob, key + '.json');
+			} else if (key === "address") {
+				const address = source.address as any;
+				for (const addressKey in address) {
+					if (address[addressKey] === null) {
+						continue;
+					}
+					formData.append(addressKey, address[addressKey]);
+				}
+				continue;
 			} else {
 				formData.append(key, source[key]);
 			}

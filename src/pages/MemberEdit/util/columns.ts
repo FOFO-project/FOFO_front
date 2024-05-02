@@ -21,7 +21,7 @@ export const labelColumnsMap: any = {
 	filteringSmoker: "상대방 흡연여부(Smoking)",
 	filteringReligion: "절대 안되는 종교(Religion)",
 	note: "관리자 멘트(Note)",
-	profileCardImage: "프로필 카드(profileCardImage)"
+	profileCardImage: "프로필 카드(profileCardImage)",
 };
 
 export const except: string[] = [
@@ -32,16 +32,13 @@ export const except: string[] = [
 	"note",
 	"profileCardImage",
 	"zipcode",
-	"location"
 ];
 
 export function getMissingValueColumns(data: UpdateMemberRequestDto) {
 	const missing = [];
 	for (const key of Object.keys(data)) {
-		console.log(key)
 		if (key === "address") {
 			for (const item of Object.keys(data[key])) {
-				console.log(item);
 				if (except.includes(item as keyof AddressFormDTO)) {
 					continue;
 				}

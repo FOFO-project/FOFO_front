@@ -127,4 +127,38 @@ export const ApiCaller = Object.freeze({
 		}
 		return response.json();
 	},
+	fileGet: async (url: string, params?: Record<string, any>) => {
+		let fullUrl = config.api_url + url;
+
+		if (params) {
+			const queryString = Object.keys(params)
+				.map((key) => {
+					const value = params[key];
+					if (value === null || value === undefined) {
+						return encodeURIComponent(key);
+					}
+					return `${encodeURIComponent(key)}=${encodeURIComponent(
+						value
+					)}`;
+				})
+				.join("&");
+
+			if (queryString) {
+				fullUrl += `?${queryString}`;
+			}
+		}
+
+		const response = await fetch(fullUrl, {
+			method: "GET",
+			headers: HEADER,
+		});
+		if (!response.ok) {
+			const error: any = new Error(
+				`HTTP error! Status: ${response.status}`
+			);
+			error.data = await response.json();
+			throw error;
+		}
+		return response;
+	},
 });

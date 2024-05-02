@@ -143,4 +143,25 @@ export const Formatter = {
 			img.src = URL.createObjectURL(file);
 		});
 	},
+	fileToDataURL(file?: File | null): Promise<string> {
+		return new Promise((resolve, reject) => {
+			if (!file) {
+				resolve("");
+				return;
+			}
+
+			const reader = new FileReader();
+
+			reader.onload = () => {
+				const dataURL = reader.result as string;
+				resolve(dataURL);
+			};
+
+			reader.onerror = () => {
+				reject(new Error("Failed to read file as data URL."));
+			};
+
+			reader.readAsDataURL(file);
+		});
+	},
 };

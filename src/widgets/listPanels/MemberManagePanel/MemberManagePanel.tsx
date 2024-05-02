@@ -21,7 +21,7 @@ import style from "./MemberManagePanel.module.scss";
 import { FindMember } from "../../../features/features";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
-
+import config from "../../../app/config";
 
 interface MemberListProps {
 	members: Member[];
@@ -270,7 +270,13 @@ export function MemberManagePanel({
 								</td>
 								<td
 									onClick={() => {
-										navigate("/MemberEdit/" + member.id);
+										if (
+											conditionData.approvalStatus !==
+											ApprovalStatus.DEPOSIT_PENDING
+										)
+											navigate(
+												"/MemberEdit/" + member.id
+											);
 									}}
 								>
 									{member.name}
@@ -325,7 +331,8 @@ export function MemberManagePanel({
 												member.id as number
 											)
 										}
-										readOnly={true
+										readOnly={
+											true
 											// conditionData.approvalStatus !==
 											// ApprovalStatus.DEPOSIT_COMPLETED
 										}
@@ -334,7 +341,35 @@ export function MemberManagePanel({
 								{conditionData.approvalStatus !==
 									ApprovalStatus.DEPOSIT_PENDING && (
 									<td>
-										<img src="" alt="profile_card" />
+										{member.profileImageId ? (
+											<a
+												href={
+													member.profileImageId
+														? `${config.api_url}/images/${member.profileImageId}/download`
+														: "#"
+												}
+												target="_blank"
+											>
+												<img
+													src={`${config.api_url}/images/${member.profileImageId}`}
+													style={{
+														height: "80px",
+													}}
+												></img>
+											</a>
+										) : (
+											<button
+												onClick={() => {
+													navigate(
+														"/MemberEdit/" +
+															member.id
+													);
+												}}
+												className="btn btn-light"
+											>
+												프로필 카드 등록
+											</button>
+										)}
 									</td>
 								)}
 							</tr>

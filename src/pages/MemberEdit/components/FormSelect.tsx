@@ -4,11 +4,17 @@ import { UpdateMemberRequestDto } from "../../../shared/shared";
 
 interface FormSelectProps {
 	column: keyof UpdateMemberRequestDto;
+	seleted: string;
 	options: [string, string][];
 	onChange: (e: any) => void;
 }
 
-export function FormSelect({ column, options, onChange }: FormSelectProps) {
+export function FormSelect({
+	column,
+	seleted,
+	options,
+	onChange,
+}: FormSelectProps) {
 	const mandatoryMark = (cols: string) => {
 		return except.includes(cols) ? null : (
 			<span className={style.mandatory_mark}>*</span>
@@ -25,6 +31,8 @@ export function FormSelect({ column, options, onChange }: FormSelectProps) {
 				id={column}
 				name={column}
 				onChange={onChange}
+				key={seleted}
+				defaultValue={seleted}
 			>
 				{options.map(([key, value]) => (
 					<option key={key} value={key}>

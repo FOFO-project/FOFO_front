@@ -6,4 +6,5 @@ export default {
 		base_url === "http://localhost:5173" ? "https://fofo.world" : base_url
 	}/api`, //프론트 서버 url , 백엔드 서버 url은 CORS 허용이 안되어 있어 우회 사용
 	resize_image_size: 2000,
+	profile_image_size: 300,
 };

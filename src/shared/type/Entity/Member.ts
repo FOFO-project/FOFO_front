@@ -7,7 +7,7 @@ import {
 	SmokingYn,
 	ageFilteringMap,
 	smokerFilteringMap,
-	religionFilteringMap
+	religionFilteringMap,
 } from "../../shared";
 import { Address } from "./Address";
 
@@ -39,45 +39,51 @@ export class Member {
 	status: ActiveStatus | null = null;
 	createdTime: Date | null = null;
 	modifiedTime: Date | null = null;
+	profileImageId: string | null = null;
 
 	static getBirthdayString(birthday: Date | null): string {
-        try {
-            return birthday ? new Date(birthday).toLocaleDateString() : "";
-        } catch (e) {
-            return "날짜 없음";
-        }
-    }
+		try {
+			return birthday ? new Date(birthday).toLocaleDateString() : "";
+		} catch (e) {
+			return "날짜 없음";
+		}
+	}
 
 	static getFilteringString(
-        filteringAgeRelation: string | null,
-        filteringSmoker: string | null,
-        filteringReligion: string | null
-    ): string {
-        let res = [
-            ageFilteringMap.get(filteringAgeRelation),
-            smokerFilteringMap.get(filteringSmoker),
-            religionFilteringMap.get(filteringReligion),
-        ];
-        return res.join(" | ");
-    }
+		filteringAgeRelation: string | null,
+		filteringSmoker: string | null,
+		filteringReligion: string | null
+	): string {
+		let res = [
+			ageFilteringMap.get(filteringAgeRelation),
+			smokerFilteringMap.get(filteringSmoker),
+			religionFilteringMap.get(filteringReligion),
+		];
+		return res.join(" | ");
+	}
 
 	static getDepositDateString(depositDate: Date | null): string {
-        try {
-            return depositDate ? new Date(depositDate).toLocaleDateString() : "";
-        } catch (e) {
-            return "날짜 없음";
-        }
-    }
+		try {
+			return depositDate
+				? new Date(depositDate).toLocaleDateString()
+				: "";
+		} catch (e) {
+			return "날짜 없음";
+		}
+	}
 
 	static getAddressString(address: Address | null): string {
-        if (address) {
-            return `${address.sido} ${address.sigungu} ${address.eupmyundong}`;
-        }
-        return "";
-    }
+		if (address) {
+			return `${address.sido} ${address.sigungu} ${address.eupmyundong}`;
+		}
+		return "";
+	}
 
-	static getCountAndChanceString(passCount:number | null, chance:number | null) : string {
-		if(passCount && chance){
+	static getCountAndChanceString(
+		passCount: number | null,
+		chance: number | null
+	): string {
+		if (passCount && chance) {
 			return `${passCount} / ${chance}`;
 		}
 		return "";

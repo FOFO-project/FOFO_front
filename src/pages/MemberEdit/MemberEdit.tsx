@@ -6,34 +6,44 @@ import {
 	SmokingYn,
 	ApiCaller,
 	UpdateMemberRequestDto,
+	Formatter,
 } from "../../shared/shared";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
-import {
-	getMissingValueColumns,
-} from "./util/columns";
+import { getMissingValueColumns } from "./util/columns";
 import { useFormData } from "./hooks/useForm";
-import { FormFile, 
-		FormInput, 
-		FormNumber, 
-		FormSelect, 
-		FormTextarea,
-		FormAddress
+import {
+	FormAddress,
+	FormFile,
+	FormInput,
+	FormNumber,
+	FormSelect,
+	FormTextarea,
 } from "./MemberEditComponent";
 import style from "./MemberEdit.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
+import config from "../../app/config";
 
 export function MemberEdit() {
 	const { memberId } = useParams();
+	const [imageUrl, setImageUrl] = useState<string>("");
 	const navigate = useNavigate();
 	// 개인정보 수집 이용 동의서
-	const [formData, setters, getters] = useFormData(new UpdateMemberRequestDto());
+	const [formData, setters, getters] = useFormData(
+		new UpdateMemberRequestDto()
+	);
 	useEffect(() => {
 		if (memberId) {
 			ApiCaller.get(`/members/${memberId}`)
-				.then((e) => {
-					setters.setFormData(new UpdateMemberRequestDto(e.data));
-					return e;
+				.then(async (res) => {
+					const { profileImageId } = res.data;
+					if (profileImageId) {
+						setImageUrl(
+							`${config.api_url}/images/${profileImageId}`
+						);
+					}
+					setters.setFormData(new UpdateMemberRequestDto(res.data));
+					return res;
 				})
 				.catch((e) => {
 					alert("해당 유저ID의 정보가 없습니다" + e);
@@ -46,13 +56,14 @@ export function MemberEdit() {
 		//수정 api 개발시 수정필요
 		e.preventDefault();
 		const missing = getMissingValueColumns(formData);
-		console.log(formData);
-		console.log(UpdateMemberRequestDto.toFormData(formData));
 		if (missing.length > 0) {
 			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
 			return;
 		}
-		ApiCaller.formDataPatch(`/members/${memberId}`, UpdateMemberRequestDto.toFormData(formData))
+		ApiCaller.formDataPatch(
+			`/members/${memberId}`,
+			UpdateMemberRequestDto.toFormData(formData)
+		)
 			.then(() => {
 				alert("회원 수정 완료");
 				navigate(`/MemberManage`);
@@ -82,7 +93,7 @@ export function MemberEdit() {
 	};
 	return (
 		<div>
-		{/* 유저 입력폼 */}
+			{/* 유저 입력폼 */}
 			<form className={classNames("container mt-5")}>
 				<h5>내 정보</h5>
 				<FormInput
@@ -114,6 +125,7 @@ export function MemberEdit() {
 				/>
 				<FormSelect
 					column="gender"
+					seleted={formData.gender || ""}
 					options={[["", "선택해주세요"], ...Object.entries(Gender)]}
 					onChange={setters.handleChange}
 				/>
@@ -151,11 +163,13 @@ export function MemberEdit() {
 
 				<FormSelect
 					column="mbti"
+					seleted={formData.mbti || ""}
 					options={[["", "선택해주세요"], ...Object.entries(Mbti)]}
 					onChange={setters.handleChange}
 				/>
 				<FormSelect
 					column="smokingYn"
+					seleted={formData.smokingYn || ""}
 					options={[
 						["", "선택해주세요"],
 						...Object.entries(SmokingYn),
@@ -164,6 +178,7 @@ export function MemberEdit() {
 				/>
 				<FormSelect
 					column="religion"
+					seleted={formData.religion || ""}
 					options={[
 						["", "선택해주세요"],
 						...Object.entries(Religion),
@@ -180,13 +195,24 @@ export function MemberEdit() {
 					getValue={getters.getValue}
 					onChange={setters.handleChange}
 				/>
+				{imageUrl !== "" ? (
+					<img
+						src={imageUrl}
+						alt="profileCardImage"
+						style={{
+							width: `${config.profile_image_size}px`,
+						}}
+					/>
+				) : null}
 				<FormFile
 					column="profileCardImage"
+					setImageUrl={setImageUrl}
 					setFormData={setters.setFormData}
 				/>
 				<h5>절대 안되는 상대 정보</h5>
 				<FormSelect
 					column="filteringAgeRelation"
+					seleted={formData.filteringAgeRelation || ""}
 					options={[
 						["", "상관없음"],
 						...Object.entries(AgeRelationType),
@@ -195,6 +221,7 @@ export function MemberEdit() {
 				/>
 				<FormSelect
 					column="filteringSmoker"
+					seleted={formData.filteringSmoker || ""}
 					options={[
 						["", "선택해주세요"],
 						["N", "상관없음"],
@@ -204,6 +231,7 @@ export function MemberEdit() {
 				/>
 				<FormSelect
 					column="filteringReligion"
+					seleted={formData.filteringReligion || ""}
 					options={[["", "상관없음"], ...Object.entries(Religion)]}
 					onChange={setters.handleChange}
 				/>

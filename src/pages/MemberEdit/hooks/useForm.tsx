@@ -1,5 +1,9 @@
 import { ChangeEventHandler, useState } from "react";
-import { UpdateMemberRequestDto, Formatter, Address, AddressFormDTO } from "../../../shared/shared";
+import {
+	UpdateMemberRequestDto,
+	Formatter,
+	AddressFormDTO,
+} from "../../../shared/shared";
 
 export function useFormData(initData: UpdateMemberRequestDto): [
 	UpdateMemberRequestDto,
@@ -85,7 +89,9 @@ export function useFormData(initData: UpdateMemberRequestDto): [
 				: "";
 		},
 		getAddressValue: (column: keyof AddressFormDTO): string => {
-			return formData["address"][column] ? formData["address"][column] + "" : "";
+			return formData["address"][column]
+				? formData["address"][column] + ""
+				: "";
 		},
 	};
 

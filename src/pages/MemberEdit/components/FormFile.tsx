@@ -4,23 +4,25 @@ import { useState } from "react";
 
 interface FormFileProps {
 	column: keyof UpdateMemberRequestDto;
+	setImageUrl: Function;
 	setFormData: Function;
 }
-export function FormFile({ column, setFormData }: FormFileProps) {
+export function FormFile({ column, setImageUrl, setFormData }: FormFileProps) {
 	const [file, setFile] = useState<File>();
 
 	function updateForm(value: any) {
-		setFormData(() => ({
+		setFormData((prevData: any) => ({
+			...prevData,
 			[column]: value,
 		}));
 	}
 
 	const onChange = (e: any) => {
-		const updatefile = e.target.file;
-		console.log(updatefile);
+		const updatefile = e.target.files[0];
 		if (updatefile) {
 			let newFile = updatefile ? updatefile : file;
 			setFile(newFile);
+			setImageUrl(URL.createObjectURL(newFile));
 			updateForm(newFile);
 		} else {
 			setFile(undefined);
