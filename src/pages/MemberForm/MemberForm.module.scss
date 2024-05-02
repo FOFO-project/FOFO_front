@@ -10,7 +10,6 @@ body {
 	font-size: 0.6em;
 }
 
-
 .buttonContainer {
 	display: flex;
 	width: 100%;
@@ -21,4 +20,8 @@ body {
 	.btn_item {
 		margin: 0 5px;
 	}
+}
+
+.mandatory_mark {
+	color: red;
 }

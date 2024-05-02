@@ -21,6 +21,7 @@ import style from "./MemberManagePanel.module.scss";
 import { FindMember } from "../../../features/features";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
+import config from "../../../app/config";
 
 interface MemberListProps {
 	members: Member[];
@@ -71,7 +72,6 @@ export function MemberManagePanel({
 		setSelectedItems(
 			newSelectAll ? members.map((member) => member.id as number) : []
 		);
-		console.log(selectedItems);
 	};
 
 	// 관리자멘트
@@ -124,6 +124,12 @@ export function MemberManagePanel({
 									setConditionData={setConditionData}
 								/>
 							</th>
+							{conditionData.approvalStatus !==
+								ApprovalStatus.DEPOSIT_PENDING && (
+								<th className={`col bg-black`}>
+									<NoneCondition title="패스/찬스" />
+								</th>
+							)}
 							<th className={`col bg-black`}>
 								<DateCondition
 									title="태어난날짜"
@@ -264,11 +270,26 @@ export function MemberManagePanel({
 								</td>
 								<td
 									onClick={() => {
-										navigate("/MemberEdit/" + member.id);
+										if (
+											conditionData.approvalStatus !==
+											ApprovalStatus.DEPOSIT_PENDING
+										)
+											navigate(
+												"/MemberEdit/" + member.id
+											);
 									}}
 								>
 									{member.name}
 								</td>
+								{conditionData.approvalStatus !==
+									ApprovalStatus.DEPOSIT_PENDING && (
+									<td>
+										{Member.getCountAndChanceString(
+											member.passCount,
+											member.chance
+										)}
+									</td>
+								)}
 								<td>
 									{Member.getBirthdayString(member.birthday)}
 								</td>
@@ -311,15 +332,44 @@ export function MemberManagePanel({
 											)
 										}
 										readOnly={
-											conditionData.approvalStatus !==
-											ApprovalStatus.DEPOSIT_COMPLETED
+											true
+											// conditionData.approvalStatus !==
+											// ApprovalStatus.DEPOSIT_COMPLETED
 										}
 									/>
 								</td>
 								{conditionData.approvalStatus !==
 									ApprovalStatus.DEPOSIT_PENDING && (
 									<td>
-										<img src="" alt="profile_card" />
+										{member.profileImageId ? (
+											<a
+												href={
+													member.profileImageId
+														? `${config.api_url}/images/${member.profileImageId}/download`
+														: "#"
+												}
+												target="_blank"
+											>
+												<img
+													src={`${config.api_url}/images/${member.profileImageId}`}
+													style={{
+														height: "80px",
+													}}
+												></img>
+											</a>
+										) : (
+											<button
+												onClick={() => {
+													navigate(
+														"/MemberEdit/" +
+															member.id
+													);
+												}}
+												className="btn btn-light"
+											>
+												프로필 카드 등록
+											</button>
+										)}
 									</td>
 								)}
 							</tr>

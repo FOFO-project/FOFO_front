@@ -1,4 +1,5 @@
 import {
+	AddressFormDTO,
 	AgeRelationType,
 	Gender,
 	Mbti,
@@ -6,17 +7,15 @@ import {
 	SmokingYn,
 } from "../../shared";
 
-export class AppendMemberRequestDto {
+export class UpdateMemberRequestDto {
 	kakaoId: string | null = null;
-	sido: string | null = null;
-	sigungu: string | null = null;
-	eupmyundong: string | null = null;
+	address: AddressFormDTO = new AddressFormDTO();
 	name: string | null = null;
 	gender: Gender | null = null;
 	birthday: string | null = null;
 	height: number | null = null;
-	phoneNumber: string | null = "010";
 	filteringAgeRelation: AgeRelationType | null = null;
+	phoneNumber: string | null = null;
 	company: string | null = null;
 	job: string | null = null;
 	university: string | null = null;
@@ -26,12 +25,19 @@ export class AppendMemberRequestDto {
 	religion: Religion | null = null;
 	filteringReligion: Religion | null = null;
 	charmingPoint: string | null = null;
-	userProfileImages: File[] | null = null;
+	// 관리자멘트
+	note: string | null = null;
+	// 프로필카드
+	profileCardImage: File | null = null;
 
 	constructor(data: any = {}) {
-		for (const key in data as AppendMemberRequestDto) {
+		for (const key in data as UpdateMemberRequestDto) {
 			if (this.hasOwnProperty(key)) {
-				this[key as keyof this] = data[key];
+				if (key === "address") {
+					this["address"] = new AddressFormDTO(data[key]);
+				} else {
+					this[key as keyof this] = data[key];
+				}
 			}
 		}
 	}
@@ -42,18 +48,26 @@ export class AppendMemberRequestDto {
 			if (source[key] === null) {
 				continue;
 			}
-			if (key === "userProfileImages") {
-				const files = source.userProfileImages as Blob[];
-				if (files) {
-					for (const file of files) {
-						formData.append("userProfileImages", file);
-					}
+
+			if (key === "profileCardImage") {
+				const file = source.profileCardImage as Blob;
+				if (file) {
+					formData.append("profileCardImage", file);
 				}
 				continue;
+			} else if (key === "address") {
+				const address = source.address as any;
+				for (const addressKey in address) {
+					if (address[addressKey] === null) {
+						continue;
+					}
+					formData.append(addressKey, address[addressKey]);
+				}
+				continue;
+			} else {
+				formData.append(key, source[key]);
 			}
-			formData.append(key, source[key] as string);
 		}
-
 		return formData;
 	}
 }

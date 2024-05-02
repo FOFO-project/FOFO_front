@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useState } from "react";
-import { AppendMemberRequestDto, Fomatter } from "../../../shared/shared";
+import { AppendMemberRequestDto, Formatter } from "../../../shared/shared";
 
-export function useFormData(initData: AppendMemberRequestDto): [
+export function useFormData(): [
 	AppendMemberRequestDto,
 	{
 		setFormData: Function;
@@ -9,24 +9,25 @@ export function useFormData(initData: AppendMemberRequestDto): [
 		handlePhoneNumberChange: ChangeEventHandler;
 		handleDateChange: ChangeEventHandler;
 		handleChange: ChangeEventHandler;
-		handleAddressChange: ChangeEventHandler;
+	},
+	{
+		getValue: (column: keyof AppendMemberRequestDto) => string;
+		getDateValue: (column: keyof AppendMemberRequestDto) => string;
 	}
 ] {
-	const [formData, setFormData] = useState(
-		new AppendMemberRequestDto(initData)
-	);
+	const [formData, setFormData] = useState(new AppendMemberRequestDto());
 	const handleHeightChange = (e: any) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
-			[name]: Fomatter.HeightFormat(value),
+			[name]: Formatter.HeightFormat(value),
 		}));
 	};
 	const handlePhoneNumberChange = (e: any) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
-			[name]: Fomatter.PhoneNumber(value),
+			[name]: Formatter.PhoneNumber(value),
 		}));
 	};
 	const handleDateChange = (e: any) => {
@@ -49,24 +50,25 @@ export function useFormData(initData: AppendMemberRequestDto): [
 					: value,
 		}));
 	};
-	const handleAddressChange = (e: any) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({
-			...prevData,
-			address: {
-				...prevData.address,
-				[name]: value.length === 0 ? null : value,
-			},
-		}));
-	};
 	const setters = {
 		setFormData,
 		handleHeightChange,
 		handlePhoneNumberChange,
 		handleDateChange,
 		handleChange,
-		handleAddressChange,
+	};
+	const getters = {
+		getValue: (column: keyof AppendMemberRequestDto): string => {
+			return formData[column] ? formData[column] + "" : "";
+		},
+		getDateValue: (column: keyof AppendMemberRequestDto): string => {
+			return formData[column]
+				? new Date(formData[column] as string)
+						.toISOString()
+						.substr(0, 10)
+				: "";
+		},
 	};
 
-	return [formData, setters];
+	return [formData, setters, getters];
 }

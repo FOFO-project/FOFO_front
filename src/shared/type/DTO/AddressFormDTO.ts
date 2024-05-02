@@ -1,13 +1,15 @@
-import { GeoPoint } from "../../shared";
 
 export class AddressFormDTO {
-	zipcode: string | null = null;
+	zipcode: string | null = "";
 	sido: string | null = null;
 	sigungu: string | null = null;
 	eupmyundong: string | null = null;
-	location: GeoPoint = new GeoPoint();
 
-	constructor(data: Partial<AddressFormDTO> = {}) {
-		Object.assign(this, data);
+	constructor(data: any = {}) {
+		for (const key in data as AddressFormDTO) {
+			if (this.hasOwnProperty(key)) {
+				this[key as keyof this] = data[key];
+			}
+		}
 	}
 }

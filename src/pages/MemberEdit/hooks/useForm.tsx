@@ -1,8 +1,12 @@
 import { ChangeEventHandler, useState } from "react";
-import { AppendMemberRequestDto, Fomatter } from "../../../shared/shared";
+import {
+	UpdateMemberRequestDto,
+	Formatter,
+	AddressFormDTO,
+} from "../../../shared/shared";
 
-export function useFormData(initData: AppendMemberRequestDto): [
-	AppendMemberRequestDto,
+export function useFormData(initData: UpdateMemberRequestDto): [
+	UpdateMemberRequestDto,
 	{
 		setFormData: Function;
 		handleHeightChange: ChangeEventHandler;
@@ -10,23 +14,28 @@ export function useFormData(initData: AppendMemberRequestDto): [
 		handleDateChange: ChangeEventHandler;
 		handleChange: ChangeEventHandler;
 		handleAddressChange: ChangeEventHandler;
+	},
+	{
+		getValue: (column: keyof UpdateMemberRequestDto) => string;
+		getDateValue: (column: keyof UpdateMemberRequestDto) => string;
+		getAddressValue: (column: keyof AddressFormDTO) => string;
 	}
 ] {
 	const [formData, setFormData] = useState(
-		new AppendMemberRequestDto(initData)
+		new UpdateMemberRequestDto(initData)
 	);
 	const handleHeightChange = (e: any) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
-			[name]: Fomatter.HeightFormat(value),
+			[name]: Formatter.HeightFormat(value),
 		}));
 	};
 	const handlePhoneNumberChange = (e: any) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
-			[name]: Fomatter.PhoneNumber(value),
+			[name]: Formatter.PhoneNumber(value),
 		}));
 	};
 	const handleDateChange = (e: any) => {
@@ -68,5 +77,23 @@ export function useFormData(initData: AppendMemberRequestDto): [
 		handleAddressChange,
 	};
 
-	return [formData, setters];
+	const getters = {
+		getValue: (column: keyof UpdateMemberRequestDto): string => {
+			return formData[column] ? formData[column] + "" : "";
+		},
+		getDateValue: (column: keyof UpdateMemberRequestDto): string => {
+			return formData[column]
+				? new Date(formData[column] as string)
+						.toISOString()
+						.substr(0, 10)
+				: "";
+		},
+		getAddressValue: (column: keyof AddressFormDTO): string => {
+			return formData["address"][column]
+				? formData["address"][column] + ""
+				: "";
+		},
+	};
+
+	return [formData, setters, getters];
 }
