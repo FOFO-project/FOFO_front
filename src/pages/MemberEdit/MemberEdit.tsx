@@ -91,18 +91,18 @@ export function MemberEdit() {
 				/>
 				<h6>주소</h6>
 				<FormInput
-					column="address"
-					getValue={getters.getValue}
+					column="sido"
+					getValue={getters.getSiDoValue}
 					onChange={setters.handleAddressChange}
 				/>
 				<FormInput
-					column="address"
-					getValue={getters.getValue}
+					column="sigungu"
+					getValue={getters.getSiGunGuValue}
 					onChange={setters.handleAddressChange}
 				/>
 				<FormInput
-					column="address"
-					getValue={getters.getValue}
+					column="eupmyundong"
+					getValue={getters.getEupMyunDongValue}
 					onChange={setters.handleAddressChange}
 				/>
 				<h6>내 정보</h6>
