@@ -273,7 +273,10 @@ export function MemberManagePanel({
 								<td
 									onClick={() => {
 										navigate(
-											"/MemberEdit/" + member.id + pageType
+											"/MemberEdit/" + member.id,
+											{ state : {
+												location: pageType
+											}}
 										);
 									}}
 								>
@@ -360,8 +363,10 @@ export function MemberManagePanel({
 												onClick={() => {
 													navigate(
 														"/MemberEdit/" +
-															member.id +
-															pageType
+															member.id, 
+														{ state : {
+															location: pageType
+														}}
 													);
 												}}
 												className="btn btn-light"

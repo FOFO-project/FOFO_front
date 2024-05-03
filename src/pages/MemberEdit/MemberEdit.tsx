@@ -20,11 +20,11 @@ import {
 	FormTextarea,
 } from "./MemberEditComponent";
 import style from "./MemberEdit.module.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import config from "../../app/config";
 
 export function MemberEdit() {
-	const { memberId, pageType } = useParams();
+	const { memberId } = useParams();
 	const [profileCardUrl, setProfileCardUrl] = useState<string>("");
 	const [profileUrls, setProfileUrls] = useState<string[]>([]);
 	const navigate = useNavigate();
@@ -32,6 +32,8 @@ export function MemberEdit() {
 	const [formData, setters, getters] = useFormData(
 		new UpdateMemberRequestDto()
 	);
+	const pageType = useLocation().state.location;
+
 	useEffect(() => {
 		if (memberId) {
 			ApiCaller.get(`/members/${memberId}`)
