@@ -24,7 +24,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import config from "../../app/config";
 
 export function MemberEdit() {
-	const { memberId } = useParams();
+	const { memberId, pageType } = useParams();
 	const [profileCardUrl, setProfileCardUrl] = useState<string>("");
 	const [profileUrls, setProfileUrls] = useState<string[]>([]);
 	const navigate = useNavigate();
@@ -76,7 +76,7 @@ export function MemberEdit() {
 		)
 			.then(() => {
 				alert("회원 수정 완료");
-				navigate(`/MemberManage`);
+				navigate(`/${pageType}`);
 			})
 			.catch((e) => {
 				alert(e);
@@ -94,7 +94,7 @@ export function MemberEdit() {
 		ApiCaller.delete(`/members/${memberId}`, formData)
 			.then(() => {
 				alert("회원 삭제 완료");
-				navigate(`/MemberManage`);
+				navigate(`/${pageType}`);
 			})
 			.catch((e) => {
 				alert(e);
@@ -266,6 +266,15 @@ export function MemberEdit() {
 				<div className={style.buttonContainer}>
 					<button
 						type="submit"
+						className={`btn btn-secondary ${style.btn_item}`}
+						onClick={() => {
+							navigate(`/${pageType}`);
+						}}
+					>
+						닫기
+					</button>
+					<button
+						type="submit"
 						className={`btn btn-primary ${style.btn_item}`}
 						onClick={handleEdit}
 					>
@@ -273,7 +282,7 @@ export function MemberEdit() {
 					</button>
 					<button
 						type="submit"
-						className={`btn btn-primary ${style.btn_item}`}
+						className={`btn btn-danger ${style.btn_item}`}
 						onClick={handleDelete}
 					>
 						삭제

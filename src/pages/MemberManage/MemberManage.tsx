@@ -35,6 +35,8 @@ export function MemberManage() {
 	const [manSelectedItems, setManSelectedItems] = useState<number[]>([]);
 	const [womanSelectedItems, setWomanSelectedItems] = useState<number[]>([]);
 
+	const pageType = "MemberManage";
+
 	useEffect(() => {
 		ApiCaller.get(
 			"/members",
@@ -81,6 +83,7 @@ export function MemberManage() {
 									setSelectedItems: setManSelectedItems,
 								}}
 								title={"남자"}
+								pageType={pageType}
 							/>
 						</div>
 						<div className={style.contents}>
@@ -98,6 +101,7 @@ export function MemberManage() {
 									setSelectedItems: setWomanSelectedItems,
 								}}
 								title={"여자"}
+								pageType={pageType}
 							/>
 						</div>
 					</div>

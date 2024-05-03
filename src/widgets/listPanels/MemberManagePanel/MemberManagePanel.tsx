@@ -41,11 +41,13 @@ export function MemberManagePanel({
 	conditionProps,
 	selectedProps,
 	title,
+	pageType,
 }: {
 	memberListProps: MemberListProps;
 	conditionProps: ConditionProps;
 	selectedProps: SelectedProps;
 	title: string;
+	pageType: string;
 }) {
 	const navigate = useNavigate();
 	const { members, setMembers } = memberListProps;
@@ -270,13 +272,9 @@ export function MemberManagePanel({
 								</td>
 								<td
 									onClick={() => {
-										if (
-											conditionData.approvalStatus !==
-											ApprovalStatus.DEPOSIT_PENDING
-										)
-											navigate(
-												"/MemberEdit/" + member.id
-											);
+										navigate(
+											"/MemberEdit/" + member.id + pageType
+										);
 									}}
 								>
 									{member.name}
@@ -362,7 +360,8 @@ export function MemberManagePanel({
 												onClick={() => {
 													navigate(
 														"/MemberEdit/" +
-															member.id
+															member.id +
+															pageType
 													);
 												}}
 												className="btn btn-light"

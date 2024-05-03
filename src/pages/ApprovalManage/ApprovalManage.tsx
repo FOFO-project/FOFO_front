@@ -19,6 +19,7 @@ export function ApprovalManage() {
 	);
 	const [members, setMembers] = useState([]);
 	const [selectedItems, setSelectedItems] = useState<number[]>([]);
+	const pageType = "ApprovalManage";
 
 	useEffect(() => {
 		ApiCaller.get(
@@ -53,6 +54,7 @@ export function ApprovalManage() {
 								setSelectedItems: setSelectedItems,
 							}}
 							title={"전체"}
+							pageType={pageType}
 						/>
 					</div>
 					<div className={styles.buttonContainer}>
