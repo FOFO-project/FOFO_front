@@ -86,7 +86,13 @@ export const Formatter = {
 			img.src = URL.createObjectURL(file);
 		});
 	},
-	resizeImage(file: File, size: number): Promise<File> {
+	resizeImage(
+		file: File,
+		size: {
+			width: number;
+			height: number;
+		}
+	): Promise<File> {
 		return new Promise((resolve, reject) => {
 			// Create a new Image object
 			const img: any = new Image();
@@ -103,19 +109,22 @@ export const Formatter = {
 				}
 
 				// Set the canvas size to the desired size
-				canvas.width = size;
-				canvas.height = size;
+				canvas.width = size.width;
+				canvas.height = size.height;
 
 				// Calculate the scale factor for resizing
-				const scaleFactor = size / Math.max(this.width, this.height);
+				const scaleFactor = Math.min(
+					size.width / this.width,
+					size.height / this.height
+				);
 
 				// Calculate the new dimensions after stretching
 				const newWidth = this.width * scaleFactor;
 				const newHeight = this.height * scaleFactor;
 
 				// Calculate the position for centering
-				const x = (size - newWidth) / 2;
-				const y = (size - newHeight) / 2;
+				const x = (size.width - newWidth) / 2;
+				const y = (size.height - newHeight) / 2;
 
 				// Draw the image onto the canvas with resizing and centering
 				ctx.drawImage(this, x, y, newWidth, newHeight);
