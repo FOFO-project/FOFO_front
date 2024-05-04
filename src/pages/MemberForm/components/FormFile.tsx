@@ -2,7 +2,6 @@ import { except, labelColumnsMap } from "../util/columns";
 import style from "../MemberForm.module.scss";
 import { AppendMemberRequestDto, Formatter } from "../../../shared/shared";
 import { useState } from "react";
-import config from "../../../app/config";
 
 interface FormFileProps {
 	column: keyof AppendMemberRequestDto;
@@ -10,12 +9,6 @@ interface FormFileProps {
 }
 export function FormFile({ column, setFormData }: FormFileProps) {
 	const [files, setFiles] = useState<File[]>([]);
-
-	const [size, setSize] = useState<{ width: number; height: number }>(
-		config.resize_image_size
-	);
-	const [imageUrl, setImageUrl] = useState<string>("");
-
 	const mandatoryMark = (cols: string) => {
 		return except.includes(cols) ? null : (
 			<span className={style.mandatory_mark}>*</span>
@@ -29,16 +22,14 @@ export function FormFile({ column, setFormData }: FormFileProps) {
 	}
 	const onChange = [
 		async (e: any) => {
-			const file = (await Formatter.resizeImage(
-				e.target.files[0],
-				size
-			).catch(() => null)) as File;
+			const file = (await Formatter.resizeImage(e.target.files[0]).catch(
+				() => null
+			)) as File;
 
 			if (file) {
 				let newFiles = files ? files.slice() : [];
 				newFiles[0] = file;
 				setFiles(newFiles);
-				setImageUrl(URL.createObjectURL(newFiles[0]));
 				updateForm(newFiles.filter((f) => f));
 			} else {
 				setFiles([]);
@@ -46,20 +37,18 @@ export function FormFile({ column, setFormData }: FormFileProps) {
 			}
 		},
 		async (e: any) => {
-			const file = (await Formatter.resizeImage(
-				e.target.files[0],
-				size
-			).catch(() => null)) as File;
+			const file = (await Formatter.resizeImage(e.target.files[0]).catch(
+				() => null
+			)) as File;
 			let newFiles = files.slice();
 			newFiles[1] = file;
 			setFiles(newFiles);
 			updateForm(newFiles.filter((f) => f));
 		},
 		async (e: any) => {
-			const file = (await Formatter.resizeImage(
-				e.target.files[0],
-				size
-			).catch(() => null)) as File;
+			const file = (await Formatter.resizeImage(e.target.files[0]).catch(
+				() => null
+			)) as File;
 			let newFiles = files.slice();
 			newFiles[2] = file;
 			setFiles(newFiles);
@@ -71,48 +60,12 @@ export function FormFile({ column, setFormData }: FormFileProps) {
 			{mandatoryMark(column)}
 			<label className="form-label">{labelColumnsMap[column]}</label>
 			<h6>메인 프로필</h6>
-			{imageUrl !== "" ? (
-				<img
-					src={imageUrl}
-					alt="profileCardImage"
-					style={{
-						width: `${size.width}px`,
-						padding: "10px",
-					}}
-				/>
-			) : null}
 			<input
 				type="file"
 				className="form-control"
 				accept="image/*"
 				onChange={onChange[0]}
 			/>
-			<div>
-				<span>
-					<div>width</div>
-					<input
-						type="number"
-						onChange={(e) => {
-							setSize({
-								width: parseInt(e.target.value),
-								height: size.height,
-							});
-						}}
-					/>
-				</span>
-				<span>
-					<div>height</div>
-					<input
-						type="number"
-						onChange={(e) => {
-							setSize({
-								width: size.width,
-								height: parseInt(e.target.value),
-							});
-						}}
-					/>
-				</span>
-			</div>
 			{files[0] ? (
 				<>
 					<h6>+</h6>

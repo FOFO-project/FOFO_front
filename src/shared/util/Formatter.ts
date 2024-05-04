@@ -1,3 +1,5 @@
+import config from "../../app/config";
+
 export const Formatter = {
 	PhoneNumber(phoneNumber: string): string | null {
 		if (!phoneNumber) return phoneNumber;
@@ -88,9 +90,18 @@ export const Formatter = {
 	},
 	resizeImage(
 		file: File,
-		size: {
-			width: number;
-			height: number;
+		size:
+			| {
+					width: number;
+					height: number;
+			  }
+			| ((
+					width: number,
+					height: number
+			  ) => { width: number; height: number }) = (width, height) => {
+			if (width > height) return config.resize_image_size_landscape;
+			else if (width < height) return config.resize_image_size_portrait;
+			else return config.resize_image_size_square;
 		}
 	): Promise<File> {
 		return new Promise((resolve, reject) => {
@@ -109,13 +120,19 @@ export const Formatter = {
 				}
 
 				// Set the canvas size to the desired size
-				canvas.width = size.width;
-				canvas.height = size.height;
+				let width: number, height: number;
+				if (typeof size === "function") {
+					size = size(this.width, this.height);
+				}
+				width = size.width;
+				height = size.height;
+				canvas.width = width;
+				canvas.height = height;
 
 				// Calculate the scale factor for resizing
 				const scaleFactor = Math.min(
-					size.width / this.width,
-					size.height / this.height
+					width / this.width,
+					height / this.height
 				);
 
 				// Calculate the new dimensions after stretching
@@ -123,8 +140,8 @@ export const Formatter = {
 				const newHeight = this.height * scaleFactor;
 
 				// Calculate the position for centering
-				const x = (size.width - newWidth) / 2;
-				const y = (size.height - newHeight) / 2;
+				const x = (width - newWidth) / 2;
+				const y = (height - newHeight) / 2;
 
 				// Draw the image onto the canvas with resizing and centering
 				ctx.drawImage(this, x, y, newWidth, newHeight);
