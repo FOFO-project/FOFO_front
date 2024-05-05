@@ -15,3 +15,4 @@ export { MatchRequestDto } from "./type/DTO/MatchRequestDto";
 export { ApiCaller } from "./util/ApiCaller";
 export { Formatter } from "./util/Formatter";
 export * from "./type/Enum/memberEnum";
+export * from "./type/Enum/errorMap";

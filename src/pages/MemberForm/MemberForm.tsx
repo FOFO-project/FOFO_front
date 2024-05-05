@@ -2,6 +2,7 @@ import {
 	AgeRelationType,
 	ApiCaller,
 	AppendMemberRequestDto,
+	errorCodeToMessage,
 	Gender,
 	Mbti,
 	Religion,
@@ -27,7 +28,7 @@ export function MemberForm() {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		
+
 		const missing = getMissingValueColumns(formData);
 		if (missing.length > 0) {
 			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
@@ -44,12 +45,14 @@ export function MemberForm() {
 			AppendMemberRequestDto.toFormData(formData)
 		)
 			.then(() => {
-				alert("제출 완료 후 카카오톡 채널 '123 world'로 꼭 '완료'라고 메세지 부탁 드리겠습니다!");
+				alert(
+					"제출 완료 후 카카오톡 채널 '123 world'로 꼭 '완료'라고 메세지 부탁 드리겠습니다!"
+				);
 				navigate("/MemberForm");
 				window.location.reload();
 			})
-			.catch(() => {
-				alert("Fail");
+			.catch((e) => {
+				alert(errorCodeToMessage(e.data.error.code));
 			});
 		return;
 	};
