@@ -23,6 +23,7 @@ import { getMissingValueColumns } from "./util/columns";
 
 export function MemberForm() {
 	const navigate = useNavigate();
+	const [activated, setActivated] = useState(true);
 	const [formData, setters, getters] = useFormData();
 	const [informationAgreeStatus, setInformationAgreeStatus] = useState("N");
 
@@ -40,6 +41,7 @@ export function MemberForm() {
 			return;
 		}
 
+		setActivated(false);
 		ApiCaller.formDataPost(
 			"/member",
 			AppendMemberRequestDto.toFormData(formData)
@@ -53,6 +55,7 @@ export function MemberForm() {
 			})
 			.catch((e) => {
 				alert(errorCodeToMessage(e.data.error.code));
+				setActivated(true);
 			});
 		return;
 	};
@@ -132,7 +135,6 @@ export function MemberForm() {
 					getValue={getters.getValue}
 					onChange={setters.handleChange}
 				/>
-
 				<FormSelect
 					column="mbti"
 					options={[["", "선택해주세요"], ...Object.entries(Mbti)]}
@@ -195,6 +197,7 @@ export function MemberForm() {
 						type="submit"
 						className={`btn btn-success ${style.btn_item}`}
 						onClick={handleSubmit}
+						disabled={!activated}
 					>
 						제출
 					</button>
