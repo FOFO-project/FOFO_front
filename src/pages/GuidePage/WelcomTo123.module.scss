@@ -1,0 +1,29 @@
+.body {
+    background: #fff;
+    height: 4250px;
+    font-family: 'nanumsquare';
+
+    .section {
+        margin: 500px 0;
+        color: black;
+        text-align: center;
+
+        h1 {
+            font-size: 2em;
+        }
+
+        .text_box {
+            width: 90%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        p {
+            font-size: 0.8em;
+        }
+    }
+
+    .section:first-child {
+        margin: 250px 0;
+    }
+}
