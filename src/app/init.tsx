@@ -8,6 +8,7 @@ import {
 	MatchingManage,
 	ApprovalManage,
 	MatchingMonitoring,
+	WelcomeTo123,
 } from "../pages/pages";
 import "./index.css";
 import {
@@ -25,6 +26,10 @@ export function init() {
 					{
 						path: "/",
 						element: <Navigate to="/SignupManage" />,
+					},
+					{
+						path: "/WelcomeTo123",
+						element: <WelcomeTo123 />
 					},
 					{
 						path: "/MemberForm",
