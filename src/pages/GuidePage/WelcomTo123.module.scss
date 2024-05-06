@@ -1,15 +1,26 @@
-.body {
-    background: #fff;
-    height: 4250px;
+.wrap {
+    background: #000;
     font-family: 'nanumsquare';
+    overflow: hidden;
 
     .section {
-        margin: 500px 0;
-        color: black;
+        color: #fff;
+        height: 100vh;
+        width: 100%;
         text-align: center;
+        display: inline-block;
+        box-sizing: border-box;
+
+        .section_item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
 
         h1 {
-            font-size: 2em;
+            font-size: 2.3em;
         }
 
         .text_box {
@@ -19,11 +30,7 @@
         }
 
         p {
-            font-size: 0.8em;
+            font-size: 0.9em;
         }
-    }
-
-    .section:first-child {
-        margin: 250px 0;
     }
 }
