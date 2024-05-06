@@ -6,6 +6,7 @@ export { Member } from "./type/Entity/Member";
 export { Matching } from "./type/Entity/Matching";
 export { Address } from "./type/Entity/Address";
 export { GeoPoint } from "./type/Entity/GeoPoint";
+export { PageInfo } from "./type/Entity/PageInfo";
 export { AppendMemberRequestDto } from "./type/DTO/AppendMemberRequestDto";
 export { UpdateMemberRequestDto } from "./type/DTO/UpdateMemberRequestDto";
 export { AddressFormDTO } from "./type/DTO/AddressFormDTO";

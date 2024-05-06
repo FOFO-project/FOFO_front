@@ -1,12 +1,7 @@
 import { FofoHeader } from "../../widgets/widgets";
 import page_styles from "../pages.module.scss";
 import styles from "./SignupManage.module.scss";
-import {
-	ApiCaller,
-	ApprovalStatus,
-	ConditionListModel,
-	Member,
-} from "../../shared/shared";
+import { ApprovalStatus, ConditionListModel } from "../../shared/shared";
 import { Reject, ConfirmDeposit } from "../../features/features";
 import { useEffect, useState } from "react";
 import { MemberManagePanel } from "../../widgets/widgets";
@@ -20,19 +15,6 @@ export function SignupManage() {
 	const [members, setMembers] = useState([]);
 	const [selectedItems, setSelectedItems] = useState<number[]>([]);
 	const pageType = "SignupManage";
-
-	useEffect(() => {
-		ApiCaller.get(
-			"/members",
-			ConditionListModel.toFindMembersConditionDto(conditionData)
-		).then((e) => {
-			setMembers(
-				e.data.content
-					? e.data.content.map((e: any) => new Member(e))
-					: []
-			);
-		});
-	}, []);
 
 	return (
 		<div className={page_styles.Page}>

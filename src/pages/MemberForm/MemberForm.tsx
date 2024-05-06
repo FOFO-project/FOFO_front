@@ -61,7 +61,7 @@ export function MemberForm() {
 	};
 
 	return (
-		<div className={style.wrap}>
+		<div>
 			{/* 개인정보 수집 이용 동의서 */}
 			<InfoAgreement
 				setInformationAgreeStatus={setInformationAgreeStatus}

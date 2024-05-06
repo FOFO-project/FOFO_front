@@ -38,15 +38,14 @@ export function MemberManage() {
 	const pageType = "MemberManage";
 
 	useEffect(() => {
-		ApiCaller.get(
-			"/members",
-			ConditionListModel.toFindMembersConditionDto(
+		ApiCaller.get("/members", {
+			...ConditionListModel.toFindMembersConditionDto(
 				new ConditionListModel({
 					approvalStatus: ApprovalStatus.APPROVED,
 					matchableYn: "Y",
 				})
-			)
-		).then((e) => {
+			),
+		}).then((e) => {
 			let manList: Member[] = [];
 			let womanList: Member[] = [];
 			for (var i = 0; i < e.data.content.length; i++) {
