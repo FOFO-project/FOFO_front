@@ -56,9 +56,9 @@ export function WelcomeTo123() {
                 <div className={style.section_item}>
                     <h1>가입조건</h1>
                     <div className={style.text_box}>
-                        <p>1. 수도권 거주</p>
-                        <p>2. 미혼</p>
-                        <p>3. 솔로(사실혼/돌싱 불가)</p>
+                        <p>1. 서울 및 경기 수도권 거주</p>
+                        <p>2. 미혼/솔로 (사실혼/돌싱 불가)</p>
+                        <p>3. 직장인(명함/사원증 인증 필수)</p>
                     </div>
                     <div className="btn-group" role="group" aria-label="">
                         <button className="btn btn-sm btn-outline-light"
@@ -96,7 +96,7 @@ export function WelcomeTo123() {
                 <div className={style.section_item}>
                     <h1>진행과정</h1>
                     <div className={style.text_box}>
-                        <p>1. 123 카카오톡 채널 추가 및 가입신청서 제출</p>
+                        <p>1. '123 World' 카카오톡 채널 추가 및 가입신청서 제출</p>
                         <p>2. 회사 인증 및 가입비 결제</p>
                         <p>3. 후보 선택 및 매칭</p>
                     </div>
