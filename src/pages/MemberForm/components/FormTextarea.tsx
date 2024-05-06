@@ -1,6 +1,6 @@
 import { except, labelColumnsMap } from "../util/columns";
 import style from "../MemberForm.module.scss";
-import { AppendMemberRequestDto } from "../../../shared/shared";
+import { AppendMemberRequestDto, inputLimit } from "../../../shared/shared";
 
 interface FormTextareaProps {
 	column: keyof AppendMemberRequestDto;
@@ -29,6 +29,7 @@ export function FormTextarea({
 				name={column}
 				value={getValue(column)}
 				onChange={onChange}
+				maxLength={inputLimit.get(column)}
 			/>
 		</div>
 	);

@@ -1,6 +1,7 @@
 import { except, labelColumnsMap } from "../util/columns";
 import style from "../MemberForm.module.scss";
 import { AppendMemberRequestDto } from "../../../shared/shared";
+import { inputLimit } from "../../../shared/type/Enum/memberEnum";
 
 interface FormInputProps {
 	column: keyof AppendMemberRequestDto;
@@ -32,6 +33,7 @@ export function FormInput({
 				name={column}
 				value={getValue(column)}
 				onChange={onChange}
+				maxLength={inputLimit.get(column)}
 			/>
 		</div>
 	);

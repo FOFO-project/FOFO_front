@@ -94,3 +94,15 @@ export const religionMap = new Map<string | null, string>([
 	["OTHERS", "기타"],
 	[null, "입력값 없음"],
 ]);
+export const inputLimit = new Map<string | null, number>([
+	["kakaoId", 20],
+	["sido", 20],
+	["sigungu", 20],
+	["eupmyundong", 20],
+	["name", 20],
+	["company", 20],
+	["job", 20],
+	["university", 20],
+	["charmingPoint", 100],
+	["note", 100]
+]);
