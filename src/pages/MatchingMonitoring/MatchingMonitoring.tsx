@@ -10,20 +10,6 @@ export function MatchingMonitoring() {
 	const [selectedItems, setSelectedItems] = useState<Matching[]>([]);
 	const matchingStatus = "MATCHING_COMPLETED";
 
-	// page 진입 시 최초 조회 로직
-	useEffect(() => {
-		ApiCaller.get("/match/result", { matchingStatus: matchingStatus }).then(
-			(e) => {
-				const matchingList: Matching[] = e.data.content.map(
-					(e: any) => {
-						return new Matching(e);
-					}
-				);
-				setMatchings(matchingList);
-			}
-		);
-	}, []);
-
 	return (
 		<div className={page_styles.Page}>
 			<FofoHeader className={style.Header} />
@@ -32,8 +18,10 @@ export function MatchingMonitoring() {
 					<div className={style.contentsContainer}>
 						<div className={style.contents}>
 							<MatchingManagePanel
-								matchings={matchings}
-								setMatchings={setMatchings}
+								matchingProps={{
+									matchings: matchings,
+									setMatchings: setMatchings,
+								}}
 								selectedProps={{
 									selectedItems: selectedItems,
 									setSelectedItems: setSelectedItems,

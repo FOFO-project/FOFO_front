@@ -70,6 +70,7 @@ export function MemberManagePanel({
 				<FindMember
 					conditionData={conditionData}
 					setMembers={setMembers}
+					pageInfoProps={{ pageInfo, setPageInfo }}
 				/>
 				<Pagnation pageInfo={pageInfo} setPageInfo={setPageInfo} />
 			</div>

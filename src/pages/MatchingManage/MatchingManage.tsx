@@ -5,8 +5,8 @@ import {
 	MatchingCancel,
 	MatchingProceed,
 } from "../../features/features";
-import { Matching, ApiCaller, MatchingStatus } from "../../shared/shared";
-import { useState, useEffect } from "react";
+import { Matching, MatchingStatus } from "../../shared/shared";
+import { useState } from "react";
 import style from "./MatchingManage.module.scss";
 import page_styles from "../pages.module.scss";
 
@@ -14,16 +14,6 @@ export function MatchingManage() {
 	const [matchings, setMatchings] = useState<Matching[]>([]);
 	const [selectedItems, setSelectedItems] = useState<Matching[]>([]);
 	const matchingStatus = "MATCHING_NOTCOMPLETED";
-
-	// page 진입 시 최초 조회 로직
-	useEffect(() => {
-		ApiCaller.get("/match/result", {}).then((e) => {
-			const matchingList: Matching[] = e.data.content.map((e: any) => {
-				return new Matching(e);
-			});
-			setMatchings(matchingList);
-		});
-	}, []);
 
 	return (
 		<div className={page_styles.Page}>
@@ -33,8 +23,10 @@ export function MatchingManage() {
 					<div className={style.contentsContainer}>
 						<div className={style.contents}>
 							<MatchingManagePanel
-								matchings={matchings}
-								setMatchings={setMatchings}
+								matchingProps={{
+									matchings: matchings,
+									setMatchings: setMatchings,
+								}}
 								selectedProps={{
 									selectedItems: selectedItems,
 									setSelectedItems: setSelectedItems,

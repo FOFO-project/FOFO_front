@@ -3,7 +3,9 @@ interface NoneCondtionProps {
 }
 export function NoneCondition({ title }: NoneCondtionProps) {
 	return (
-		<div>
+		<div
+			style={{ width: "100%", display: "flex", justifyContent: "center" }}
+		>
 			<button
 				className={`btn btn-light btn-lg`}
 				data-bs-toggle="dropdown"

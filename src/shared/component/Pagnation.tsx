@@ -36,7 +36,7 @@ export function Pagnation({ pageInfo, setPageInfo }: PagnationProps) {
 				</li>
 				<li
 					className={
-						pageInfo.page >= pageInfo.totalPages //- 1
+						pageInfo.page >= pageInfo.totalPages - 1
 							? "page-item disabled"
 							: "page-item"
 					}
