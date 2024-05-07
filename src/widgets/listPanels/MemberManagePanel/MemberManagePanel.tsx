@@ -59,6 +59,7 @@ export function MemberManagePanel({
 
 	return (
 		<div className={style.container}>
+			<ImagePopup apiUrl={config.api_url} imageId={imageId} />
 			<div className={style.button_container}>
 				<FindMember
 					conditionData={conditionData}
