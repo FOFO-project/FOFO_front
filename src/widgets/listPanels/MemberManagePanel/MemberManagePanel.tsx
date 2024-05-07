@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { ApiCaller, Member, PageInfo } from "../../../shared/shared";
+import {
+	ApiCaller,
+	Member,
+	PageInfo,
+	ImagePopup,
+} from "../../../shared/shared";
 import { ConditionListModel } from "../../../shared/shared";
 import style from "./MemberManagePanel.module.scss";
 import { FindMember } from "../../../features/features";
@@ -38,6 +43,9 @@ export function MemberManagePanel({
 	const { conditionData } = conditionProps;
 	const { setSelectedItems } = selectedProps;
 
+	// image popup state
+	const [imageId, setImageId] = useState("");
+
 	// 페이지네이션
 	const [pageInfo, setPageInfo] = useState(new PageInfo());
 
@@ -59,6 +67,7 @@ export function MemberManagePanel({
 
 	return (
 		<div className={style.container}>
+			<ImagePopup apiUrl={config.api_url} imageId={imageId} />
 			<div className={style.button_container}>
 				<FindMember
 					conditionData={conditionData}
