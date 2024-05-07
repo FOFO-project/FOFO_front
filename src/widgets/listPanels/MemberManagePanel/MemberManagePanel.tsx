@@ -8,6 +8,7 @@ import {
 	ApprovalStatus,
 	smokingYnMap,
 	religionMap,
+	ImagePopup,
 } from "../../../shared/shared";
 import {
 	SelectCondition,
@@ -55,6 +56,8 @@ export function MemberManagePanel({
 	const { selectedItems, setSelectedItems } = selectedProps;
 	// 전체선택
 	const [selectAll, setSelectAll] = useState(false);
+	// image popup state
+	const [ imageId, setImageId ] = useState("");
 
 	// checkbox handler
 	const checkboxHandler = (memberId: any) => {
@@ -95,6 +98,7 @@ export function MemberManagePanel({
 
 	return (
 		<div className={style.container}>
+			<ImagePopup apiUrl={config.api_url} imageId={imageId} />
 			<div className={style.button_container}>
 				<FindMember
 					conditionData={conditionData}
@@ -344,13 +348,13 @@ export function MemberManagePanel({
 									<td>
 										{member.profileImageId ? (
 											<a
-												href={
-													member.profileImageId
-														? `${config.api_url}/images/${member.profileImageId}/download`
-														: "#"
-												}
-												target="_blank"
-											>
+												type="button" 
+												data-bs-toggle="modal" 
+												data-bs-target="#staticBackdrop"
+												onClick={() => {
+													setImageId(member.profileImageId?member.profileImageId:"");
+												}}
+												>
 												<img
 													src={`${config.api_url}/images/${member.profileImageId}`}
 													style={{
