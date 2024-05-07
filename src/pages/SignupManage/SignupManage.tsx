@@ -3,7 +3,7 @@ import page_styles from "../pages.module.scss";
 import styles from "./SignupManage.module.scss";
 import { ApprovalStatus, ConditionListModel } from "../../shared/shared";
 import { Reject, ConfirmDeposit } from "../../features/features";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MemberManagePanel } from "../../widgets/widgets";
 export function SignupManage() {
 	const [conditionData, setConditionData] = useState(

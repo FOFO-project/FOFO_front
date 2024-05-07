@@ -37,30 +37,6 @@ export function MemberManage() {
 
 	const pageType = "MemberManage";
 
-	useEffect(() => {
-		ApiCaller.get("/members", {
-			...ConditionListModel.toFindMembersConditionDto(
-				new ConditionListModel({
-					approvalStatus: ApprovalStatus.APPROVED,
-					matchableYn: "Y",
-				})
-			),
-		}).then((e) => {
-			let manList: Member[] = [];
-			let womanList: Member[] = [];
-			for (var i = 0; i < e.data.content.length; i++) {
-				let member = new Member(e.data.content[i]);
-				if (member.gender == Gender.MAN) {
-					manList.push(member);
-				} else {
-					womanList.push(member);
-				}
-			}
-			setMans(manList);
-			setWomans(womanList);
-		});
-	}, []);
-
 	return (
 		<div className={page_styles.Page}>
 			<FofoHeader className={page_styles.Header} />

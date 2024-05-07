@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
-import { ApiCaller, Member, PageInfo, Pagnation } from "../../../shared/shared";
+import {
+	ApiCaller,
+	Member,
+	PageInfo,
+	Pagnation,
+	ImagePopup,
+} from "../../../shared/shared";
 import { ConditionListModel } from "../../../shared/shared";
 import style from "./MemberManagePanel.module.scss";
 import { FindMember } from "../../../features/features";
 import classNames from "classnames";
 import { TableHeader } from "./components/TableHeader";
 import { TableContents } from "./components/TableContents";
+import config from "../../../app/config";
 interface MemberListProps {
 	members: Member[];
 	setMembers: Function;
@@ -32,9 +39,8 @@ export function MemberManagePanel({
 	title: string;
 	pageType: string;
 }) {
-	const { members, setMembers } = memberListProps;
+	const { setMembers } = memberListProps;
 	const { conditionData } = conditionProps;
-	const { setSelectedItems } = selectedProps;
 
 	// image popup state
 	const [imageId, setImageId] = useState("");
@@ -68,23 +74,18 @@ export function MemberManagePanel({
 				<Pagnation pageInfo={pageInfo} setPageInfo={setPageInfo} />
 			</div>
 			<div className={style.table_container}>
+				<ImagePopup apiUrl={config.api_url} imageId={imageId} />
 				<table className={classNames(`table`)}>
 					<TableHeader
 						title={title}
 						conditionProps={conditionProps}
-						selectedProps={{
-							...selectedProps,
-							selectAllHandler: (e: any) => {
-								setSelectedItems(
-									members.map((member) => member.id as any)
-								);
-							},
-						}}
+						memberProps={memberListProps}
+						selectedProps={selectedProps}
 					/>
 					<TableContents
-						members={members}
 						conditionData={conditionData}
-						setMembers={setMembers}
+						setImageId={setImageId}
+						memberProps={memberListProps}
 						selectedProps={selectedProps}
 						pageType={pageType}
 					/>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
 	AddressCondition,
 	ApprovalStatus,
@@ -6,6 +5,7 @@ import {
 	DateCondition,
 	FilteringCondition,
 	Mbti,
+	Member,
 	NoneCondition,
 	Religion,
 	SelectCondition,
@@ -17,25 +17,51 @@ interface ConditionProps {
 	conditionData: ConditionListModel;
 	setConditionData: Function;
 }
+
+interface MemberProps {
+	members: Member[];
+	setMembers: Function;
+}
+
 interface SelectedProps {
 	selectedItems: number[];
 	setSelectedItems: Function;
-	selectAllHandler: Function;
 }
 
 interface TableHeaderProps {
 	title: string;
 	conditionProps: ConditionProps;
+	memberProps: MemberProps;
 	selectedProps: SelectedProps;
 }
 export function TableHeader({
 	title,
 	conditionProps,
+	memberProps,
 	selectedProps,
 }: TableHeaderProps) {
-	const { selectedItems, setSelectedItems, selectAllHandler } = selectedProps;
-
 	const { conditionData, setConditionData } = conditionProps;
+	const { members } = memberProps;
+	const { selectedItems, setSelectedItems } = selectedProps;
+
+	function isAllSelected() {
+		for (const member of members) {
+			if (!selectedItems.includes(member.id as number)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	function handleSelectAll() {
+		const selected = new Set(selectedItems);
+		if (isAllSelected()) {
+			members.forEach((member) => selected.delete(member.id as number));
+		} else {
+			members.forEach((member) => selected.add(member.id as number));
+		}
+		setSelectedItems(Array.from(selected));
+	}
+
 	return (
 		<thead>
 			<tr>
@@ -45,9 +71,9 @@ export function TableHeader({
 				>
 					<button
 						className={`btn btn-md ${
-							true ? "btn-dark" : "btn-light"
+							isAllSelected() ? "btn-dark" : "btn-light"
 						}`}
-						onClick={(e) => selectAllHandler(e)}
+						onClick={() => handleSelectAll()}
 					>
 						{title}
 					</button>
