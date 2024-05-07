@@ -2,12 +2,11 @@ import { FofoHeader } from "../../widgets/widgets";
 import { MemberManagePanel } from "../../widgets/widgets";
 import {
 	ConditionListModel,
-	ApiCaller,
 	Member,
 	Gender,
 	ApprovalStatus,
 } from "../../shared/shared";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import style from "./MemberManage.module.scss";
 import page_styles from "../pages.module.scss";
 import {
