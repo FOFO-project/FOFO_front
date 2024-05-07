@@ -3,11 +3,13 @@ import {
 	ApprovalStatus,
 	ConditionListModel,
 	Gender,
+	ImagePopup,
 	Member,
 	religionMap,
 	smokingYnMap,
 } from "../../../../shared/shared";
 import config from "../../../../app/config";
+import { useState } from "react";
 
 interface SelectedProps {
 	selectedItems: number[];
@@ -31,6 +33,10 @@ export function TableContents({
 }: TableContentsProps) {
 	const { selectedItems, setSelectedItems } = selectedProps;
 	const navigate = useNavigate();
+
+	// image popup state
+	const [imageId, setImageId] = useState("");
+
 	// 관리자멘트
 	const handleNoteChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
@@ -58,6 +64,7 @@ export function TableContents({
 	};
 	return (
 		<tbody className="text-center">
+			<ImagePopup apiUrl={config.api_url} imageId={imageId} />
 			{members?.map((member) => (
 				<tr
 					key={member.id}
@@ -135,12 +142,16 @@ export function TableContents({
 						<td>
 							{member.profileImageId ? (
 								<a
-									href={
-										member.profileImageId
-											? `${config.api_url}/images/${member.profileImageId}/download`
-											: "#"
-									}
-									target="_blank"
+									type="button"
+									data-bs-toggle="modal"
+									data-bs-target="#staticBackdrop"
+									onClick={() => {
+										setImageId(
+											member.profileImageId
+												? member.profileImageId
+												: ""
+										);
+									}}
 								>
 									<img
 										src={`${config.api_url}/images/${member.profileImageId}`}

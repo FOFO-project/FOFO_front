@@ -1,5 +1,4 @@
-import { PageInfo } from "../../../../shared/shared";
-import style from "../MemberManagePanel.module.scss";
+import { PageInfo } from "../shared";
 
 interface PagnationProps {
 	pageInfo: PageInfo;
