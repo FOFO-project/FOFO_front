@@ -13,7 +13,6 @@ export { AddressFormDTO } from "./type/DTO/AddressFormDTO";
 export { ConditionListModel, Filtering } from "./type/DTO/ConditionListModel";
 export { FindMembersConditionDto } from "./type/DTO/FindMembersConditionDto";
 export { MatchRequestDto } from "./type/DTO/MatchRequestDto";
-export { ImagePopup } from "./component/popup/ImagePopup"
 export { ApiCaller } from "./util/ApiCaller";
 export { Formatter } from "./util/Formatter";
 export * from "./type/Enum/memberEnum";
