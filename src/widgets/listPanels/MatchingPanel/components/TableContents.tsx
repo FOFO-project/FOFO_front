@@ -1,9 +1,4 @@
-import {
-	ConditionListModel,
-	Matching,
-	MatchingStatus,
-	Member,
-} from "../../../../shared/shared";
+import { Matching, MatchingStatus, Member } from "../../../../shared/shared";
 import style from "../MatchingManagePanel.module.scss";
 
 interface MatchingProps {
