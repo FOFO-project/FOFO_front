@@ -59,6 +59,6 @@ jobs:
                   host: ${{secrets.DEV_HOST}}
                   username: ${{secrets.DEV_USERNAME}}
                   key: ${{secrets.SSH_KEY2}}
-                  source: "./dist/*"
+                  source: "./dist"
                   target: "/home/${{secrets.DEV_USERNAME}}/fofo/fofo-webserver/dist"
                   strip_components: 2
