@@ -14,5 +14,4 @@ export default defineConfig({
 		},
 		cors: true,
 	},
-	base: "fofo-frontend",
 });
