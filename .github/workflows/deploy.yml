@@ -52,7 +52,7 @@ jobs:
               with:
                   host: ${{secrets.DEV_HOST}}
                   username: ${{secrets.DEV_USERNAME}}
-                  key: ${{secrets.SSH_KEY2}}
+                  key: ${{secrets.SSH_KEY}}
                   script: rm -rf /home/${{secrets.DEV_USERNAME}}/fofo/fofo-webserver/dist
 
             # 배포
@@ -61,7 +61,7 @@ jobs:
               with:
                   host: ${{secrets.DEV_HOST}}
                   username: ${{secrets.DEV_USERNAME}}
-                  key: ${{secrets.SSH_KEY2}}
+                  key: ${{secrets.SSH_KEY}}
                   source: "./dist"
                   target: "/home/${{secrets.DEV_USERNAME}}/fofo/fofo-webserver/dist"
                   strip_components: 2
@@ -108,7 +108,7 @@ jobs:
               with:
                   host: ${{secrets.PROD_HOST}}
                   username: ${{secrets.PROD_USERNAME}}
-                  key: ${{secrets.SSH_KEY2}}
+                  key: ${{secrets.SSH_KEY}}
                   script: rm -rf /home/${{secrets.PROD_USERNAME}}/fofo/fofo-webserver/dist
 
             # 배포
@@ -117,7 +117,7 @@ jobs:
               with:
                   host: ${{secrets.PROD_HOST}}
                   username: ${{secrets.PROD_USERNAME}}
-                  key: ${{secrets.SSH_KEY2}}
+                  key: ${{secrets.SSH_KEY}}
                   source: "./dist"
                   target: "/home/${{secrets.PROD_USERNAME}}/fofo/fofo-webserver/dist"
                   strip_components: 2
