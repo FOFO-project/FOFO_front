@@ -14,5 +14,4 @@ export default defineConfig({
 		},
 		cors: true,
 	},
-	base: "https://dev.fofo.world/",
 });

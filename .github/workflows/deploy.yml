@@ -5,6 +5,7 @@ name: Vite React CI
 on:
     push:
         branches:
+            #- "main"
             - "development"
 
 # 워크플로우에서 할 작업 정의한다.
@@ -38,7 +39,7 @@ jobs:
     deploy-dev:
         needs: build
         runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/github-action'
+        if: github.ref == 'refs/heads/development'
 
         # 빌드한 artifact 다운로드
         steps:
