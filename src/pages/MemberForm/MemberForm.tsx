@@ -89,11 +89,6 @@ export function MemberForm() {
 					getValue={getters.getValue}
 					onChange={setters.handleChange}
 				/>
-				<FormInput
-					column="eupmyundong"
-					getValue={getters.getValue}
-					onChange={setters.handleChange}
-				/>
 				<h6>내 정보</h6>
 				<FormInput
 					column="name"
@@ -114,11 +109,6 @@ export function MemberForm() {
 				<FormNumber
 					column="height"
 					onChange={setters.handleHeightChange}
-				/>
-				<FormInput
-					column="phoneNumber"
-					getValue={getters.getValue}
-					onChange={setters.handlePhoneNumberChange}
 				/>
 				<FormInput
 					column="company"

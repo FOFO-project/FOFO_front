@@ -16,6 +16,7 @@ export function Pagnation({ pageInfo, setPageInfo }: PagnationProps) {
 		<div
 			style={{
 				paddingTop: "10px",
+				marginInline: "20px",
 			}}
 		>
 			<ul className="pagination">

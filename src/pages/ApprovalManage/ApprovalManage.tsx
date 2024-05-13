@@ -1,4 +1,4 @@
-import { FofoHeader } from "../../widgets/widgets";
+import { CommonHeader } from "../../widgets/widgets";
 import page_styles from "../pages.module.scss";
 import styles from "./ApprovalManage.module.scss";
 import { ApprovalStatus, ConditionListModel } from "../../shared/shared";
@@ -18,7 +18,7 @@ export function ApprovalManage() {
 
 	return (
 		<div className={page_styles.Page}>
-			<FofoHeader className={page_styles.Header} />
+			<CommonHeader className={page_styles.Header} />
 			<div className={page_styles.Panel}>
 				<div className={styles.container}>
 					<div className={styles.contentsContainer}>

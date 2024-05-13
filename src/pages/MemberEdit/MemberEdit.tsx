@@ -94,25 +94,6 @@ export function MemberEdit() {
 		return;
 	};
 
-	const handleDelete = (e: any) => {
-		e.preventDefault();
-		const missing = getMissingValueColumns(formData);
-		if (missing.length > 0) {
-			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
-			return;
-		}
-		setActivated(false);
-		ApiCaller.delete(`/members/${memberId}`, formData)
-			.then(() => {
-				alert("회원 삭제 완료");
-				navigate(`/${pageType}`);
-			})
-			.catch((e) => {
-				alert(errorCodeToMessage(e.data.error.code));
-				setActivated(true);
-			});
-		return;
-	};
 	return (
 		<div>
 			{/* 유저 입력폼 */}
@@ -151,11 +132,6 @@ export function MemberEdit() {
 					getValue={getters.getAddressValue}
 					onChange={setters.handleAddressChange}
 				/>
-				<FormAddress
-					column="eupmyundong"
-					getValue={getters.getAddressValue}
-					onChange={setters.handleAddressChange}
-				/>
 				<h6>내 정보</h6>
 				<FormInput
 					column="name"
@@ -178,11 +154,6 @@ export function MemberEdit() {
 					column="height"
 					getValue={getters.getValue}
 					onChange={setters.handleHeightChange}
-				/>
-				<FormInput
-					column="phoneNumber"
-					getValue={getters.getValue}
-					onChange={setters.handlePhoneNumberChange}
 				/>
 				<FormInput
 					column="company"
@@ -292,14 +263,6 @@ export function MemberEdit() {
 						disabled={!activated}
 					>
 						수정
-					</button>
-					<button
-						type="submit"
-						className={`btn btn-danger ${style.btn_item}`}
-						onClick={handleDelete}
-						disabled={!activated}
-					>
-						삭제
 					</button>
 				</div>
 			</form>

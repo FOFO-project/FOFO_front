@@ -1,8 +1,8 @@
-import { FofoHeader } from "../../widgets/widgets";
+import { CommonHeader } from "../../widgets/widgets";
 import page_styles from "../pages.module.scss";
 import styles from "./SignupManage.module.scss";
 import { ApprovalStatus, ConditionListModel } from "../../shared/shared";
-import { Reject, ConfirmDeposit } from "../../features/features";
+import { ConfirmDeposit } from "../../features/features";
 import { useState } from "react";
 import { MemberManagePanel } from "../../widgets/widgets";
 export function SignupManage() {
@@ -18,7 +18,7 @@ export function SignupManage() {
 
 	return (
 		<div className={page_styles.Page}>
-			<FofoHeader className={page_styles.Header} />
+			<CommonHeader className={page_styles.Header} />
 			<div className={page_styles.Panel}>
 				<div className={styles.container}>
 					<div className={styles.contentsContainer}>
@@ -41,7 +41,6 @@ export function SignupManage() {
 					</div>
 					<div className={styles.buttonContainer}>
 						<ConfirmDeposit selected={selectedItems} />
-						<Reject selected={selectedItems} />
 					</div>
 				</div>
 			</div>

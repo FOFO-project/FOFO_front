@@ -8,7 +8,7 @@ import {
 } from "../../../shared/shared";
 import { ConditionListModel } from "../../../shared/shared";
 import style from "./MemberManagePanel.module.scss";
-import { FindMember } from "../../../features/features";
+import { FindMember, DeleteMember } from "../../../features/features";
 import classNames from "classnames";
 import { TableHeader } from "./components/TableHeader";
 import { TableContents } from "./components/TableContents";
@@ -41,6 +41,7 @@ export function MemberManagePanel({
 }) {
 	const { setMembers } = memberListProps;
 	const { conditionData } = conditionProps;
+	const { selectedItems } = selectedProps;
 
 	// image popup state
 	const [imageId, setImageId] = useState("");
@@ -67,12 +68,13 @@ export function MemberManagePanel({
 	return (
 		<div className={style.container}>
 			<div className={style.button_container}>
+				<Pagnation pageInfo={pageInfo} setPageInfo={setPageInfo} />
 				<FindMember
 					conditionData={conditionData}
 					setMembers={setMembers}
 					pageInfoProps={{ pageInfo, setPageInfo }}
 				/>
-				<Pagnation pageInfo={pageInfo} setPageInfo={setPageInfo} />
+				<DeleteMember selected={selectedItems} />
 			</div>
 			<div className={style.table_container}>
 				<ImagePopup apiUrl={config.api_url} imageId={imageId} />
