@@ -3,7 +3,7 @@ import logo from "../../assets/fofologo-removebg-preview.png";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 
-export function FofoHeader({ className }: { className?: string }) {
+export function CommonHeader({ className }: { className?: string }) {
 	const navigate = useNavigate();
 	const data = [
 		{

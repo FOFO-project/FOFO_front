@@ -1,4 +1,4 @@
-import { FofoHeader } from "../../widgets/widgets";
+import { CommonHeader } from "../../widgets/widgets";
 import { MatchingManagePanel } from "../../widgets/listPanels/MatchingPanel/MatchingManagePanel";
 import {
 	MatchingConfirm,
@@ -17,7 +17,7 @@ export function MatchingManage() {
 
 	return (
 		<div className={page_styles.Page}>
-			<FofoHeader className={style.Header} />
+			<CommonHeader className={style.Header} />
 			<div className={page_styles.Panel}>
 				<div className={style.container}>
 					<div className={style.contentsContainer}>

@@ -1,4 +1,4 @@
-import { FofoHeader } from "../../widgets/widgets";
+import { CommonHeader } from "../../widgets/widgets";
 import { MemberManagePanel } from "../../widgets/widgets";
 import {
 	ConditionListModel,
@@ -38,7 +38,7 @@ export function MemberManage() {
 
 	return (
 		<div className={page_styles.Page}>
-			<FofoHeader className={page_styles.Header} />
+			<CommonHeader className={page_styles.Header} />
 			<div className={page_styles.Panel}>
 				<div className={style.container}>
 					<div className={style.contentsContainer}>
