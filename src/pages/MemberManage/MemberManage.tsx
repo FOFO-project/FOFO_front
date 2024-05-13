@@ -1,13 +1,12 @@
-import { FofoHeader } from "../../widgets/widgets";
+import { CommonHeader } from "../../widgets/widgets";
 import { MemberManagePanel } from "../../widgets/widgets";
 import {
 	ConditionListModel,
-	ApiCaller,
 	Member,
 	Gender,
 	ApprovalStatus,
 } from "../../shared/shared";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import style from "./MemberManage.module.scss";
 import page_styles from "../pages.module.scss";
 import {
@@ -37,34 +36,9 @@ export function MemberManage() {
 
 	const pageType = "MemberManage";
 
-	useEffect(() => {
-		ApiCaller.get(
-			"/members",
-			ConditionListModel.toFindMembersConditionDto(
-				new ConditionListModel({
-					approvalStatus: ApprovalStatus.APPROVED,
-					matchableYn: "Y",
-				})
-			)
-		).then((e) => {
-			let manList: Member[] = [];
-			let womanList: Member[] = [];
-			for (var i = 0; i < e.data.content.length; i++) {
-				let member = new Member(e.data.content[i]);
-				if (member.gender == Gender.MAN) {
-					manList.push(member);
-				} else {
-					womanList.push(member);
-				}
-			}
-			setMans(manList);
-			setWomans(womanList);
-		});
-	}, []);
-
 	return (
 		<div className={page_styles.Page}>
-			<FofoHeader className={page_styles.Header} />
+			<CommonHeader className={page_styles.Header} />
 			<div className={page_styles.Panel}>
 				<div className={style.container}>
 					<div className={style.contentsContainer}>

@@ -25,7 +25,7 @@
 			cursor: pointer;
 		}
 
-		.heart_clicked_left ,
+		.heart_clicked_left,
 		.heart_clicked_right {
 			display: inline-block;
 			border: none;
@@ -40,7 +40,7 @@
 		.heart_clicked_left::before,
 		.heart_clicked_right::before {
 			position: absolute;
-			content: '';
+			content: "";
 			background-color: red;
 			height: 100%;
 			width: 100%;
@@ -52,7 +52,7 @@
 		.heart_clicked_left::after,
 		.heart_clicked_right::after {
 			position: absolute;
-			content: '';
+			content: "";
 			background-color: red;
 			height: 100%;
 			width: 100%;
@@ -61,7 +61,7 @@
 			border-radius: 50%;
 		}
 
-		.heart_unclicked_left ,
+		.heart_unclicked_left,
 		.heart_unclicked_right {
 			display: inline-block;
 			border: none;
@@ -76,7 +76,7 @@
 		.heart_unclicked_left::before,
 		.heart_unclicked_right::before {
 			position: absolute;
-			content: '';
+			content: "";
 			background-color: grey;
 			height: 100%;
 			width: 100%;
@@ -88,7 +88,7 @@
 		.heart_unclicked_left::after,
 		.heart_unclicked_right::after {
 			position: absolute;
-			content: '';
+			content: "";
 			background-color: grey;
 			height: 100%;
 			width: 100%;

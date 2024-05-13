@@ -1,5 +1,5 @@
 export { FindMember } from "./MemberManage/FindMember/FindMember";
-export { FindMatch } from "./MatchingManage/FindMatch/FindMatch"
+export { FindMatch } from "./MatchingManage/FindMatch/FindMatch";
 export { ManualMatch } from "./MemberManage/ManualMatch/ManualMatch";
 export { AutoMatch } from "./MemberManage/AutoMatch/AutoMatch";
 export { IndividualMatch } from "./MemberManage/IndividualMatch/IndividualMatch";
@@ -8,5 +8,5 @@ export { MatchingConfirm } from "./MatchingManage/MatchingConfirm/MatchingConfir
 export { MatchingProceed } from "./MatchingManage/MatchingProceed/MatchingProceed";
 export { MatchingSave } from "./MatchingManage/MatchingSave/MatchingSave";
 export { MatchingBack } from "./MatchingMonitoring/MatchingBack/MatchingBack";
-export { Reject } from "./SignupManage/Reject/Reject";
+export { Reject } from "./SignupManage/";
 export { ConfirmDeposit } from "./SignupManage/ConfirmDeposit/ConfirmDeposit";

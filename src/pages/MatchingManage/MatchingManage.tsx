@@ -1,4 +1,4 @@
-import { FofoHeader } from "../../widgets/widgets";
+import { CommonHeader } from "../../widgets/widgets";
 import { MatchingManagePanel } from "../../widgets/listPanels/MatchingPanel/MatchingManagePanel";
 import {
 	MatchingConfirm,
@@ -6,8 +6,8 @@ import {
 	MatchingProceed,
 	MatchingSave,
 } from "../../features/features";
-import { Matching, ApiCaller, MatchingStatus } from "../../shared/shared";
-import { useState, useEffect } from "react";
+import { Matching, MatchingStatus } from "../../shared/shared";
+import { useState } from "react";
 import style from "./MatchingManage.module.scss";
 import page_styles from "../pages.module.scss";
 
@@ -16,26 +16,18 @@ export function MatchingManage() {
 	const [selectedItems, setSelectedItems] = useState<Matching[]>([]);
 	const matchingStatus = "MATCHING_NOTCOMPLETED";
 
-	// page 진입 시 최초 조회 로직
-	useEffect(() => {
-		ApiCaller.get("/match/result", {}).then((e) => {
-			const matchingList: Matching[] = e.data.content.map((e: any) => {
-				return new Matching(e);
-			});
-			setMatchings(matchingList);
-		});
-	}, []);
-
 	return (
 		<div className={page_styles.Page}>
-			<FofoHeader className={style.Header} />
+			<CommonHeader className={style.Header} />
 			<div className={page_styles.Panel}>
 				<div className={style.container}>
 					<div className={style.contentsContainer}>
 						<div className={style.contents}>
 							<MatchingManagePanel
-								matchings={matchings}
-								setMatchings={setMatchings}
+								matchingProps={{
+									matchings: matchings,
+									setMatchings: setMatchings,
+								}}
 								selectedProps={{
 									selectedItems: selectedItems,
 									setSelectedItems: setSelectedItems,

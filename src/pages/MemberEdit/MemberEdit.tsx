@@ -6,6 +6,7 @@ import {
 	SmokingYn,
 	ApiCaller,
 	UpdateMemberRequestDto,
+	errorCodeToMessage,
 } from "../../shared/shared";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
@@ -25,6 +26,7 @@ import config from "../../app/config";
 
 export function MemberEdit() {
 	const { memberId } = useParams();
+	const [activated, setActivated] = useState(false);
 	const [profileCardUrl, setProfileCardUrl] = useState<string>("");
 	const [profileUrls, setProfileUrls] = useState<string[]>([]);
 	const navigate = useNavigate();
@@ -55,12 +57,15 @@ export function MemberEdit() {
 						);
 					}
 					setters.setFormData(new UpdateMemberRequestDto(res.data));
+					setActivated(true);
 					return res;
 				})
 				.catch((e) => {
 					alert("해당 유저ID의 정보가 없습니다" + e);
 					navigate("/SignupManage");
 				});
+		} else {
+			setActivated(true);
 		}
 	}, []);
 
@@ -72,6 +77,8 @@ export function MemberEdit() {
 			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
 			return;
 		}
+
+		setActivated(false);
 		ApiCaller.formDataPatch(
 			`/members/${memberId}`,
 			UpdateMemberRequestDto.toFormData(formData)
@@ -81,7 +88,8 @@ export function MemberEdit() {
 				navigate(`/${pageType}`);
 			})
 			.catch((e) => {
-				alert(e);
+				alert(errorCodeToMessage(e.data.error.code));
+				setActivated(true);
 			});
 		return;
 	};
@@ -136,11 +144,6 @@ export function MemberEdit() {
 					getValue={getters.getAddressValue}
 					onChange={setters.handleAddressChange}
 				/>
-				<FormAddress
-					column="eupmyundong"
-					getValue={getters.getAddressValue}
-					onChange={setters.handleAddressChange}
-				/>
 				<h6>내 정보</h6>
 				<FormInput
 					column="name"
@@ -163,11 +166,6 @@ export function MemberEdit() {
 					column="height"
 					getValue={getters.getValue}
 					onChange={setters.handleHeightChange}
-				/>
-				<FormInput
-					column="phoneNumber"
-					getValue={getters.getValue}
-					onChange={setters.handlePhoneNumberChange}
 				/>
 				<FormInput
 					column="company"
@@ -274,15 +272,9 @@ export function MemberEdit() {
 						type="submit"
 						className={`btn btn-primary ${style.btn_item}`}
 						onClick={handleEdit}
+						disabled={!activated}
 					>
 						수정
-					</button>
-					<button
-						type="submit"
-						className={`btn btn-danger ${style.btn_item}`}
-						onClick={handleDelete}
-					>
-						삭제
 					</button>
 				</div>
 			</form>

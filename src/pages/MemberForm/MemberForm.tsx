@@ -2,6 +2,7 @@ import {
 	AgeRelationType,
 	ApiCaller,
 	AppendMemberRequestDto,
+	errorCodeToMessage,
 	Gender,
 	Mbti,
 	Religion,
@@ -22,12 +23,13 @@ import { getMissingValueColumns } from "./util/columns";
 
 export function MemberForm() {
 	const navigate = useNavigate();
+	const [activated, setActivated] = useState(true);
 	const [formData, setters, getters] = useFormData();
 	const [informationAgreeStatus, setInformationAgreeStatus] = useState("N");
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		
+
 		const missing = getMissingValueColumns(formData);
 		if (missing.length > 0) {
 			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
@@ -39,23 +41,27 @@ export function MemberForm() {
 			return;
 		}
 
+		setActivated(false);
 		ApiCaller.formDataPost(
 			"/member",
 			AppendMemberRequestDto.toFormData(formData)
 		)
 			.then(() => {
-				alert("제출 완료 후 카카오톡 채널 '123 world'로 꼭 '완료'라고 메세지 부탁 드리겠습니다!");
+				alert(
+					"제출 완료 후 카카오톡 채널 '123 world'로 꼭 '완료'라고 메세지 부탁 드리겠습니다!"
+				);
 				navigate("/MemberForm");
 				window.location.reload();
 			})
-			.catch(() => {
-				alert("Fail");
+			.catch((e) => {
+				alert(errorCodeToMessage(e.data.error.code));
+				setActivated(true);
 			});
 		return;
 	};
 
 	return (
-		<div className={style.wrap}>
+		<div>
 			{/* 개인정보 수집 이용 동의서 */}
 			<InfoAgreement
 				setInformationAgreeStatus={setInformationAgreeStatus}
@@ -83,11 +89,6 @@ export function MemberForm() {
 					getValue={getters.getValue}
 					onChange={setters.handleChange}
 				/>
-				<FormInput
-					column="eupmyundong"
-					getValue={getters.getValue}
-					onChange={setters.handleChange}
-				/>
 				<h6>내 정보</h6>
 				<FormInput
 					column="name"
@@ -110,11 +111,6 @@ export function MemberForm() {
 					onChange={setters.handleHeightChange}
 				/>
 				<FormInput
-					column="phoneNumber"
-					getValue={getters.getValue}
-					onChange={setters.handlePhoneNumberChange}
-				/>
-				<FormInput
 					column="company"
 					getValue={getters.getValue}
 					onChange={setters.handleChange}
@@ -129,7 +125,6 @@ export function MemberForm() {
 					getValue={getters.getValue}
 					onChange={setters.handleChange}
 				/>
-
 				<FormSelect
 					column="mbti"
 					options={[["", "선택해주세요"], ...Object.entries(Mbti)]}
@@ -192,6 +187,7 @@ export function MemberForm() {
 						type="submit"
 						className={`btn btn-success ${style.btn_item}`}
 						onClick={handleSubmit}
+						disabled={!activated}
 					>
 						제출
 					</button>

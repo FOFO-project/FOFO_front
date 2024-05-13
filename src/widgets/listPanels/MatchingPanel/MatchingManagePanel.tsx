@@ -1,32 +1,41 @@
-import { Matching } from "../../../shared/shared";
-import { NoneCondition, Member, MatchingStatus } from "../../../shared/shared";
+import {
+	ApiCaller,
+	Matching,
+	PageInfo,
+	Pagnation,
+} from "../../../shared/shared";
 import { FindMatch } from "../../../features/features";
 import style from "./MatchingManagePanel.module.scss";
 import classNames from "classnames";
+import { TableHeader } from "./components/TableHeader";
+import { TableContents } from "./components/TableContents";
+import { useEffect, useState } from "react";
 
+interface MatchingProps {
+	matchings: Matching[];
+	setMatchings: Function;
+}
 interface SelectedProps {
 	selectedItems: Matching[];
 	setSelectedItems: Function;
 }
 interface MatchingManagePanelProps {
-	matchings: Matching[];
-	setMatchings: Function;
+	matchingProps: MatchingProps;
 	selectedProps: SelectedProps;
 	title: string;
-	pageType: Object;
+	pageType: string;
 }
 export function MatchingManagePanel({
-	matchings,
-	setMatchings,
+	matchingProps,
 	selectedProps,
 	title,
-	pageType
+	pageType,
 }: MatchingManagePanelProps) {
-	const { selectedItems, setSelectedItems } = selectedProps;
-	
+	const { setMatchings } = matchingProps;
+
 	// 매칭중(MATCHING_NOTCOMPLETED)
 	const conditionData = {
-		matchingStatus: pageType
+		matchingStatus: pageType,
 	};
 
 	// checkbox handler
@@ -58,13 +67,17 @@ export function MatchingManagePanel({
 				"N" : (item.womanAgreement === "N" ? null : "Y");
 			}
 		});
-		setMatchings(matchings.slice());
-	}
+	}, [pageInfo.page]);
 
 	return (
 		<div className={style.container}>
 			<div className={style.button_container}>
-				<FindMatch conditionData={conditionData} setMatchings={setMatchings} />
+				<FindMatch
+					conditionData={conditionData}
+					setMatchings={setMatchings}
+					pageInfoProps={{ pageInfo, setPageInfo }}
+				/>
+				<Pagnation pageInfo={pageInfo} setPageInfo={setPageInfo} />
 			</div>
 			<div className={style.table_container}>
 				<table className={classNames(`table`)}>
