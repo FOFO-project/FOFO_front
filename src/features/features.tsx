@@ -6,5 +6,7 @@ export { IndividualMatch } from "./MemberManage/IndividualMatch/IndividualMatch"
 export { MatchingCancel } from "./MatchingManage/MatchingCancel/MatchingCancel";
 export { MatchingConfirm } from "./MatchingManage/MatchingConfirm/MatchingConfirm";
 export { MatchingProceed } from "./MatchingManage/MatchingProceed/MatchingProceed";
+export { MatchingSave } from "./MatchingManage/MatchingSave/MatchingSave";
+export { MatchingBack } from "./MatchingMonitoring/MatchingBack/MatchingBack";
 export { Reject } from "./SignupManage/Reject/Reject";
 export { ConfirmDeposit } from "./SignupManage/ConfirmDeposit/ConfirmDeposit";

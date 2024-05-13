@@ -1,5 +1,6 @@
 import { FofoHeader } from "../../widgets/widgets";
 import { MatchingManagePanel } from "../../widgets/listPanels/MatchingPanel/MatchingManagePanel";
+import { MatchingBack } from "../../features/features";
 import { Matching, ApiCaller } from "../../shared/shared";
 import { useState, useEffect } from "react";
 import style from "./MatchingMonitoring.module.scss";
@@ -42,6 +43,9 @@ export function MatchingMonitoring() {
 								pageType={matchingStatus}
 							/>
 						</div>
+					</div>
+					<div className={style.buttonContainer}>
+						<MatchingBack matchItems={selectedItems} />
 					</div>
 				</div>
 			</div>

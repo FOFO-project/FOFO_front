@@ -43,7 +43,8 @@ export function MatchingManagePanel({
 		e.preventDefault();
 		matchings.forEach((item) => {
 			if(item.id === matchingId){
-				item.manAgreement = item.manAgreement === "Y" ? "N" : "Y";
+				item.manAgreement = item.manAgreement === "Y" ? 
+				"N" : (item.manAgreement === "N" ? null : "Y");
 			}
 		});
 		setMatchings(matchings.slice());
@@ -53,7 +54,8 @@ export function MatchingManagePanel({
 		e.preventDefault();
 		matchings.map((item) => {
 			if(item.id === matchingId){
-				item.womanAgreement = item.womanAgreement === "Y" ? "N" : "Y";
+				item.womanAgreement = item.womanAgreement === "Y" ? 
+				"N" : (item.womanAgreement === "N" ? null : "Y");
 			}
 		});
 		setMatchings(matchings.slice());
@@ -75,10 +77,7 @@ export function MatchingManagePanel({
 								<NoneCondition title="이름" />
 							</th>
 							<th className={`col bg-black`}>
-								<NoneCondition title="생년월일" />
-							</th>
-							<th className={`col bg-black`}>
-								<NoneCondition title="주소" />
+								<NoneCondition title="카카오톡" />
 							</th>
 							<th className={`col bg-black`}>
 								<NoneCondition title="절대 안되는 부분" />
@@ -90,10 +89,7 @@ export function MatchingManagePanel({
 								<NoneCondition title="이름" />
 							</th>
 							<th className={`col bg-black`}>
-								<NoneCondition title="생년월일" />
-							</th>
-							<th className={`col bg-black`}>
-								<NoneCondition title="주소" />
+								<NoneCondition title="카카오톡" />
 							</th>
 							<th className={`col bg-black`}>
 								<NoneCondition title="절대 안되는 부분" />
@@ -116,12 +112,11 @@ export function MatchingManagePanel({
 										checked={selectedItems.includes(
 											matching as any
 										)}
-										disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}
+										// disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}
 									/>
 								</td>
 								<td>{matching.man?.name}</td>
-								<td>{Member.getBirthdayString(matching.man?.birthday?matching.man?.birthday:null)}</td>
-								<td>{Member.getAddressString(matching.man?.address?matching.man?.address:null)}</td>
+								<td>{matching.man?.kakaoId}</td>
 								<td>{Member.getFilteringString(matching.man?.filteringAgeRelation?matching.man?.filteringAgeRelation:null,
 																matching.man?.filteringSmoker?matching.man?.filteringSmoker:null,
 																matching.man?.filteringReligion?matching.man?.filteringReligion:null
@@ -132,21 +127,24 @@ export function MatchingManagePanel({
 											<button className={`${style.heart_button}`}
 												onClick={(e) => ManHeart(e, matching.id)}
 												disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}>
-													<div className={matching.manAgreement == "Y" ? style.heart_clicked_left : style.heart_unclicked_left}></div>
+													<div className={
+														matching.manAgreement == "Y" ? style.heart_clicked_left : 
+														(matching.manAgreement == "N" ? style.heart_unclicked_left : style.heart_null_left)}></div>
 											</button>
 										</div>
 										<div className={`col ${style.right_box}`}>
 											<button className={`${style.heart_button}`}
 												onClick={(e) => WomanHeart(e, matching.id)}
 												disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}>
-													<div className={matching.womanAgreement == "Y" ? style.heart_clicked_right : style.heart_unclicked_right}></div>
+													<div className={
+														matching.womanAgreement == "Y" ? style.heart_clicked_right : 
+														(matching.womanAgreement == "N" ? style.heart_unclicked_right : style.heart_null_right)}></div>
 											</button>
 										</div>
 									</div>
 								</td>
 								<td>{matching.woman?.name}</td>
-								<td>{Member.getBirthdayString(matching.woman?.birthday?matching.woman?.birthday:null)}</td>
-								<td>{Member.getAddressString(matching.woman?.address?matching.woman?.address:null)}</td>
+								<td>{matching.woman?.kakaoId}</td>
 								<td>{Member.getFilteringString(matching.woman?.filteringAgeRelation?matching.woman?.filteringAgeRelation:null,
 																matching.woman?.filteringSmoker?matching.woman?.filteringSmoker:null,
 																matching.woman?.filteringReligion?matching.woman?.filteringReligion:null

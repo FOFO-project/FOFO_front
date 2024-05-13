@@ -88,11 +88,6 @@ export function MemberEdit() {
 
 	const handleDelete = (e: any) => {
 		e.preventDefault();
-		const missing = getMissingValueColumns(formData);
-		if (missing.length > 0) {
-			alert(`${missing.join(", ")}은 필수 입력 항목입니다.`);
-			return;
-		}
 		ApiCaller.delete(`/members/${memberId}`, formData)
 			.then(() => {
 				alert("회원 삭제 완료");

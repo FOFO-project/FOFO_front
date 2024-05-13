@@ -26,6 +26,13 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 			}
 		}
 
+		for(let i = 0; i < matchData.length; i++){
+			if(matchData[i].manAgreement == null || matchData[i].womanAgreement == null){
+				alert("매칭상태가 확정되지 않은 커플이 있습니다.");
+				return;
+			}
+		}
+
 		try {
 			const result = await getResult(matchData.map(e => e.MatchRequestDto()));
 			if (result === "SUCCESS") {
