@@ -4,6 +4,7 @@ import {
 	MatchingConfirm,
 	MatchingCancel,
 	MatchingProceed,
+	MatchingSave,
 } from "../../features/features";
 import { Matching, MatchingStatus } from "../../shared/shared";
 import { useState } from "react";
@@ -37,6 +38,13 @@ export function MatchingManage() {
 						</div>
 					</div>
 					<div className={style.buttonContainer}>
+						<MatchingSave
+							matchData={selectedItems.filter(
+								(matching) =>
+									matching.matchingStatus ===
+									MatchingStatus.MATCHING_SAVE
+							)}
+						/>
 						<MatchingProceed
 							matchData={selectedItems.filter(
 								(matching) =>

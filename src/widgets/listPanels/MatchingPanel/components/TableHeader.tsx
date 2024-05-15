@@ -14,10 +14,7 @@ export function TableHeader({ title }: TableHeaderProps) {
 					<NoneCondition title="이름" />
 				</th>
 				<th className={`col bg-black`}>
-					<NoneCondition title="생년월일" />
-				</th>
-				<th className={`col bg-black`}>
-					<NoneCondition title="주소" />
+					<NoneCondition title="카카오톡" />
 				</th>
 				<th className={`col bg-black`}>
 					<NoneCondition title="절대 안되는 부분" />
@@ -29,10 +26,7 @@ export function TableHeader({ title }: TableHeaderProps) {
 					<NoneCondition title="이름" />
 				</th>
 				<th className={`col bg-black`}>
-					<NoneCondition title="생년월일" />
-				</th>
-				<th className={`col bg-black`}>
-					<NoneCondition title="주소" />
+					<NoneCondition title="카카오톡" />
 				</th>
 				<th className={`col bg-black`}>
 					<NoneCondition title="절대 안되는 부분" />

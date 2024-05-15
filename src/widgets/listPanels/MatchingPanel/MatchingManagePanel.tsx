@@ -49,7 +49,7 @@ export function MatchingManagePanel({
 						pageNumber: pageInfo.page,
 						pageSize: pageInfo.size,
 						...conditionData,
-				  }
+				}
 				: { pageNumber: pageInfo.page, pageSize: pageInfo.size };
 		ApiCaller.get("/match/result", body).then((e) => {
 			const pageInfo = new PageInfo(e.data.pageInfo);
@@ -64,12 +64,12 @@ export function MatchingManagePanel({
 	return (
 		<div className={style.container}>
 			<div className={style.button_container}>
+				<Pagnation pageInfo={pageInfo} setPageInfo={setPageInfo} />
 				<FindMatch
 					conditionData={conditionData}
 					setMatchings={setMatchings}
 					pageInfoProps={{ pageInfo, setPageInfo }}
 				/>
-				<Pagnation pageInfo={pageInfo} setPageInfo={setPageInfo} />
 			</div>
 			<div className={style.table_container}>
 				<table className={classNames(`table`)}>

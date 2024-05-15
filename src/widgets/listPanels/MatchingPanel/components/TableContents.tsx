@@ -35,31 +35,27 @@ export function TableContents({
 		});
 	};
 
-	const ManHeart = (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-		matchingId: any
-	) => {
-		e.preventDefault();
-		matchings.forEach((item) => {
-			if (item.id === matchingId) {
-				item.manAgreement = item.manAgreement === "Y" ? "N" : "Y";
-			}
-		});
-		setMatchings(matchings.slice());
-	};
+	const ManHeart = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>, matchingId: any) => {
+        e.preventDefault();
+        matchings.forEach((item) => {
+            if(item.id === matchingId){
+                item.manAgreement = item.manAgreement === "Y" ? 
+                "N" : (item.manAgreement === "N" ? null : "Y");
+            }
+        });
+        setMatchings(matchings.slice());
+    }
 
-	const WomanHeart = (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-		matchingId: any
-	) => {
-		e.preventDefault();
-		matchings.map((item) => {
-			if (item.id === matchingId) {
-				item.womanAgreement = item.womanAgreement === "Y" ? "N" : "Y";
-			}
-		});
-		setMatchings(matchings.slice());
-	};
+    const WomanHeart = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>, matchingId: any) => {
+        e.preventDefault();
+        matchings.map((item) => {
+            if(item.id === matchingId){
+                item.womanAgreement = item.womanAgreement === "Y" ? 
+                "N" : (item.womanAgreement === "N" ? null : "Y");
+            }
+        });
+        setMatchings(matchings.slice());
+    }
 
 	return (
 		<tbody className="text-center">
@@ -79,27 +75,10 @@ export function TableContents({
 							type="checkbox"
 							onChange={() => checkboxHandler(matching)}
 							checked={selectedItems.includes(matching as any)}
-							disabled={
-								conditionData.matchingStatus ===
-								"MATCHING_COMPLETED"
-									? true
-									: false
-							}
 						/>
 					</td>
 					<td>{matching.man?.name}</td>
-					<td>
-						{Member.getBirthdayString(
-							matching.man?.birthday
-								? matching.man?.birthday
-								: null
-						)}
-					</td>
-					<td>
-						{Member.getAddressString(
-							matching.man?.address ? matching.man?.address : null
-						)}
-					</td>
+					<td>{matching.man?.kakaoId}</td>
 					<td>
 						{Member.getFilteringString(
 							matching.man?.filteringAgeRelation
@@ -114,64 +93,29 @@ export function TableContents({
 						)}
 					</td>
 					<td>
-						<div className="row">
+						<div className='row'>
 							<div className={`col ${style.left_box}`}>
-								<button
-									className={`${style.heart_button}`}
+								<button className={`${style.heart_button}`}
 									onClick={(e) => ManHeart(e, matching.id)}
-									disabled={
-										conditionData.matchingStatus ===
-										"MATCHING_COMPLETED"
-											? true
-											: false
-									}
-								>
-									<div
-										className={
-											matching.manAgreement == "Y"
-												? style.heart_clicked_left
-												: style.heart_unclicked_left
-										}
-									></div>
+									disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}>
+										<div className={
+											matching.manAgreement == "Y" ? style.heart_clicked_left : 
+											(matching.manAgreement == "N" ? style.heart_unclicked_left : style.heart_null_left)}></div>
 								</button>
 							</div>
 							<div className={`col ${style.right_box}`}>
-								<button
-									className={`${style.heart_button}`}
+								<button className={`${style.heart_button}`}
 									onClick={(e) => WomanHeart(e, matching.id)}
-									disabled={
-										conditionData.matchingStatus ===
-										"MATCHING_COMPLETED"
-											? true
-											: false
-									}
-								>
-									<div
-										className={
-											matching.womanAgreement == "Y"
-												? style.heart_clicked_right
-												: style.heart_unclicked_right
-										}
-									></div>
+									disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}>
+										<div className={
+											matching.womanAgreement == "Y" ? style.heart_clicked_right : 
+											(matching.womanAgreement == "N" ? style.heart_unclicked_right : style.heart_null_right)}></div>
 								</button>
 							</div>
 						</div>
 					</td>
 					<td>{matching.woman?.name}</td>
-					<td>
-						{Member.getBirthdayString(
-							matching.woman?.birthday
-								? matching.woman?.birthday
-								: null
-						)}
-					</td>
-					<td>
-						{Member.getAddressString(
-							matching.woman?.address
-								? matching.woman?.address
-								: null
-						)}
-					</td>
+					<td>{matching.woman?.kakaoId}</td>
 					<td>
 						{Member.getFilteringString(
 							matching.woman?.filteringAgeRelation
