@@ -64,12 +64,12 @@ export function MatchingManagePanel({
 	return (
 		<div className={style.container}>
 			<div className={style.button_container}>
+				<Pagnation pageInfo={pageInfo} setPageInfo={setPageInfo} />
 				<FindMatch
 					conditionData={conditionData}
 					setMatchings={setMatchings}
 					pageInfoProps={{ pageInfo, setPageInfo }}
 				/>
-				<Pagnation pageInfo={pageInfo} setPageInfo={setPageInfo} />
 			</div>
 			<div className={style.table_container}>
 				<table className={classNames(`table`)}>

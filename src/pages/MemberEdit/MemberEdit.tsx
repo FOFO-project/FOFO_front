@@ -93,19 +93,7 @@ export function MemberEdit() {
 			});
 		return;
 	};
-
-	const handleDelete = (e: any) => {
-		e.preventDefault();
-		ApiCaller.delete(`/members/${memberId}`, formData)
-			.then(() => {
-				alert("회원 삭제 완료");
-				navigate(`/${pageType}`);
-			})
-			.catch((e) => {
-				alert(e);
-			});
-		return;
-	};
+	
 	return (
 		<div>
 			{/* 유저 입력폼 */}
