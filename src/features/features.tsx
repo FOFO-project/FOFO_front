@@ -8,5 +8,5 @@ export { MatchingConfirm } from "./MatchingManage/MatchingConfirm/MatchingConfir
 export { MatchingProceed } from "./MatchingManage/MatchingProceed/MatchingProceed";
 export { MatchingSave } from "./MatchingManage/MatchingSave/MatchingSave";
 export { MatchingBack } from "./MatchingMonitoring/MatchingBack/MatchingBack";
-export { Reject } from "./SignupManage/";
+export { DeleteMember } from "../features/MemberManage/DeleteMember/DeleteMember";
 export { ConfirmDeposit } from "./SignupManage/ConfirmDeposit/ConfirmDeposit";

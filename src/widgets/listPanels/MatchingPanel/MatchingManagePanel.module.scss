@@ -96,43 +96,9 @@
 			top: -50%;
 			border-radius: 50%;
 		}
-
-		.heart_null_left ,
-		.heart_null_right {
-			display: inline-block;
-			border: none;
-			background-color: black;
-			font-size: 24px;
-			width: 30px;
-			height: 30px;
-			cursor: pointer;
-			transform: rotate(45deg);
+		th {
+			margin: 0 auto;
 		}
-
-		.heart_null_left::before,
-		.heart_null_right::before {
-			position: absolute;
-			content: '';
-			background-color: black;
-			height: 100%;
-			width: 100%;
-			top: 0;
-			left: -50%;
-			border-radius: 50%;
-		}
-
-		.heart_null_left::after,
-		.heart_null_right::after {
-			position: absolute;
-			content: '';
-			background-color: black;
-			height: 100%;
-			width: 100%;
-			right: 0;
-			top: -50%;
-			border-radius: 50%;
-		}
-
 	}
 	.button_container {
 		max-width: 100%;
