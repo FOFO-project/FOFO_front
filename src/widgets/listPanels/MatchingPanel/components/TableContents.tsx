@@ -75,12 +75,6 @@ export function TableContents({
 							type="checkbox"
 							onChange={() => checkboxHandler(matching)}
 							checked={selectedItems.includes(matching as any)}
-							disabled={
-								conditionData.matchingStatus ===
-								"MATCHING_COMPLETED"
-									? true
-									: false
-							}
 						/>
 					</td>
 					<td>{matching.man?.name}</td>
