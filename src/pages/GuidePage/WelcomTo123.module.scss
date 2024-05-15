@@ -1,6 +1,5 @@
-.body {
-    background: #fff;
-    height: 4250px;
+.wrap {
+    background: #000;
     font-family: 'nanumsquare';
     overflow: hidden;
     overflow-x: auto;
@@ -43,9 +42,5 @@
         button {
             font-size: 1.2em;
         }
-    }
-
-    .section:first-child {
-        margin: 250px 0;
     }
 }
