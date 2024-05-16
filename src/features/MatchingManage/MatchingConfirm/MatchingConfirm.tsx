@@ -29,8 +29,8 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 
 		for (let i = 0; i < matchData.length; i++) {
 			if (
-				matchData[i].manAgreement == null ||
-				matchData[i].womanAgreement == null
+				matchData[i].manAgreement == "UNDEFINED" ||
+				matchData[i].womanAgreement == "UNDEFINED"
 			) {
 				alert("매칭상태가 확정되지 않은 커플이 있습니다.");
 				return;
