@@ -30,7 +30,12 @@ export function WelcomeTo123() {
     return (
         <div className={style.wrap} ref={scrollRef}>
             <div className={`${style.section}`} ref={sectionRefs[0]}>
-                <img src={guide1} alt="" />
+                <div className={style.section_item}>
+                    <img src={guide1} alt="" />
+                    <div className={style.text_box}>
+                        <p><strong>우측으로 슬라이드!</strong></p>
+                    </div>
+                </div>
             </div>
             <div className={style.section} ref={sectionRefs[1]}>
                 <img src={guide2} alt="" />

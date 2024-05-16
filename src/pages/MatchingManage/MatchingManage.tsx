@@ -42,7 +42,7 @@ export function MatchingManage() {
 							matchData={selectedItems.filter(
 								(matching) =>
 									matching.matchingStatus ===
-									MatchingStatus.MATCHING_SAVE
+									MatchingStatus.MATCHING_PROGRESSING
 							)}
 						/>
 						<MatchingProceed
