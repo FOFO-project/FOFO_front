@@ -13,12 +13,14 @@ interface SelectedProps {
 
 interface TableContentsProps {
 	conditionData: { matchingStatus: string };
+	setImageId: Function;
 	matchingProps: MatchingProps;
 	selectedProps: SelectedProps;
 }
 
 export function TableContents({
 	conditionData,
+	setImageId,
 	matchingProps,
 	selectedProps,
 }: TableContentsProps) {
@@ -35,27 +37,41 @@ export function TableContents({
 		});
 	};
 
-	const ManHeart = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>, matchingId: any) => {
-        e.preventDefault();
-        matchings.forEach((item) => {
-            if(item.id === matchingId){
-                item.manAgreement = item.manAgreement === "Y" ? 
-                "N" : (item.manAgreement === "N" ? "UNDEFINED" : "Y");
-            }
-        });
-        setMatchings(matchings.slice());
-    }
+	const ManHeart = (
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+		matchingId: any
+	) => {
+		e.preventDefault();
+		matchings.forEach((item) => {
+			if (item.id === matchingId) {
+				item.manAgreement =
+					item.manAgreement === "Y"
+						? "N"
+						: item.manAgreement === "N"
+						? "UNDEFINED"
+						: "Y";
+			}
+		});
+		setMatchings(matchings.slice());
+	};
 
-    const WomanHeart = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>, matchingId: any) => {
-        e.preventDefault();
-        matchings.map((item) => {
-            if(item.id === matchingId){
-                item.womanAgreement = item.womanAgreement === "Y" ? 
-                "N" : (item.womanAgreement === "N" ? "UNDEFINED" : "Y");
-            }
-        });
-        setMatchings(matchings.slice());
-    }
+	const WomanHeart = (
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+		matchingId: any
+	) => {
+		e.preventDefault();
+		matchings.map((item) => {
+			if (item.id === matchingId) {
+				item.womanAgreement =
+					item.womanAgreement === "Y"
+						? "N"
+						: item.womanAgreement === "N"
+						? "UNDEFINED"
+						: "Y";
+			}
+		});
+		setMatchings(matchings.slice());
+	};
 
 	return (
 		<tbody className="text-center">
@@ -66,11 +82,12 @@ export function TableContents({
 						matching.matchingStatus ===
 						MatchingStatus.MATCHING_PROGRESSING
 							? "table-warning"
-							: (matching.matchingStatus === 
-								MatchingStatus.MATCHING_COMPLETED
-								&& matching.manAgreement == "Y" 
-								&& matching.womanAgreement == "Y"
-							) ? "table-success" : ""
+							: matching.matchingStatus ===
+									MatchingStatus.MATCHING_COMPLETED &&
+							  matching.manAgreement == "Y" &&
+							  matching.womanAgreement == "Y"
+							? "table-success"
+							: ""
 					}`}
 					style={{ height: 100 }}
 				>
@@ -81,7 +98,22 @@ export function TableContents({
 							checked={selectedItems.includes(matching as any)}
 						/>
 					</td>
-					<td>{matching.man?.name}</td>
+					<td>
+						<a
+							type="button"
+							data-bs-toggle="modal"
+							data-bs-target="#staticBackdrop"
+							onClick={() => {
+								setImageId(
+									matching.man?.profileImageId
+										? matching.man?.profileImageId
+										: ""
+								);
+							}}
+						>
+							{matching.man?.name}
+						</a>
+					</td>
 					<td>{matching.man?.kakaoId}</td>
 					<td>
 						{Member.getFilteringString(
@@ -97,28 +129,69 @@ export function TableContents({
 						)}
 					</td>
 					<td>
-						<div className='row'>
+						<div className="row">
 							<div className={`col ${style.left_box}`}>
-								<button className={`${style.heart_button}`}
+								<button
+									className={`${style.heart_button}`}
 									onClick={(e) => ManHeart(e, matching.id)}
-									disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}>
-										<div className={
-											matching.manAgreement == "Y" ? style.heart_clicked_left : 
-											(matching.manAgreement == "N" ? style.heart_unclicked_left : style.heart_null_left)}></div>
+									disabled={
+										conditionData.matchingStatus ===
+										"MATCHING_COMPLETED"
+											? true
+											: false
+									}
+								>
+									<div
+										className={
+											matching.manAgreement == "Y"
+												? style.heart_clicked_left
+												: matching.manAgreement == "N"
+												? style.heart_unclicked_left
+												: style.heart_null_left
+										}
+									></div>
 								</button>
 							</div>
 							<div className={`col ${style.right_box}`}>
-								<button className={`${style.heart_button}`}
+								<button
+									className={`${style.heart_button}`}
 									onClick={(e) => WomanHeart(e, matching.id)}
-									disabled={conditionData.matchingStatus === "MATCHING_COMPLETED" ? true:false}>
-										<div className={
-											matching.womanAgreement == "Y" ? style.heart_clicked_right : 
-											(matching.womanAgreement == "N" ? style.heart_unclicked_right : style.heart_null_right)}></div>
+									disabled={
+										conditionData.matchingStatus ===
+										"MATCHING_COMPLETED"
+											? true
+											: false
+									}
+								>
+									<div
+										className={
+											matching.womanAgreement == "Y"
+												? style.heart_clicked_right
+												: matching.womanAgreement == "N"
+												? style.heart_unclicked_right
+												: style.heart_null_right
+										}
+									></div>
 								</button>
 							</div>
 						</div>
 					</td>
-					<td>{matching.woman?.name}</td>
+					<td>
+						<a
+							type="button"
+							data-bs-toggle="modal"
+							data-bs-target="#staticBackdrop"
+							onClick={() => {
+								setImageId(
+									matching.woman?.profileImageId
+										? matching.woman?.profileImageId
+										: ""
+								);
+							}}
+						>
+							{matching.woman?.name}
+						</a>
+					</td>
 					<td>{matching.woman?.kakaoId}</td>
 					<td>
 						{Member.getFilteringString(

@@ -1,5 +1,6 @@
 import {
 	ApiCaller,
+	ImagePopup,
 	Matching,
 	PageInfo,
 	Pagnation,
@@ -10,6 +11,7 @@ import classNames from "classnames";
 import { TableHeader } from "./components/TableHeader";
 import { TableContents } from "./components/TableContents";
 import { useEffect, useState } from "react";
+import config from "../../../app/config";
 
 interface MatchingProps {
 	matchings: Matching[];
@@ -41,6 +43,9 @@ export function MatchingManagePanel({
 	// 페이지네이션
 	const [pageInfo, setPageInfo] = useState(new PageInfo());
 
+	//프로필 이미지
+	const [imageId, setImageId] = useState("");
+
 	// page 진입 시 최초 조회 로직
 	useEffect(() => {
 		const body =
@@ -49,7 +54,7 @@ export function MatchingManagePanel({
 						pageNumber: pageInfo.page,
 						pageSize: pageInfo.size,
 						...conditionData,
-				}
+				  }
 				: { pageNumber: pageInfo.page, pageSize: pageInfo.size };
 		ApiCaller.get("/match/result", body).then((e) => {
 			const pageInfo = new PageInfo(e.data.pageInfo);
@@ -72,10 +77,12 @@ export function MatchingManagePanel({
 				/>
 			</div>
 			<div className={style.table_container}>
+				<ImagePopup apiUrl={config.api_url} imageId={imageId} />
 				<table className={classNames(`table`)}>
 					<TableHeader title={title} />
 					<TableContents
 						conditionData={conditionData}
+						setImageId={setImageId}
 						matchingProps={matchingProps}
 						selectedProps={selectedProps}
 					/>

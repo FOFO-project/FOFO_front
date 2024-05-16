@@ -52,18 +52,16 @@ export function ImagePopup({ apiUrl, imageId }: ImagePopupProps) {
 							>
 								닫기
 							</button>
-							<a
-								type="button"
-								className="btn btn-primary"
-								href={
-									imageId
-										? `${apiUrl}/images/${imageId}/download`
-										: "#"
-								}
-								target="_blank"
-							>
-								다운로드
-							</a>
+							{imageId ? (
+								<a
+									type="button"
+									className="btn btn-primary"
+									href={`${apiUrl}/images/${imageId}/download`}
+									target="_blank"
+								>
+									다운로드
+								</a>
+							) : null}
 						</div>
 					</div>
 				</div>
