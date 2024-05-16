@@ -13,7 +13,7 @@ export const MatchingSave: React.FC<MatchProps> = ({
 		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
 	) => {
 		e.preventDefault();
-
+		
 		if (matchData.length < 1) {
 			alert("선택된 값이 없습니다.");
 			return;

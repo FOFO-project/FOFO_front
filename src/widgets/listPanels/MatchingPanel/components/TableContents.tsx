@@ -40,7 +40,7 @@ export function TableContents({
         matchings.forEach((item) => {
             if(item.id === matchingId){
                 item.manAgreement = item.manAgreement === "Y" ? 
-                "N" : (item.manAgreement === "N" ? null : "Y");
+                "N" : (item.manAgreement === "N" ? "UNDEFINED" : "Y");
             }
         });
         setMatchings(matchings.slice());
@@ -51,7 +51,7 @@ export function TableContents({
         matchings.map((item) => {
             if(item.id === matchingId){
                 item.womanAgreement = item.womanAgreement === "Y" ? 
-                "N" : (item.womanAgreement === "N" ? null : "Y");
+                "N" : (item.womanAgreement === "N" ? "UNDEFINED" : "Y");
             }
         });
         setMatchings(matchings.slice());
@@ -65,8 +65,12 @@ export function TableContents({
 					className={`align-middle ${
 						matching.matchingStatus ===
 						MatchingStatus.MATCHING_PROGRESSING
-							? "table-success"
-							: ""
+							? "table-warning"
+							: (matching.matchingStatus === 
+								MatchingStatus.MATCHING_COMPLETED
+								&& matching.manAgreement == "Y" 
+								&& matching.womanAgreement == "Y"
+							) ? "table-success" : ""
 					}`}
 					style={{ height: 100 }}
 				>

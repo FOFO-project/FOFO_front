@@ -1,7 +1,14 @@
+@font-face {
+    font-family: 'UhBeenamsoyoung';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/UhBeenamsoyoung.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/UhBeenamsoyoung.woff') format('woff');
+    font-style: normal;
+}
+
 .wrap {
     background: #000;
-    font-family: 'nanumsquare';
-    overflow: hidden;
+    font-family: 'UhBeenamsoyoung';
+    overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch; // Optional: Enable smooth scrolling on iOS Safari
@@ -29,9 +36,16 @@
             height: 100%;
             position: relative;
 
+            .text_box {
+                position: absolute;
+                top: 85%;
+                color: #171717;
+                font-size: 1.7em;
+            }
+
             .button_box {
                 position: absolute;
-                top: 50%;
+                top: 55%;
 
                 .box_cont {
                     margin: 0 10px;
@@ -40,7 +54,8 @@
         }
 
         button {
-            font-size: 1.2em;
+            font-size: 1.5em;
+            border: none;
         }
     }
 }
