@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { ConditionListModel, PageInfo } from "../../../shared/shared";
 import { getResult } from "./api/getResult";
 import style from "../../features.module.scss";
+import { useState } from "react";
 
 interface PageInfoProps {
 	pageInfo: PageInfo;
@@ -19,12 +20,11 @@ export const FindMember: React.FC<FindProps> = ({
 	setMembers,
 	pageInfoProps,
 }: FindProps) => {
+	const [isActive, setActivated] = useState(true);
 	const { pageInfo, setPageInfo } = pageInfoProps;
-	const search = async (
-		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-	) => {
-		e.preventDefault();
+	const search = async () => {
 		try {
+			setActivated(false);
 			const result = await getResult({
 				pageNumber: pageInfo.page,
 				pageSize: pageInfo.size,
@@ -34,6 +34,8 @@ export const FindMember: React.FC<FindProps> = ({
 			setMembers(result.members);
 		} catch (err) {
 			alert("조회에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
+		} finally {
+			setActivated(true);
 		}
 	};
 
@@ -42,13 +44,13 @@ export const FindMember: React.FC<FindProps> = ({
 	};
 	return (
 		<>
-			<a
+			<button
 				className={classNames("btn", "btn-primary", style.btn)}
-				href="#"
 				onClick={search}
+				disabled={!isActive}
 			>
 				{btnData.btnName}
-			</a>
+			</button>
 		</>
 	);
 };
