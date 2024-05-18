@@ -13,10 +13,8 @@ export class Matching {
 	updatedTime: Date | null = null;
 
 	constructor(data: any = {}) {
-		const man = new Member(data.man.member);
-		man.address = data.man.address;
-		const woman = new Member(data.woman.member);
-		woman.address = data.woman.address;
+		const man = new Member(data.man);
+		const woman = new Member(data.woman);
 		data.man = man;
 		data.woman = woman;
 		Object.assign(this, data);
