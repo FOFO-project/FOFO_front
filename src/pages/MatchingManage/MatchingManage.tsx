@@ -38,18 +38,18 @@ export function MatchingManage() {
 						</div>
 					</div>
 					<div className={style.buttonContainer}>
-						<MatchingSave
-							matchData={selectedItems.filter(
-								(matching) =>
-									matching.matchingStatus ===
-									MatchingStatus.MATCHING_PROGRESSING
-							)}
-						/>
 						<MatchingProceed
 							matchData={selectedItems.filter(
 								(matching) =>
 									matching.matchingStatus ===
 									MatchingStatus.MATCHING_PENDING
+							)}
+						/>
+						<MatchingSave
+							matchData={selectedItems.filter(
+								(matching) =>
+									matching.matchingStatus ===
+									MatchingStatus.MATCHING_PROGRESSING
 							)}
 						/>
 						<MatchingConfirm

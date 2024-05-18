@@ -13,7 +13,7 @@ export const MatchingSave: React.FC<MatchProps> = ({
 	const [isActive, setActivated] = useState(true);
 	const save = async () => {
 		if (matchData.length < 1) {
-			alert("선택된 값이 없습니다.");
+			alert("선택된 값이 없습니다.(상태저장은 프로필발송인 건들만 가능합니다)");
 			return;
 		}
 

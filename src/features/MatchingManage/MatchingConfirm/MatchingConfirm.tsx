@@ -1,4 +1,4 @@
-import { Match, Matching, MatchingStatus } from "../../../shared/shared";
+import { Match, Matching } from "../../../shared/shared";
 import { getResult } from "./api/getResult";
 import style from "../../features.module.scss";
 import { useState } from "react";
@@ -13,10 +13,10 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 	const [isActive, setActivated] = useState(true);
 	const Confirm = async () => {
 		if (matchData.length < 1) {
-			alert("선택된 값이 없습니다.");
+			alert("선택된 값이 없습니다.(매칭확정은 프로필발송인 건들만 가능합니다)");
 			return;
 		}
-
+		/*
 		for (let i = 0; i < matchData.length; i++) {
 			if (
 				matchData[i].matchingStatus !==
@@ -26,7 +26,7 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 				return;
 			}
 		}
-
+		*/
 		for (let i = 0; i < matchData.length; i++) {
 			if (
 				matchData[i].manAgreement == "UNDEFINED" ||

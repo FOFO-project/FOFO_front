@@ -2,6 +2,7 @@ import { Match, Matching } from "../../../shared/shared";
 import { getResult } from "./api/getResult";
 import style from "../../features.module.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface MatchProps {
 	matchItems: Matching[];
@@ -10,6 +11,7 @@ interface MatchProps {
 export const MatchingBack: React.FC<MatchProps> = ({
 	matchItems,
 }: MatchProps) => {
+	const navigate = useNavigate();
 	const [isActive, setActivated] = useState(true);
 	const Back = async () => {
 		if (matchItems.length < 1) {
@@ -27,8 +29,8 @@ export const MatchingBack: React.FC<MatchProps> = ({
 			setActivated(false);
 			const result = await getResult(matchIds(matchItems));
 			if (result === "SUCCESS") {
-				alert(`요청을 완료하였습니다.`);
-				window.location.reload();
+				alert(`요청을 완료하였습니다.(찬스가 없는 인원의 경우, "가입신청" 메뉴에서 확인가능합니다.)`);
+				navigate("/MemberManage");
 			} else {
 				throw new Error();
 			}
