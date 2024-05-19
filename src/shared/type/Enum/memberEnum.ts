@@ -47,6 +47,7 @@ export enum MatchingStatus {
 	MATCHING_PENDING = "MATCHING_PENDING", //"매칭대기중",
 	MATCHING_PROGRESSING = "MATCHING_PROGRESSING", //"매칭진행중",
 	MATCHING_COMPLETED = "MATCHING_COMPLETED", //"매칭완료",
+	MATCHING_SAVE = "MATCHING_SAVE" // 매칭상태저장
 }
 
 export enum ActiveStatus {

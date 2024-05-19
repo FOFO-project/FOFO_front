@@ -5,19 +5,20 @@ interface MatchProps {
 		btnName: string;
 		btnFunction: Function;
 	};
+	isActive?: boolean;
 	className?: string;
 }
-export function Match({ data, className }: MatchProps) {
+export function Match({ data, isActive, className }: MatchProps) {
 	return (
 		// link는 차후 매칭완료 페이지 url로 설정
-		<a
+		<button
 			className={classNames("btn", "btn-primary", className)}
-			href="#"
-			onClick={(e) => {
-				data.btnFunction(e);
+			onClick={() => {
+				data.btnFunction();
 			}}
+			disabled={!isActive}
 		>
 			{data.btnName}
-		</a>
+		</button>
 	);
 }

@@ -74,7 +74,7 @@ export class Member {
 
 	static getAddressString(address: Address | null): string {
 		if (address) {
-			return `${address.sido} ${address.sigungu} ${address.eupmyundong}`;
+			return `${address.sido} ${address.sigungu}`;
 		}
 		return "";
 	}

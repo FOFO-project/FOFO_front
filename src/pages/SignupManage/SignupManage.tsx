@@ -1,14 +1,9 @@
-import { FofoHeader } from "../../widgets/widgets";
+import { CommonHeader } from "../../widgets/widgets";
 import page_styles from "../pages.module.scss";
 import styles from "./SignupManage.module.scss";
-import {
-	ApiCaller,
-	ApprovalStatus,
-	ConditionListModel,
-	Member,
-} from "../../shared/shared";
-import { Reject, ConfirmDeposit } from "../../features/features";
-import { useEffect, useState } from "react";
+import { ApprovalStatus, ConditionListModel } from "../../shared/shared";
+import { ConfirmDeposit } from "../../features/features";
+import { useState } from "react";
 import { MemberManagePanel } from "../../widgets/widgets";
 export function SignupManage() {
 	const [conditionData, setConditionData] = useState(
@@ -21,22 +16,9 @@ export function SignupManage() {
 	const [selectedItems, setSelectedItems] = useState<number[]>([]);
 	const pageType = "SignupManage";
 
-	useEffect(() => {
-		ApiCaller.get(
-			"/members",
-			ConditionListModel.toFindMembersConditionDto(conditionData)
-		).then((e) => {
-			setMembers(
-				e.data.content
-					? e.data.content.map((e: any) => new Member(e))
-					: []
-			);
-		});
-	}, []);
-
 	return (
 		<div className={page_styles.Page}>
-			<FofoHeader className={page_styles.Header} />
+			<CommonHeader className={page_styles.Header} />
 			<div className={page_styles.Panel}>
 				<div className={styles.container}>
 					<div className={styles.contentsContainer}>
@@ -59,7 +41,6 @@ export function SignupManage() {
 					</div>
 					<div className={styles.buttonContainer}>
 						<ConfirmDeposit selected={selectedItems} />
-						<Reject selected={selectedItems} />
 					</div>
 				</div>
 			</div>

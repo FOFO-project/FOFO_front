@@ -1,13 +1,8 @@
-import { FofoHeader } from "../../widgets/widgets";
+import { CommonHeader } from "../../widgets/widgets";
 import page_styles from "../pages.module.scss";
 import styles from "./ApprovalManage.module.scss";
-import {
-	ApiCaller,
-	ApprovalStatus,
-	ConditionListModel,
-	Member,
-} from "../../shared/shared";
-import { useEffect, useState } from "react";
+import { ApprovalStatus, ConditionListModel } from "../../shared/shared";
+import { useState } from "react";
 import { MemberManagePanel } from "../../widgets/widgets";
 import { Approve } from "../../features/ApprovalManage/Approve/Approve";
 export function ApprovalManage() {
@@ -21,22 +16,9 @@ export function ApprovalManage() {
 	const [selectedItems, setSelectedItems] = useState<number[]>([]);
 	const pageType = "ApprovalManage";
 
-	useEffect(() => {
-		ApiCaller.get(
-			"/members",
-			ConditionListModel.toFindMembersConditionDto(conditionData)
-		).then((e) => {
-			setMembers(
-				e.data.content
-					? e.data.content.map((e: any) => new Member(e))
-					: []
-			);
-		});
-	}, []);
-
 	return (
 		<div className={page_styles.Page}>
-			<FofoHeader className={page_styles.Header} />
+			<CommonHeader className={page_styles.Header} />
 			<div className={page_styles.Panel}>
 				<div className={styles.container}>
 					<div className={styles.contentsContainer}>

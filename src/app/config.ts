@@ -4,7 +4,7 @@ export default {
 	base_url: base_url,
 	api_url: `${
 		base_url === "http://localhost:5173"
-			? "https://dev.fofo.world"
+			? "https://dev.123world.co.kr"
 			: base_url
 	}/api`, //프론트 서버 url , 백엔드 서버 url은 CORS 허용이 안되어 있어 우회 사용
 

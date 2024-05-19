@@ -1,15 +1,29 @@
+@font-face {
+    font-family: 'UhBeenamsoyoung';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/UhBeenamsoyoung.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/UhBeenamsoyoung.woff') format('woff');
+    font-style: normal;
+}
+
 .wrap {
     background: #000;
-    font-family: 'nanumsquare';
-    overflow: hidden;
+    font-family: 'UhBeenamsoyoung';
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch; // Optional: Enable smooth scrolling on iOS Safari
+    scroll-snap-type: x mandatory;
 
     .section {
+        display: inline-block;
         color: #fff;
         height: 100vh;
         width: 100%;
         text-align: center;
-        display: inline-block;
-        box-sizing: border-box;
+        vertical-align: top;
+        white-space: normal;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
 
         .section_item {
             display: flex;
@@ -17,20 +31,39 @@
             align-items: center;
             justify-content: center;
             height: 100%;
+            position: relative;
+            
+            img {
+                height: 100vh;
+            }
+
+            .text_box {
+                position: absolute;
+                top: 85%;
+                color: #171717;
+                font-size: 1.7em;
+            }
+
+            .button_box {
+                position: absolute;
+                top: 55%;
+
+                .box_cont {
+                    margin: 0 10px;
+                }
+            }
         }
 
-        h1 {
-            font-size: 2.3em;
+        button {
+            font-size: 1.5em;
+            border: none;
         }
+    }
+}
 
-        .text_box {
-            width: 90%;
-            display: block;
-            margin: 0 auto;
-        }
-
-        p {
-            font-size: 0.9em;
-        }
+@media (max-width: 639px) {
+	img {
+        height: auto;
+        width: 100%;
     }
 }

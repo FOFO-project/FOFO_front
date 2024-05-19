@@ -55,8 +55,7 @@ export function InfoAgreement({
 						</p>
 						<p className={style.modal_content}>
 							<strong>2. 수집 항목:</strong>{" "}
-							개인식별정보(성명,생년월일,주소,전화번호,kakaoId,학력
-							등)
+							개인식별정보(성명,생년월일,주소,kakaoId,학력 등)
 						</p>
 						<p className={style.modal_content}>
 							<strong>3. 보유 및 이용 기간:</strong> 정보

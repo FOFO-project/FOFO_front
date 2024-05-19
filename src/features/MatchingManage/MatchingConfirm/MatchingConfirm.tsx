@@ -1,33 +1,47 @@
-import { Match, Matching, MatchingStatus } from "../../../shared/shared";
+import { Match, Matching } from "../../../shared/shared";
 import { getResult } from "./api/getResult";
 import style from "../../features.module.scss";
+import { useState } from "react";
 
 interface MatchProps {
-    matchData: Matching[];
+	matchData: Matching[];
 }
 
 export const MatchingConfirm: React.FC<MatchProps> = ({
-    matchData
+	matchData,
 }: MatchProps) => {
-	const Confirm = async (
-		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-	) => {
-		e.preventDefault();
-
+	const [isActive, setActivated] = useState(true);
+	const Confirm = async () => {
 		if (matchData.length < 1) {
-			alert("선택된 값이 없습니다.");
+			alert("선택된 값이 없습니다.(매칭확정은 프로필발송인 건들만 가능합니다)");
 			return;
 		}
-		
-		for(let i = 0; i < matchData.length; i++){
-			if(matchData[i].matchingStatus !== MatchingStatus.MATCHING_PROGRESSING){
+		/*
+		for (let i = 0; i < matchData.length; i++) {
+			if (
+				matchData[i].matchingStatus !==
+				MatchingStatus.MATCHING_PROGRESSING
+			) {
 				alert("매칭확정은 프로필발송 상태인 건들만 가능합니다.");
+				return;
+			}
+		}
+		*/
+		for (let i = 0; i < matchData.length; i++) {
+			if (
+				matchData[i].manAgreement == "UNDEFINED" ||
+				matchData[i].womanAgreement == "UNDEFINED"
+			) {
+				alert("매칭상태가 확정되지 않은 커플이 있습니다.");
 				return;
 			}
 		}
 
 		try {
-			const result = await getResult(matchData.map(e => e.MatchRequestDto()));
+			setActivated(false);
+			const result = await getResult(
+				matchData.map((e) => e.MatchRequestDto())
+			);
 			if (result === "SUCCESS") {
 				alert(`매칭확정 완료.`);
 				window.location.reload();
@@ -37,6 +51,8 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 		} catch (err) {
 			alert("매칭확정 실패.");
 			window.location.reload();
+		} finally {
+			setActivated(true);
 		}
 	};
 
@@ -44,5 +60,5 @@ export const MatchingConfirm: React.FC<MatchProps> = ({
 		btnName: "매칭확정",
 		btnFunction: Confirm,
 	};
-	return <Match data={btnData} className={style.btn} />;
+	return <Match data={btnData} className={style.btn} isActive={isActive} />;
 };

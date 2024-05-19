@@ -25,6 +25,8 @@ export const labelColumnsMap: any = {
 };
 
 export const except: string[] = [
+	"eupmyundong",
+	"phoneNumber",
 	"height",
 	"filteringAgeRelation",
 	"filteringReligion",

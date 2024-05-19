@@ -1,0 +1,123 @@
+# 워크 플로우 이름
+name: Vite React CI
+
+# 워크 플로우가 언제 실행 될지를 정한다.
+on:
+    push:
+        branches:
+            - "main"
+            - "develop"
+
+# 워크플로우에서 할 작업 정의한다.
+jobs:
+    # 개발 서버 배포
+    deploy-dev:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            packages: write
+        if: github.ref == 'refs/heads/develop'
+
+        steps:
+            # 빌드
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "npm"
+            - name: Install dependencies
+              run: npm ci
+            - name: Build
+              run: npm run build
+
+            # dist 디렉터리 업로드
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: frontend-dev
+                  path: "./dist"
+
+            # dist 디렉터리 다운로드
+            - name: Download build artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: frontend-dev
+                  path: ./dist
+
+            # Remove existing directory on the server
+            - name: Remove existing directory
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{secrets.DEV_HOST}}
+                  username: ${{secrets.DEV_USERNAME}}
+                  key: ${{secrets.SSH_KEY}}
+                  script: rm -rf /home/${{secrets.DEV_USERNAME}}/fofo/fofo-webserver/dist
+
+            # 배포
+            - name: Deploy to dev server
+              uses: appleboy/scp-action@master
+              with:
+                  host: ${{secrets.DEV_HOST}}
+                  username: ${{secrets.DEV_USERNAME}}
+                  key: ${{secrets.SSH_KEY}}
+                  source: "./dist"
+                  target: "/home/${{secrets.DEV_USERNAME}}/fofo/fofo-webserver/dist"
+                  strip_components: 2
+
+    # 운영 서버 배포
+    deploy-prod:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            packages: write
+        if: github.ref == 'refs/heads/main'
+
+        steps:
+            # 빌드
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "npm"
+            - name: Install dependencies
+              run: npm ci
+            - name: Build
+              run: npm run build
+
+            # dist 디렉터리 업로드
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: frontend-prod
+                  path: "./dist"
+
+            # dist 디렉터리 다운로드
+            - name: Download build artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: frontend-prod
+                  path: ./dist
+
+            # Remove existing directory on the server
+            - name: Remove existing directory
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{secrets.PROD_HOST}}
+                  username: ${{secrets.PROD_USERNAME}}
+                  key: ${{secrets.SSH_KEY}}
+                  script: rm -rf /home/${{secrets.PROD_USERNAME}}/fofo/fofo-webserver/dist
+
+            # 배포
+            - name: Deploy to prod server
+              uses: appleboy/scp-action@master
+              with:
+                  host: ${{secrets.PROD_HOST}}
+                  username: ${{secrets.PROD_USERNAME}}
+                  key: ${{secrets.SSH_KEY}}
+                  source: "./dist"
+                  target: "/home/${{secrets.PROD_USERNAME}}/fofo/fofo-webserver/dist"
+                  strip_components: 2
