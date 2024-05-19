@@ -77,7 +77,11 @@ export function MemberManagePanel({
 				<DeleteMember selected={selectedItems} />
 			</div>
 			<div className={style.table_container}>
-				<ImagePopup apiUrl={config.api_url} imageId={imageId} />
+				<ImagePopup
+					apiUrl={config.api_url}
+					imageId={imageId}
+					popupId={title}
+				/>
 				<table className={classNames(`table`)}>
 					<TableHeader
 						title={title}
@@ -91,6 +95,7 @@ export function MemberManagePanel({
 						memberProps={memberListProps}
 						selectedProps={selectedProps}
 						pageType={pageType}
+						title={title}
 					/>
 				</table>
 			</div>
