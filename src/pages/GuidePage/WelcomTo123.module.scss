@@ -23,6 +23,7 @@
         vertical-align: top;
         white-space: normal;
         scroll-snap-align: start;
+        scroll-snap-stop: always;
 
         .section_item {
             display: flex;
