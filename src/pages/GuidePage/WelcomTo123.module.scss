@@ -24,10 +24,6 @@
         white-space: normal;
         scroll-snap-align: start;
 
-        img {
-            width: 100%;
-        }
-
         .section_item {
             display: flex;
             flex-direction: column;
@@ -35,6 +31,10 @@
             justify-content: center;
             height: 100%;
             position: relative;
+            
+            img {
+                height: 100vh;
+            }
 
             .text_box {
                 position: absolute;
@@ -57,5 +57,12 @@
             font-size: 1.5em;
             border: none;
         }
+    }
+}
+
+@media (max-width: 639px) {
+	img {
+        height: auto;
+        width: 100%;
     }
 }
