@@ -38,19 +38,29 @@ export function WelcomeTo123() {
                 </div>
             </div>
             <div className={style.section} ref={sectionRefs[1]}>
-                <img src={guide2} alt="" />
+                <div className={style.section_item}>
+                    <img src={guide2} alt="" />
+                </div>
             </div>
             <div className={style.section} ref={sectionRefs[2]}>
-                <img src={guide3} alt="" />
+                <div className={style.section_item}>
+                    <img src={guide3} alt="" />
+                </div>
             </div>
             <div className={style.section} ref={sectionRefs[3]}>
-                <img src={guide4} alt="" />
+                <div className={style.section_item}>
+                    <img src={guide4} alt="" />
+                </div>
             </div>
             <div className={style.section} ref={sectionRefs[4]}>
-                <img src={guide5} alt="" />
+                <div className={style.section_item}>
+                    <img src={guide5} alt="" />
+                </div>
             </div>
             <div className={style.section} ref={sectionRefs[5]}>
-                <img src={guide6} alt="" />
+                <div className={style.section_item}>
+                    <img src={guide6} alt="" />
+                </div>
             </div>
             <div className={style.section} ref={sectionRefs[6]}>
                 <div className={style.section_item}>
