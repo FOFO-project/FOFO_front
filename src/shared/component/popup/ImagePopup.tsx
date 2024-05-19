@@ -1,26 +1,25 @@
 interface ImagePopupProps {
 	apiUrl: string;
 	imageId: string;
+	popupId?: string;
 }
-export function ImagePopup({ apiUrl, imageId }: ImagePopupProps) {
+export function ImagePopup({ apiUrl, imageId, popupId }: ImagePopupProps) {
+	popupId = popupId ? popupId : "staticBackdrop";
 	return (
 		<>
 			<div
 				className="modal fade"
-				id="staticBackdrop"
+				id={popupId}
 				data-bs-backdrop="static"
 				data-bs-keyboard="false"
 				tabIndex={-1}
-				aria-labelledby="staticBackdropLabel"
+				aria-labelledby={`${popupId}Label`}
 				aria-hidden="true"
 			>
 				<div className="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5
-								className="modal-title"
-								id="staticBackdropLabel"
-							>
+							<h5 className="modal-title" id={`${popupId}Label`}>
 								프로필카드
 							</h5>
 							<button

@@ -25,6 +25,7 @@ interface TableContentsProps {
 	memberProps: MemberProps;
 	selectedProps: SelectedProps;
 	pageType: string;
+	title: string;
 }
 
 export function TableContents({
@@ -33,6 +34,7 @@ export function TableContents({
 	memberProps,
 	selectedProps,
 	pageType,
+	title,
 }: TableContentsProps) {
 	const { members, setMembers } = memberProps;
 	const { selectedItems, setSelectedItems } = selectedProps;
@@ -150,7 +152,7 @@ export function TableContents({
 									<a
 										type="button"
 										data-bs-toggle="modal"
-										data-bs-target="#staticBackdrop"
+										data-bs-target={`#${title}`}
 										onClick={() => {
 											setImageId(
 												member.profileImageId
