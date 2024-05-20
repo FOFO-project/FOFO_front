@@ -39,8 +39,8 @@ export const FindMatch: React.FC<FindProps> = ({
 					...conditionData,
 				});
 			}
-			setPageInfo(new PageInfo(result.pageInfo));
-			setMatchings(result);
+			setPageInfo(result.pageInfo);
+			setMatchings(result.matches);
 		} catch (err) {
 			alert("조회에 실패하였습니다. 관리자에게 문의 부탁드립니다.");
 		} finally {
