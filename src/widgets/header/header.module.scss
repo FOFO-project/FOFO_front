@@ -12,37 +12,40 @@
 	display: flex; // 내부 항목 좌우배치를 위한 flex
 	align-items: center; // 세로축 정렬 : 가온데 정렬
 	justify-content: space-between; // 가로축 정렬 : 양 끝 펼침
-	height: 80px;
+	height: 5vh;
 	padding: 0 16px;
 	background-color: #000; // 기본색상
 }
 
 .header_logo {
 	background-color: transparent;
-	object-fit: cover;
-	height: 80px;
-	line-height: 40px;
-	margin-left: 40px;
+	object-fit: contain;
+	width: 20%;
+	max-width: 20%;
+	max-height: 100%;
+	//line-height: 50;
+	margin-left: 0%;
 	color: #000;
 }
 
 .header_menubox {
 	display: flex;
 	background-color: transparent;
+	justify-content: flex-end;
 	border: none;
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	margin-right: 40px;
-	font-size: 1.5rem;
+	flex: 1 0 0;
 }
 
 .header_items {
 	border: none;
-	padding: 0 20px;
+	padding: 0 2.5%;
 	background-color: transparent;
 	justify-content: space-between;
 	border-left: 1px solid #999;
+	font-size: 1.5cqb;
 }
 
 .header_items > a {

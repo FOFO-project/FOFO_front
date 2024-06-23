@@ -8,6 +8,7 @@ import {
 	Filtering,
 	Religion,
 } from "../../../shared";
+import classNames from "classnames";
 
 interface FilteringConditionProps {
 	title: string;
@@ -92,128 +93,125 @@ export function FilteringCondition({
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
 				data-bs-auto-close="outside"
-				style={{width:180, height:60}}
 			>
 				{title}
 			</button>
-			<ul className="dropdown-menu">
-				<li className="dropdown-item">
-					<div className="col dropdown">
-						<button
-							className="btn btn-dark btn-sm dropdown-toggle"
-							data-bs-toggle="dropdown"
-							aria-expanded="false"
-						>
-							{selectedAgeValue == "없음"
-								? title
-								: selectedAgeValue}
-						</button>
-						<ul
-							className="dropdown-menu"
-							style={{ maxHeight: "150px", overflowY: "auto" }}
-						>
-							{ageRelationOptions.map((options) => (
-								<li key={options.key}>
-									<a
-										className="dropdown-item"
-										href="#"
-										onClick={(e) =>
-											handleOptionClick(
-												e,
-												options.key,
-												options.value,
-												"AgeRelation"
-											)
-										}
-									>
-										{options.value}
-									</a>
-								</li>
-							))}
-						</ul>
-					</div>
-				</li>
-				<li className="dropdown-item">
-					<div className="col dropdown">
-						<button
-							className="btn btn-dark btn-sm dropdown-toggle"
-							data-bs-toggle="dropdown"
-							aria-expanded="false"
-						>
-							{selectedSmokingValue == "없음"
-								? title
-								: selectedSmokingValue}
-						</button>
-						<ul
-							className="dropdown-menu"
-							style={{ maxHeight: "150px", overflowY: "auto" }}
-						>
-							{smokingOptions.map((options) => (
-								<li key={options.key}>
-									<a
-										className="dropdown-item"
-										href="#"
-										onClick={(e) =>
-											handleOptionClick(
-												e,
-												options.key,
-												options.value,
-												"SmokingYn"
-											)
-										}
-									>
-										{options.value}
-									</a>
-								</li>
-							))}
-						</ul>
-					</div>
-				</li>
-				<li className="dropdown-item">
-					<div className="col dropdown">
-						<button
-							className="btn btn-dark btn-sm dropdown-toggle"
-							data-bs-toggle="dropdown"
-							aria-expanded="false"
-						>
-							{selectedRelValue == "없음"
-								? title
-								: selectedRelValue}
-						</button>
-						<ul
-							className="dropdown-menu"
-							style={{ maxHeight: "150px", overflowY: "auto" }}
-						>
-							{religionOptions.map((options) => (
-								<li key={options.key}>
-									<a
-										className="dropdown-item"
-										href="#"
-										onClick={(e) =>
-											handleOptionClick(
-												e,
-												options.key,
-												options.value,
-												"Religion"
-											)
-										}
-									>
-										{options.value}
-									</a>
-								</li>
-							))}
-						</ul>
-					</div>
-				</li>
-				<li>
+			<ul
+				className={classNames(
+					"dropdown-menu",
+					style.dropdownMenu,
+					style.filtering
+				)}
+			>
+				<div className={classNames("col dropdown", style.dropdownItem)}>
+					<button
+						className={classNames(
+							"btn btn-dark btn-sm dropdown-toggle",
+							style.button
+						)}
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+					>
+						{selectedAgeValue == "없음" ? title : selectedAgeValue}
+					</button>
+					<ul className="dropdown-menu">
+						{ageRelationOptions.map((options) => (
+							<li key={options.key}>
+								<a
+									className="dropdown-item"
+									href="#"
+									onClick={(e) =>
+										handleOptionClick(
+											e,
+											options.key,
+											options.value,
+											"AgeRelation"
+										)
+									}
+								>
+									{options.value}
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+				<div className={classNames("col dropdown", style.dropdownItem)}>
+					<button
+						className={classNames(
+							"btn btn-dark btn-sm dropdown-toggle",
+							style.button
+						)}
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+					>
+						{selectedSmokingValue == "없음"
+							? title
+							: selectedSmokingValue}
+					</button>
+					<ul className="dropdown-menu">
+						{smokingOptions.map((options) => (
+							<li key={options.key}>
+								<a
+									className="dropdown-item"
+									href="#"
+									onClick={(e) =>
+										handleOptionClick(
+											e,
+											options.key,
+											options.value,
+											"SmokingYn"
+										)
+									}
+								>
+									{options.value}
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+				<div className={classNames("col dropdown", style.dropdownItem)}>
+					<button
+						className={classNames(
+							"btn btn-dark btn-sm dropdown-toggle",
+							style.button
+						)}
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+					>
+						{selectedRelValue == "없음" ? title : selectedRelValue}
+					</button>
+					<ul className="dropdown-menu">
+						{religionOptions.map((options) => (
+							<li key={options.key}>
+								<a
+									className="dropdown-item"
+									href="#"
+									onClick={(e) =>
+										handleOptionClick(
+											e,
+											options.key,
+											options.value,
+											"Religion"
+										)
+									}
+								>
+									{options.value}
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+
+				<div className={classNames("col dropdown", style.dropdownItem)}>
 					<a
-						className="dropdown-item"
+						className={classNames("btn btn-sm", style.button)}
+						aria-expanded="false"
 						href="#"
 						onClick={(e) => handleClearClick(e)}
 					>
 						clear
 					</a>
-				</li>
+				</div>
 			</ul>
 		</div>
 	);

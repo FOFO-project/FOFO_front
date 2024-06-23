@@ -1,0 +1,24 @@
+.container {
+	min-height: 65%;
+	max-height: 100%;
+	width: 100%;
+	max-width: 30cqb;
+	display: flex;
+	flex-direction: row;
+}
+
+.pageInfo {
+	height: 100%;
+	width: auto;
+	font-size: 1.5cqb;
+	flex: 2 0 0;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.pageLink {
+	font-size: 1.5cqb;
+	flex: 1 0 0;
+	text-align: center;
+	line-height: 100%;
+}

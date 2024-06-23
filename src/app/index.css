@@ -12,6 +12,10 @@ body {
 }
 
 input[type="checkbox"] {
-	width: 30px;
-	height: 30px;
+	width: 2vh;
+	height: 2vh;
 }
+/* 
+.react-datepicker {
+	font-size: min(1vh, 1vw);
+} */

@@ -1,6 +1,6 @@
 import { AddressFormDTO, ConditionListModel } from "../../../shared";
 import { useEffect, useRef, useState } from "react";
-import style from "../ConditionBox.module.scss"
+import style from "../ConditionBox.module.scss";
 
 interface AddressConditionProps {
 	title: string;
@@ -54,7 +54,6 @@ export function AddressCondition({
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
 				data-bs-auto-close="true"
-				style={{width:180, height:60}}
 			>
 				{title}
 			</button>
@@ -68,8 +67,9 @@ export function AddressCondition({
 							placeholder="시도"
 							autoFocus={true}
 							onInput={(e) => {
-								const inputValue = (e.target as HTMLInputElement)
-									.value;
+								const inputValue = (
+									e.target as HTMLInputElement
+								).value;
 								onChange(inputValue, "sido");
 								setActive(true);
 							}}
@@ -92,8 +92,9 @@ export function AddressCondition({
 							placeholder="시군구"
 							autoFocus={true}
 							onInput={(e) => {
-								const inputValue = (e.target as HTMLInputElement)
-									.value;
+								const inputValue = (
+									e.target as HTMLInputElement
+								).value;
 								onChange(inputValue, "sigungu");
 								setActive(true);
 							}}
@@ -116,8 +117,9 @@ export function AddressCondition({
 							placeholder="읍면동"
 							autoFocus={true}
 							onInput={(e) => {
-								const inputValue = (e.target as HTMLInputElement)
-									.value;
+								const inputValue = (
+									e.target as HTMLInputElement
+								).value;
 								onChange(inputValue, "eupmyundong");
 								setActive(true);
 							}}

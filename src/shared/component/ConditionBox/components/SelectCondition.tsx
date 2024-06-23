@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ConditionListModel } from "../../../shared";
 import style from "../ConditionBox.module.scss";
+import classNames from "classnames";
 
 interface SelectConditionProps {
 	title: string;
@@ -15,46 +16,63 @@ export function SelectCondition({
 	type,
 	targetColumn,
 	conditionData,
-	setConditionData
+	setConditionData,
 }: SelectConditionProps) {
-	const [ selectedValue, setSelectedValue ] = useState("없음");
+	const [selectedValue, setSelectedValue] = useState("없음");
 	const [isActive, setActive] = useState(false);
 
-	const Options = [{key: null, value: "없음" }, ...Object.entries(type).map(
-        ([key, value]) => {
-            return { key: key, value: value};
-        }
-    )];
+	const Options = [
+		{ key: null, value: "없음" },
+		...Object.entries(type).map(([key, value]) => {
+			return { key: key, value: value };
+		}),
+	];
 
-	const handleOptionClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, key:any, value:any) => {
+	const handleOptionClick = (
+		e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+		key: any,
+		value: any
+	) => {
 		e.preventDefault();
 		setConditionData({
 			...conditionData,
 			[targetColumn]: key,
 		});
 		setSelectedValue(value);
-		if(key == null){
+		if (key == null) {
 			setActive(false);
-		} else{
+		} else {
 			setActive(true);
 		}
 	};
 
 	return (
 		<div className="dropdown">
-			<button className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle ${style.btnbox}`}
-					data-bs-toggle="dropdown"
-					aria-expanded="false"
-					data-bs-auto-close="outside"
-					style={{width:180, height:60}}>
+			<button
+				className={`btn ${
+					isActive == false ? "btn-light" : "btn-dark"
+				} btn-lg dropdown-toggle ${style.btnbox}`}
+				data-bs-toggle="dropdown"
+				aria-expanded="false"
+				data-bs-auto-close="outside"
+			>
 				{selectedValue == "없음" ? title : selectedValue}
 			</button>
-			<ul className="dropdown-menu" style={{maxHeight:"150px",overflowY:"auto"}}>
+			<ul
+				className={classNames(
+					style.dropdownMenu,
+					style.select,
+					"dropdown-menu"
+				)}
+			>
 				{Options.map((options) => (
 					<li key={options.key}>
-						<a className="dropdown-item"
+						<a
+							className={classNames("dropdown-item", style.a)}
 							href="#"
-							onClick={(e) => handleOptionClick(e, options.key, options.value)}
+							onClick={(e) =>
+								handleOptionClick(e, options.key, options.value)
+							}
 						>
 							{options.value}
 						</a>

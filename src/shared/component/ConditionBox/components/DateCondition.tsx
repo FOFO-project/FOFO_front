@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ConditionListModel } from "../../../shared";
 import { useRef, useState } from "react";
 import style from "../ConditionBox.module.scss";
+import classNames from "classnames";
 
 interface DateConditionProps {
 	title: string;
@@ -27,17 +28,19 @@ export function DateCondition({
 	return (
 		<div className="dropdown">
 			<button
-				className={`btn ${isActive == false ? 'btn-light' : 'btn-dark'} btn-lg dropdown-toggle ${style.btnbox}`}
+				className={`btn ${
+					isActive == false ? "btn-light" : "btn-dark"
+				} btn-lg dropdown-toggle ${style.btnbox}`}
 				data-bs-toggle="dropdown"
 				aria-expanded="false"
 				data-bs-auto-close="true"
-				style={{width:180, height:60}}
 			>
 				{title}
 			</button>
-			<ul className="dropdown-menu">
-				<li>
-					<DatePicker className="dropdown-item"
+			<ul className={classNames("dropdown-menu", style.dropdownMenu)}>
+				<li className={classNames(style.input)}>
+					<DatePicker
+						className={classNames("dropdown-item")}
 						ref={datePickerRef}
 						id="datePicker"
 						selected={conditionData[targetColumn] as Date}
@@ -51,8 +54,10 @@ export function DateCondition({
 						dateFormat="yyyy-MM-dd"
 					/>
 				</li>
-				<li>
-					<a	className="btn btn-dark"
+				<div className={classNames("col dropdown", style.dropdownItem)}>
+					<a
+						className={classNames("btn btn-sm", style.button)}
+						aria-expanded="false"
 						href="#"
 						onClick={(e) => {
 							e.preventDefault();
@@ -65,7 +70,7 @@ export function DateCondition({
 					>
 						clear
 					</a>
-				</li>
+				</div>
 			</ul>
 		</div>
 	);

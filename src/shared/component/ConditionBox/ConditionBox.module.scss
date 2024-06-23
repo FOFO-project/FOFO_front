@@ -19,3 +19,42 @@
 		background-color: cornflowerblue;
 	}
 }
+
+.btnbox {
+	width: 13.5cqb;
+	height: 4.5cqb;
+	font-size: 1.5cqb;
+	border-radius: 1cqb;
+}
+
+.dropdownMenu {
+	width: 13.5cqb;
+	height: auto;
+	justify-content: center;
+	.dropdownItem {
+		height: 4cqb;
+		width: 100%;
+		align-items: center;
+	}
+	.input {
+		font-size: 1.5cqb;
+	}
+	.a {
+		font-size: 1.5cqb;
+	}
+	.button {
+		font-size: 1cqb;
+		width: 80%;
+		margin-left: 10%;
+	}
+}
+
+.select {
+	max-height: 25cqb;
+	overflow-y: auto;
+}
+
+.filtering {
+	//max-height: 25cqb;
+	//overflow-y: auto;
+}

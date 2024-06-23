@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import {
 	AddressCondition,
 	ApprovalStatus,
@@ -12,6 +13,7 @@ import {
 	SmokingYn,
 	StringCondition,
 } from "../../../../shared/shared";
+import style from "../MemberManagePanel.module.scss";
 
 interface ConditionProps {
 	conditionData: ConditionListModel;
@@ -63,16 +65,16 @@ export function TableHeader({
 	}
 
 	return (
-		<thead>
+		<thead className={classNames(style.thead)}>
 			<tr>
-				<th
-					className="col bg-black text-light align-middle"
-					style={{ minWidth: 30 }}
-				>
+				<th className="col bg-black text-light align-middle">
 					<button
-						className={`btn btn-md ${
-							isAllSelected() ? "btn-dark" : "btn-light"
-						}`}
+						className={classNames(
+							`btn btn-md ${
+								isAllSelected() ? "btn-dark" : "btn-light"
+							}`,
+							style.headItem
+						)}
 						onClick={() => handleSelectAll()}
 					>
 						{title}
