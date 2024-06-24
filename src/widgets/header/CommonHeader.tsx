@@ -28,32 +28,26 @@ export function CommonHeader({ className }: { className?: string }) {
 		},
 	];
 	return (
-		<>
-			<header className={classNames(className, style.header)}>
-				<div className={style.header_wrapper}>
-					<img
-						className={style.header_logo}
-						src={logo}
-						alt="FOFO logo"
-					/>
-					<ul className={style.header_menubox}>
-						{data.map((item, index) => {
-							return (
-								<li key={index} className={style.header_items}>
-									<a
-										href=""
-										onClick={() => {
-											navigate(item.url);
-										}}
-									>
-										{item.title}
-									</a>
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-			</header>
-		</>
+		<header className={classNames(className, style.header)}>
+			<div className={style.header_wrapper}>
+				<img className={style.header_logo} src={logo} alt="FOFO logo" />
+				<ul className={style.header_menubox}>
+					{data.map((item, index) => {
+						return (
+							<li key={index} className={style.header_items}>
+								<a
+									href=""
+									onClick={() => {
+										navigate(item.url);
+									}}
+								>
+									{item.title}
+								</a>
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+		</header>
 	);
 }

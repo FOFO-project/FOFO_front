@@ -9,10 +9,10 @@
 
 .header_wrapper {
 	// header wrapper 영역
+	height: 6.5vh;
 	display: flex; // 내부 항목 좌우배치를 위한 flex
 	align-items: center; // 세로축 정렬 : 가온데 정렬
 	justify-content: space-between; // 가로축 정렬 : 양 끝 펼침
-	height: 5vh;
 	padding: 0 16px;
 	background-color: #000; // 기본색상
 }
@@ -36,7 +36,9 @@
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	height: 5vh;
 	flex: 1 0 0;
+	align-items: center; /* Vertical alignment */
 }
 
 .header_items {
@@ -45,7 +47,14 @@
 	background-color: transparent;
 	justify-content: space-between;
 	border-left: 1px solid #999;
-	font-size: 1.5cqb;
+	max-width: 15vh;
+	font-size: min(1.5cqb, 2.5vw);
+	flex: 1 0 0;
+	text-align: center;
+	a {
+		height: 100%;
+		width: 100%;
+	}
 }
 
 .header_items > a {
