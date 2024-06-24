@@ -1,6 +1,6 @@
 .container {
 	min-height: 65%;
-	max-height: 100%;
+	max-height: 65%;
 	width: 100%;
 	max-width: 30cqb;
 	display: flex;
@@ -8,16 +8,18 @@
 }
 
 .pageInfo {
-	height: 100%;
-	width: auto;
-	font-size: 1.5cqb;
+	min-height: 100%;
+	max-height: 100%;
+	min-width: auto;
+	font-size: min(1.5cqb, 2vw);
 	flex: 2 0 0;
 	text-align: center;
 	vertical-align: middle;
 }
 
 .pageLink {
-	font-size: 1.5cqb;
+	font-size: min(1.5cqb, 2vw);
+	max-width: 27.5%;
 	flex: 1 0 0;
 	text-align: center;
 	line-height: 100%;

@@ -6,23 +6,21 @@
 	align-items: center;
 	justify-content: center;
 	max-height: 100%;
-	.table_container {
-		width: 100%;
-		max-width: 100%;
-		flex: 1 0 0;
-		background-color: inherit;
-		overflow-x: auto;
-		border: 1px solid gray;
-		border-radius: 5px;
-	}
 	.button_container {
 		width: 100%;
-		max-width: 100%;
-		height: 5cqb;
+		flex: 1 0 0;
 		display: flex;
 		flex-direction: row-reverse;
 		align-self: flex-end;
 		align-items: center;
+	}
+	.table_container {
+		width: 100%;
+		flex: 20 0 0;
+		background-color: inherit;
+		overflow-x: auto;
+		border: 1px solid gray;
+		border-radius: 5px;
 	}
 }
 

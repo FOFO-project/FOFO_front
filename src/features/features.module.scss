@@ -5,10 +5,10 @@
 .btn {
 	width: 100%;
 	max-width: 15cqb;
-	height: 65%;
+	max-height: 65%;
 	// background-color: transparent;
 	// text-decoration: none;
-	font-size: 1.5cqb;
+	font-size: min(1.5cqb, 2.5vw);
 	color: #fff;
 	padding: 5px 10px 5px 10px;
 	margin: 10px;
