@@ -7,7 +7,7 @@
 	align-items: center;
 	justify-content: center;
 	flex: 1;
-	padding: 1vh;
+	padding: max(1vh, 1vw, 10px);
 	.contentsContainer {
 		height: 100%;
 		display: flex;
