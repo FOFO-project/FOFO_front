@@ -8,7 +8,8 @@
 	max-height: 100%;
 	.button_container {
 		width: 100%;
-		flex: 1 0 0;
+		flex: 5% 0 0;
+		max-height: 5%;
 		display: flex;
 		flex-direction: row-reverse;
 		align-self: flex-end;
@@ -16,18 +17,34 @@
 	}
 	.table_container {
 		width: 100%;
-		flex: 20 0 0;
+		flex: 95% 0 0;
+		min-height: 95%;
 		background-color: inherit;
 		overflow-x: auto;
 		border: 1px solid gray;
-		border-radius: 5px;
+		border-radius: min(0.5vh, 0.5vw);
+		display: flex;
+		.thead {
+			flex: 10% 0 0;
+			max-height: 10%;
+		}
+		.tbody {
+			flex: 90% 0 0;
+			max-height: 90%;
+			tr {
+				height: 100px;
+			}
+		}
 	}
 }
 
 .headItem {
 	height: 4.5cqb;
-	font-size: 1.5cqb;
-	border-radius: 0.1cqb;
+	font-size: min(1.5cqb, 2vw);
+	width: 4.5cqb;
+	border-radius: min(0.5vh, 0.5vw);
+	padding-block: 0.25cqb;
+	padding-inline: 0.25cqi;
 }
 
 // td:first-child {

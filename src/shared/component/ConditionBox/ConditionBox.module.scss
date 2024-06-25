@@ -1,7 +1,7 @@
 .container {
 	display: flex;
 	width: 100%;
-	height: 100px;
+	height: 100%;
 	place-items: center;
 	justify-content: center;
 	flex-direction: row;
@@ -20,41 +20,52 @@
 	}
 }
 
-.btnbox {
-	width: 13.5cqb;
-	height: 4.5cqb;
-	font-size: 1.5cqb;
-	border-radius: 1cqb;
-}
-
-.dropdownMenu {
-	width: 13.5cqb;
-	height: auto;
-	justify-content: center;
-	.dropdownItem {
-		height: 4cqb;
+.dropdown {
+	min-width: 100%;
+	min-height: 100%;
+	.btnbox {
+		min-width: 100%;
+		min-height: 100%;
+		font-size: min(1.5cqb, 2vw);
+		border-radius: min(0.5vh, 0.5vw);
+	}
+	.btnbox {
+		width: 13.5cqb;
+		height: 4.5cqb;
+		font-size: min(1.5cqb, 2vw);
+		border-radius: min(0.5vh, 0.5vw);
+		padding-block: 0.25cqb;
+		padding-inline: 0.25cqi;
+	}
+	.dropdownMenu {
 		width: 100%;
-		align-items: center;
+		height: auto;
+		justify-content: center;
+		.dropdownItem {
+			height: 4cqb;
+			width: 100%;
+			align-items: center;
+		}
+		.input {
+			font-size: min(1.5cqb, 2vw);
+		}
+		.a {
+			font-size: min(1.5cqb, 2vw);
+		}
+		.button {
+			font-size: min(1cqb, 2vw);
+			width: 80%;
+			margin-left: 10%;
+		}
 	}
-	.input {
-		font-size: 1.5cqb;
-	}
-	.a {
-		font-size: 1.5cqb;
-	}
-	.button {
-		font-size: 1cqb;
-		width: 80%;
-		margin-left: 10%;
-	}
-}
 
-.select {
-	max-height: 25cqb;
-	overflow-y: auto;
-}
+	.select {
+		max-height: 25cqb;
+		overflow-y: auto;
+	}
 
-.filtering {
-	//max-height: 25cqb;
-	//overflow-y: auto;
+	.filtering {
+		//max-height: 25cqb;
+		//overflow-y: auto;
+	}
 }

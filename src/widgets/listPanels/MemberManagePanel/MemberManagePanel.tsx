@@ -82,7 +82,7 @@ export function MemberManagePanel({
 					imageId={imageId}
 					popupId={title}
 				/>
-				<table className={classNames(`table`)}>
+				<table className={`table`}>
 					<TableHeader
 						title={title}
 						conditionProps={conditionProps}

@@ -1,6 +1,7 @@
 import { AddressFormDTO, ConditionListModel } from "../../../shared";
 import { useEffect, useRef, useState } from "react";
 import style from "../ConditionBox.module.scss";
+import classNames from "classnames";
 
 interface AddressConditionProps {
 	title: string;
@@ -46,7 +47,7 @@ export function AddressCondition({
 	}
 
 	return (
-		<div className={`dropdown`}>
+		<div className={classNames(`dropdown`, style.dropdown)}>
 			<button
 				className={`btn ${
 					isActive == false ? "btn-light" : "btn-dark"

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import style from "../ConditionBox.module.scss";
 
 interface NoneCondtionProps {
@@ -5,7 +6,7 @@ interface NoneCondtionProps {
 }
 export function NoneCondition({ title }: NoneCondtionProps) {
 	return (
-		<div className="dropdown">
+		<div className={classNames(`dropdown`, style.dropdown)}>
 			<button
 				className={`btn btn-light btn-lg ${style.btnbox}`}
 				data-bs-toggle="dropdown"

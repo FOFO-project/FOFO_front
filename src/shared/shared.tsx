@@ -1,5 +1,4 @@
 export { Match } from "./component/Match/Match";
-export { ConditionBox } from "./component/ConditionBox/ConditionBox";
 export * from "./component/ConditionBox/ConditionIntegrate";
 export { ItemListPanel } from "./component/ItemListPanel/ItemListPanel";
 export { Pagnation } from "./component/Pagnation/Pagnation";

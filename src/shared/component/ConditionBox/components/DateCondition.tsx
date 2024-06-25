@@ -26,7 +26,7 @@ export function DateCondition({
 	// });
 
 	return (
-		<div className="dropdown">
+		<div className={classNames(`dropdown`, style.dropdown)}>
 			<button
 				className={`btn ${
 					isActive == false ? "btn-light" : "btn-dark"

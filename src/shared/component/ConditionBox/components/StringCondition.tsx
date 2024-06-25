@@ -38,7 +38,7 @@ export function StringCondition({
 	};
 
 	return (
-		<div className="dropdown">
+		<div className={classNames(`dropdown`, style.dropdown)}>
 			<button
 				className={`btn ${
 					isActive ? "btn-dark" : "btn-light"
