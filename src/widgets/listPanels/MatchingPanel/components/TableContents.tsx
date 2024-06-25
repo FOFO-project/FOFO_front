@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { Matching, MatchingStatus, Member } from "../../../../shared/shared";
 import style from "../MatchingManagePanel.module.scss";
 
@@ -74,7 +75,7 @@ export function TableContents({
 	};
 
 	return (
-		<tbody className="text-center">
+		<tbody className={classNames("text-center", style.tbody)}>
 			{matchings?.map((matching) => (
 				<tr
 					key={matching.id}
@@ -88,8 +89,7 @@ export function TableContents({
 							  matching.womanAgreement == "Y"
 							? "table-success"
 							: ""
-					}`}
-					style={{ height: 100 }}
+					} ${style.tr}`}
 				>
 					<td scope="row">
 						<input

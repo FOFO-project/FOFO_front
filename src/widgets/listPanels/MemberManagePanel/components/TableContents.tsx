@@ -77,7 +77,7 @@ export function TableContents({
 						member.gender === Gender.MAN
 							? "table-primary"
 							: "table-danger"
-					}`}
+					} ${style.tr}`}
 				>
 					<td scope="row">
 						<input
@@ -139,6 +139,9 @@ export function TableContents({
 								handleNoteChange(e, member.id as number)
 							}
 							readOnly={true}
+							style={{
+								fontSize: "min(1.25cqb, 2.5vw)",
+							}}
 						/>
 					</td>
 					{conditionData.approvalStatus !==
@@ -160,7 +163,9 @@ export function TableContents({
 									<img
 										src={`${config.api_url}/images/${member.profileImageId}`}
 										style={{
-											height: "80px",
+											maxHeight: "100%",
+											minHeight: "100%",
+											height: "100%",
 										}}
 									></img>
 								</a>
@@ -174,6 +179,9 @@ export function TableContents({
 										});
 									}}
 									className="btn btn-light"
+									style={{
+										fontSize: "min(1.25cqb, 2.5vw)",
+									}}
 								>
 									프로필 카드 등록
 								</button>

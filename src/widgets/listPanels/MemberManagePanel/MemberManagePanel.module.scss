@@ -6,6 +6,7 @@
 	align-items: center;
 	justify-content: center;
 	max-height: 100%;
+
 	.button_container {
 		width: 100%;
 		flex: 5% 0 0;
@@ -23,7 +24,7 @@
 		overflow-x: auto;
 		border: 1px solid gray;
 		border-radius: min(0.5vh, 0.5vw);
-		display: flex;
+
 		.thead {
 			flex: 10% 0 0;
 			max-height: 10%;
@@ -32,7 +33,10 @@
 			flex: 90% 0 0;
 			max-height: 90%;
 			tr {
-				height: 100px;
+				max-height: 8vh;
+				min-height: 8vh;
+				height: 8vh;
+				font-size: min(1.25cqb, 2.5vw);
 			}
 		}
 	}
