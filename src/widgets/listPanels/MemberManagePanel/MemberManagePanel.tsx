@@ -9,7 +9,6 @@ import {
 import { ConditionListModel } from "../../../shared/shared";
 import style from "./MemberManagePanel.module.scss";
 import { FindMember, DeleteMember } from "../../../features/features";
-import classNames from "classnames";
 import { TableHeader } from "./components/TableHeader";
 import { TableContents } from "./components/TableContents";
 import config from "../../../app/config";
